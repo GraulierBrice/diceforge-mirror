@@ -30,7 +30,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>Complete.Qualified.Name.Of.The.Main.Class</mainClass> <!-- CHANGE ME -->
+          <mainClass>DiceForge.Main</mainClass> <!-- CHANGE ME -->
 <!--          <arguments>
             <argument>argument1</argument>
           </arguments>
