@@ -2,13 +2,11 @@ public class Main {
     public static void main(String[] args) {
         Player J1 = new Player();
         Player J2 = new Player();
-        FaceGold gold1 = new FaceGold(1);
-        J1.addHonour(36);
-        gold1.giveReward(J1);
-        if (J1.getHonour() > J2.getHonour()) {
-            System.out.println("Le joueur 1 a gagné avec " + J1.getHonour() + " points d'honneur");
+        J1.addHonor(36);
+        if (J1.getHonor() > J2.getHonor()) {
+            System.out.println("Le joueur 1 a gagné avec " + J1.getHonor() + " points d'honneur");
         } else {
-            System.out.println("Le joueur 2 a gagné avec " + J2.getHonour() + " points d'honneur");
+            System.out.println("Le joueur 2 a gagné avec " + J2.getHonor() + " points d'honneur");
         }
     }
 }
