@@ -35,5 +35,10 @@ public class testFace {
         assertTrue(player.getPdL()==6);
     }
 
-
+    @Test public void FaceHonour(){
+        Player player=new Player();
+        FaceHonour honour1=new FaceHonour(1);
+        honour1.giveReward(player);
+        assertTrue(player.getHonour()==1);
+    }
 }
