@@ -9,8 +9,10 @@ public class Main {
         J2.faveur();
         if (J1.getHonour() > J2.getHonour()) {
             System.out.println("Le joueur 1 a gagné avec " + J1.getHonour() + " points d'honneur");
-        } else {
+        } else if(J1.getHonour()<J2.getHonour()) {
             System.out.println("Le joueur 2 a gagné avec " + J2.getHonour() + " points d'honneur");
+        }else {
+            System.out.println("Egalité");
         }
     }
 }
