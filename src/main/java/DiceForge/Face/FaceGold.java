@@ -1,3 +1,6 @@
+package DiceForge.Face;
+import DiceForge.*;
+
 public class FaceGold extends Face {
 
 	public FaceGold(int amount){

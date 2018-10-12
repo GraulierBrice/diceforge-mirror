@@ -1,8 +1,13 @@
+package DiceForge;
+
 public class Player {
     private int honour;
     private int PdL;
     private int PdS;
     private int gold;
+    private int maxPdL=6;
+    private int maxPdS=6;
+    private int maxGold=12;
 
     public Player(){
         this.honour=0;
@@ -26,21 +31,21 @@ public class Player {
         this.honour+=honour;
     }
     public void addPdL(int PdL){
-        if(this.PdL+PdL<=6){
+        if(this.PdL+PdL<=maxPdL){
             this.PdL+=PdL;
         }else {
             this.PdL=6;
         }
     }
     public void addPdS(int PdS){
-        if(this.PdS+PdS<=6){
+        if(this.PdS+PdS<=maxPdS){
             this.PdS+=PdS;
         }else {
             this.PdS=6;
         }
     }
     public void addGold(int gold){
-        if(this.gold+gold<=12){
+        if(this.gold+gold<=maxGold){
             this.gold+=gold;
         }else {
             this.gold=12;

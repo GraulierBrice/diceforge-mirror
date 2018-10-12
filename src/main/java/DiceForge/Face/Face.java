@@ -1,3 +1,6 @@
+package DiceForge.Face;
+import DiceForge.*;
+
 public abstract class Face{
 
 	int reward;
