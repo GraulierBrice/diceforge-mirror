@@ -34,4 +34,6 @@ public class testFace {
         PdL8.giveReward(player);
         assertTrue(player.getPdL()==6);
     }
+
+
 }
