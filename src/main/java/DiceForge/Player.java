@@ -1,4 +1,5 @@
 package DiceForge;
+import DiceForge.Face.*;
 
 public class Player {
     private int honour;
@@ -8,6 +9,9 @@ public class Player {
     private int maxPdL=6;
     private int maxPdS=6;
     private int maxGold=12;
+
+    private Dice de1 = new Dice(new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FacePdS(1));
+    private Dice de2 = new Dice(new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceHonour(1),new FacePdL(1));
 
     public Player(){
         this.honour=0;
@@ -71,5 +75,9 @@ public class Player {
         }else{
             this.gold=0;
         }
+    }
+    public void faveur(){
+        this.de1.roll().giveReward(this);
+        this.de2.roll().giveReward(this);
     }
 }
