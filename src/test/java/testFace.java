@@ -24,4 +24,14 @@ public class testFace {
         PdS8.giveReward(player);
         assertTrue(player.getPdS()==6);
     }
+
+    @Test public void facePdL(){
+        Player player=new Player();
+        FacePdL PdL1=new FacePdL(1);
+        PdL1.giveReward(player);
+        assertTrue(player.getPdL()==1);
+        FacePdL PdL8=new FacePdL(8);
+        PdL8.giveReward(player);
+        assertTrue(player.getPdL()==6);
+    }
 }
