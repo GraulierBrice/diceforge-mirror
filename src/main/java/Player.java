@@ -1,29 +1,29 @@
 public class Player {
-    private int honour;
+    private int honor;
     private int PdL;
-    private int PdS;
+    private int PdF;
     private int gold;
 
     public Player(){
-        this.honour=0;
+        this.honor=0;
         this.PdL=0;
-        this.PdS=0;
+        this.PdF=0;
         this.gold=0;
     }
-    public int getHonour(){
-        return this.honour;
+    public int getHonor(){
+        return this.honor;
     }
     public int getPdL(){
         return this.PdL;
     }
-    public int getPdS(){
-        return this.PdS;
+    public int getPdF(){
+        return this.PdF;
     }
     public int getGold(){
         return this.gold;
     }
-    public void addhonour(int honour){
-        this.honour+=honour;
+    public void addHonor(int honor){
+        this.honor+=honor;
     }
     public void addPdL(int PdL){
         if(this.PdL+PdL<=6){
@@ -32,11 +32,11 @@ public class Player {
             this.PdL=6;
         }
     }
-    public void addPdS(int PdS){
-        if(this.PdS+PdS<=6){
-            this.PdS+=PdS;
+    public void addPdF(int PdF){
+        if(this.PdF+PdF<=6){
+            this.PdF+=PdF;
         }else {
-            this.PdS=6;
+            this.PdF=6;
         }
     }
     public void addGold(int gold){
@@ -53,11 +53,11 @@ public class Player {
             this.PdL=0;
         }
     }
-    public void removePdS(int PdS){
-        if(this.PdS-PdS>=0){
-            this.PdS-=PdS;
+    public void removePdF(int PdF){
+        if(this.PdF-PdF>=0){
+            this.PdF-=PdF;
         }else {
-            this.PdS=0;
+            this.PdF=0;
         }
     }
     public void removeGold(int gold){

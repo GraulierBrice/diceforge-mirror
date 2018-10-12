@@ -13,17 +13,17 @@ public class testPlayer {
         player.removeGold(5);
         assertTrue(player.getGold()==0);
 
-        player.addHonour(36);
-        assertTrue(player.getHonour()==36);
+        player.addHonor(36);
+        assertTrue(player.getHonor()==36);
 
-        player.addPdS(5);
-        assertTrue(player.getPdS()==5);
-        player.addPdS(2);
-        assertTrue(player.getPdS()==6);
-        player.removePdS(3);
-        assertTrue(player.getPdS()==3);
-        player.removePdS(5);
-        assertTrue(player.getPdS()==0);
+        player.addPdF(5);
+        assertTrue(player.getPdF()==5);
+        player.addPdF(2);
+        assertTrue(player.getPdF()==6);
+        player.removePdF(3);
+        assertTrue(player.getPdF()==3);
+        player.removePdF(5);
+        assertTrue(player.getPdF()==0);
 
         player.addPdL(4);
         assertTrue(player.getPdL()==4);
