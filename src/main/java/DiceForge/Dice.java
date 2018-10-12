@@ -15,7 +15,7 @@ public class Dice{
 	}
 
 	Face roll(){
-		return this.faces[(int)Math.random()*5];
+		return this.faces[(int)(Math.random()*5)];
 	}
 
 }
