@@ -17,7 +17,7 @@ public class Dice{
 	}
 
 	int rollDice(){
-		this.roll = (int)(Math.random()*5)];
+		this.roll = (int)(Math.random()*5);
 		return this.roll;
 	}
 
