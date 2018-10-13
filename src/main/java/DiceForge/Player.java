@@ -77,7 +77,7 @@ public class Player {
         }
     }
     public void faveur(){
-        this.de1.roll().giveReward(this);
-        this.de2.roll().giveReward(this);
+        this.de1.getFace(this.de1.roll()).giveReward(this);
+        this.de2.getFace(this.de2.roll()).giveReward(this);
     }
 }
