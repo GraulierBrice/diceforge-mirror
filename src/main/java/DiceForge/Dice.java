@@ -16,8 +16,9 @@ public class Dice{
 		this.roll = 0;
 	}
 
-	void rollDice(){
+	int rollDice(){
 		this.roll = (int)(Math.random()*5)];
+		return this.roll;
 	}
 
 	Face getFace(int i){
