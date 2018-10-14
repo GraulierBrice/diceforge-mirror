@@ -25,4 +25,8 @@ public class Dice{
 		return this.faces[i];
 	}
 
+	void setFace(Face face,int i){
+		this.faces[i] = face;
+	}
+
 }
