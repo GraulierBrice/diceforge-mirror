@@ -5,12 +5,12 @@ import DiceForge.Player.*;
 import java.util.ArrayList;
 
 public class Basin {
-    private int price = 2;
+    private int price;
     private ArrayList<Face> faces= new ArrayList<>();
 
-    public Basin(/*int price,*/ ArrayList<Face> faces) {
+    public Basin(int price, ArrayList<Face> faces) {
         this.faces = faces;
-        //this.price = price;
+        this.price = price;
     }
 
     public void setPrice(int price) {
