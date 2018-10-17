@@ -25,8 +25,8 @@ public class Pool {
         return this.faces.get(n);
     }
 
-    public Face Buy(Player player,Face face) {
-        if (player.getGold() > this.price) {
+    public Face buy(Player player,Face face) {
+        if (player.getGold() >= this.price) {
             player.removeGold(this.price);
             faces.remove(face);
             return face;
@@ -37,5 +37,9 @@ public class Pool {
 
     public boolean isEmpty() {
         return this.faces.isEmpty();
+    }
+
+    public void removeFace(Face face){
+        this.faces.remove(face);
     }
 }
