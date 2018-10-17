@@ -4,11 +4,11 @@ import DiceForge.Face.Face;
 import DiceForge.Player.*;
 import java.util.ArrayList;
 
-public class Basin {
+public class Pool {
     private int price;
-    private ArrayList<Face> faces= new ArrayList<>();
+    private ArrayList<Face> faces;
 
-    public Basin(int price, ArrayList<Face> faces) {
+    public Pool(int price, ArrayList<Face> faces) {
         this.faces = faces;
         this.price = price;
     }
