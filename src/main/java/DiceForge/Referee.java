@@ -1,5 +1,8 @@
 package DiceForge;
 
+import java.awt.*;
+import java.awt.color.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -68,7 +71,11 @@ public class Referee {
 
     public void printLog(){
         for (Player p : players) {
-            System.out.println("information joueur: " + (this.players.indexOf(p) + 1));
+            if(this.players.indexOf(p)==this.getTurnPlayer()){
+                System.out.println("\u001B[31m" +"information joueur: " + (this.players.indexOf(p) + 1)+"\u001B[0m");
+            }else {
+                System.out.println("information joueur: " + (this.players.indexOf(p) + 1));
+            }
             System.out.println("Honour: " + p.getHonour());
             System.out.println("Gold: " + p.getGold());
             System.out.println("PdS: " + p.getPdS());

@@ -90,4 +90,5 @@ public class Player {
         this.de1.getFace(this.de1.rollDice()).giveReward(this);
         this.de2.getFace(this.de2.rollDice()).giveReward(this);
     }
+
 }
