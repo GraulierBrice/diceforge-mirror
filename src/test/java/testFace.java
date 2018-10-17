@@ -3,7 +3,7 @@ import DiceForge.Face.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class testFace {
+public class TestFace {
     @Test
     public void faceGold() {
         Player player=new Player();

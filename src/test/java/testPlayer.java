@@ -2,7 +2,7 @@ import DiceForge.Player;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class testPlayer {
+public class TestPlayer {
     @Test public void playerMethods(){
         Player player=new Player();
         player.addGold(11);

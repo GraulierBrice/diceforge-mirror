@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
-public class testPool {
+public class TestPool {
 
     @Test public void poolMethods(){
         FaceGold g1=new FaceGold(1);
