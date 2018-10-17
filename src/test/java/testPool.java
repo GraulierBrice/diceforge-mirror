@@ -27,11 +27,10 @@ public class testPool {
 
         assertEquals(pool.buy(player,PdS1),PdS1);
         assertEquals(player.getGold(),0);
+        pool.setPrice(0);
+        assertEquals(pool.buy(player,g1),g1);
         assertEquals(pool.isEmpty(),false);
-        pool.removeFace(PdS1);
-        pool.removeFace(g1);
-        assertEquals(pool.isEmpty(),false);//ici on vérifie que l'on enlève pas plusieurs fois une face si elle existe en plusieurs fois dans la pool
-        pool.removeFace(g1);
+        assertEquals(pool.buy(player,g1),g1);
         assertEquals(pool.isEmpty(),true);
     }
 

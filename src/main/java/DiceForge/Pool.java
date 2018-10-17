@@ -1,7 +1,6 @@
 package DiceForge;
 
 import DiceForge.Face.Face;
-import DiceForge.Player.*;
 import java.util.ArrayList;
 
 public class Pool {
@@ -39,7 +38,4 @@ public class Pool {
         return this.faces.isEmpty();
     }
 
-    public void removeFace(Face face){
-        this.faces.remove(face);
-    }
 }
