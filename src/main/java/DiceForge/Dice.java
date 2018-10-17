@@ -29,6 +29,14 @@ public class Dice{
 		return this.faces[i];
 	}
 
+	public void toString(int dice){
+		System.out.print("Dé "+dice+" :");
+		for(int i=0;i<6;i++){
+			System.out.print(" "+this.getFace(i).getReward());
+		}
+		System.out.print("\n");
+	}
+
 	public void setFace(Face face,int i){
 		this.faces[i] = face;
 	}

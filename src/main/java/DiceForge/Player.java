@@ -33,6 +33,14 @@ public class Player {
     public int getGold(){
         return this.gold;
     }
+    public Dice getDice(int n){
+        if(n==1){
+            return this.de1;
+        }else if(n==2){
+            return this.de2;
+        }
+        return null;
+    }
     public void addHonour(int honour){
         this.honour+=honour;
     }

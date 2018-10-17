@@ -10,4 +10,8 @@ public class FacePdL extends Face{
     public void giveReward(Player player) {
         player.addPdL(this.reward);
     }
+
+    public String getReward(){
+        return Integer.toString(this.reward)+"PdL";
+    }
 }
