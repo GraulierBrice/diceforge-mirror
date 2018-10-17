@@ -1,19 +1,14 @@
 package DiceForge;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
+        Referee R = new Referee(4);
+        R.faveur();
+        R.choixAction("forge"); //a prendre en compte choix de l'IA
+        R.honour();
 
-        Player J1 = new Player();
-        Player J2 = new Player();
-        J1.faveur();
-        J2.faveur();
-        if (J1.getHonour() > J2.getHonour()) {
-            System.out.println("Le joueur 1 a gagné avec " + J1.getHonour() + " points d'honneur");
-        } else if(J1.getHonour()<J2.getHonour()) {
-            System.out.println("Le joueur 2 a gagné avec " + J2.getHonour() + " points d'honneur");
-        }else {
-            System.out.println("Egalité");
-        }
     }
 }
 

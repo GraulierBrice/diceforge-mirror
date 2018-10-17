@@ -18,7 +18,9 @@ public class Player {
         this.PdL=0;
         this.PdS=0;
         this.gold=0;
+
     }
+
     public int getHonour(){
         return this.honour;
     }
