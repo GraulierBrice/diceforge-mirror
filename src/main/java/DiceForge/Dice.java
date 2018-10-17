@@ -1,6 +1,9 @@
 package DiceForge;
 import DiceForge.Face.*;
 
+import java.util.Random;
+
+
 public class Dice{
 
 	Face[] faces = new Face[6];
@@ -17,7 +20,8 @@ public class Dice{
 	}
 
 	int rollDice(){
-		this.roll = (int)(Math.random()*5);
+		Random r = new Random();
+		this.roll = r.nextInt(6);
 		return this.roll;
 	}
 

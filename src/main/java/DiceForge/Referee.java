@@ -28,29 +28,19 @@ public class Referee {
 
     public void choixAction(String action){
         if(action == "passe"){
-            System.out.println("Joueur "+ this.turnPlayer+1 + " passe son tour");
+            System.out.println("Joueur "+ (this.turnPlayer+1) + " passe son tour");
         }
         if(action == "forge"){
-            System.out.println("Joueur "+ this.turnPlayer+1 + "achête une face");
+            System.out.println("Joueur "+ (this.turnPlayer+1) + " achète une face");
         }
         if(action == "exploit"){
-            System.out.println("Joueur "+ this.turnPlayer+1 + "choisit un exploit");
+            System.out.println("Joueur "+ (this.turnPlayer+1) + " choisit un exploit");
         }
     }
 
     public void faveur() {
         for (Player player : this.players) {
             player.faveur();
-        }
-    }
-
-    public void sort(){
-        for(int i=0;i<this.players.size();i++) {
-            for (int j = i + 1; j < this.players.size(); j++) {
-                if (this.players.get(i).getHonour() < this.players.get(j).getHonour()) {
-                    Collections.swap(this.players, i,j);
-                }
-            }
         }
     }
 
@@ -61,22 +51,26 @@ public class Referee {
 
     public void printLog(){
         for (Player p : players){
+            System.out.println("information joueur: "+ (this.players.indexOf(p)+1));
             System.out.println("Honour: "+p.getHonour());
             System.out.println("Gold: "+p.getGold());
             System.out.println("PdS: "+p.getPdS());
-            System.out.println("PdL: "+p.getPdL());
+            System.out.println("PdL: "+p.getPdL()+"\n");
 
         }
     }
 
-    /*public void honour(){
-        if (.getHonour() > J2.getHonour()) {
-            System.out.println("Le joueur 1 a gagné avec " + J1.getHonour() + " points d'honneur");
-        } else if(J1.getHonour()<J2.getHonour()) {
-            System.out.println("Le joueur 2 a gagné avec " + J2.getHonour() + " points d'honneur");
-        }else {
-            System.out.println("Egalité");
+    public void honour(){
+        int max=this.players.get(0).getHonour();
+        int playerid = 0;
+        for (Player i : this.players) {
+            if (max < i.getHonour()) {
+                max = i.getHonour();
+                playerid = this.players.indexOf(i);
+            }
         }
-    }*/
+        System.out.println("Joueur "+ (playerid+1) + " gagne avec " + max + " honneur ");
+
+    }
 
 }
