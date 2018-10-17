@@ -6,7 +6,7 @@ public class Dice{
 	Face[] faces = new Face[6];
 	private int roll;
 
-	Dice(Face face1,Face face2,Face face3,Face face4,Face face5,Face face6){
+	public Dice(Face face1,Face face2,Face face3,Face face4,Face face5,Face face6){
 		this.faces[0] = face1;
 		this.faces[1] = face2;
 		this.faces[2] = face3;
@@ -21,11 +21,11 @@ public class Dice{
 		return this.roll;
 	}
 
-	Face getFace(int i){
+	public Face getFace(int i){
 		return this.faces[i];
 	}
 
-	void setFace(Face face,int i){
+	public void setFace(Face face,int i){
 		this.faces[i] = face;
 	}
 
