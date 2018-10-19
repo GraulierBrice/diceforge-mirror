@@ -1,38 +1,39 @@
 import DiceForge.Player;
+import DiceForge.AI.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TestPlayer {/*
-    @Test public void playerMethods(){
-        Player player=new Player();
-        player.addGold(11);
-        assertTrue(player.getGold()==11);
-        player.addGold(3);
-        assertTrue(player.getGold()==12);
-        player.removeGold(8);
-        assertTrue(player.getGold()==4);
-        player.removeGold(5);
-        assertTrue(player.getGold()==0);
+public class TestPlayer {
+    @Test public void AIMethods(){
+        RandomAI AI=new RandomAI();
+        AI.addGold(11);
+        assertTrue(AI.getGold()==11);
+        AI.addGold(3);
+        assertTrue(AI.getGold()==12);
+        AI.removeGold(8);
+        assertTrue(AI.getGold()==4);
+        AI.removeGold(5);
+        assertTrue(AI.getGold()==0);
 
-        player.addHonour(36);
-        assertTrue(player.getHonour()==36);
+        AI.addHonour(36);
+        assertTrue(AI.getHonour()==36);
 
-        player.addPdS(5);
-        assertTrue(player.getPdS()==5);
-        player.addPdS(2);
-        assertTrue(player.getPdS()==6);
-        player.removePdS(3);
-        assertTrue(player.getPdS()==3);
-        player.removePdS(5);
-        assertTrue(player.getPdS()==0);
+        AI.addPdS(5);
+        assertTrue(AI.getPdS()==5);
+        AI.addPdS(2);
+        assertTrue(AI.getPdS()==6);
+        AI.removePdS(3);
+        assertTrue(AI.getPdS()==3);
+        AI.removePdS(5);
+        assertTrue(AI.getPdS()==0);
 
-        player.addPdL(4);
-        assertTrue(player.getPdL()==4);
-        player.addPdL(4);
-        assertTrue(player.getPdL()==6);
-        player.removePdL(2);
-        assertTrue(player.getPdL()==4);
-        player.removePdL(6);
-        assertTrue(player.getPdL()==0);
-    }*/
+        AI.addPdL(4);
+        assertTrue(AI.getPdL()==4);
+        AI.addPdL(4);
+        assertTrue(AI.getPdL()==6);
+        AI.removePdL(2);
+        assertTrue(AI.getPdL()==4);
+        AI.removePdL(6);
+        assertTrue(AI.getPdL()==0);
+    }
 }

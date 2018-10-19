@@ -8,7 +8,9 @@ public class FacePdS extends Face{
     public void giveReward(Player player){
         player.addPdS(this.reward);
     }
-    public String getReward(){
-        return Integer.toString(this.reward)+"PdS";
+    public void getReward(){
+        System.out.print(""+this.reward+"PdS ");
+
+        //return Integer.toString(this.reward)+"PdS";
     }
 }

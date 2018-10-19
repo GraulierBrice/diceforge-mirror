@@ -8,7 +8,9 @@ public class FaceHonour extends Face{
     public void giveReward(Player player){
         player.addHonour(this.reward);
     }
-    public String getReward(){
-        return Integer.toString(this.reward)+"H";
+    public void getReward(){
+        System.out.print(""+this.reward+"H ");
+
+      //  return Integer.toString(this.reward)+"H";
     }
 }

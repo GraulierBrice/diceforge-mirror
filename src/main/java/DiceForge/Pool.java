@@ -20,6 +20,10 @@ public class Pool {
         return this.price;
     }
 
+    public int howManyFaces(){
+        return faces.size();
+    }
+
     public Face getFace(int n){
         return this.faces.get(n);
     }

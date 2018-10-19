@@ -6,7 +6,7 @@ import DiceForge.*;
 public class TestReferee {
 
     @Test public void refereeMethods() {
-        Referee referee=new Referee(4);
+        //Referee referee=new Referee(4);
 
     }
 }

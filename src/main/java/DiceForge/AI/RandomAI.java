@@ -36,21 +36,13 @@ public class RandomAI extends Player{
         return r.nextInt(6);
     }
 
-    public int choosePoolFace(Referee R) {
+    public int choosePoolFace(Pool pool) {
         Random r = new Random();
-        return r.nextInt(R.getNumberPlayer());
+        return r.nextInt(pool.howManyFaces());
     }
 
-    public Pool choosePool() {
-        int randomValue=0;
-        if(randomValue==0){
-            ArrayList<Face> pool2G=new ArrayList<>();
-            for(int i=0;i<4;i++) {//pour 4J pour l'instant pour test
-                pool2G.add(new FaceGold(2));
-            }
-            Pool pool= new Pool(2,pool2G);
-            return pool;
-        }
-        return null;
+    public int choosePool() {
+        Random r = new Random();
+        return r.nextInt(10-3);//10 jeu complet mais 3 pools non codées
     }
 }

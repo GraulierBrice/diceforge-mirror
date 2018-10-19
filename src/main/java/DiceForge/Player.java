@@ -34,9 +34,9 @@ public abstract class Player {
         return this.gold;
     }
     public Dice getDice(int n){
-        if(n==1){
+        if(n==0){
             return this.de1;
-        }else if(n==2){
+        }else if(n==1){
             return this.de2;
         }
         return null;
@@ -97,7 +97,7 @@ public abstract class Player {
     public abstract String chooseAction();
     public abstract int chooseDice();
     public abstract int chooseDiceFace();
-    public abstract int choosePoolFace(Referee R);
-    public abstract Pool choosePool();
+    public abstract int choosePoolFace(Pool pool);
+    public abstract int choosePool();
 
 }
