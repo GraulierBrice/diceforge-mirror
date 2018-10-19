@@ -1,7 +1,7 @@
 package DiceForge;
 import DiceForge.Face.*;
 
-public class Player {
+public abstract class Player {
     private int honour;
     private int PdL;
     private int PdS;
@@ -90,5 +90,14 @@ public class Player {
         this.de1.getFace(this.de1.rollDice()).giveReward(this);
         this.de2.getFace(this.de2.rollDice()).giveReward(this);
     }
+    public void buy(Referee R,Pool pool,int poolFace,int diceNumber,int diceFace){
+        this.getDice(diceNumber).setFace(pool.buy(R.getPlayer(R.getTurnPlayer()), pool.getFace(poolFace)), diceFace);
+    }
+
+    public abstract String chooseAction();
+    public abstract int chooseDice();
+    public abstract int chooseDiceFace();
+    public abstract int choosePoolFace(Referee R);
+    public abstract Pool choosePool();
 
 }

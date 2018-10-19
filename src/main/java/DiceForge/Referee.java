@@ -1,10 +1,7 @@
 package DiceForge;
-
-import java.awt.*;
-import java.awt.color.*;
+import DiceForge.AI.RandomAI;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Referee {
     private ArrayList<Player> players=new ArrayList<>();
@@ -12,7 +9,7 @@ public class Referee {
 
     public Referee(int nbJoueur){
         for (int i=1; i<=nbJoueur;i++) {
-            this.players.add(new Player());
+         //   this.players.add(new Player());
         }
         turnPlayer = 0;
         round=1;
@@ -22,6 +19,22 @@ public class Referee {
             maxRound=9;
         }
     }
+
+    public Referee(int nbJoueur,String typeAI){
+        for(int i=1;i<=nbJoueur;i++){
+            if(typeAI.equals("random")) {
+                this.players.add(new RandomAI());
+            }
+        }
+        turnPlayer=0;
+        round=1;
+        if(nbJoueur==3){
+            maxRound=10;
+        }else {
+            maxRound=9;
+        }
+    }
+
     public int getTurnPlayer(){
         return this.turnPlayer;
     }
@@ -52,6 +65,7 @@ public class Referee {
         }
         if(action == "forge"){
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut acheter une face");
+            this.buy(this.getPlayer(this.turnPlayer).choosePool(),this.getPlayer(this.turnPlayer).choosePoolFace(this),this.getPlayer(this.turnPlayer).chooseDice(),this.getPlayer(this.turnPlayer).chooseDiceFace());
         }
         if(action == "exploit"){
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
@@ -66,7 +80,10 @@ public class Referee {
 
     public void nextPlayer(){
         this.turnPlayer++;
-        if(this.turnPlayer == this.getNumberPlayer()) turnPlayer = 0; round++;
+        if(this.turnPlayer == this.getNumberPlayer()) {
+            turnPlayer = 0;
+            round++;
+        }
     }
 
     public void printLog(){
@@ -96,6 +113,9 @@ public class Referee {
         }
         System.out.println("Joueur "+ (playerid+1) + " gagne avec " + max + " honneurs ");
 
+    }
+    public void buy(Pool pool,int poolFace,int diceNumber,int diceFace){
+        this.getPlayer(this.turnPlayer).buy(this,pool,poolFace,diceNumber,diceFace);
     }
 
 }
