@@ -11,8 +11,7 @@ public class FacePdL extends Face{
         player.addPdL(this.reward);
     }
 
-    public void getReward(){
-        System.out.print(""+this.reward+"PdL ");
-        //return Integer.toString(this.reward)+"PdL";
+    public String getReward(){
+        return (Integer.toString(this.reward)+"PdL");
     }
 }

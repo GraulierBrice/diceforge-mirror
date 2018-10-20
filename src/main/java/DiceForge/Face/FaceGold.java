@@ -11,10 +11,9 @@ public class FaceGold extends Face {
 		player.addGold(this.reward);
 	}
 
-	public void getReward(){
-		System.out.print(""+this.reward+"G ");
+	public String getReward(){
+		return (Integer.toString(this.reward)+"G");
 
-		//return (Integer.toString(this.reward)+"G");
 	}
 
 }

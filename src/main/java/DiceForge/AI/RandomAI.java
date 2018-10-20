@@ -1,7 +1,5 @@
 package DiceForge.AI;
 import DiceForge.*;
-import DiceForge.Face.*;
-import java.util.ArrayList;
 
 import java.util.Random;
 

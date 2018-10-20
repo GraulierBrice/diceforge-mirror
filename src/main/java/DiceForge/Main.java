@@ -18,8 +18,7 @@ public class Main {
                 R.nextPlayer();
             }
         }
-        System.out.println(R.getNumberPlayer());
-    	R.honour();
+    	R.printWinner();
     }
 }
 

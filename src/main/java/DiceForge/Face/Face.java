@@ -11,10 +11,6 @@ public abstract class Face{
 
 	public abstract void giveReward(Player player);
 
-	public void getReward(){
-		System.out.print(""+this.reward+"");
-
-		//return Integer.toString(reward);
-	}
+	public abstract String getReward();
 
 }

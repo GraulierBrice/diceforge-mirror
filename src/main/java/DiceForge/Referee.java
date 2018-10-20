@@ -1,6 +1,5 @@
 package DiceForge;
 import DiceForge.AI.RandomAI;
-import DiceForge.Face.*;
 
 import java.util.ArrayList;
 
@@ -58,19 +57,10 @@ public class Referee {
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut acheter une face");
             int poolNumber= this.getPlayer(this.turnPlayer).choosePool();
             Pool pool=forge.getPool(poolNumber);
-        /*for(int i=0;i<this.getNumberPlayer();i++){
-                System.out.println(this.getNumberPlayer());
-                System.out.println(pool.getFace(i).getReward());
-            }*/
             if(pool.isEmpty()==false && this.getPlayer(this.turnPlayer).getGold()>=pool.getPrice()) {
                 int poolFace = this.getPlayer(this.turnPlayer).choosePoolFace(pool);
-                int dice =0;// this.getPlayer(this.turnPlayer).chooseDice();
+                int dice = this.getPlayer(this.turnPlayer).chooseDice();
                 int diceFace = this.getPlayer(this.turnPlayer).chooseDiceFace();
-                System.out.println("\u001B[32m"+"pool number :"+poolNumber);
-                System.out.println("pool face: "+poolFace);
-                System.out.println("dice number: "+dice);
-                System.out.println("dice face: "+diceFace);
-                System.out.println("pool nb de face restante: "+pool.howManyFaces()+"\u001B[0m");
                 this.buy(pool, poolFace, dice, diceFace);
             }
         }
@@ -109,18 +99,21 @@ public class Referee {
         }
     }
 
-    public void honour(){
-        int max=this.players.get(0).getHonour();
-        int playerid = 0;
+    public int[] honour() {
+        int []winner={this.players.get(0).getHonour(),0};//winner[0]=max;winner[1]=playerid;
         for (Player i : this.players) {
-            if (max < i.getHonour()) {
-                max = i.getHonour();
-                playerid = this.players.indexOf(i);
+            if (winner[0] < i.getHonour()) {
+                winner[0] = i.getHonour();
+                winner[1] = this.players.indexOf(i);
             }
         }
-        System.out.println("Joueur "+ (playerid+1) + " gagne avec " + max + " honneurs ");
-
+        return winner;
     }
+    public void printWinner() {
+        int []winner=this.honour();
+        System.out.println("Joueur " + (winner[1] + 1) + " gagne avec " + winner[0] + " honneurs ");
+    }
+
     public void buy(Pool pool,int poolFace,int diceNumber,int diceFace){
         this.getPlayer(this.turnPlayer).buy(this,pool,poolFace,diceNumber,diceFace);
     }
