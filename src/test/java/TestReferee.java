@@ -2,11 +2,12 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 import DiceForge.*;
+import DiceForge.AI.RandomAI;
 
 public class TestReferee {
 
     @Test public void refereeMethods() {
-        Referee referee=new Referee(4,"random");
+        Referee referee=new Referee(new RandomAI(),new RandomAI(),new RandomAI(),new RandomAI());
         Forge forge=new Forge(referee);
         referee.addForge(forge);
 

@@ -27,7 +27,6 @@ public class RandomAI extends Player{
 
     public int chooseDice(){
         return r.nextInt(2);
-
     }
 
     public int chooseDiceFace() {

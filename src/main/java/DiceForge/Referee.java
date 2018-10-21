@@ -2,7 +2,6 @@ package DiceForge;
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.*;
 
-
 import java.util.ArrayList;
 
 public class Referee {
@@ -10,22 +9,23 @@ public class Referee {
     private Forge forge;
     private int turnPlayer,round,maxRound;
 
-    public Referee(int nbJoueur,String typeAI){
-        for(int i=1;i<=nbJoueur;i++){
-            if(typeAI.equals("random")) {
-                this.players.add(new RandomAI());
-            }
+    public Referee(Player... joueurs){
+        for(Player i : joueurs){
+            this.players.add(i);
+            
         }
+
         turnPlayer=0;
         round=1;
-        if(nbJoueur==3){
-            maxRound=10;
-        }else {
-            maxRound=9;
-        }
+
+        if(this.getNumberPlayer()==3)
+            {maxRound=10;}
+        else
+            {maxRound=9;}
+
     }
 
-    public void addForge(Forge forge){this.forge=forge; }
+    public void addForge(Forge forge){this.forge=forge;}
 
     public int getTurnPlayer(){
         return this.turnPlayer;
