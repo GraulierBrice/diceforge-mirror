@@ -3,6 +3,7 @@ import DiceForge.AI.RandomAI;
 import DiceForge.Feat.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Referee {
     private ArrayList<Player> players=new ArrayList<>();
@@ -10,10 +11,7 @@ public class Referee {
     private int turnPlayer,round,maxRound;
 
     public Referee(Player... joueurs){
-        for(Player i : joueurs){
-            this.players.add(i);
-            
-        }
+        Arrays.asList(joueurs).addAll(this.players);
 
         turnPlayer=0;
         round=1;
@@ -59,14 +57,14 @@ public class Referee {
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut acheter une face");
             int poolNumber= this.getPlayer(this.turnPlayer).choosePool();
             Pool pool=forge.getPool(poolNumber);
-            if(pool.isEmpty()==false && this.getPlayer(this.turnPlayer).getGold()>=pool.getPrice()) {
+            if( !pool.isEmpty() && this.getPlayer(this.turnPlayer).getGold()>=pool.getPrice()) {
                 int poolFace = this.getPlayer(this.turnPlayer).choosePoolFace(pool);
                 int dice = this.getPlayer(this.turnPlayer).chooseDice();
                 int diceFace = this.getPlayer(this.turnPlayer).chooseDiceFace();
                 this.buy(pool, poolFace, dice, diceFace);
             }
         }
-        if(action == "exploit"){
+        if(action.equals("exploit")){
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
         }
     }

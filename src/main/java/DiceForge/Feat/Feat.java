@@ -15,6 +15,8 @@ public abstract class Feat{
 		return this.honour;
 	}
 
+	public Player getOwner() { return owner; }
+
 	public void setPlayer(Player player){
 		this.owner = player;
 	}
