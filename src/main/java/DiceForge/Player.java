@@ -1,7 +1,11 @@
 package DiceForge;
 import DiceForge.Face.*;
+import DiceForge.Feat.*;
+
+import java.util.ArrayList;
 
 public abstract class Player {
+    private ArrayList<Feat> feats=new ArrayList<>();
     private int honour;
     private int PdL;
     private int PdS;
@@ -18,7 +22,8 @@ public abstract class Player {
         this.PdL=0;
         this.PdS=0;
         this.gold=0;
-
+        this.feats.add(new Hammer());
+        this.feats.get(0).setPlayer(this);
     }
 
     public int getHonour(){
@@ -41,6 +46,9 @@ public abstract class Player {
         }
         return null;
     }
+    public Feat getFeat(int n){
+        return this.feats.get(n);
+    }
     public void addHonour(int honour){
         this.honour+=honour;
     }
@@ -59,6 +67,9 @@ public abstract class Player {
         }
     }
     public void addGold(int gold){
+        for(Feat f : this.feats){
+            if(f instanceof Hammer && ((Hammer)f).getLevel() < 2){gold = this.goldChoice(gold, (Hammer)f); break;}
+        }
         if(this.gold+gold<=maxGold){
             this.gold+=gold;
         }else {
@@ -99,5 +110,6 @@ public abstract class Player {
     public abstract int chooseDiceFace();
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
+    public abstract int goldChoice(int g, Hammer h);
 
 }
