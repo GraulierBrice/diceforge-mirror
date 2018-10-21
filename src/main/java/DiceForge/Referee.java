@@ -92,12 +92,10 @@ public class Referee {
             }else {
                 System.out.println("information joueur: " + (this.players.indexOf(p) + 1));
             }
-            Hammer h = (Hammer)p.getFeat(0);
             System.out.println("Honour: " + p.getHonour());
             System.out.println("Gold: " + p.getGold());
             System.out.println("PdS: " + p.getPdS());
             System.out.println("PdL: " + p.getPdL());
-            System.out.println("Marteau : " +h.getGold());
 
             p.getDice(0).toString(1);
             p.getDice(1).toString(2);

@@ -22,8 +22,6 @@ public abstract class Player {
         this.PdL=0;
         this.PdS=0;
         this.gold=0;
-        this.feats.add(new Hammer());
-        this.feats.get(0).setPlayer(this);
     }
 
     public int getHonour(){
