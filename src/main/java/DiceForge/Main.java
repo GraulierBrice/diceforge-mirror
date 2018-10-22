@@ -9,7 +9,6 @@ public class Main {
         Referee R = new Referee(new RandomAI(),new RandomAI(),new RandomAI());
         Forge forge=new Forge(R);
         R.addForge(forge);
-
         while(R.getRound()<=R.getMaxRound()) {
             System.out.println("Nous sommes au tour : " + R.getRound() + "\n");
             for (int i = 0; i < R.getNumberPlayer(); i++) {

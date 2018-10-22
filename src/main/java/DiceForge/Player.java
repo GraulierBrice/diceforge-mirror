@@ -47,6 +47,13 @@ public abstract class Player {
     public Feat getFeat(int n){
         return this.feats.get(n);
     }
+
+    public int getNbFeat(){ return this.feats.size();}
+
+    public void addFeat(Feat feat){
+        this.feats.add(feat);
+    }
+
     public void addHonour(int honour){
         this.honour+=honour;
     }

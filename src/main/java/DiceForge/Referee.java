@@ -1,18 +1,21 @@
 package DiceForge;
-import DiceForge.AI.RandomAI;
 import DiceForge.Feat.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Referee {
     private ArrayList<Player> players=new ArrayList<>();
     private Forge forge;
+    private Island island;
     private int turnPlayer,round,maxRound;
 
     public Referee(Player... joueurs){
-        Arrays.asList(joueurs).addAll(this.players);
-
+        for(int i=0;i<joueurs.length;i++) {
+            this.players.add(joueurs[i]);
+        }
+        ArrayList<Feat> island1=new ArrayList<>();
+        island1.add(new Hammer());
+        this.island=new Island(island1,this);
         turnPlayer=0;
         round=1;
 
@@ -66,6 +69,14 @@ public class Referee {
         }
         if(action.equals("exploit")){
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
+            //int island=0;//l'ile qu'il va choisir
+            int exploit=0;//l'exploit sur l'ile qu'il va choisir
+            if(this.island.getFeat(exploit).getNbExploit()>0 && this.getPlayer(this.turnPlayer).getGold()>this.island.getFeat(exploit).getPrice()){
+                this.getPlayer(this.turnPlayer).removeGold(1);
+                this.island.getFeat(exploit).setPlayer(this.getPlayer(this.turnPlayer));
+                System.out.println("Joueur "+(this.turnPlayer+1) + " réalise l'exploit "+this.island.getFeat(exploit).getNameExploit());
+
+            }
         }
     }
 
@@ -94,6 +105,15 @@ public class Referee {
             System.out.println("Gold: " + p.getGold());
             System.out.println("PdS: " + p.getPdS());
             System.out.println("PdL: " + p.getPdL());
+            for(int i=0;i<p.getNbFeat();i++){
+                if(p.getFeat(i).getNameExploit().equals("Hammer")){
+                    Hammer hammer=(Hammer)p.getFeat(i);
+                    if(hammer.getLevel()<2) {
+                        System.out.println("Hammer level " + (hammer.getLevel() + 1) + ": " + hammer.getGold());
+                        break;
+                    }
+                }
+            }
 
             p.getDice(0).toString(1);
             p.getDice(1).toString(2);

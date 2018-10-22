@@ -5,11 +5,18 @@ public class Hammer extends Feat{
 
 	private int gold;
 	private int level;
+	private int price;
 
 	public Hammer(){
 		super(0);
 		this.gold = 0;
 		this.level = 0;
+		this.price=1;
+		this.nameExploit="Hammer";
+	}
+
+	public int getPrice(){
+		return this.price;
 	}
 
 	public int getLevel(){
@@ -23,6 +30,12 @@ public class Hammer extends Feat{
 	public void giveGold(int g){
 		this.gold+=g;
 	}
+
+	public void setPlayer(Player player){
+	    super.setPlayer(player);
+        player.addFeat(new Hammer());
+
+    }
 
 	public void effect(Object... o){
 		this.gold+=(int)o[0];
