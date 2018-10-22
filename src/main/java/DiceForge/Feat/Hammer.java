@@ -15,10 +15,6 @@ public class Hammer extends Feat{
 		this.nameExploit="Hammer";
 	}
 
-	public int getPrice(){
-		return this.price;
-	}
-
 	public int getLevel(){
 		return this.level;
 	}
@@ -33,7 +29,7 @@ public class Hammer extends Feat{
 
 	public void setPlayer(Player player){
 	    super.setPlayer(player);
-        player.addFeat(new Hammer());
+        player.addFeat(this);
 
     }
 

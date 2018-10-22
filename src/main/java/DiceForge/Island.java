@@ -1,21 +1,33 @@
 package DiceForge;
 import DiceForge.Feat.*;
 import java.util.ArrayList;
+import java.lang.*;
 
 public class Island{
-	private int price;
     private ArrayList<Feat> feats;
 
-    public Island(ArrayList<Feat> feats,Referee R){
+    public Island(ArrayList<Feat> feats){
         this.feats=feats;
-        for(int i=0;i<feats.size();i++) {
-            this.feats.get(i).setNbExploit(R.getNumberPlayer());
+    }
+
+    public Feat getFeat(Class c){
+        for(Feat f : feats){
+             if(c.isInstance(f)){return f;}
+        }
+        return null;
+    }
+
+    public Boolean isIn(Class c){
+        for(Feat f : feats){
+             if(c.isInstance(f)){return true;}
+        }
+        return false;
+    }
+
+    public void removeFeat(Class c){
+        for(Feat f : feats){
+             if(c.isInstance(f)){feats.remove(f);break;}
         }
     }
-
-    public Feat getFeat(int i){
-        return this.feats.get(i);
-    }
-
 
 }

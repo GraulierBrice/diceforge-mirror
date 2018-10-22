@@ -10,12 +10,12 @@ public class Referee {
     private int turnPlayer,round,maxRound;
 
     public Referee(Player... joueurs){
+        ArrayList<Feat> island1=new ArrayList<>();
         for(int i=0;i<joueurs.length;i++) {
             this.players.add(joueurs[i]);
+            island1.add(new Hammer());
         }
-        ArrayList<Feat> island1=new ArrayList<>();
-        island1.add(new Hammer());
-        this.island=new Island(island1,this);
+        this.island=new Island(island1);
         turnPlayer=0;
         round=1;
 
@@ -70,12 +70,12 @@ public class Referee {
         if(action.equals("exploit")){
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
             //int island=0;//l'ile qu'il va choisir
-            int exploit=0;//l'exploit sur l'ile qu'il va choisir
-            if(this.island.getFeat(exploit).getNbExploit()>0 && this.getPlayer(this.turnPlayer).getGold()>this.island.getFeat(exploit).getPrice()){
-                this.getPlayer(this.turnPlayer).removeGold(1);
+            Class exploit = Hammer.class;//l'exploit sur l'ile qu'il va choisir
+            if(this.island.isIn(exploit) && this.getPlayer(this.turnPlayer).getPdL()>this.island.getFeat(exploit).getPrice()){
+                this.getPlayer(this.turnPlayer).removePdL(1);
                 this.island.getFeat(exploit).setPlayer(this.getPlayer(this.turnPlayer));
                 System.out.println("Joueur "+(this.turnPlayer+1) + " réalise l'exploit "+this.island.getFeat(exploit).getNameExploit());
-
+                this.island.removeFeat(exploit);
             }
         }
     }

@@ -4,7 +4,7 @@ import DiceForge.*;
 public abstract class Feat{
 
 	Player owner;
-	int honour,nbExploit;
+	int honour,nbExploit, price;
 	String nameExploit;
 
 	public Feat(int amount){
@@ -13,7 +13,9 @@ public abstract class Feat{
 		this.nameExploit=null;
 	}
 
-	public abstract int getPrice();
+	public int getPrice(){
+		return this.price;
+	}
 
 
 	public void setNbExploit(int nbExploit){
