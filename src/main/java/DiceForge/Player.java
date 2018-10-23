@@ -36,6 +36,22 @@ public abstract class Player {
     public int getGold(){
         return this.gold;
     }
+    public int getMaxPdL(){ return this.maxPdL;}
+    public int getMaxPdS(){
+        return this.maxPdS;
+    }
+    public int getMaxGold(){
+        return this.maxGold;
+    }
+
+    public int setMaxPdL(int maxPdL){ return this.maxPdL;}
+    public int setMaxPdS(int maxPdS){
+        return this.maxPdS;
+    }
+    public int setMaxGold(int maxGold){
+        return this.maxGold;
+    }
+
     public Dice getDice(int n){
         if(n==0){
             return this.de1;

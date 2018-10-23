@@ -14,6 +14,7 @@ public class Referee {
         for(int i=0;i<joueurs.length;i++) {
             this.players.add(joueurs[i]);
             island1.add(new Hammer());
+            island1.add(new Chest());
         }
         this.island=new Island(island1);
         turnPlayer=0;
@@ -70,8 +71,12 @@ public class Referee {
         if(action.equals("exploit")){
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
             //int island=0;//l'ile qu'il va choisir
-            Class exploit = Hammer.class;//l'exploit sur l'ile qu'il va choisir
-            if(this.island.isIn(exploit) && this.getPlayer(this.turnPlayer).getPdL()>this.island.getFeat(exploit).getPrice()){
+            Class exploit = Chest.class;//l'exploit sur l'ile qu'il va choisir
+            if(this.island.isIn(exploit)){ // test a retirer
+                System.out.println(" C'EST VRAI TON TRUC");
+            }
+            
+            if(this.island.isIn(exploit) && this.getPlayer(this.turnPlayer).getPdL()>=this.island.getFeat(exploit).getPrice()){
                 this.getPlayer(this.turnPlayer).removePdL(1);
                 this.island.getFeat(exploit).setPlayer(this.getPlayer(this.turnPlayer));
                 System.out.println("Joueur "+(this.turnPlayer+1) + " réalise l'exploit "+this.island.getFeat(exploit).getNameExploit());
@@ -102,9 +107,9 @@ public class Referee {
                 System.out.println("information joueur: " + (this.players.indexOf(p) + 1));
             }
             System.out.println("Honour: " + p.getHonour());
-            System.out.println("Gold: " + p.getGold());
-            System.out.println("PdS: " + p.getPdS());
-            System.out.println("PdL: " + p.getPdL());
+            System.out.println("Gold: " + p.getGold() + "/" + p.getMaxGold());
+            System.out.println("PdS: " + p.getPdS() + "/" + p.getMaxPdS());
+            System.out.println("PdL: " + p.getPdL() + "/" + p.getMaxPdL());
             for(int i=0;i<p.getNbFeat();i++){
                 if(p.getFeat(i).getNameExploit().equals("Hammer")){
                     Hammer hammer=(Hammer)p.getFeat(i);

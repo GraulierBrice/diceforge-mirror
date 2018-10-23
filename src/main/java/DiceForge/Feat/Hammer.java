@@ -5,13 +5,12 @@ public class Hammer extends Feat{
 
 	private int gold;
 	private int level;
-	private int price;
+
 
 	public Hammer(){
-		super(0);
+		super(0,1);
 		this.gold = 0;
 		this.level = 0;
-		this.price=1;
 		this.nameExploit="Hammer";
 	}
 

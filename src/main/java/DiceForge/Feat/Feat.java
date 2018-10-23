@@ -7,9 +7,10 @@ public abstract class Feat{
 	int honour,nbExploit, price;
 	String nameExploit;
 
-	public Feat(int amount){
+	public Feat(int amount, int price){
 		this.honour = amount;
 		this.owner = null;
+		this.price = price;
 		this.nameExploit=null;
 	}
 
