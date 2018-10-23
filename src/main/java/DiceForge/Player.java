@@ -36,7 +36,9 @@ public abstract class Player {
     public int getGold(){
         return this.gold;
     }
-    public int getMaxPdL(){ return this.maxPdL;}
+    public int getMaxPdL(){
+        return this.maxPdL;
+    }
     public int getMaxPdS(){
         return this.maxPdS;
     }
@@ -44,13 +46,10 @@ public abstract class Player {
         return this.maxGold;
     }
 
-    public int setMaxPdL(int maxPdL){ return this.maxPdL;}
-    public int setMaxPdS(int maxPdS){
-        return this.maxPdS;
-    }
-    public int setMaxGold(int maxGold){
-        return this.maxGold;
-    }
+    public void setMaxPdL(int n){ this.maxPdL = n;}
+    public void setMaxPdS(int n){ this.maxPdS = n;}
+    public void setMaxGold(int n){ this.maxGold = n;}
+
 
     public Dice getDice(int n){
         if(n==0){

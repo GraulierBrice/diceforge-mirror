@@ -14,14 +14,13 @@ public class Chest extends Feat {
 
     public void setPlayer(Player player){
         super.setPlayer(player);
-        player.addFeat(this);
-
+        this.effect(null);
     }
 
     public void effect(Object... o){
-        owner.setMaxPdL(owner.getMaxPdL()+3);
-        owner.setMaxPdS(owner.getMaxPdS()+3);
-        owner.setMaxGold(owner.getMaxGold()+4);
+        owner.setMaxPdL(this.owner.getMaxPdL()+3);
+        owner.setMaxPdS(this.owner.getMaxPdS()+3);
+        owner.setMaxGold(this.owner.getMaxGold()+4);
 
     }
 }

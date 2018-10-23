@@ -72,10 +72,6 @@ public class Referee {
             System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
             //int island=0;//l'ile qu'il va choisir
             Class exploit = Chest.class;//l'exploit sur l'ile qu'il va choisir
-            if(this.island.isIn(exploit)){ // test a retirer
-                System.out.println(" C'EST VRAI TON TRUC");
-            }
-            
             if(this.island.isIn(exploit) && this.getPlayer(this.turnPlayer).getPdL()>=this.island.getFeat(exploit).getPrice()){
                 this.getPlayer(this.turnPlayer).removePdL(1);
                 this.island.getFeat(exploit).setPlayer(this.getPlayer(this.turnPlayer));

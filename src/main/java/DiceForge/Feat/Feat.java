@@ -38,7 +38,7 @@ public abstract class Feat{
 
 	public void setPlayer(Player player){
 		this.owner = player;
-		this.nbExploit--;
+		player.addFeat(this);
 	}
 
 	public abstract void effect(Object... o);

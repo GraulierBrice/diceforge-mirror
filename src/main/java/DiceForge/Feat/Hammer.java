@@ -26,12 +26,6 @@ public class Hammer extends Feat{
 		this.gold+=g;
 	}
 
-	public void setPlayer(Player player){
-	    super.setPlayer(player);
-        player.addFeat(this);
-
-    }
-
 	public void effect(Object... o){
 		this.gold+=(int)o[0];
 		if(this.gold>=15) {
