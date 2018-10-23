@@ -38,6 +38,7 @@ public abstract class Feat{
 
 	public void setPlayer(Player player){
 		this.owner = player;
+		owner.addHonour(this.honour);
 		player.addFeat(this);
 	}
 

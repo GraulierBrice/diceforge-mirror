@@ -8,7 +8,7 @@ public class Chest extends Feat {
     private int maxGold;
 
     public Chest() {
-        super(1,1);
+        super(2,1);
         this.nameExploit="Chest";
     }
 
