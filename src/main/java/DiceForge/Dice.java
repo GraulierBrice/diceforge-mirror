@@ -32,7 +32,8 @@ public class Dice{
 	public void toString(int dice){
 		System.out.print("Dé "+dice+" :");
 		for(int i=0;i<6;i++){
-			System.out.print(this.getFace(i).getReward()+" ");
+			if(i==this.roll){ System.out.print("\u001B[33m"+this.getFace(i).getReward() + "\u001B[0m "); }
+			else {System.out.print(this.getFace(i).getReward() + " "); }
 		}
 		System.out.print("\n");
 	}

@@ -55,10 +55,12 @@ public class Referee {
 
     public void choixAction(String action){
         if(action == "passe"){
-            System.out.println("Joueur "+ (this.turnPlayer+1) + " passe son tour");
+            System.out.println("\033[34mJoueur "+ (this.turnPlayer+1) + " passe son tour\u001B[0m");
         }
+
+
         if(action == "forge"){
-            System.out.println("Joueur "+ (this.turnPlayer+1) + " peut acheter une face");
+            System.out.println("\033[34mJoueur "+ (this.turnPlayer+1) + " peut acheter une face\u001B[0m");
             int poolNumber= this.getPlayer(this.turnPlayer).choosePool();
             Pool pool=forge.getPool(poolNumber);
             if( !pool.isEmpty() && this.getPlayer(this.turnPlayer).getGold()>=pool.getPrice()) {
@@ -69,13 +71,13 @@ public class Referee {
             }
         }
         if(action.equals("exploit")){
-            System.out.println("Joueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser");
-            //int island=0;//l'ile qu'il va choisir
-            Class exploit = Chest.class;//l'exploit sur l'ile qu'il va choisir
+            System.out.println("\033[34mJoueur "+ (this.turnPlayer+1) + " peut choisir un exploit à réaliser\u001B[0m");
+            this.getPlayer(this.turnPlayer).chooseIsland();
+            Class exploit = this.getPlayer(this.turnPlayer).chooseFeat();//l'exploit sur l'ile qu'il va choisir
             if(this.island.isIn(exploit) && this.getPlayer(this.turnPlayer).getPdL()>=this.island.getFeat(exploit).getPrice()){
                 this.getPlayer(this.turnPlayer).removePdL(1);
                 this.island.getFeat(exploit).setPlayer(this.getPlayer(this.turnPlayer));
-                System.out.println("Joueur "+(this.turnPlayer+1) + " réalise l'exploit "+this.island.getFeat(exploit).getNameExploit());
+                System.out.println("\033[34mJoueur "+(this.turnPlayer+1) + " réalise l'exploit "+this.island.getFeat(exploit).getNameExploit()+"\u001B[0m");
                 this.island.removeFeat(exploit);
             }
         }

@@ -13,6 +13,7 @@ public abstract class Player {
     private int maxPdL=6;
     private int maxPdS=6;
     private int maxGold=12;
+    protected int currentIsland=-1;
 
     private Dice de1 = new Dice(new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FacePdS(1));
     private Dice de2 = new Dice(new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceHonour(1),new FacePdL(1));
@@ -45,6 +46,8 @@ public abstract class Player {
     public int getMaxGold(){
         return this.maxGold;
     }
+
+    public int getCurrentIsland(){return this.currentIsland;}
 
     public void setMaxPdL(int n){ this.maxPdL = n;}
     public void setMaxPdS(int n){ this.maxPdS = n;}
@@ -131,5 +134,7 @@ public abstract class Player {
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
     public abstract int goldChoice(int g, Hammer h);
+    public abstract void chooseIsland();
+    public abstract Class chooseFeat();
 
 }

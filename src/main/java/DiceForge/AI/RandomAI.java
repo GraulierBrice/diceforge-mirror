@@ -46,4 +46,23 @@ public class RandomAI extends Player{
         m.effect(g);
         return gold-g;
     }
+
+    public void chooseIsland(){
+        this.currentIsland=r.nextInt(1);
+    }
+
+    public Class chooseFeat(){
+        int featNumber=r.nextInt(2);//pour l'instant il n'y a pas d'ile avec plus de deux feat, pour la dernière ile, il faudra juste vérif si on est dessus et dans ce cas on fera random bound: 3
+        switch(this.currentIsland){
+            case 0:
+                switch(featNumber){
+                    case 0:
+                        return Hammer.class;
+                    case 1:
+                        return Chest.class;
+                }
+            default:
+                return null;
+        }
+    }
 }

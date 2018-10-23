@@ -29,7 +29,7 @@ public class Island{
 
     public void removeFeat(Class c){
         for (Feat f : feats){
-             if(c.isInstance(f))feats.remove(f); break;
+             if(c.isInstance(f)){feats.remove(f); break;}
         }
     }
 
