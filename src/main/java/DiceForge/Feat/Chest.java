@@ -14,7 +14,7 @@ public class Chest extends Feat {
 
     public void setPlayer(Player player){
         super.setPlayer(player);
-        this.effect(null);
+        this.effect();
     }
 
     public void effect(Object... o){

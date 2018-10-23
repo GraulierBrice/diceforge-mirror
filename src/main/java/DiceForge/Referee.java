@@ -10,7 +10,7 @@ public class Referee {
     private int turnPlayer,round,maxRound;
 
     public Referee(Player... joueurs){
-        ArrayList<Feat> island1=new ArrayList<>();
+        ArrayList<Feat> island1 = new ArrayList<>();
         for(int i=0;i<joueurs.length;i++) {
             this.players.add(joueurs[i]);
             island1.add(new Hammer());
