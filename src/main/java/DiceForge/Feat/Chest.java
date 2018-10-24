@@ -8,7 +8,7 @@ public class Chest extends Feat {
     private int maxGold;
 
     public Chest() {
-        super(2,1);
+        super(2,1,0);
     }
 
     public void setPlayer(Player player){

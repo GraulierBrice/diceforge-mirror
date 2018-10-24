@@ -64,7 +64,7 @@ public class Referee {
                 System.out.println("\033[34mJoueur "+(this.turnPlayer+1)+" peut choisir un exploit à réaliser\u001B[0m");
                 turnP.chooseIsland();
                 Class exploit = turnP.chooseFeat();//l'exploit sur l'ile qu'il va choisir
-                if(this.island.isIn(exploit) && turnP.getPdL()>=this.island.getFeat(exploit).getPrice()){
+                if(this.island.isIn(exploit) && (turnP.getPdL()>=this.island.getFeat(exploit).getPricePdL() || turnP.getPdS()>=this.island.getFeat(exploit).getPricePdS())){
                     turnP.removePdL(1);
                     this.island.getFeat(exploit).setPlayer(turnP);
                     System.out.println("\033[34mJoueur "+(this.turnPlayer+1)+" réalise l'exploit "+exploit.getName().split("\\.")[2]+"\u001B[0m");
