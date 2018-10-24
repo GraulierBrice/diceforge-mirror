@@ -1,6 +1,7 @@
 package DiceForge.Face;
 import DiceForge.*;
 
+//Abstract Methode use as Parent of other Face Objects
 public abstract class Face{
 
 	int reward;
@@ -9,8 +10,7 @@ public abstract class Face{
 		this.reward = amount;
 	}
 
-	public abstract void giveReward(Player player);
+	public abstract void giveReward(Player player); //Overridden to adjust for each Face ressource type
 
-	public abstract String getReward();
-
+	public abstract String getReward(); //Display overridden depending on ressource
 }

@@ -13,7 +13,6 @@ public class FaceGold extends Face {
 
 	public String getReward(){
 		return (Integer.toString(this.reward)+"G");
-
 	}
 
 }

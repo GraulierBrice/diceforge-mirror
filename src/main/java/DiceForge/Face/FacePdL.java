@@ -14,4 +14,5 @@ public class FacePdL extends Face{
     public String getReward(){
         return (Integer.toString(this.reward)+"PdL");
     }
+
 }

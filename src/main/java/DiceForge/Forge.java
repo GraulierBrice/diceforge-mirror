@@ -1,5 +1,6 @@
 package DiceForge;
 import DiceForge.Face.*;
+
 import java.util.ArrayList;
 
 public class Forge{
@@ -50,6 +51,7 @@ public class Forge{
         //this.forge.add(pool12G);
     }
 
+    /* Accessor */
     public Pool getPool(int n){
         return this.forge.get(n);
     }

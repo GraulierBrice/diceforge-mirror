@@ -1,5 +1,6 @@
 package DiceForge;
 import DiceForge.Feat.*;
+
 import java.util.ArrayList;
 import java.lang.*;
 
@@ -10,6 +11,7 @@ public class Island{
         this.feats=feats;
     }
 
+    /* Accessor */
     public Feat getFeat(Class c){
         for(Feat f : feats){
              if(c.isInstance(f)) return f;
@@ -17,6 +19,7 @@ public class Island{
         return null;
     }
 
+    //checks if Feat type is present in island
     public Boolean isIn(Class c){
         for (Feat f : feats)
             if (c.isInstance(f)) return true;
@@ -28,9 +31,7 @@ public class Island{
     }
 
     public void removeFeat(Class c){
-        for (Feat f : feats){
-             if(c.isInstance(f)){feats.remove(f); break;}
-        }
+        feats.remove(feats.stream().filter(c::isInstance).findFirst().orElse(null)); //Lambda streams are fun
     }
 
 }

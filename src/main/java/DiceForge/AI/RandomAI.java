@@ -29,7 +29,7 @@ public class RandomAI extends Player{
         return r.nextInt(2);
     }
 
-    public int chooseDiceFace() {
+    public int chooseDiceFace(int dice) {
         return r.nextInt(6);
     }
 
