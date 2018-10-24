@@ -75,7 +75,7 @@ public class Referee {
     }
 
     public void faveur() {
-        for (Player player : this.players) player.faveur();
+        players.forEach(Player::faveur);
     }
 
 
