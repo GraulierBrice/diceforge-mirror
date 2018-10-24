@@ -36,7 +36,7 @@ public class Dice{
 
 	void giveReward(Player player){
 		this.rollDice();
-		this.faces[roll].giveReward(player);
+		this.getFace(roll).giveReward(player);
 	}
 
 	//Affichage du dé et ses faces
