@@ -19,13 +19,13 @@ public class Dice{
 	}
 
 	/* Accessor */
-	public Face getFace(int i){
-		return this.faces[i];
-	}
+	public Face getFace(int i){return this.faces[i];}
 
 	/* Mutator */
-	public void setFace(Face face,int i){
-		this.faces[i] = face;
+	public void setFace(Face face,int i){this.faces[i] = face;}
+	void giveReward(Player player){
+		this.rollDice();
+		this.faces[roll].giveReward(player);
 	}
 
 	//Change le numéro de face roulé aléatoirement
@@ -34,10 +34,7 @@ public class Dice{
 		this.roll = r.nextInt(6);
 	}
 
-	void giveReward(Player player){
-		this.rollDice();
-		this.getFace(roll).giveReward(player);
-	}
+
 
 	//Affichage du dé et ses faces
 	public void toString(int dice){
