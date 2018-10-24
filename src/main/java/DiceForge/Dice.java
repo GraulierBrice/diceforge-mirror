@@ -29,10 +29,14 @@ public class Dice{
 	}
 
 	//Change le numéro de face roulé aléatoirement
-	int rollDice(){ 
+	void rollDice(){ 
 		Random r = new Random();
 		this.roll = r.nextInt(6);
-		return this.roll;
+	}
+
+	void giveReward(Player player){
+		this.rollDice();
+		this.getFace(roll).giveReward(player);
 	}
 
 	//Affichage du dé et ses faces

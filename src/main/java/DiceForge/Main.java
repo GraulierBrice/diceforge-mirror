@@ -12,7 +12,7 @@ public class Main {
         R.addForge(forge);
         while(R.getRound()<=R.getMaxRound()) {
             System.out.println("Nous sommes au tour : " + R.getRound() + "\n");
-            for (int i = ; i < R.getNumberPlayer(); i++) {
+            for (int i = 0; i < R.getNumberPlayer(); i++) {
                 R.faveur();
                 R.choixAction(R.getPlayer(R.getTurnPlayer()).chooseAction());
                 R.printLog();

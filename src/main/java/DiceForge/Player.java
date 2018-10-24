@@ -51,8 +51,8 @@ public abstract class Player {
     
     //Rolls dice and adds rewards to player's ressources
     public void faveur(){
-        this.de1.getFace(this.de1.rollDice()).giveReward(this);
-        this.de2.getFace(this.de2.rollDice()).giveReward(this);
+        this.de1.giveReward(this);
+        this.de2.giveReward(this);
     }
 
     //Purchase a dice face and set it on a dice of chosing
