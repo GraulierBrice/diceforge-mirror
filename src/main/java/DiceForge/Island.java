@@ -15,6 +15,7 @@ public class Island{
     public Feat getFeat(Class c){
         return feats.stream().filter(c::isInstance).findFirst().orElse(null);
     }
+    public void setFeats(Feat feat){ this.feats.add(feat);}
 
     //checks if Feat type is present in island
     public Boolean isIn(Class c){
