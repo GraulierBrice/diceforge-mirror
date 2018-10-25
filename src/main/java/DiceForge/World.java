@@ -1,31 +1,39 @@
 package DiceForge;
 
-import DiceForge.Feat.Chest;
 import DiceForge.Feat.*;
-
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class World {
     private ArrayList<Island> islands=new ArrayList<>();
-    Island island1 = new Island(new ArrayList<>(Arrays.asList(new Hammer(),new Chest())));
-    Island island2 = new Island(new ArrayList<>(Arrays.asList(new Ancien())));
-    /*Island island3 = new Island(new ArrayList<>());
-    Island island4 = new Island(new ArrayList<>());
-    Island island5 = new Island(new ArrayList<>());
-    Island island6 = new Island(new ArrayList<>());
-    Island island7 = new Island(new ArrayList<>());*/
-
 
     public World(Referee R){
-        islands.add(island1);
-        islands.add(island2);
-        /*islands.add(new Island(island3));
-        islands.add(new Island(island4));
-        islands.add(new Island(island5));
-        islands.add(new Island(island6));
-        islands.add(new Island(island7));*/
+        ArrayList<Feat> feats1 = new ArrayList<>();
+        ArrayList<Feat> feats2 = new ArrayList<>();
+        /*ArrayList<Feat> feats3 = new ArrayList<>();
+        ArrayList<Feat> feats4 = new ArrayList<>();
+        ArrayList<Feat> feats5 = new ArrayList<>();
+        ArrayList<Feat> feats6 = new ArrayList<>();
+        ArrayList<Feat> feats7 = new ArrayList<>();*/
 
+        for(int i=0;i<R.getNumberPlayer();i++){
+            feats1.add(new Hammer());feats1.add(new Chest());
+            feats2.add(new Ancien());feats2.add(new HerbesFolles());
+            /*feats3.add();feats3.add();
+            feats4.add();feats4.add();
+            feats5.add();feats5.add();
+            feats6.add();feats6.add();
+            feats7.add();feats7.add();feats7.add();*/
+
+        }
+
+        islands.add(new Island(feats1));
+        islands.add(new Island(feats2));
+        /*islands.add(new Island(feats3));
+        islands.add(new Island(feats4));
+        islands.add(new Island(feats5));
+        islands.add(new Island(feats6));
+        islands.add(new Island(feats7));*/
     }
+    /* Accessor */
+    public Island getIsland(int n){return this.islands.get(n); }
 }
