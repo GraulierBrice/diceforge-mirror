@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class Referee {
     private ArrayList<Player> players=new ArrayList<>();
-    private Forge forge;
+    private static Forge forge;
+    private static World world;
     private Island island;
     private int turnPlayer,round,maxRound;
 
@@ -24,6 +25,7 @@ public class Referee {
     }
 
     public void addForge(Forge forge){this.forge=forge;}
+    public void addWorld(World world){this.world=world;}
 
     /* Accessor */
     public int getTurnPlayer(){return this.turnPlayer;}
@@ -31,8 +33,9 @@ public class Referee {
     public Player getPlayer(int n){return players.get(n);}
     public int getRound(){return this.round;}
     public int getMaxRound(){return this.maxRound;}
-   
-    /* Mutator */
+    public static Forge getForge(){return forge;}
+    public static World getWorld(){return world;}
+        /* Mutator */
     public void setPlayers(ArrayList<Player> players){this.players = players;}
     public void nextPlayer(){
         this.turnPlayer++;
@@ -53,6 +56,7 @@ public class Referee {
             case "forge" :
                 System.out.println("\033[34mJoueur "+(this.turnPlayer+1)+" peut acheter une face\u001B[0m");
                 Pool pool=forge.getPool(turnP.choosePool());
+                System.out.println(pool.isEmpty());
                 if(!pool.isEmpty() && turnP.getGold()>=pool.getPrice()) {
                     int poolFace = turnP.choosePoolFace(pool);
                     int dice = turnP.chooseDice();

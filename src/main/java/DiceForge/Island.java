@@ -30,4 +30,37 @@ public class Island{
         feats.remove(getFeat(c)); //Lambda streams are fun
     }
 
+    public boolean isEmpty(){
+        return feats.isEmpty();
+    }
+
+    public boolean doesItCost(String kind) {
+        for (Feat f : feats) {
+            if ((kind.equals("PdL") && f.getPricePdL()>0) || (kind.equals("PdS") && f.getPricePdS()>0)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Feat lowestPriceOfFeat(String kind){
+        int number=0;
+        for(int i=0;i<feats.size()-1;i++) {
+            if(kind.equals("PdL")) {
+                if (feats.get(i).getPricePdL()<feats.get(i+1).getPricePdL()){
+                    number=i;
+                }else {
+                    number=i+1;
+                }
+            }else if(kind.equals("PdS")){
+                if(feats.get(i).getPricePdS()<feats.get(i+1).getPricePdS()){
+                    number=i;
+                }else {
+                    number=i+1;
+                }
+            }
+        }
+        return feats.get(number);
+    }
+
 }

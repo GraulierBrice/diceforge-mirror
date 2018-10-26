@@ -36,4 +36,13 @@ public class World {
     }
     /* Accessor */
     public Island getIsland(int n){return this.islands.get(n); }
+
+    public Island lowestIslandNotEmpty(String kind){
+        for(Island i:islands){
+            if(i.isEmpty()==false && i.doesItCost(kind)){
+                return i;
+            }
+        }
+        return null;
+    }
 }

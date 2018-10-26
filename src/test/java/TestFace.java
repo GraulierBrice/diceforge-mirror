@@ -14,37 +14,37 @@ public class TestFace {
 
     @Test
     public void faceGold() {
-        FaceGold g1=new FaceGold(1);
+        FaceGold g1=new FaceGold(1,"G");
         g1.giveReward(randomAI);
         assertTrue(randomAI.getGold()==1);
-        FaceGold g18=new FaceGold(18);
+        FaceGold g18=new FaceGold(18,"G");
         g18.giveReward(randomAI);
         assertTrue(randomAI.getGold()==12);
     }
 
     @Test
     public void facePdS(){
-        FacePdS PdS1=new FacePdS(1);
+        FacePdS PdS1=new FacePdS(1,"PdS");
         PdS1.giveReward(randomAI);
         assertTrue(randomAI.getPdS()==1);
-        FacePdS PdS8=new FacePdS(8);
+        FacePdS PdS8=new FacePdS(8,"PdS");
         PdS8.giveReward(randomAI);
         assertTrue(randomAI.getPdS()==6);
     }
 
     @Test
     public void facePdL(){
-        FacePdL PdL1=new FacePdL(1);
+        FacePdL PdL1=new FacePdL(1,"PdL");
         PdL1.giveReward(randomAI);
         assertTrue(randomAI.getPdL()==1);
-        FacePdL PdL8=new FacePdL(8);
+        FacePdL PdL8=new FacePdL(8,"PdL");
         PdL8.giveReward(randomAI);
         assertTrue(randomAI.getPdL()==6);
     }
 
     @Test
     public void FaceHonour(){
-        FaceHonour honour1=new FaceHonour(1);
+        FaceHonour honour1=new FaceHonour(1,"H");
         honour1.giveReward(randomAI);
         assertTrue(randomAI.getHonour()==1);
     }

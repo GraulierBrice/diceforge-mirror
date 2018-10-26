@@ -8,8 +8,8 @@ public abstract class Player {
     private ArrayList<Feat> feats=new ArrayList<>();
     private int honour, gold, PdL, PdS, maxPdL = 6, maxPdS=6, maxGold=12;
     protected int currentIsland=-1;
-    private Dice de1 = new Dice(new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FacePdS(1));
-    private Dice de2 = new Dice(new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceGold(1),new FaceHonour(1),new FacePdL(1));
+    private Dice de1 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FacePdS(1,"PdS"));
+    private Dice de2 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceHonour(1,"H"),new FacePdL(1,"PdL"));
 
     public Player(){
         this.honour=0;

@@ -35,4 +35,14 @@ public class Pool {
         return this.faces.isEmpty();
     }
 
+    public boolean kindOfPool(String kind){
+        for(Face f:faces){
+            if(f.getKind().equals(kind) || kind.equals("")){
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+

@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 public class TestDice {
 
 	@Test public void diceMethods(){
-		Face g1 = new FaceGold(1);
-		Face g2 = new FaceGold(2);
+		Face g1 = new FaceGold(1,"G");
+		Face g2 = new FaceGold(2,"G");
 		Dice dice = new Dice(g1,g1,g1,g1,g1,g1);
 		dice.setFace(g2,2);
 		assertEquals(dice.getFace(0),g1);

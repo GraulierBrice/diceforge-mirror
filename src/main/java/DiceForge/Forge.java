@@ -18,14 +18,16 @@ public class Forge{
         ArrayList<Face> _3Honour=new ArrayList<>();
         ArrayList<Face> FacePool12G=new ArrayList<>();//toutes les faces pas encore codée
 
+
         for(int i=0;i<R.getNumberPlayer();i++){
-            _3G.add(new FaceGold(3));
-            _1PdL.add(new FacePdL(1));
-            _4G.add(new FaceGold(4));
-            _1PdS.add(new FacePdS(1));
-            _2PdL.add(new FacePdL(2));
-            _2PdS.add(new FacePdS(2));
-            _3Honour.add(new FaceHonour(3));
+            _3G.add(new FaceGold(3,"G"));
+            _1PdL.add(new FacePdL(1,"PdL"));
+            _4G.add(new FaceGold(4,"G"));
+            _1PdS.add(new FacePdS(1,"PdS"));
+            _2PdL.add(new FacePdL(2,"PdL"));
+            _2PdS.add(new FacePdS(2,"PdS"));
+            _3Honour.add(new FaceHonour(3,"H"));
+
         }
 
         Pool pool2G_3G=new Pool(2,_3G);
@@ -38,6 +40,7 @@ public class Forge{
         Pool pool8G_2PdS=new Pool(8,_2PdS);
         Pool pool8G_3Honour=new Pool(8,_3Honour);
         Pool pool12G=new Pool(12,FacePool12G);//pas codée encore
+
 
         this.forge.add(pool2G_3G);
         this.forge.add(pool2G_1PdL);
@@ -56,4 +59,21 @@ public class Forge{
         return this.forge.get(n);
     }
 
+    public Pool lowestPoolNotEmptyContaining(String kind){//if kind=="" then return all kind of pool
+        for(Pool p:forge){
+            if(p.isEmpty()==false && p.kindOfPool(kind)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public int isNumber(Pool pool){
+        for(int i=0;i<forge.size();i++){
+            if(forge.get(i)==pool){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

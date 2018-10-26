@@ -41,5 +41,23 @@ public class Dice{
 		}
 		System.out.print("\n");
 	}
+	public boolean diceNotFullWith(String kind){
+		for(Face f:faces){
+			if(!f.getKind().equals(kind)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public int faceNotOfThisKind(String kind){
+		for(int i=0;i<faces.length;i++){
+			if(!faces[i].getKind().equals(kind)){
+				return i;
+			}
+		}
+		return -1;
+	}
+
 
 }

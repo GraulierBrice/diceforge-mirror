@@ -5,12 +5,16 @@ import DiceForge.*;
 public abstract class Face{
 
 	int reward;
+	String kind;
 
-	public Face(int amount){
-		this.reward = amount;
+	public Face(int amount,String kind){
+		this.kind=kind;
+	    this.reward = amount;
 	}
 
 	public abstract void giveReward(Player player); //Overridden to adjust for each Face ressource type
 
-	public abstract String getReward(); //Display overridden depending on ressource
+	public String getReward(){return (this.reward+this.kind);}; //Display overridden depending on ressource
+
+    public String getKind(){return this.kind;}
 }
