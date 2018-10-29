@@ -51,10 +51,12 @@ public class LunarAI extends Player {
 
     @Override
     public int choosePool() {
-        if(Referee.getForge().lowestPoolNotEmptyContaining("PdL").getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
+        Pool poolPdL =Referee.getForge().lowestPoolNotEmptyContaining("PdL");
+        Pool poolG=Referee.getForge().lowestPoolNotEmptyContaining("G");
+        if(poolPdL!=null && poolPdL.getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
             return Referee.getForge().isNumber(Referee.getForge().lowestPoolNotEmptyContaining("PdL"));
-//        }else if(Referee.getForge().lowestPoolNotEmptyContaining("G").getPrice()<=this.getGold()){
-            //return Referee.getForge().isNumber((Referee.getForge().lowestPoolNotEmptyContaining(("G"))));
+        }else if(poolG!=null && poolG.getPrice()<=this.getGold()){
+            return Referee.getForge().isNumber((Referee.getForge().lowestPoolNotEmptyContaining(("G"))));
         }
         return 0;//devrait être -1 en plein test
     }

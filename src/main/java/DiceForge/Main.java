@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        Referee R = new Referee(new RandomAI(), new RandomAI(), new LunarAI(),new LunarAI());
+        Referee R = new Referee(new RandomAI(), new LunarAI());
         Forge forge = new Forge(R);
         World world = new World(R);
         R.addForge(forge);
         R.addWorld(world);
-        R.game(1);
+        R.game(100000);
     }
 }
 

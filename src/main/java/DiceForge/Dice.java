@@ -52,7 +52,7 @@ public class Dice{
 
 	public int faceNotOfThisKind(String kind){
 		for(int i=0;i<faces.length;i++){
-			if(!faces[i].getKind().equals(kind)){
+			if(!faces[i].getKind().equals(kind) || (kind.equals("G") && faces[i].getReward().equals("1G"))){
 				return i;
 			}
 		}
