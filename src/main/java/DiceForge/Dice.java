@@ -56,7 +56,7 @@ public class Dice{
 				return i;
 			}
 		}
-		return -1;
+		return 0;
 	}
 
 

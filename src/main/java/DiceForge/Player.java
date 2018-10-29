@@ -60,6 +60,28 @@ public abstract class Player {
         this.getDice(diceNumber).setFace(pool.buy(R.getPlayer(R.getTurnPlayer()), pool.getFace(poolFace)), diceFace);
     }
 
+    public void reset(){
+        this.de1= new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FacePdS(1,"PdS"));
+        this.de2 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceHonour(1,"H"),new FacePdL(1,"PdL"));
+        this.gold=0;
+        this.honour=0;
+        this.PdL=0;
+        this.PdS=0;
+        this.maxPdL=6;
+        this.maxPdS=6;
+        this.maxGold=12;
+        this.currentIsland=-1;
+        this.feats=new ArrayList<>();
+    }
+
+    public boolean doIHaveAnHammer(){
+        for(Feat f:feats){
+            if(f instanceof Hammer);
+            return true;
+        }
+        return false;
+    }
+
     public abstract String chooseAction();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);

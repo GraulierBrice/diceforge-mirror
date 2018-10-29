@@ -16,7 +16,7 @@ public class LunarAI extends Player {
     public String chooseAction() {
         Pool pool=Referee.getForge().lowestPoolNotEmptyContaining("PdL");
         Island island=Referee.getWorld().lowestIslandNotEmpty("PdL");
-        if(this.getPdL()>=island.lowestPriceOfFeat("PdL").getPricePdL()) {
+        if(island!=null && this.getPdL()>=island.lowestPriceOfFeat("PdL").getPricePdL() && this.doIHaveAnHammer()==false) {//pour farmer les marteaux pour l'instant
             return "exploit";
         }else if(pool!=null) {
             if (this.getGold() >= pool.getPrice()) {
@@ -28,14 +28,17 @@ public class LunarAI extends Player {
 
     @Override
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des PdL comme ça on est sûr d'en drop à chaque tour
-        return 1;
+        if(Referee.getForge().lowestPoolNotEmptyContaining("PdL").getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
+            return 1;
+        }
+        return 0;// devrait retourner -1 test
     }
 
     @Override
     public int chooseDiceFace(int dice) {
-        System.out.println(dice);
-        if(this.chooseDice()>=0) return (this.getDice(dice).faceNotOfThisKind("PdL"));
-        return -1;
+        if(this.chooseDice()==1) return (this.getDice(dice).faceNotOfThisKind("PdL"));
+        else if(this.chooseDice()==0) return (this.getDice(dice).faceNotOfThisKind("G"));
+        return 0;//test devrait être -1 pour cas erreur
     }
 
     @Override
@@ -48,16 +51,22 @@ public class LunarAI extends Player {
 
     @Override
     public int choosePool() {
-        if(Referee.getForge().lowestPoolNotEmptyContaining("PdL").getPrice()<=this.getGold()) {
+        if(Referee.getForge().lowestPoolNotEmptyContaining("PdL").getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
             return Referee.getForge().isNumber(Referee.getForge().lowestPoolNotEmptyContaining("PdL"));
+//        }else if(Referee.getForge().lowestPoolNotEmptyContaining("G").getPrice()<=this.getGold()){
+            //return Referee.getForge().isNumber((Referee.getForge().lowestPoolNotEmptyContaining(("G"))));
         }
-        return -1;
+        return 0;//devrait être -1 en plein test
     }
 
     @Override
     public int goldChoice(int g, Hammer h) {
-        h.effect(g);
-        return 0;
+        if(this.getGold()>=2) {
+            h.effect(g);
+            return 0;
+        }
+        h.effect(g-this.getGold());
+        return this.getGold();
     }
 
     @Override
@@ -73,10 +82,13 @@ public class LunarAI extends Player {
 
     @Override
     public Class chooseFeat() {
+
         switch(this.currentIsland){
             case 0:
-                Random r = new Random();
-                int featNumber=r.nextInt(2);
+                int featNumber;
+                if(this.doIHaveAnHammer()==false){
+                    featNumber=0;
+                }else featNumber=1;
                 switch(featNumber){
                     case 0:
                         return Hammer.class;

@@ -12,7 +12,7 @@ public class Main {
         World world = new World(R);
         R.addForge(forge);
         R.addWorld(world);
-        R.game(30000);
+        R.game(1);
     }
 }
 
