@@ -22,12 +22,24 @@ public class TestIsland {
     }
 
     @Test
-    public void removeFeats() {
+    public void methodsFeats() {
         assertEquals(2, island.numOfFeats());
+        assertTrue(island.doesItCost("PdL"));
+        assertFalse(island.doesItCost("PdS"));
         assertTrue(island.isIn(Hammer.class));
+
+        Feat feat=feats1.get(1);
+        assertEquals(island.lowestPriceOfFeat("PdL"),feat);
+
         island.removeFeat(Hammer.class);
         assertEquals(1, island.numOfFeats());
         assertTrue( !island.isIn(Hammer.class));
+
+        Feat feat1=feats1.get(0);
+        assertEquals(island.lowestPriceOfFeat("PdL"),feat1);
+
+        island.removeFeat(Chest.class);
+        assertTrue(island.isEmpty());
     }
 
 

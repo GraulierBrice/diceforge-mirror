@@ -1,15 +1,27 @@
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import DiceForge.*;
-import DiceForge.AI.RandomAI;
+import DiceForge.Feat.*;
+import DiceForge.AI.*;
 
 public class TestReferee {
+    private Referee referee;
+    private Forge forge;
+    private World world;
+
+
+    @Before
+    public void setUp() {
+        referee=new Referee(new RandomAI(),new RandomAI(),new RandomAI(),new LunarAI());
+        forge=new Forge(referee);
+        world=new World(referee);
+        referee.addForge(forge);
+        referee.addWorld(world);
+    }
 
     @Test public void refereeMethods() {
-        Referee referee=new Referee(new RandomAI(),new RandomAI(),new RandomAI(),new RandomAI());
-        Forge forge=new Forge(referee);
-        referee.addForge(forge);
 
         assertEquals(referee.getNumberPlayer(),4);
         assertEquals(referee.getMaxRound(),9);
@@ -37,6 +49,75 @@ public class TestReferee {
         assertEquals(forge.getPool(3).howManyFaces(),referee.getNumberPlayer()-1);//pour buy la face
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1PdS");//on regarde si après achat la face achetée est bien la bonne
+
+        referee.reset();
+
+        assertEquals(referee.getTurnPlayer(),0);
+        assertEquals(referee.getRound(),1);
+        assertEquals(referee.getMaxRound(),9);
+        assertNotSame(referee.getForge(),forge);
+        assertNotSame(referee.getWorld(),world);
+    }
+
+    @Test public void interactionLunar(){
+         referee.nextPlayer();
+         referee.nextPlayer();
+         referee.nextPlayer();
+         referee.getPlayer(referee.getTurnPlayer()).addPdL(6);
+         referee.choixAction("exploit",1);
+         assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(0) instanceof Hammer);
+
+         referee.choixAction("exploit",1);
+         assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(1) instanceof Chest);
+
+         referee.getPlayer(referee.getTurnPlayer()).addGold(15);
+         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),2);
+         Hammer hammer=(Hammer)referee.getPlayer(referee.getTurnPlayer()).getFeat(0);
+         assertEquals(hammer.getLevel(),0);
+         assertEquals(hammer.getGold(),13);
+
+         referee.getPlayer(referee.getTurnPlayer()).addGold(12);
+         assertEquals(hammer.getLevel(),1);
+         assertEquals(hammer.getGold(),10);
+
+         referee.getPlayer(referee.getTurnPlayer()).addGold(10);
+
+         assertEquals(hammer.getLevel(),2);
+         assertEquals(hammer.getGold(),0);
+
+         referee.getPlayer(referee.getTurnPlayer()).addGold(10);
+
+         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),16);//test du up du maxGold du chest
+
+        assertFalse(referee.getPlayer(referee.getTurnPlayer()).doIHaveAnHammer());
+
+        referee.choixAction("exploit",1);
+
+        assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(2) instanceof Hammer);
+
+        Hammer hammer2=(Hammer)referee.getPlayer(referee.getTurnPlayer()).getFeat(2);
+        referee.choixAction("exploit",1);
+
+        referee.getPlayer(referee.getTurnPlayer()).addGold(13);
+        referee.getPlayer(referee.getTurnPlayer()).addGold(13);
+        referee.getPlayer(referee.getTurnPlayer()).addGold(7);
+
+        assertEquals(hammer2.getLevel(),2);
+        assertEquals(hammer2.getGold(),0);
+
+
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),19);//test add chest
+
+        referee.choixAction("forge",1);
+
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),13);
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(1).getFace(0).getReward(),"2PdL");
+
+        referee.choixAction("exploit",1);
+        referee.choixAction("forge",1);
+
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),10);
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(0).getReward(),"4G");
 
     }
 }

@@ -41,23 +41,33 @@ public class Forge{
         Pool pool8G_3Honour=new Pool(8,_3Honour);
         Pool pool12G=new Pool(12,FacePool12G);//pas codée encore
 
-
-        this.forge.add(pool2G_3G);
-        this.forge.add(pool2G_1PdL);
-        this.forge.add(pool3G_4G);
-        this.forge.add(pool3G_1PdS);
-        //this.forge.add(pool4G);
-        //this.forge.add(pool5G);
-        this.forge.add(pool6G_2PdL);
-        this.forge.add(pool8G_2PdS);
-        this.forge.add(pool8G_3Honour);
         //this.forge.add(pool12G);
+        this.forge.add(pool8G_3Honour);
+        this.forge.add(pool8G_2PdS);
+        this.forge.add(pool6G_2PdL);
+        //this.forge.add(pool5G);
+        //this.forge.add(pool4G);
+        this.forge.add(pool3G_1PdS);
+        this.forge.add(pool3G_4G);
+        this.forge.add(pool2G_1PdL);
+        this.forge.add(pool2G_3G);
+
+
+
+
+
+
+
+
+
     }
 
     /* Accessor */
     public Pool getPool(int n){
         return this.forge.get(n);
     }
+
+    public int size(){return this.forge.size();}
 
     public Pool lowestPoolNotEmptyContaining(String kind){//if kind=="" then return all kind of pool
         for(Pool p:forge){
@@ -67,6 +77,16 @@ public class Forge{
         }
         return null;
     }
+
+    public Pool affordablePoolWith(String kind,int gold){
+        for(Pool p:forge){
+            if(p.isEmpty()==false && p.kindOfPool(kind) && p.getPrice()<=gold){
+                return p;
+            }
+        }
+        return null;
+    }
+
 
     public int isNumber(Pool pool){
         for(int i=0;i<forge.size();i++){

@@ -72,7 +72,7 @@ public class Referee {
         }
     }
 
-    public void choixAction(String action, int number) {
+    public void choixAction(String action, int number) {//number = nombre de games
 
         Player turnP = this.getPlayer(this.turnPlayer);
 
@@ -99,7 +99,8 @@ public class Referee {
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.chooseFeat();//l'exploit sur l'ile qu'il va choisir
                 if (island.isIn(exploit) && (turnP.getPdL() >= island.getFeat(exploit).getPricePdL() || turnP.getPdS() >= island.getFeat(exploit).getPricePdS())) {
-                    turnP.removePdL(1);
+                    turnP.removePdL(island.getFeat(exploit).getPricePdL());
+                    turnP.removePdS(island.getFeat(exploit).getPricePdS());
                     island.getFeat(exploit).setPlayer(turnP);
                     if (number == 1)
                         System.out.println("\033[34mJoueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + "\u001B[0m");
@@ -164,6 +165,7 @@ public class Referee {
             }
         }
     }
+
 
     public void buy(Pool pool, int poolFace, int diceNumber, int diceFace) {
         this.getPlayer(this.turnPlayer).buy(this, pool, poolFace, diceNumber, diceFace);

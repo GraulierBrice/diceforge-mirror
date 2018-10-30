@@ -76,8 +76,12 @@ public abstract class Player {
 
     public boolean doIHaveAnHammer(){
         for(Feat f:feats){
-            if(f instanceof Hammer);
-            return true;
+            if(f instanceof Hammer) {
+                Hammer hammer = (Hammer) f;
+                if (hammer.getLevel() != 2) {
+                    return true;
+                }
+            }
         }
         return false;
     }

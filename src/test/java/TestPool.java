@@ -25,6 +25,9 @@ public class TestPool {
         RandomAI randomAI=new RandomAI();
         randomAI.addGold(12);
 
+        assertTrue(pool.kindOfPool(""));
+        assertTrue(pool.kindOfPool("G"));
+
         assertEquals(pool.buy(randomAI,PdS1),PdS1);
         assertEquals(randomAI.getGold(),0);
         pool.setPrice(0);
@@ -32,6 +35,7 @@ public class TestPool {
         assertEquals(pool.isEmpty(),false);
         assertEquals(pool.buy(randomAI,g1),g1);
         assertEquals(pool.isEmpty(),true);
+
     }
 
 }

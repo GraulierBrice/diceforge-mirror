@@ -9,14 +9,17 @@ public class TestDice {
 	@Test public void diceMethods(){
 		Face g1 = new FaceGold(1,"G");
 		Face g2 = new FaceGold(2,"G");
-		Dice dice = new Dice(g1,g1,g1,g1,g1,g1);
+		Dice dice = new Dice(g1,g1,g1,g1,g1,new FaceHonour(5,"H"));
 		dice.setFace(g2,2);
 		assertEquals(dice.getFace(0),g1);
 		assertEquals(dice.getFace(1),g1);
 		assertEquals(dice.getFace(2),g2);
 		assertEquals(dice.getFace(3),g1);
 		assertEquals(dice.getFace(4),g1);
-		assertEquals(dice.getFace(5),g1);
-	}
+		assertEquals(dice.faceNotOfThisKind("PdL"),0);
+		assertEquals(dice.faceNotOfThisKind("G"),0);//1G ne compte pas comme une FaceGold i.e on souhaite la remplacer par n'importe quoi d'autre
+        Dice dice2 = new Dice(g2,g2,g2,g2,g2,new FaceHonour(5,"H"));
+        assertEquals(dice2.faceNotOfThisKind("G"),5);
+    }
 	
 }

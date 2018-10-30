@@ -20,6 +20,8 @@ public class TestFace {
         FaceGold g18=new FaceGold(18,"G");
         g18.giveReward(randomAI);
         assertTrue(randomAI.getGold()==12);
+        assertEquals(g1.getKind(),"G");
+        assertEquals(g1.getReward(),"1G");
     }
 
     @Test
@@ -30,6 +32,8 @@ public class TestFace {
         FacePdS PdS8=new FacePdS(8,"PdS");
         PdS8.giveReward(randomAI);
         assertTrue(randomAI.getPdS()==6);
+        assertEquals(PdS1.getKind(),"PdS");
+        assertEquals(PdS1.getReward(),"1PdS");
     }
 
     @Test
@@ -40,6 +44,9 @@ public class TestFace {
         FacePdL PdL8=new FacePdL(8,"PdL");
         PdL8.giveReward(randomAI);
         assertTrue(randomAI.getPdL()==6);
+        assertEquals(PdL1.getKind(),"PdL");
+        assertEquals(PdL1.getReward(),"1PdL");
+
     }
 
     @Test
@@ -47,5 +54,8 @@ public class TestFace {
         FaceHonour honour1=new FaceHonour(1,"H");
         honour1.giveReward(randomAI);
         assertTrue(randomAI.getHonour()==1);
+        assertEquals(honour1.getKind(),"H");
+        assertEquals(honour1.getReward(),"1H");
+
     }
 }

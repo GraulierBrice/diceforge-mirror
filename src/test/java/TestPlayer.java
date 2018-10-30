@@ -35,5 +35,13 @@ public class TestPlayer {
         assertTrue(AI.getPdL()==4);
         AI.removePdL(6);
         assertTrue(AI.getPdL()==0);
+        assertTrue(AI.getMaxPdL()==6);
+        assertTrue(AI.getMaxPdS()==6);
+        assertTrue(AI.getMaxGold()==12);
+        assertTrue(AI.getCurrentIsland()==-1);
+
+
+
+
     }
 }
