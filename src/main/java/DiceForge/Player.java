@@ -1,5 +1,9 @@
 package DiceForge;
-import DiceForge.Face.*;
+
+import DiceForge.Face.FaceGold;
+import DiceForge.Face.FaceHonour;
+import DiceForge.Face.FacePdL;
+import DiceForge.Face.FacePdS;
 import DiceForge.Feat.*;
 
 import java.util.ArrayList;
@@ -86,6 +90,64 @@ public abstract class Player {
         return false;
     }
 
+    public Class listFeat(int featNumber){
+        switch(this.currentIsland){
+            case 0:
+                switch(featNumber){
+                    case 0:
+                        return Hammer.class;
+                    case 1:
+                        return Chest.class;
+                }
+            case 1:
+                switch(featNumber){
+                    case 0:
+                        return Ancien.class;
+                    case 1:
+                        return HerbesFolles.class;
+                }
+            case 2:
+                switch(featNumber){
+                    case 0:
+                        //return Les sabots d'argent.class;
+                    case 1:
+                        //return Les satyres.class;
+                }
+            case 3:
+                switch(featNumber){
+                    case 0:
+                        //return Les ailes de la gardienne.class;
+                    case 1:
+                        //return Le minotaure.class;
+                }
+            case 4:
+                switch(featNumber){
+                    case 0:
+                        //return Le passeur.class;
+                    case 1:
+                        //return Le casque d'invisibilité.class;
+                }
+            case 5:
+                switch(featNumber){
+                    case 0:
+                        //return La méduse.class;
+                    case 1:
+                        //return Le miroir abyssal.class;
+                }
+            case 6:
+                switch(featNumber){
+                    case 0:
+                        //return La pince.class;
+                    case 1:
+                        //return L'hydre.class;
+                    case 2:
+                        //return L'énigme.class;
+                }
+            default:
+                return null;
+        }
+    }
+
     public abstract String chooseAction();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
@@ -93,6 +155,6 @@ public abstract class Player {
     public abstract int choosePool();
     public abstract int goldChoice(int g, Hammer h);
     public abstract void chooseIsland();
-    public abstract Class chooseFeat();
+    public abstract int chooseFeat();
 
 }

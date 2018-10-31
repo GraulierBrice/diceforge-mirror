@@ -1,5 +1,6 @@
 package DiceForge;
-import DiceForge.Feat.*;
+
+import DiceForge.Feat.Hammer;
 
 import java.util.ArrayList;
 
@@ -97,7 +98,7 @@ public class Referee {
                     System.out.println("\033[34mJoueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser\u001B[0m");
                 turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
-                Class exploit = turnP.chooseFeat();//l'exploit sur l'ile qu'il va choisir
+                Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
                 if (island.isIn(exploit) && (turnP.getPdL() >= island.getFeat(exploit).getPricePdL() || turnP.getPdS() >= island.getFeat(exploit).getPricePdS())) {
                     turnP.removePdL(island.getFeat(exploit).getPricePdL());
                     turnP.removePdS(island.getFeat(exploit).getPricePdS());

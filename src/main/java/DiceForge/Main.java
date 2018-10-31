@@ -1,8 +1,5 @@
 package DiceForge;
-import DiceForge.Face.*;
 import DiceForge.AI.*;
-
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +9,7 @@ public class Main {
         World world = new World(R);
         R.addForge(forge);
         R.addWorld(world);
-        R.game(10000);
+        R.game(100000);
     }
 }
 

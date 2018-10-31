@@ -81,31 +81,27 @@ public class LunarAI extends Player {
     @Override
     public void chooseIsland() {
         if(this.getPdL()>=4 && false){//virer les && false quand les iles existeronts
-            this.currentIsland=2;
+            this.currentIsland=4;//3,lune
         }else if(this.getPdL()>2 && false){
-            this.currentIsland=1;
+            this.currentIsland=2;//2,lune
         }else{
-            this.currentIsland=0;
+            this.currentIsland=0;//1,lune
+        }
+        if(this.getPdS()>=1){
+            this.currentIsland=1;//1,lune
         }
     }
 
     @Override
-    public Class chooseFeat() {
+    public int chooseFeat() {
 
-        switch(this.currentIsland){
-            case 0:
-                int featNumber;
+        if(this.currentIsland==0){
                 if(this.doIHaveAnHammer()==false){
-                    featNumber=0;
-                }else featNumber=1;
-                switch(featNumber){
-                    case 0:
-                        return Hammer.class;
-                    case 1:
-                        return Chest.class;
-                }
-            default:
-                return null;
+                    return 0;
+                }else return 1;
+        }else if(this.currentIsland==1){
+            return 1;
         }
+        return 1;//pour le moment dans tout les cas, 2iles donc on veut qu'il prenne les herbesfolles
     }
 }
