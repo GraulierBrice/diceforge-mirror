@@ -12,9 +12,12 @@ public class Referee {
     public ArrayList<Integer> nbVictoire = new ArrayList<>();
 
     public Referee(Player... players) {
+        int gold=3;
         for (int i = 0; i < players.length; i++) {
             this.players.add(players[i]);
+            this.players.get(i).addGold(gold);
             nbVictoire.add(0);
+            gold--;
         }
         this.turnPlayer = 0;
         this.round = 1;
@@ -137,6 +140,7 @@ public class Referee {
                         }
                     }
                 }
+                System.out.println("Faveur :");
                 p.getDice(0).toString(1);
                 p.getDice(1).toString(2);
             }
@@ -189,9 +193,16 @@ public class Referee {
             while (this.getRound() <= this.getMaxRound()) {
                 if (number == 1) System.out.println("Nous sommes au tour : " + this.getRound() + "\n");
                 for (int i = 0; i < this.getNumberPlayer(); i++) {
-                    this.faveur();
                     this.choixAction(this.getPlayer(this.getTurnPlayer()).chooseAction(), number);
                     this.printLog(number);
+                    if(this.getNumberPlayer()==2) {
+                        this.faveur();
+                        System.out.println("Seconde Faveur:");
+                        this.getPlayer(this.getTurnPlayer()).getDice(0).toString(1);
+                        this.getPlayer(this.getTurnPlayer()).getDice(1).toString(2);
+                    }
+                    this.faveur();
+
                     this.nextPlayer();
                 }
             }
