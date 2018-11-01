@@ -2,6 +2,7 @@ package DiceForge;
 import DiceForge.Face.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Forge{
     private ArrayList<Pool> forge=new ArrayList<>();
@@ -19,7 +20,7 @@ public class Forge{
         ArrayList<Face> FacePool12G=new ArrayList<>();//toutes les faces pas encore codée
 
 
-        for(int i=0;i<R.getNumberPlayer();i++){
+        for(int i=0;i<4;i++){
             _3G.add(new FaceGold(3,"G"));
             _1PdL.add(new FacePdL(1,"PdL"));
             _4G.add(new FaceGold(4,"G"));
@@ -28,6 +29,19 @@ public class Forge{
             _2PdS.add(new FacePdS(2,"PdS"));
             _3Honour.add(new FaceHonour(3,"H"));
 
+        }
+
+        if(R.getNumberPlayer()==2){
+            Random r = new Random();
+            for(int i=0;i<2;i++){
+                _3G.remove(r.nextInt(4-i));
+                _1PdL.remove(r.nextInt(4-i));
+                _4G.remove(r.nextInt(4-i));
+                _1PdS.remove(r.nextInt(4-i));
+                _2PdL.remove(r.nextInt(4-i));
+                _2PdS.remove(r.nextInt(4-i));
+                _3Honour.remove(r.nextInt(4-i));
+            }
         }
 
         Pool pool2G_3G=new Pool(2,_3G);
