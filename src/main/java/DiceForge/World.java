@@ -25,7 +25,6 @@ public class World {
             feats7.add();feats7.add();feats7.add();*/
 
         }
-
         islands.add(new Island(feats1));
         islands.add(new Island(feats2));
         islands.add(new Island(feats3));

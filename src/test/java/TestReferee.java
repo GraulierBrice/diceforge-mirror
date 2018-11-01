@@ -119,5 +119,25 @@ public class TestReferee {
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),10);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(0).getReward(),"4G");
 
+        referee.getPlayer(referee.getTurnPlayer()).removePdL(1000);
+        referee.getPlayer(referee.getTurnPlayer()).removeGold(1000);
+        referee.getPlayer(referee.getTurnPlayer()).removePdS(1000);
+        referee.getPlayer(referee.getTurnPlayer()).addPdS(1);//on reset toutes ses stats pour voir si il achète bien herbes folles
+
+        referee.choixAction("exploit",1);
+
+        assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(5) instanceof HerbesFolles);
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getPdS(),0);
+
+        referee.getPlayer(referee.getTurnPlayer()).addPdL(1);
+        referee.getPlayer(referee.getTurnPlayer()).addPdS(1);
+
+        referee.choixAction("exploit",1);
+
+        assertFalse(referee.getPlayer(referee.getTurnPlayer()).getFeat(6) instanceof HerbesFolles);
+
+        assertNotSame(referee.getPlayer(referee.getTurnPlayer()).chooseAction(),"passe");
+
+
     }
 }

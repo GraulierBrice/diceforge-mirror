@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public abstract class Player {
     private ArrayList<Feat> feats=new ArrayList<>();
     private int honour, gold, PdL, PdS, maxPdL = 6, maxPdS=6, maxGold=12;
-    protected int currentIsland=-1;
+    protected int currentIsland=0;//ile début à modif pour mettre une valeur "ile de départ"
     private Dice de1 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FacePdS(1,"PdS"));
     private Dice de2 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceHonour(1,"H"),new FacePdL(1,"PdL"));
 
@@ -74,7 +74,7 @@ public abstract class Player {
         this.maxPdL=6;
         this.maxPdS=6;
         this.maxGold=12;
-        this.currentIsland=-1;
+        this.currentIsland=0;// à modif pour mettre une valeur "ile de départ"
         this.feats=new ArrayList<>();
     }
 

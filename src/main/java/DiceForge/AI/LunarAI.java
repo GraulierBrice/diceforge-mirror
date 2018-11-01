@@ -16,7 +16,8 @@ public class LunarAI extends Player {
     public String chooseAction() {
         Pool pool=Referee.getForge().affordablePoolWith("PdL",this.getGold());
         Island island=Referee.getWorld().lowestIslandNotEmpty("PdL");
-        if(island!=null && this.getPdL()>=island.lowestPriceOfFeat("PdL").getPricePdL() && this.doIHaveAnHammer()==false) {//pour farmer les marteaux pour l'instant
+        Island islandPdS=Referee.getWorld().lowestIslandNotEmpty("PdS");
+        if(island!=null && (this.getPdL()>=island.lowestPriceOfFeat("PdL").getPricePdL() || (islandPdS!=null && this.getPdS()>=islandPdS.lowestPriceOfFeat("PdS").getPricePdS() && island.isIn(HerbesFolles.class) ))) {//pour farmer les marteaux pour l'instant
             return "exploit";
         }else if(pool!=null) {
             if (this.getGold() >= pool.getPrice()) {
@@ -84,11 +85,10 @@ public class LunarAI extends Player {
             this.currentIsland=4;//3,lune
         }else if(this.getPdL()>2 && false){
             this.currentIsland=2;//2,lune
-        }else{
+        }else if(this.getPdL()>1){
             this.currentIsland=0;//1,lune
-        }
-        if(this.getPdS()>=1){
-            this.currentIsland=1;//1,lune
+        }else if(this.getPdS()>=1){
+            this.currentIsland=1;//1,soleil
         }
     }
 
