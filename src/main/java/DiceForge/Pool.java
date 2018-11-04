@@ -37,7 +37,7 @@ public class Pool {
 
     public boolean kindOfPool(String kind){
         for(Face f:faces){
-            if(f.getKind().equals(kind) || kind.equals("")){
+            if(f.getKind().contains(kind) || kind.equals("")){
                 return true;
             }
         }

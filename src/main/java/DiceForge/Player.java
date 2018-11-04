@@ -1,9 +1,6 @@
 package DiceForge;
 
-import DiceForge.Face.FaceGold;
-import DiceForge.Face.FaceHonour;
-import DiceForge.Face.FacePdL;
-import DiceForge.Face.FacePdS;
+import DiceForge.Face.*;
 import DiceForge.Feat.*;
 
 import java.util.ArrayList;
@@ -12,8 +9,8 @@ public abstract class Player {
     private ArrayList<Feat> feats=new ArrayList<>();
     private int honour, gold, PdL, PdS, maxPdL = 6, maxPdS=6, maxGold=12;
     protected int currentIsland=0;//ile début à modif pour mettre une valeur "ile de départ"
-    private Dice de1 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FacePdS(1,"PdS"));
-    private Dice de2 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceHonour(1,"H"),new FacePdL(1,"PdL"));
+    private Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
+    private Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
 
     public Player(){
         this.honour=0;

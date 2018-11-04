@@ -21,15 +21,19 @@ public class Forge{
 
 
         for(int i=0;i<4;i++){
-            _3G.add(new FaceGold(3,"G"));
-            _1PdL.add(new FacePdL(1,"PdL"));
-            _4G.add(new FaceGold(4,"G"));
-            _1PdS.add(new FacePdS(1,"PdS"));
-            _2PdL.add(new FacePdL(2,"PdL"));
-            _2PdS.add(new FacePdS(2,"PdS"));
-            _3Honour.add(new FaceHonour(3,"H"));
+            _3G.add(new FaceCombinationAND(3,0,0,0));
+            _1PdL.add(new FaceCombinationAND(0,1,0,0));
+            _4G.add(new FaceCombinationAND(4,0,0,0));
+            _1PdS.add(new FaceCombinationAND(0,0,1,0));
+            _2PdL.add(new FaceCombinationAND(0,2,0,0));
+            _2PdS.add(new FaceCombinationAND(0,0,2,0));
+            _3Honour.add(new FaceCombinationAND(0,0,0,3));
 
         }
+        FacePool4G.add(new FaceCombinationAND(6,0,0,0));
+        FacePool4G.add(new FaceCombinationAND(2,1,0,0));
+        FacePool4G.add(new FaceCombinationAND(0,0,1,1));
+        FacePool4G.add(new FaceCombinationAND(3,0,0,0));//ici un OR mise de 4 faces pour éviter toute possibilités de problèmes
 
         if(R.getNumberPlayer()==2){
             Random r = new Random();
@@ -41,6 +45,7 @@ public class Forge{
                 _2PdL.remove(r.nextInt(4-i));
                 _2PdS.remove(r.nextInt(4-i));
                 _3Honour.remove(r.nextInt(4-i));
+                FacePool4G.remove(r.nextInt(4-i));
             }
         }
 
@@ -60,7 +65,7 @@ public class Forge{
         this.forge.add(pool8G_2PdS);
         this.forge.add(pool6G_2PdL);
         //this.forge.add(pool5G);
-        //this.forge.add(pool4G);
+        this.forge.add(pool4G);
         this.forge.add(pool3G_1PdS);
         this.forge.add(pool3G_4G);
         this.forge.add(pool2G_1PdL);
