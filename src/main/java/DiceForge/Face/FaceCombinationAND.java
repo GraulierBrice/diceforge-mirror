@@ -14,5 +14,9 @@ public class FaceCombinationAND extends Face{
         player.addHonour(rewardHonour);
     }
 
+    public void giveRewardOR(Player player, int chooseFaceBonus) {
+
+    }
+
 
 }

@@ -28,18 +28,18 @@ public class Forge{
             _2PdL.add(new FaceCombinationAND(0,2,0,0));
             _2PdS.add(new FaceCombinationAND(0,0,2,0));
             _3Honour.add(new FaceCombinationAND(0,0,0,3));
-            FacePool5G.add(new FaceCombinationAND(3,0,0,2));//ici un OR à mettre
+            FacePool5G.add(new FaceCombinationOR(3,0,0,2));//ici un OR à mettre
 
         }
         FacePool4G.add(new FaceCombinationAND(6,0,0,0));
         FacePool4G.add(new FaceCombinationAND(2,1,0,0));
         FacePool4G.add(new FaceCombinationAND(0,0,1,1));
-        FacePool4G.add(new FaceCombinationAND(3,0,0,0));//ici un OR mise de 4 faces pour éviter toute possibilités de problèmes
+        FacePool4G.add(new FaceCombinationOR(1,1,1,0));//ici un OR mise de 4 faces pour éviter toute possibilités de problèmes
 
         FacePool12G.add(new FaceCombinationAND(0,0,0,4));
         FacePool12G.add(new FaceCombinationAND(1,1,1,1));
         FacePool12G.add(new FaceCombinationAND(0,2,0,2));
-        FacePool12G.add(new FaceCombinationAND(2,2,2,0));//ici un OR à mettre
+        FacePool12G.add(new FaceCombinationOR(2,2,2,0));//ici un OR à mettre
 
         if(R.getNumberPlayer()==2){
             Random r = new Random();

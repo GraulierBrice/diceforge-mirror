@@ -19,9 +19,14 @@ public class Dice{
 
 	/* Mutator */
 	public void setFace(Face face,int i){this.faces[i] = face;}
+
 	void giveReward(Player player){
 		this.rollDice();
-		this.faces[roll].giveReward(player);
+		if(this.faces[this.roll] instanceof FaceCombinationOR){
+			this.faces[this.roll].giveRewardOR(player,player.chooseFaceBonus(this.faces[this.roll]));
+		}else {
+			this.faces[roll].giveReward(player);
+		}
 	}
 
 	//Change le numéro de face roulé aléatoirement

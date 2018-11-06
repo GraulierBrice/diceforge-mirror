@@ -150,6 +150,7 @@ public abstract class Player {
     public abstract String chooseAction();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
+    public abstract int chooseFaceBonus(Face face);
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
     public abstract int goldChoice(int g, Hammer h);

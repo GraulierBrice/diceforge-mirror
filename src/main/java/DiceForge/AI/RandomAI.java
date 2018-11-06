@@ -1,5 +1,6 @@
 package DiceForge.AI;
 import DiceForge.*;
+import DiceForge.Face.Face;
 import DiceForge.Feat.*;
 
 import java.util.Random;
@@ -55,6 +56,15 @@ public class RandomAI extends Player{
 
     public int chooseDiceFace(int dice) {
         return r.nextInt(6);
+    }
+
+    public int chooseFaceBonus(Face face){
+        int possibilities=0;
+        if(face.getKind().contains("G"))possibilities++;
+        if(face.getKind().contains("PdL"))possibilities++;
+        if(face.getKind().contains("PdS"))possibilities++;
+        if(face.getKind().contains("H"))possibilities++;
+        return r.nextInt(possibilities);
     }
 
     public int choosePoolFace(Pool pool) {

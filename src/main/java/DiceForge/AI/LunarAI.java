@@ -1,5 +1,6 @@
 package DiceForge.AI;
 
+import DiceForge.Face.Face;
 import DiceForge.Feat.*;
 import DiceForge.*;
 
@@ -64,6 +65,11 @@ public class LunarAI extends Player {
         if(this.chooseDice()==1) return (this.getDice(dice).faceNotOfThisKind("PdL"));
         else if(this.chooseDice()==0) return (this.getDice(dice).faceNotOfThisKind("G"));
         return 0;//test devrait être -1 pour cas erreur
+    }
+
+    @Override
+    public int chooseFaceBonus(Face face) {
+        return 0;
     }
 
     @Override
