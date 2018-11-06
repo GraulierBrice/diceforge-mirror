@@ -8,8 +8,8 @@ import static org.junit.Assert.*;
 public class TestPool {
 
     @Test public void poolMethods(){
-        FaceGold g1=new FaceGold(1,"G");
-        FacePdS PdS1=new FacePdS(1,"PdS");
+        FaceCombinationAND g1=new FaceCombinationAND(1,0,0,0);
+        FaceCombinationAND PdS1=new FaceCombinationAND(0,0,1,0);
         ArrayList<Face> faces=new ArrayList<Face>();
         faces.add(g1);
         faces.add(g1);

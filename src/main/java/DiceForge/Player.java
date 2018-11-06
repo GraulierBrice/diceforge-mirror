@@ -62,8 +62,8 @@ public abstract class Player {
     }
 
     public void reset(){
-        this.de1= new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FacePdS(1,"PdS"));
-        this.de2 = new Dice(new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceGold(1,"G"),new FaceHonour(1,"H"),new FacePdL(1,"PdL"));
+        this.de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
+        this.de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
         this.gold=0;
         this.honour=0;
         this.PdL=0;

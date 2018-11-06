@@ -14,10 +14,10 @@ public class TestFace {
 
     @Test
     public void faceGold() {
-        FaceGold g1=new FaceGold(1,"G");
+        FaceCombinationAND g1=new FaceCombinationAND(1,0,0,0);
         g1.giveReward(randomAI);
         assertTrue(randomAI.getGold()==1);
-        FaceGold g18=new FaceGold(18,"G");
+        FaceCombinationAND g18=new FaceCombinationAND(18,0,0,0);
         g18.giveReward(randomAI);
         assertTrue(randomAI.getGold()==12);
         assertEquals(g1.getKind(),"G");
@@ -26,10 +26,10 @@ public class TestFace {
 
     @Test
     public void facePdS(){
-        FacePdS PdS1=new FacePdS(1,"PdS");
+        FaceCombinationAND PdS1=new FaceCombinationAND(0,0,1,0);
         PdS1.giveReward(randomAI);
         assertTrue(randomAI.getPdS()==1);
-        FacePdS PdS8=new FacePdS(8,"PdS");
+        FaceCombinationAND PdS8=new FaceCombinationAND(0,0,8,0);
         PdS8.giveReward(randomAI);
         assertTrue(randomAI.getPdS()==6);
         assertEquals(PdS1.getKind(),"PdS");
@@ -38,10 +38,10 @@ public class TestFace {
 
     @Test
     public void facePdL(){
-        FacePdL PdL1=new FacePdL(1,"PdL");
+        FaceCombinationAND PdL1=new FaceCombinationAND(0,1,0,0);
         PdL1.giveReward(randomAI);
         assertTrue(randomAI.getPdL()==1);
-        FacePdL PdL8=new FacePdL(8,"PdL");
+        FaceCombinationAND PdL8=new FaceCombinationAND(0,8,0,0);
         PdL8.giveReward(randomAI);
         assertTrue(randomAI.getPdL()==6);
         assertEquals(PdL1.getKind(),"PdL");
@@ -51,7 +51,7 @@ public class TestFace {
 
     @Test
     public void FaceHonour(){
-        FaceHonour honour1=new FaceHonour(1,"H");
+        FaceCombinationAND honour1=new FaceCombinationAND(0,0,0,1);
         honour1.giveReward(randomAI);
         assertTrue(randomAI.getHonour()==1);
         assertEquals(honour1.getKind(),"H");
