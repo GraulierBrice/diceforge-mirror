@@ -11,6 +11,30 @@ public class LunarAI extends Player {
         super();
     }
 
+    private Random r = new Random();
+    @Override
+    public String chooseReinforcement() {
+        int choice = r.nextInt(2);
+        switch(choice){
+            case 0:
+                return null;
+            case 1:
+                return "reinforcement";
+        }
+        return null;
+    }
+    @Override
+    public String chooseFeatReinforcement() {
+        int choice = r.nextInt(2);
+        switch(choice){
+            case 0:
+                return null;
+            case 1:
+                return "featreinforcement";
+        }
+        return null;
+    }
+
 
     @Override
     public String chooseAction() {
@@ -96,7 +120,7 @@ public class LunarAI extends Player {
     public int chooseFeat() {
 
         if(this.currentIsland==0){
-                if(this.doIHaveAnHammer()==false){
+                if(!this.doIHaveAnHammer()){
                     return 0;
                 }else return 1;
         }else if(this.currentIsland==1){

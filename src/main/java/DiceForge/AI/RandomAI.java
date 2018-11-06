@@ -12,6 +12,28 @@ public class RandomAI extends Player{
         super();
     }
 
+    public String chooseReinforcement() {
+        int choice = r.nextInt(2);
+        switch(choice){
+            case 0:
+                return null;
+            case 1:
+                return "reinforcement";
+        }
+        return null;
+    }
+    public String chooseFeatReinforcement() {
+        int choice = r.nextInt(2);
+        switch(choice){
+            case 0:
+                return null;
+            case 1:
+                return "featreinforcement";
+        }
+        return null;
+    }
+
+
     public String chooseAction() {
         int choice = r.nextInt(3);
         switch(choice){
@@ -24,6 +46,8 @@ public class RandomAI extends Player{
         }
         return null;
     }
+
+
 
     public int chooseDice(){
         return r.nextInt(2);

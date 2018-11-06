@@ -76,6 +76,23 @@ public class Referee {
         }
     }
 
+    public void choixReinforcement(String action, int number){
+        Player turnP = this.getPlayer(this.turnPlayer);
+        if(action =="reinforcement"){
+            for (int i = 0; i < turnP.getNbFeat(); i++) {
+                if(turnP.getFeat(i).getReinfor()== 1 ){
+                    if (number == 1)
+                        System.out.println("\u001B[32mJoueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + "\u001B[0m");
+                    if(turnP.chooseFeatReinforcement()== "featreinforcement"){
+                        if (number == 1)
+                            System.out.println("\u001B[32mJoueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2]+ "\u001B[0m");
+                        turnP.getFeat(i).effect();
+                    }
+                }
+            }
+        }
+    }
+
     public void choixAction(String action, int number) {//number = nombre de games
 
         Player turnP = this.getPlayer(this.turnPlayer);
@@ -83,11 +100,11 @@ public class Referee {
         switch (action) {
             case "passe":
                 if (number == 1)
-                    System.out.println("\033[34mJoueur " + (this.turnPlayer + 1) + " passe son tour\u001B[0m");
+                    System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " passe son tour\u001B[0m");
                 break;
             case "forge":
                 if (number == 1)
-                    System.out.println("\033[34mJoueur " + (this.turnPlayer + 1) + " peut acheter une face\u001B[0m");
+                    System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " peut acheter une face\u001B[0m");
                 Pool pool = forge.getPool(turnP.choosePool());
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                     int poolFace = turnP.choosePoolFace(pool);
@@ -98,7 +115,7 @@ public class Referee {
                 break;
             case "exploit":
                 if (number == 1)
-                    System.out.println("\033[34mJoueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser\u001B[0m");
+                    System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser\u001B[0m");
                 turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
@@ -107,12 +124,13 @@ public class Referee {
                     turnP.removePdS(island.getFeat(exploit).getPricePdS());
                     island.getFeat(exploit).setPlayer(turnP);
                     if (number == 1)
-                        System.out.println("\033[34mJoueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + "\u001B[0m");
+                        System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + "\u001B[0m");
                     island.removeFeat(exploit);
                 }
                 break;
         }
     }
+
 
     public void faveur() {
         players.forEach(Player::faveur);
@@ -193,7 +211,8 @@ public class Referee {
             while (this.getRound() <= this.getMaxRound()) {
                 if (number == 1) System.out.println("Nous sommes au tour : " + this.getRound() + "\n");
                 for (int i = 0; i < this.getNumberPlayer(); i++) {
-                    this.choixAction(this.getPlayer(this.getTurnPlayer()).chooseAction(), number);
+                    this.choixReinforcement(this.getPlayer(this.turnPlayer).chooseReinforcement(), number);
+                    this.choixAction(this.getPlayer(this.turnPlayer).chooseAction(), number);
                     this.printLog(number);
                     if(this.getNumberPlayer()==2) {
                         this.faveur();

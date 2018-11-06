@@ -145,6 +145,8 @@ public abstract class Player {
         }
     }
 
+    public abstract String chooseReinforcement();
+    public abstract String chooseFeatReinforcement();
     public abstract String chooseAction();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
