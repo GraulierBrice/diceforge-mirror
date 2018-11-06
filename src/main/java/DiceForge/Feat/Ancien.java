@@ -7,7 +7,9 @@ public class Ancien extends Feat{
 
     //trade gold vs honour
     public void effect(Object... o) {
-        owner.removeGold(3);
-        owner.addHonour(4);
+        if (owner.getGold() >= 3) {
+            owner.removeGold(3);
+            owner.addHonour(4);
+        }
     }
 }
