@@ -82,11 +82,15 @@ public class Referee {
             for (int i = 0; i < turnP.getNbFeat(); i++) {
                 if(turnP.getFeat(i).getReinfor()== 1 ){
                     if (number == 1)
-                        System.out.println("\u001B[32mJoueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + "\u001B[0m");
+                        System.out.println("\u001B[4;1;92mJoueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + "\u001B[0m");
                     if(turnP.chooseFeatReinforcement()== "featreinforcement"){
                         if (number == 1)
-                            System.out.println("\u001B[32mJoueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2]+ "\u001B[0m");
+                            System.out.println(" \u001B[32mJoueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2]+ "\u001B[0m");
                         turnP.getFeat(i).effect();
+                    }else{
+                        if (number == 1)
+                            System.out.println(" \u001B[32mIl n'a pas fait de renforcement\u001B[0m");
+
                     }
                 }
             }
@@ -100,11 +104,11 @@ public class Referee {
         switch (action) {
             case "passe":
                 if (number == 1)
-                    System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " passe son tour\u001B[0m");
+                    System.out.println("\u001B[94mJoueur " + (this.turnPlayer + 1) + " passe son tour\u001B[0m");
                 break;
             case "forge":
                 if (number == 1)
-                    System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " peut acheter une face\u001B[0m");
+                    System.out.println("\u001B[94mJoueur " + (this.turnPlayer + 1) + " peut acheter une face\u001B[0m");
                 Pool pool = forge.getPool(turnP.choosePool());
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                     int poolFace = turnP.choosePoolFace(pool);
@@ -115,7 +119,7 @@ public class Referee {
                 break;
             case "exploit":
                 if (number == 1)
-                    System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser\u001B[0m");
+                    System.out.println("\u001B[4;1;94mJoueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser\u001B[0m");
                 turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
@@ -124,8 +128,11 @@ public class Referee {
                     turnP.removePdS(island.getFeat(exploit).getPricePdS());
                     island.getFeat(exploit).setPlayer(turnP);
                     if (number == 1)
-                        System.out.println("\u001B[34mJoueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + "\u001B[0m");
+                        System.out.println(" \u001B[94mJoueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + "\u001B[0m");
                     island.removeFeat(exploit);
+                }else{
+                    if (number == 1)
+                        System.out.println(" \u001B[94mIl ne réalise pas d'exploit\u001B[0m");
                 }
                 break;
         }
@@ -147,18 +154,18 @@ public class Referee {
     public void printLog(int number) {
         if (number == 1) {
             for (Player p : players) {
-                System.out.println(this.players.indexOf(p) == this.getTurnPlayer() ? "\u001B[31m" + "information joueur: " + (this.players.indexOf(p) + 1) + "\u001B[0m" : "information joueur: " + (this.players.indexOf(p) + 1));
-                System.out.println("Honour: " + p.getHonour() + "\nGold: " + p.getGold() + "/" + p.getMaxGold() + "\nPdS: " + p.getPdS() + "/" + p.getMaxPdS() + "\nPdL: " + p.getPdL() + "/" + p.getMaxPdL());
+                System.out.println(this.players.indexOf(p) == this.getTurnPlayer() ? "\u001B[1;4;91mInformation joueur: " + (this.players.indexOf(p) + 1) + "\u001B[0m" : "\u001B[1;4;Information joueur: " + (this.players.indexOf(p) + 1)+"\u001B[0m");
+                System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  PdS: " + p.getPdS() + "/" + p.getMaxPdS() + "\n  PdL: " + p.getPdL() + "/" + p.getMaxPdL());
                 for (int i = 0; i < p.getNbFeat(); i++) {
                     if (p.getFeat(i) instanceof Hammer) {
                         Hammer hammer = (Hammer) p.getFeat(i);
                         if (hammer.getLevel() < 2) {
-                            System.out.println("Hammer level " + (hammer.getLevel() + 1) + ": " + hammer.getGold());
+                            System.out.println("  Hammer level " + (hammer.getLevel() + 1) + ": " + hammer.getGold());
                             break;
                         }
                     }
                 }
-                System.out.println("Faveur :");
+                System.out.println("  Faveur :");
                 p.getDice(0).toString(1);
                 p.getDice(1).toString(2);
             }
@@ -179,7 +186,7 @@ public class Referee {
     public void printWinner(int number) {
         int[] winner = this.honour();
         if (number == 1) {
-            System.out.println("Joueur " + (winner[1] + 1) + " gagne avec " + winner[0] + " honneurs ");
+            System.out.println("\u001B[1;93mJoueur " + (winner[1] + 1) + " gagne avec " + winner[0] + " honneurs\u001B[0m");
         } else {
             for (int i = 0; i < this.getNumberPlayer(); i++) {
                 if (winner[1] == i) {
@@ -230,7 +237,7 @@ public class Referee {
         }
         if (number > 1) {
             for (int i = 0; i < this.getNumberPlayer(); i++) {
-                System.out.println("Le joueur " + (i+1) + ": " + this.nbVictoire.get(i));
+                System.out.println("\u001B[4;1;91mLe joueur " + (i+1) + ":\u001B[0m " + this.nbVictoire.get(i));
             }
         }
     }

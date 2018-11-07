@@ -39,10 +39,10 @@ public class Dice{
 
 	//Affichage du dé et ses faces
 	public void toString(int dice){
-		System.out.print("  Dé "+dice+" :");
+		System.out.print("    Dé "+dice+" :");
 		for(int i=0;i<6;i++){
 			//affiche en couleur la face roulé
-            System.out.print(i == this.roll ? "\u001B[33m" + this.getFace(i).getReward() + "\u001B[0m " : this.getFace(i).getReward() + " ");
+            System.out.print(i == this.roll ? "\u001B[1;33m" + this.getFace(i).getReward() + "\u001B[0m " : this.getFace(i).getReward() + " ");
 		}
 		System.out.print("\n");
 	}
