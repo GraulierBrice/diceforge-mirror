@@ -46,6 +46,7 @@ public class Dice{
 		}
 		System.out.print("\n");
 	}
+	
 	public boolean diceNotFullWith(String kind){
 		for(Face f:faces){
 			if(!f.getKind().equals(kind)){

@@ -40,7 +40,7 @@ public class LunarAI extends Player {
 
     @Override
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des PdL comme ça on est sûr d'en drop à chaque tour
-        if(Referee.getForge().affordablePoolWith("PdL",this.getGold()).getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
+        if(Referee.getForge().affordablePoolWith("PdL",this.getGold()).getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
             return 1;
         }
         return 0;
@@ -76,7 +76,7 @@ public class LunarAI extends Player {
     public int choosePool() {
         Pool poolPdL =Referee.getForge().affordablePoolWith("PdL",this.getGold());
         Pool poolG=Referee.getForge().affordablePoolWith("G",this.getGold());
-        if(poolPdL!=null && poolPdL.getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
+        if(poolPdL!=null && poolPdL.getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
             return Referee.getForge().isNumber(Referee.getForge().affordablePoolWith("PdL",this.getGold()));
         }else if(poolG!=null && poolG.getPrice()<=this.getGold()){
             return Referee.getForge().isNumber((Referee.getForge().affordablePoolWith("G",this.getGold())));

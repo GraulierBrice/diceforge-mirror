@@ -38,7 +38,7 @@ public class World {
 
     public Island lowestIslandNotEmpty(String kind){
         for(Island i:islands){
-            if(i.isEmpty()==false && i.doesItCost(kind)){
+            if(!i.isEmpty() && i.doesItCost(kind)){
                 return i;
             }
         }

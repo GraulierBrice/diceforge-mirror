@@ -98,7 +98,7 @@ public class Forge{
 
     public Pool lowestPoolNotEmptyContaining(String kind){//if kind=="" then return all kind of pool
         for(Pool p:forge){
-            if(p.isEmpty()==false && p.kindOfPool(kind)){
+            if(!p.isEmpty() && p.kindOfPool(kind)){
                 return p;
             }
         }
@@ -107,7 +107,7 @@ public class Forge{
 
     public Pool affordablePoolWith(String kind,int gold){
         for(Pool p:forge){
-            if(p.isEmpty()==false && p.kindOfPool(kind) && p.getPrice()<=gold){
+            if(!p.isEmpty() && p.kindOfPool(kind) && p.getPrice()<=gold){
                 return p;
             }
         }
