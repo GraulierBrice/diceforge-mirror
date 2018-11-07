@@ -237,7 +237,7 @@ public class Referee {
         }
         if (number > 1) {
             for (int i = 0; i < this.getNumberPlayer(); i++) {
-                System.out.println("\u001B[4;1;91mLe joueur " + (i+1) + ":\u001B[0m " + this.nbVictoire.get(i)+"("+((float)this.nbVictoire.get(i)/(float)number)*100+")");
+                System.out.println("\u001B[4;1;91mLe joueur " + (i+1) + ":\u001B[0m " + this.nbVictoire.get(i)+"("+((float)this.nbVictoire.get(i)/(float)number)*100+"%)");
             }
         }
     }

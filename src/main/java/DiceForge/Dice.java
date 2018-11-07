@@ -20,7 +20,7 @@ public class Dice{
 	/* Mutator */
 	public void setFace(Face face,int i){this.faces[i] = face;}
 
-	void giveReward(Player player){
+	public void giveReward(Player player){
 		this.rollDice();
 		if(this.faces[this.roll] instanceof FaceCombinationOR){
 			this.faces[this.roll].giveRewardOR(player,player.chooseFaceBonus(this.faces[this.roll]));
@@ -30,7 +30,7 @@ public class Dice{
 	}
 
 	//Change le numéro de face roulé aléatoirement
-	void rollDice(){ 
+	public void rollDice(){ 
 		Random r = new Random();
 		this.roll = r.nextInt(6);
 	}

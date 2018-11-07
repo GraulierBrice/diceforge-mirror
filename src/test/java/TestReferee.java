@@ -39,14 +39,14 @@ public class TestReferee {
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1G");// on regarde la face avant modification par achat
 
-        referee.buy(forge.getPool(3),0,0,3);
+        referee.buy(forge.getPool(6),0,0,3);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);//pas assez de gold
         assertEquals(forge.getPool(3).howManyFaces(),referee.getNumberPlayer());//pour buy la face
         referee.getPlayer(referee.getTurnPlayer()).addGold(3);//on ajoute des golds pour buy la face plus tard
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),3);
-        referee.buy(forge.getPool(3),0,0,3);
+        referee.buy(forge.getPool(6),0,0,3);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
-        assertEquals(forge.getPool(3).howManyFaces(),referee.getNumberPlayer()-1);//pour buy la face
+        assertEquals(forge.getPool(6).howManyFaces(),referee.getNumberPlayer()-2);//pour buy la face
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1PdS");//on regarde si après achat la face achetée est bien la bonne
 
@@ -63,7 +63,7 @@ public class TestReferee {
          referee.nextPlayer();
          referee.nextPlayer();
          referee.nextPlayer();
-         referee.getPlayer(referee.getTurnPlayer()).addPdL(6);
+         referee.getPlayer(referee.getTurnPlayer()).addPdL(2);
          referee.choixAction("exploit",1);
          assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(0) instanceof Hammer);
 
@@ -107,17 +107,19 @@ public class TestReferee {
 
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),19);//test add chest
-
+        referee.getPlayer(referee.getTurnPlayer()).removeGold(13);
         referee.choixAction("forge",1);
 
-        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),13);
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(1).getFace(0).getReward(),"2PdL");
 
         referee.choixAction("exploit",1);
+        referee.getPlayer(referee.getTurnPlayer()).addGold(5);
+
         referee.choixAction("forge",1);
 
-        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),10);
-        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(0).getReward(),"4G");
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(0).getReward(),"3G");
 
         referee.getPlayer(referee.getTurnPlayer()).removePdL(1000);
         referee.getPlayer(referee.getTurnPlayer()).removeGold(1000);

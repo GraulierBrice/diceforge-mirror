@@ -12,28 +12,14 @@ public class LunarAI extends Player {
         super();
     }
 
-    private Random r = new Random();
     @Override
     public String chooseReinforcement() {
-        int choice = r.nextInt(2);
-        switch(choice){
-            case 0:
-                return null;
-            case 1:
-                return "reinforcement";
-        }
-        return null;
+        return "reinforcement";
     }
+
     @Override
     public String chooseFeatReinforcement() {
-        int choice = r.nextInt(2);
-        switch(choice){
-            case 0:
-                return null;
-            case 1:
-                return "featreinforcement";
-        }
-        return null;
+        return "featreinforcement";
     }
 
 
@@ -57,7 +43,13 @@ public class LunarAI extends Player {
         if(Referee.getForge().affordablePoolWith("PdL",this.getGold()).getPrice()<=this.getGold() && this.doIHaveAnHammer()==false) {
             return 1;
         }
-        return 0;// devrait retourner -1 test
+        return 0;
+    }
+
+    @Override
+    public Dice chooseBestDice() {
+        if(this.maxPdL-this.PdL < 2) return de1;
+        return de2;
     }
 
     @Override
@@ -111,27 +103,26 @@ public class LunarAI extends Player {
 
     @Override
     public void chooseIsland() {
-        if(this.getPdL()>=4){//virer les && false quand les iles existeronts
+        if(this.getPdL()>=4 && !Referee.getWorld().isEmpty(4)){//virer les && false quand les iles existeronts
             this.currentIsland=4;//3,lune
-        }else if(this.getPdL()>2 && false){
+        }else if(this.getPdL()>2 && !Referee.getWorld().isEmpty(2)){
             this.currentIsland=2;//2,lune
-        }else if(this.getPdL()>1){
+        }else if(this.getPdL()>1 && !Referee.getWorld().isEmpty(0)){
             this.currentIsland=0;//1,lune
-        }else if(this.getPdS()>=1){
+        }else if(this.getPdS()>=1 && !Referee.getWorld().isEmpty(1)){
             this.currentIsland=1;//1,soleil
         }
     }
 
     @Override
     public int chooseFeat() {
-
         if(this.currentIsland==0){
                 if(!this.doIHaveAnHammer()){
                     return 0;
                 }else return 1;
         }else if(this.currentIsland==1){
             return 1;
-        }if(this.currentIsland==4)return 0;
+        }if(this.currentIsland==4 || this.currentIsland==2)return 0;
         return 1;//pour le moment dans tout les cas, 2iles donc on veut qu'il prenne les herbesfolles
     }
 }

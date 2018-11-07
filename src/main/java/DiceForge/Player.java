@@ -6,11 +6,11 @@ import DiceForge.Feat.*;
 import java.util.ArrayList;
 
 public abstract class Player {
-    private ArrayList<Feat> feats=new ArrayList<>();
-    private int honour, gold, PdL, PdS, maxPdL = 6, maxPdS=6, maxGold=12;
+    protected ArrayList<Feat> feats=new ArrayList<>();
+    protected int honour, gold, PdL, PdS, maxPdL = 6, maxPdS=6, maxGold=12;
     protected int currentIsland=0;//ile début à modif pour mettre une valeur "ile de départ"
-    private Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
-    private Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
+    protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
+    protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
 
     public Player(){
         this.honour=0;
@@ -106,7 +106,7 @@ public abstract class Player {
             case 2:
                 switch(featNumber){
                     case 0:
-                        //return Les sabots d'argent.class;
+                        return SabotArgent.class;
                     case 1:
                         //return Les satyres.class;
                 }
@@ -156,5 +156,6 @@ public abstract class Player {
     public abstract int goldChoice(int g, Hammer h);
     public abstract void chooseIsland();
     public abstract int chooseFeat();
+    public abstract Dice chooseBestDice();
 
 }

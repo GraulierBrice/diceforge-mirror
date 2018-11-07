@@ -38,7 +38,7 @@ public class TestPlayer {
         assertTrue(AI.getMaxPdL()==6);
         assertTrue(AI.getMaxPdS()==6);
         assertTrue(AI.getMaxGold()==12);
-        assertTrue(AI.getCurrentIsland()==-1);
+        assertTrue(AI.getCurrentIsland()==0);
 
 
 

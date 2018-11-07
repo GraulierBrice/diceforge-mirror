@@ -18,7 +18,7 @@ public class World {
         for(int i=0;i<R.getNumberPlayer();i++){
             feats1.add(new Hammer());feats1.add(new Chest());
             feats2.add(new Ancien());feats2.add(new HerbesFolles());
-            //feats3.add();feats3.add();
+            feats3.add(new SabotArgent());//feats3.add();
             //feats4.add(new );feats4.add();
             feats5.add(new Passeur());//feats5.add();
            // feats6.add(new Meduse());//feats6.add();
@@ -43,5 +43,9 @@ public class World {
             }
         }
         return null;
+    }
+
+    public boolean isEmpty(int n){
+        return this.islands.get(n).isEmpty();
     }
 }

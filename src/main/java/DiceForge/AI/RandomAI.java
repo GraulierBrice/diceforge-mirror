@@ -49,9 +49,12 @@ public class RandomAI extends Player{
     }
 
 
-
     public int chooseDice(){
         return r.nextInt(2);
+    }
+
+    public Dice chooseBestDice(){
+        return this.getDice(r.nextInt(2));
     }
 
     public int chooseDiceFace(int dice) {
@@ -82,14 +85,17 @@ public class RandomAI extends Player{
     }
 
     public void chooseIsland(){
-        int number=r.nextInt(3);
+        int number=r.nextInt(4);
         if(number==0) this.currentIsland=0;
         if(number==1) this.currentIsland=1;
-        if(number==2) this.currentIsland=4;
+        if(number==2) this.currentIsland=2;
+        if(number==3) this.currentIsland=4;
+
     }
 
     public int chooseFeat(){
         if(this.currentIsland==0 || this.currentIsland==1) return r.nextInt(2);//pour l'instant il n'y a pas d'ile avec plus de deux feat, pour la dernière ile, il faudra juste vérif si on est dessus et dans ce cas on fera random bound: 3
         else return 0;
     }
+
 }
