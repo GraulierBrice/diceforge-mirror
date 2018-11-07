@@ -81,15 +81,15 @@ public class Referee {
         if(action =="reinforcement"){
             for (int i = 0; i < turnP.getNbFeat(); i++) {
                 if(turnP.getFeat(i).getReinfor()){
-                    if (number == 1){
+                    if (number == 1)
                         System.out.println("\u001B[4;1;92mJoueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + "\u001B[0m");
-                        if(turnP.chooseFeatReinforcement()== "featreinforcement"){
-                            System.out.println(" \u001B[32mJoueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2]+ "\u001B[0m");
+                    if(turnP.chooseFeatReinforcement()== "featreinforcement"){
+                        if (number == 1)
+                        System.out.println(" \u001B[32mJoueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2]+ "\u001B[0m");
                         turnP.getFeat(i).effect();
-                        }else{
-                            System.out.println(" \u001B[32mIl n'a pas fait de renforcement\u001B[0m");
-
-                        }
+                    }else{
+                        if (number == 1)
+                        System.out.println(" \u001B[32mIl n'a pas fait de renforcement\u001B[0m");
                     }
                 }
             }
