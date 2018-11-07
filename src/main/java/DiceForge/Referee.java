@@ -154,7 +154,7 @@ public class Referee {
     public void printLog(int number) {
         if (number == 1) {
             for (Player p : players) {
-                System.out.println(this.players.indexOf(p) == this.getTurnPlayer() ? "\u001B[1;4;91mInformation joueur: " + (this.players.indexOf(p) + 1) + "\u001B[0m" : "\u001B[1;4;Information joueur: " + (this.players.indexOf(p) + 1)+"\u001B[0m");
+                System.out.println(this.players.indexOf(p) == this.getTurnPlayer() ? "\u001B[1;4;91mInformation joueur: " + (this.players.indexOf(p) + 1) + "\u001B[0m" : "\u001B[1;4mInformation joueur: " + (this.players.indexOf(p) + 1)+"\u001B[0m");
                 System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  PdS: " + p.getPdS() + "/" + p.getMaxPdS() + "\n  PdL: " + p.getPdL() + "/" + p.getMaxPdL());
                 for (int i = 0; i < p.getNbFeat(); i++) {
                     if (p.getFeat(i) instanceof Hammer) {
@@ -237,7 +237,7 @@ public class Referee {
         }
         if (number > 1) {
             for (int i = 0; i < this.getNumberPlayer(); i++) {
-                System.out.println("\u001B[4;1;91mLe joueur " + (i+1) + ":\u001B[0m " + this.nbVictoire.get(i));
+                System.out.println("\u001B[4;1;91mLe joueur " + (i+1) + ":\u001B[0m " + this.nbVictoire.get(i)+"("+((float)this.nbVictoire.get(i)/(float)number)*100+")");
             }
         }
     }

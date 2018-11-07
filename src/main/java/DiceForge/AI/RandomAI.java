@@ -82,10 +82,14 @@ public class RandomAI extends Player{
     }
 
     public void chooseIsland(){
-        this.currentIsland=r.nextInt(2);
+        int number=r.nextInt(3);
+        if(number==0) this.currentIsland=0;
+        if(number==1) this.currentIsland=1;
+        if(number==2) this.currentIsland=4;
     }
 
     public int chooseFeat(){
-       return r.nextInt(2);//pour l'instant il n'y a pas d'ile avec plus de deux feat, pour la dernière ile, il faudra juste vérif si on est dessus et dans ce cas on fera random bound: 3
+        if(this.currentIsland==0 || this.currentIsland==1) return r.nextInt(2);//pour l'instant il n'y a pas d'ile avec plus de deux feat, pour la dernière ile, il faudra juste vérif si on est dessus et dans ce cas on fera random bound: 3
+        else return 0;
     }
 }

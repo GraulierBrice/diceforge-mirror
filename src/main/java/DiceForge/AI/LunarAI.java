@@ -111,7 +111,7 @@ public class LunarAI extends Player {
 
     @Override
     public void chooseIsland() {
-        if(this.getPdL()>=4 && false){//virer les && false quand les iles existeronts
+        if(this.getPdL()>=4){//virer les && false quand les iles existeronts
             this.currentIsland=4;//3,lune
         }else if(this.getPdL()>2 && false){
             this.currentIsland=2;//2,lune
@@ -131,7 +131,7 @@ public class LunarAI extends Player {
                 }else return 1;
         }else if(this.currentIsland==1){
             return 1;
-        }
+        }if(this.currentIsland==4)return 0;
         return 1;//pour le moment dans tout les cas, 2iles donc on veut qu'il prenne les herbesfolles
     }
 }
