@@ -5,7 +5,7 @@ import DiceForge.Player;
 public class HerbesFolles extends Feat {
 
     public HerbesFolles() {
-        super(2,0,1,0);
+        super(2,0,1,true);
     }
 
     public void setPlayer(Player player) {

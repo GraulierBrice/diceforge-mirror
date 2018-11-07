@@ -5,7 +5,7 @@ import DiceForge.Main;
 
 public class SabotArgent extends Feat{
 
-    public SabotArgent(){super(2,2,0,1);}
+    public SabotArgent(){super(2,2,0,true);}
 
     //rolls dice to play
     public void effect(Object... o) {

@@ -7,7 +7,7 @@ public class Hammer extends Feat{
 	private int level;
 
 	public Hammer(){
-		super(0,1,0,0);
+		super(0,1,0,false);
 		this.gold = 0;
 		this.level = 0;
 	}
