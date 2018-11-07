@@ -85,11 +85,12 @@ public class RandomAI extends Player{
     }
 
     public void chooseIsland(){
-        int number=r.nextInt(4);
+        int number=r.nextInt(5);
         if(number==0) this.currentIsland=0;
         if(number==1) this.currentIsland=1;
         if(number==2) this.currentIsland=2;
         if(number==3) this.currentIsland=4;
+        if(number==4) this.currentIsland=5;
 
     }
 

@@ -127,7 +127,7 @@ public abstract class Player {
             case 5:
                 switch(featNumber){
                     case 0:
-                       // return Meduse.class;
+                        return Meduse.class;
                     case 1:
                         //return Le miroir abyssal.class;
                 }
