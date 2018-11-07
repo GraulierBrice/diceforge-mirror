@@ -120,14 +120,14 @@ public abstract class Player {
             case 4:
                 switch(featNumber){
                     case 0:
-                        return Passeur.class;
+                        //return Le passeur.class;
                     case 1:
                         //return Le casque d'invisibilité.class;
                 }
             case 5:
                 switch(featNumber){
                     case 0:
-                        return Meduse.class;
+                        //return La méduse.class;
                     case 1:
                         //return Le miroir abyssal.class;
                 }
