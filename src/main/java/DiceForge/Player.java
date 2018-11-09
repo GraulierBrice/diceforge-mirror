@@ -158,4 +158,9 @@ public abstract class Player {
     public abstract int chooseFeat();
     public abstract Dice chooseBestDice();
 
+    public void lastAction(){
+       // if(Referee.getWorld().getIsland(6).getFeat(Hydre.class).isEmpty() && this.PdL>=5 && this.PdS>=5){
+            this.currentIsland=6;
+        //}
+    }
 }

@@ -9,14 +9,13 @@ public class Referee {
     private static Forge forge;
     private static World world;
     private int turnPlayer, round, maxRound;
-    public ArrayList<Integer> nbVictoire = new ArrayList<>();
 
     public Referee(Player... players) {
-        int gold=3;
+        int gold = 3;
         for (int i = 0; i < players.length; i++) {
             this.players.add(players[i]);
             this.players.get(i).addGold(gold);
-            nbVictoire.add(0);
+
             gold--;
         }
         this.turnPlayer = 0;
@@ -55,6 +54,8 @@ public class Referee {
         return this.maxRound;
     }
 
+    public ArrayList<Player> getPlayers(){ return this.players;}
+
     public static Forge getForge() {
         return forge;
     }
@@ -76,20 +77,20 @@ public class Referee {
         }
     }
 
-    public void choixReinforcement(String action, int number){
+    public void choixReinforcement(String action, int number) {
         Player turnP = this.getPlayer(this.turnPlayer);
-        if(action =="reinforcement"){
+        if (action == "reinforcement") {
             for (int i = 0; i < turnP.getNbFeat(); i++) {
-                if(turnP.getFeat(i).getReinfor()){
+                if (turnP.getFeat(i).getReinfor()) {
                     if (number == 1)
-                        System.out.println("\u001B[4;1;92mJoueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + "\u001B[0m");
-                    if(turnP.chooseFeatReinforcement()== "featreinforcement"){
+                        System.out.println(Announcer.ANSI_UNDERLINE+Announcer.ANSI_BOLD+Announcer.ANSI_SGREEN+"Joueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + Announcer.ANSI_RESET);
+                    if (turnP.chooseFeatReinforcement() == "featreinforcement") {
                         if (number == 1)
-                        System.out.println(" \u001B[32mJoueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2]+ "\u001B[0m");
+                            System.out.println(Announcer.ANSI_GREEN+"Joueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + Announcer.ANSI_RESET);
                         turnP.getFeat(i).effect();
-                    }else{
+                    } else {
                         if (number == 1)
-                        System.out.println(" \u001B[32mIl n'a pas fait de renforcement\u001B[0m");
+                            System.out.println(Announcer.ANSI_GREEN+"Il n'a pas fait de renforcement"+Announcer.ANSI_RESET);
                     }
                 }
             }
@@ -103,11 +104,11 @@ public class Referee {
         switch (action) {
             case "passe":
                 if (number == 1)
-                    System.out.println("\u001B[94mJoueur " + (this.turnPlayer + 1) + " passe son tour\u001B[0m");
+                    System.out.println(Announcer.ANSI_SBLUE+"Joueur " + (this.turnPlayer + 1) + " passe son tour"+Announcer.ANSI_RESET);
                 break;
             case "forge":
                 if (number == 1)
-                    System.out.println("\u001B[94mJoueur " + (this.turnPlayer + 1) + " peut acheter une face\u001B[0m");
+                    System.out.println(Announcer.ANSI_SBLUE+"Joueur " + (this.turnPlayer + 1) + " peut acheter une face"+Announcer.ANSI_RESET);
                 Pool pool = forge.getPool(turnP.choosePool());
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                     int poolFace = turnP.choosePoolFace(pool);
@@ -118,7 +119,7 @@ public class Referee {
                 break;
             case "exploit":
                 if (number == 1)
-                    System.out.println("\u001B[4;1;94mJoueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser\u001B[0m");
+                    System.out.println(Announcer.ANSI_UNDERLINE+Announcer.ANSI_BOLD+Announcer.ANSI_SBLUE+"Joueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser"+Announcer.ANSI_RESET);
                 turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
@@ -127,11 +128,11 @@ public class Referee {
                     turnP.removePdS(island.getFeat(exploit).getPricePdS());
                     island.getFeat(exploit).setPlayer(turnP);
                     if (number == 1)
-                        System.out.println(" \u001B[94mJoueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + "\u001B[0m");
+                        System.out.println(Announcer.ANSI_SBLUE+" Joueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + Announcer.ANSI_RESET);
                     island.removeFeat(exploit);
-                }else{
+                } else {
                     if (number == 1)
-                        System.out.println(" \u001B[94mIl ne réalise pas d'exploit\u001B[0m");
+                        System.out.println(Announcer.ANSI_SBLUE+"Il ne réalise pas d'exploit"+Announcer.ANSI_RESET);
                 }
                 break;
         }
@@ -150,26 +151,7 @@ public class Referee {
         -Indicates player actions in blue
         -Indicates dice faces rolled in yellow    
     */
-    public void printLog(int number) {
-        if (number == 1) {
-            for (Player p : players) {
-                System.out.println(this.players.indexOf(p) == this.getTurnPlayer() ? "\u001B[1;4;91mInformation joueur: " + (this.players.indexOf(p) + 1) + "\u001B[0m" : "\u001B[1;4mInformation joueur: " + (this.players.indexOf(p) + 1)+"\u001B[0m");
-                System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  PdS: " + p.getPdS() + "/" + p.getMaxPdS() + "\n  PdL: " + p.getPdL() + "/" + p.getMaxPdL());
-                for (int i = 0; i < p.getNbFeat(); i++) {
-                    if (p.getFeat(i) instanceof Hammer) {
-                        Hammer hammer = (Hammer) p.getFeat(i);
-                        if (hammer.getLevel() < 2) {
-                            System.out.println("  Hammer level " + (hammer.getLevel() + 1) + ": " + hammer.getGold());
-                            break;
-                        }
-                    }
-                }
-                System.out.println("  Faveur :");
-                p.getDice(0).toString(1);
-                p.getDice(1).toString(2);
-            }
-        }
-    }
+
 
     public int[] honour() {
         int[] winner = {this.players.get(0).getHonour(), 0};//winner[0]=max;winner[1]=playerid;
@@ -180,19 +162,6 @@ public class Referee {
             }
         }
         return winner;
-    }
-
-    public void printWinner(int number) {
-        int[] winner = this.honour();
-        if (number == 1) {
-            System.out.println("\u001B[1;93mJoueur " + (winner[1] + 1) + " gagne avec " + winner[0] + " honneurs\u001B[0m");
-        } else {
-            for (int i = 0; i < this.getNumberPlayer(); i++) {
-                if (winner[1] == i) {
-                    this.nbVictoire.set(i, this.nbVictoire.get(i) + 1);
-                }
-            }
-        }
     }
 
 
@@ -212,32 +181,4 @@ public class Referee {
         this.turnPlayer = 0;
     }
 
-    public void game(int number) {
-        for (int j = 0; j < number; j++) {
-            while (this.getRound() <= this.getMaxRound()) {
-                if (number == 1) System.out.println("Nous sommes au tour : " + this.getRound() + "\n");
-                for (int i = 0; i < this.getNumberPlayer(); i++) {
-                    this.choixReinforcement(this.getPlayer(this.turnPlayer).chooseReinforcement(), number);
-                    this.choixAction(this.getPlayer(this.turnPlayer).chooseAction(), number);
-                    this.printLog(number);
-                    if(this.getNumberPlayer()==2) {
-                        this.faveur();
-                        System.out.println("Seconde Faveur:");
-                        this.getPlayer(this.getTurnPlayer()).getDice(0).toString(1);
-                        this.getPlayer(this.getTurnPlayer()).getDice(1).toString(2);
-                    }
-                    this.faveur();
-
-                    this.nextPlayer();
-                }
-            }
-            this.printWinner(number);
-            this.reset();
-        }
-        if (number > 1) {
-            for (int i = 0; i < this.getNumberPlayer(); i++) {
-                System.out.println("\u001B[4;1;91mLe joueur " + (i+1) + ":\u001B[0m " + this.nbVictoire.get(i)+"("+((float)this.nbVictoire.get(i)/(float)number)*100+"%)");
-            }
-        }
-    }
 }

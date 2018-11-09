@@ -42,7 +42,7 @@ public class Dice{
 		System.out.print("    Dé "+dice+" :");
 		for(int i=0;i<6;i++){
 			//affiche en couleur la face roulé
-            System.out.print(i == this.roll ? "\u001B[1;33m" + this.getFace(i).getReward() + "\u001B[0m " : this.getFace(i).getReward() + " ");
+            System.out.print(i == this.roll ? Announcer.ANSI_BOLD+Announcer.ANSI_YELLOW + this.getFace(i).getReward() +" "+ Announcer.ANSI_RESET : this.getFace(i).getReward() + " ");
 		}
 		System.out.print("\n");
 	}
