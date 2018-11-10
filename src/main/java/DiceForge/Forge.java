@@ -61,12 +61,12 @@ public class Forge{
         Pool pool2G_1PdL=new Pool(2,_1PdL);
         Pool pool3G_4G=new Pool(3,_4G);
         Pool pool3G_1PdS=new Pool(3,_1PdS);
-        Pool pool4G=new Pool(4,FacePool4G);//pas codée encore
-        Pool pool5G=new Pool(5,FacePool5G);//pas codée encore
+        Pool pool4G=new Pool(4,FacePool4G);
+        Pool pool5G=new Pool(5,FacePool5G);
         Pool pool6G_2PdL=new Pool(6,_2PdL);
         Pool pool8G_2PdS=new Pool(8,_2PdS);
         Pool pool8G_3Honour=new Pool(8,_3Honour);
-        Pool pool12G=new Pool(12,FacePool12G);//pas codée encore
+        Pool pool12G=new Pool(12,FacePool12G);
 
         this.forge.add(pool12G);
         this.forge.add(pool8G_3Honour);

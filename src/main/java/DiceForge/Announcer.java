@@ -45,12 +45,15 @@ public class Announcer {
 
     public void game(int number) {
             for (int j = 0; j < number; j++) {
-                while(referee.getRound()<referee.getMaxRound()){
+                while(referee.getRound()<=referee.getMaxRound()){
                 if (number == 1) System.out.println("Nous sommes au tour : " + referee.getRound() + "\n");
                 for (int i = 0; i < referee.getNumberPlayer(); i++) {
                     referee.choixReinforcement(referee.getPlayer(referee.getTurnPlayer()).chooseReinforcement(), number);
-                    referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).chooseAction(), number);
+                    if(referee.getRound()!=referee.getMaxRound())
+                        referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).chooseAction(), number);
+                    else referee.getPlayer(referee.getTurnPlayer()).lastAction();
                     this.printLog(number);
+
                     if (referee.getNumberPlayer() == 2) {
                         referee.faveur();
                         System.out.println("Seconde Faveur:");
@@ -67,7 +70,7 @@ public class Announcer {
         }
         if (number > 1) {
             for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                System.out.println(ANSI_UNDERLINE+ANSI_SRED+"Le joueur " + (i + 1) + ANSI_RESET + this.nbVictoire.get(i) + "(" + ((float) this.nbVictoire.get(i) / (float) number) * 100 + "%)");
+                System.out.println(ANSI_UNDERLINE+ANSI_SRED+"Le joueur " + (i + 1)+":" + ANSI_RESET +" "+ this.nbVictoire.get(i) + "(" + ((float) this.nbVictoire.get(i) / (float) number) * 100 + "%)");
                 System.out.println("Honneur moyen du joueur " + (i + 1) + ": " + this.sumHonour.get(i) / number);
             }
         }

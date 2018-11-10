@@ -114,7 +114,7 @@ public class Referee {
                     int poolFace = turnP.choosePoolFace(pool);
                     int dice = turnP.chooseDice();
                     int diceFace = turnP.chooseDiceFace(turnP.chooseDice());
-                    this.buy(pool, poolFace, dice, diceFace);
+                    this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
                 }
                 break;
             case "exploit":
@@ -124,12 +124,9 @@ public class Referee {
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
                 if (island.isIn(exploit) && (turnP.getPdL() >= island.getFeat(exploit).getPricePdL() || turnP.getPdS() >= island.getFeat(exploit).getPricePdS())) {
-                    turnP.removePdL(island.getFeat(exploit).getPricePdL());
-                    turnP.removePdS(island.getFeat(exploit).getPricePdS());
-                    island.getFeat(exploit).setPlayer(turnP);
+                    this.world.giveFeat(turnP,exploit);
                     if (number == 1)
                         System.out.println(Announcer.ANSI_SBLUE+" Joueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + Announcer.ANSI_RESET);
-                    island.removeFeat(exploit);
                 } else {
                     if (number == 1)
                         System.out.println(Announcer.ANSI_SBLUE+"Il ne réalise pas d'exploit"+Announcer.ANSI_RESET);
@@ -164,10 +161,6 @@ public class Referee {
         return winner;
     }
 
-
-    public void buy(Pool pool, int poolFace, int diceNumber, int diceFace) {
-        this.getPlayer(this.turnPlayer).buy(this, pool, poolFace, diceNumber, diceFace);
-    }
 
     public void reset() {
         for (Player player : players) {

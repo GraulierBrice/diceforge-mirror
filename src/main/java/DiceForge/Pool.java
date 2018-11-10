@@ -43,6 +43,15 @@ public class Pool {
         }
         return false;
     }
+
+    public int faceKind(String kind){
+        for(int i=0;i<this.howManyFaces();i++){
+            if(this.faces.get(i).getKind().contains(kind)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
 

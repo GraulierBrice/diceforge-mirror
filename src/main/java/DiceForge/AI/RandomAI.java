@@ -75,7 +75,7 @@ public class RandomAI extends Player{
     }
 
     public int choosePool() {
-        return r.nextInt(10-3);//10 jeu complet mais 3 pools non codées
+        return r.nextInt(10);//10 jeu complet mais 3 pools non codées
     }
 
     public int goldChoice(int gold, Hammer m) {
@@ -85,12 +85,8 @@ public class RandomAI extends Player{
     }
 
     public void chooseIsland(){
-        int number=r.nextInt(5);
-        if(number==0) this.currentIsland=0;
-        if(number==1) this.currentIsland=1;
-        if(number==2) this.currentIsland=2;
-        if(number==3) this.currentIsland=4;
-        if(number==4) this.currentIsland=5;
+        this.currentIsland=r.nextInt(6);
+
 
     }
 

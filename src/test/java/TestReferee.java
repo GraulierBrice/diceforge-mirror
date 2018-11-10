@@ -39,12 +39,12 @@ public class TestReferee {
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1G");// on regarde la face avant modification par achat
 
-        referee.buy(forge.getPool(6),0,0,3);
+        referee.getPlayer(referee.getTurnPlayer()).buy(forge.getPool(6),0,0,3);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);//pas assez de gold
         assertEquals(forge.getPool(3).howManyFaces(),referee.getNumberPlayer());//pour buy la face
         referee.getPlayer(referee.getTurnPlayer()).addGold(3);//on ajoute des golds pour buy la face plus tard
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),3);
-        referee.buy(forge.getPool(6),0,0,3);
+        referee.getPlayer(referee.getTurnPlayer()).buy(forge.getPool(6),0,0,3);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
         assertEquals(forge.getPool(6).howManyFaces(),referee.getNumberPlayer()-2);//pour buy la face
 

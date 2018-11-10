@@ -57,8 +57,8 @@ public abstract class Player {
     }
 
     //Purchase a dice face and set it on a dice of chosing
-    public void buy(Referee R,Pool pool,int poolFace,int diceNumber,int diceFace){
-        this.getDice(diceNumber).setFace(pool.buy(R.getPlayer(R.getTurnPlayer()), pool.getFace(poolFace)), diceFace);
+    public void buy(Pool pool,int poolFace,int diceNumber,int diceFace){
+        this.getDice(diceNumber).setFace(pool.buy(this, pool.getFace(poolFace)), diceFace);
     }
 
     public void reset(){
@@ -108,37 +108,37 @@ public abstract class Player {
                     case 0:
                         return SabotArgent.class;
                     case 1:
-                        //return Les satyres.class;
+                        return Satyres.class;
                 }
             case 3:
                 switch(featNumber){
                     case 0:
-                        //return Les ailes de la gardienne.class;
+                        return AilesGardienne.class;
                     case 1:
-                        //return Le minotaure.class;
+                        return Minotaure.class;
                 }
             case 4:
                 switch(featNumber){
                     case 0:
                         return Passeur.class;
                     case 1:
-                        //return Le casque d'invisibilité.class;
+                        return CasqueInvisibilite.class;
                 }
             case 5:
                 switch(featNumber){
                     case 0:
                         return Meduse.class;
                     case 1:
-                        //return Le miroir abyssal.class;
+                        return MiroirAbyssal.class;
                 }
             case 6:
                 switch(featNumber){
                     case 0:
-                        //return La pince.class;
+                        return Pince.class;
                     case 1:
-                        //return L'hydre.class;
+                        return Hydre.class;
                     case 2:
-                        //return L'énigme.class;
+                        return Enigme.class;
                 }
             default:
                 return null;
@@ -159,8 +159,60 @@ public abstract class Player {
     public abstract Dice chooseBestDice();
 
     public void lastAction(){
-       // if(Referee.getWorld().getIsland(6).getFeat(Hydre.class).isEmpty() && this.PdL>=5 && this.PdS>=5){
+        int diceNumber=0;
+        if(this.de1.diceNotFullWith("H")) diceNumber=0;
+        else if(this.de2.diceNotFullWith("H")) diceNumber=1;
+        if(false){
+       // if(Referee.getWorld().getIsland(6).isIn(Hydre.class) && this.PdL>=5 && this.PdS>=5){
             this.currentIsland=6;
-        //}
+            Referee.getWorld().giveFeat(this,Hydre.class);
+
+        }else if(Referee.getWorld().getIsland(5).isIn(Meduse.class) && this.PdS>=5){
+            this.currentIsland=5;
+            Referee.getWorld().giveFeat(this,Meduse.class);
+
+        }else if(Referee.getWorld().getIsland(4).isIn(Passeur.class) && this.PdL>=5){
+            this.currentIsland=4;
+            Referee.getWorld().giveFeat(this,Passeur.class);
+
+        }else if(Referee.getWorld().getIsland(5).isIn(MiroirAbyssal.class) && this.PdS>=5){
+            this.currentIsland=5;
+            Referee.getWorld().giveFeat(this,MiroirAbyssal.class);
+        }else if(Referee.getWorld().getIsland(6).isIn(Enigme.class) && this.PdS>=6){
+            this.currentIsland=6;
+            Referee.getWorld().giveFeat(this,Enigme.class);
+        }else if(Referee.getWorld().getIsland(6).isIn(Pince.class) && this.PdL>=6){
+            this.currentIsland=6;
+            Referee.getWorld().giveFeat(this,Pince.class);
+        }else if(Referee.getWorld().getIsland(3).isIn(Minotaure.class) && this.PdS>=3){
+            this.currentIsland=3;
+            Referee.getWorld().giveFeat(this,Minotaure.class);
+        }else if(Referee.getWorld().getIsland(2).isIn(Satyres.class) && this.PdL>=3){
+            this.currentIsland=2;
+            Referee.getWorld().giveFeat(this,Satyres.class);
+        }else if(Referee.getWorld().getIsland(4).isIn(CasqueInvisibilite.class) && this.PdL>=5){
+            this.currentIsland=4;
+            Referee.getWorld().giveFeat(this,CasqueInvisibilite.class);
+        }else if(Referee.getWorld().getIsland(3).isIn(AilesGardienne.class) && this.PdS>=2){
+            this.currentIsland=3;
+            Referee.getWorld().giveFeat(this,AilesGardienne.class);
+        }else if(Referee.getWorld().getIsland(1).isIn(HerbesFolles.class) && this.PdS>=1){
+            this.currentIsland=1;
+            Referee.getWorld().giveFeat(this,HerbesFolles.class);
+        }else if(Referee.getWorld().getIsland(0).isIn(Chest.class) && this.PdL>=1){
+            this.currentIsland=0;
+            Referee.getWorld().giveFeat(this,Chest.class);
+        }else if(Referee.getWorld().getIsland(2).isIn(SabotArgent.class) && this.PdL>=2){
+            this.currentIsland=2;
+            Referee.getWorld().giveFeat(this,SabotArgent.class);
+        }else if(Referee.getForge().getPool(0).kindOfPool("H") && this.gold>=12){
+            this.buy(Referee.getForge().getPool(0),Referee.getForge().getPool(0).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
+        }else if(Referee.getForge().getPool(1).kindOfPool("H") && this.gold>=8){
+            this.buy(Referee.getForge().getPool(1),Referee.getForge().getPool(1).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
+        }else if(Referee.getForge().getPool(4).kindOfPool("H") && this.gold>=5){
+            this.buy(Referee.getForge().getPool(4),Referee.getForge().getPool(4).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
+        }else if(Referee.getForge().getPool(5).kindOfPool("H") && this.gold>=4){
+            this.buy(Referee.getForge().getPool(5),Referee.getForge().getPool(5).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
+        }
     }
 }

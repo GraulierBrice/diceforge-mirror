@@ -18,11 +18,11 @@ public class World {
         for(int i=0;i<R.getNumberPlayer();i++){
             feats1.add(new Hammer());feats1.add(new Chest());
             feats2.add(new Ancien());feats2.add(new HerbesFolles());
-            feats3.add(new SabotArgent());//feats3.add();
-            //feats4.add(new );feats4.add();
-            feats5.add(new Passeur());//feats5.add();
-           // feats6.add(new Meduse());//feats6.add();
-            //feats7.add();feats7.add();feats7.add();
+            feats3.add(new SabotArgent());feats3.add(new Satyres());
+            feats4.add(new AilesGardienne());feats4.add(new Minotaure());
+            feats5.add(new Passeur());feats5.add(new CasqueInvisibilite());
+            feats6.add(new Meduse());feats6.add(new MiroirAbyssal());
+            feats7.add(new Pince());feats7.add(new Hydre());feats7.add(new Enigme());
 
         }
         islands.add(new Island(feats1));
@@ -47,5 +47,12 @@ public class World {
 
     public boolean isEmpty(int n){
         return this.islands.get(n).isEmpty();
+    }
+
+    public void giveFeat(Player player, Class feat){
+        this.islands.get(player.getCurrentIsland()).getFeat(feat).setPlayer(player);
+        player.removePdL(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPricePdL());
+        player.removePdS(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPricePdS());
+        this.islands.get(player.getCurrentIsland()).removeFeat(feat);
     }
 }
