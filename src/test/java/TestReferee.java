@@ -64,10 +64,10 @@ public class TestReferee {
          referee.nextPlayer();
          referee.nextPlayer();
          referee.getPlayer(referee.getTurnPlayer()).addPdL(2);
-         referee.choixAction("exploit",1);
+         referee.choixAction("exploit");
          assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(0) instanceof Hammer);
 
-         referee.choixAction("exploit",1);
+         referee.choixAction("exploit");
          assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(1) instanceof Chest);
 
          referee.getPlayer(referee.getTurnPlayer()).addGold(15);
@@ -91,12 +91,12 @@ public class TestReferee {
 
         assertFalse(referee.getPlayer(referee.getTurnPlayer()).doIHaveAnHammer());
 
-        referee.choixAction("exploit",1);
+        referee.choixAction("exploit");
 
         assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(2) instanceof Hammer);
 
         Hammer hammer2=(Hammer)referee.getPlayer(referee.getTurnPlayer()).getFeat(2);
-        referee.choixAction("exploit",1);
+        referee.choixAction("exploit");
 
         referee.getPlayer(referee.getTurnPlayer()).addGold(13);
         referee.getPlayer(referee.getTurnPlayer()).addGold(13);
@@ -108,15 +108,15 @@ public class TestReferee {
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),19);//test add chest
         referee.getPlayer(referee.getTurnPlayer()).removeGold(13);
-        referee.choixAction("forge",1);
+        referee.choixAction("forge");
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(1).getFace(0).getReward(),"2PdL");
 
-        referee.choixAction("exploit",1);
+        referee.choixAction("exploit");
         referee.getPlayer(referee.getTurnPlayer()).addGold(5);
 
-        referee.choixAction("forge",1);
+        referee.choixAction("forge");
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(0).getReward(),"3G");
@@ -126,7 +126,7 @@ public class TestReferee {
         referee.getPlayer(referee.getTurnPlayer()).removePdS(1000);
         referee.getPlayer(referee.getTurnPlayer()).addPdS(1);//on reset toutes ses stats pour voir si il achète bien herbes folles
 
-        referee.choixAction("exploit",1);
+        referee.choixAction("exploit");
 
         assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(5) instanceof HerbesFolles);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getPdS(),0);
@@ -134,7 +134,7 @@ public class TestReferee {
         referee.getPlayer(referee.getTurnPlayer()).addPdL(1);
         referee.getPlayer(referee.getTurnPlayer()).addPdS(1);
 
-        referee.choixAction("exploit",1);
+        referee.choixAction("exploit");
 
         assertFalse(referee.getPlayer(referee.getTurnPlayer()).getFeat(6) instanceof HerbesFolles);
 

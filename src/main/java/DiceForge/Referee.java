@@ -77,38 +77,23 @@ public class Referee {
         }
     }
 
-    public void choixReinforcement(String action, int number) {
+    public void choixReinforcement(String action) {
         Player turnP = this.getPlayer(this.turnPlayer);
         if (action == "reinforcement") {
             for (int i = 0; i < turnP.getNbFeat(); i++) {
-                if (turnP.getFeat(i).getReinfor()) {
-                    if (number == 1)
-                        System.out.println(Announcer.ANSI_UNDERLINE+Announcer.ANSI_BOLD+Announcer.ANSI_SGREEN+"Joueur " + (this.turnPlayer + 1) + " peut renforcer " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + Announcer.ANSI_RESET);
-                    if (turnP.chooseFeatReinforcement() == "featreinforcement") {
-                        if (number == 1)
-                            System.out.println(Announcer.ANSI_GREEN+"Joueur " + (this.turnPlayer + 1) + " renforce l'exploit " + turnP.getFeat(i).getClass().getName().split("\\.")[2] + Announcer.ANSI_RESET);
-                        turnP.getFeat(i).effect();
-                    } else {
-                        if (number == 1)
-                            System.out.println(Announcer.ANSI_GREEN+"Il n'a pas fait de renforcement"+Announcer.ANSI_RESET);
-                    }
+                if (turnP.getFeat(i).getReinfor() && turnP.chooseFeatReinforcement() == "featreinforcement") {
+                    turnP.getFeat(i).effect();
                 }
             }
         }
     }
 
-    public void choixAction(String action, int number) {//number = nombre de games
+    public void choixAction(String action) {//number = nombre de games
 
         Player turnP = this.getPlayer(this.turnPlayer);
 
-        switch (action) {
-            case "passe":
-                if (number == 1)
-                    System.out.println(Announcer.ANSI_SBLUE+"Joueur " + (this.turnPlayer + 1) + " passe son tour"+Announcer.ANSI_RESET);
-                break;
+        switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case "forge":
-                if (number == 1)
-                    System.out.println(Announcer.ANSI_SBLUE+"Joueur " + (this.turnPlayer + 1) + " peut acheter une face"+Announcer.ANSI_RESET);
                 Pool pool = forge.getPool(turnP.choosePool());
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                     int poolFace = turnP.choosePoolFace(pool);
@@ -118,18 +103,11 @@ public class Referee {
                 }
                 break;
             case "exploit":
-                if (number == 1)
-                    System.out.println(Announcer.ANSI_UNDERLINE+Announcer.ANSI_BOLD+Announcer.ANSI_SBLUE+"Joueur " + (this.turnPlayer + 1) + " peut choisir un exploit à réaliser"+Announcer.ANSI_RESET);
                 turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
                 if (island.isIn(exploit) && (turnP.getPdL() >= island.getFeat(exploit).getPricePdL() || turnP.getPdS() >= island.getFeat(exploit).getPricePdS())) {
-                    this.world.giveFeat(turnP,exploit);
-                    if (number == 1)
-                        System.out.println(Announcer.ANSI_SBLUE+" Joueur " + (this.turnPlayer + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + Announcer.ANSI_RESET);
-                } else {
-                    if (number == 1)
-                        System.out.println(Announcer.ANSI_SBLUE+"Il ne réalise pas d'exploit"+Announcer.ANSI_RESET);
+                    this.world.giveFeat(turnP, exploit);
                 }
                 break;
         }
