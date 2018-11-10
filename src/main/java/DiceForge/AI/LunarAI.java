@@ -14,33 +14,33 @@ public class LunarAI extends Player {
 
     @Override
     public String chooseReinforcement() {
-        return "reinforcement";
+        return Referee.REINFORCEMENT;
     }
 
     @Override
     public String chooseFeatReinforcement() {
-        return "featreinforcement";
+        return Referee.FEAT_REINFORCEMENT;
     }
 
 
     @Override
     public String chooseAction() {
-        Pool pool=Referee.getForge().affordablePoolWith("PdL",this.getGold());
-        Island island=Referee.getWorld().lowestIslandNotEmpty("PdL");
-        Island islandPdS=Referee.getWorld().lowestIslandNotEmpty("PdS");
-        if(island!=null && (this.getPdL()>=island.lowestPriceOfFeat("PdL").getPricePdL() || (islandPdS!=null && this.getPdS()>=islandPdS.lowestPriceOfFeat("PdS").getPricePdS() && island.isIn(HerbesFolles.class) ))) {//pour farmer les marteaux pour l'instant
-            return "exploit";
+        Pool pool=Referee.getForge().affordablePoolWith(PDL,this.getGold());
+        Island island=Referee.getWorld().lowestIslandNotEmpty(PDL);
+        Island islandPdS=Referee.getWorld().lowestIslandNotEmpty(PDS);
+        if(island!=null && (this.getPdL()>=island.lowestPriceOfFeat(PDL).getPricePdL() || (islandPdS!=null && this.getPdS()>=islandPdS.lowestPriceOfFeat(PDS).getPricePdS() && island.isIn(HerbesFolles.class) ))) {//pour farmer les marteaux pour l'instant
+            return Referee.EXPLOIT;
         }else if(pool!=null) {
             if (this.getGold() >= pool.getPrice()) {
-                return "forge";
+                return Referee.FORGE;
             }
         }
-        return "passe";
+        return Referee.PASSE;
     }
 
     @Override
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des PdL comme ça on est sûr d'en drop à chaque tour
-        if(Referee.getForge().affordablePoolWith("PdL",this.getGold()).getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
+        if(Referee.getForge().affordablePoolWith(PDL,this.getGold()).getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
             return 1;
         }
         return 0;
@@ -54,8 +54,8 @@ public class LunarAI extends Player {
 
     @Override
     public int chooseDiceFace(int dice) {
-        if(this.chooseDice()==1) return (this.getDice(dice).faceNotOfThisKind("PdL"));
-        else if(this.chooseDice()==0) return (this.getDice(dice).faceNotOfThisKind("G"));
+        if(this.chooseDice()==1) return (this.getDice(dice).faceNotOfThisKind(PDL));
+        else if(this.chooseDice()==0) return (this.getDice(dice).faceNotOfThisKind(GOLD));
         return 0;//test devrait être -1 pour cas erreur
     }
 
@@ -66,7 +66,7 @@ public class LunarAI extends Player {
 
     @Override
     public int choosePoolFace(Pool pool) {//test pour l'instant pour prendre les pools avec uniquement des PdL pour le moment
-        if(Referee.getForge().affordablePoolWith("PdL",this.getGold()).getPrice()<=this.getGold()){
+        if(Referee.getForge().affordablePoolWith(PDL,this.getGold()).getPrice()<=this.getGold()){
             return 0;
         }
         return 0;
@@ -74,12 +74,12 @@ public class LunarAI extends Player {
 
     @Override
     public int choosePool() {
-        Pool poolPdL =Referee.getForge().affordablePoolWith("PdL",this.getGold());
-        Pool poolG=Referee.getForge().affordablePoolWith("G",this.getGold());
+        Pool poolPdL =Referee.getForge().affordablePoolWith(PDL,this.getGold());
+        Pool poolG=Referee.getForge().affordablePoolWith(GOLD,this.getGold());
         if(poolPdL!=null && poolPdL.getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
-            return Referee.getForge().isNumber(Referee.getForge().affordablePoolWith("PdL",this.getGold()));
+            return Referee.getForge().isNumber(Referee.getForge().affordablePoolWith(PDL,this.getGold()));
         }else if(poolG!=null && poolG.getPrice()<=this.getGold()){
-            return Referee.getForge().isNumber((Referee.getForge().affordablePoolWith("G",this.getGold())));
+            return Referee.getForge().isNumber((Referee.getForge().affordablePoolWith(GOLD,this.getGold())));
         }
         return 0;//devrait être -1 en plein test
     }

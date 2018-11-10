@@ -13,7 +13,7 @@ public class Main {
         Announcer announcer = new Announcer(R);
         R.addForge(forge);
         R.addWorld(world);
-        announcer.game(numberOfGames);
+        announcer.DiceForgeResult(numberOfGames);
     }
 }
 

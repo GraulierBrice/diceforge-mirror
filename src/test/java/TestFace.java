@@ -1,5 +1,6 @@
 import DiceForge.AI.*;
 import DiceForge.Face.*;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -20,7 +21,7 @@ public class TestFace {
         FaceCombinationAND g18=new FaceCombinationAND(18,0,0,0);
         g18.giveReward(randomAI);
         assertTrue(randomAI.getGold()==12);
-        assertEquals(g1.getKind(),"G");
+        assertEquals(g1.getKind(), Player.GOLD);
         assertEquals(g1.getReward(),"1G");
     }
 
@@ -32,7 +33,7 @@ public class TestFace {
         FaceCombinationAND PdS8=new FaceCombinationAND(0,0,8,0);
         PdS8.giveReward(randomAI);
         assertTrue(randomAI.getPdS()==6);
-        assertEquals(PdS1.getKind(),"PdS");
+        assertEquals(PdS1.getKind(),Player.PDS);
         assertEquals(PdS1.getReward(),"1PdS");
     }
 
@@ -44,7 +45,7 @@ public class TestFace {
         FaceCombinationAND PdL8=new FaceCombinationAND(0,8,0,0);
         PdL8.giveReward(randomAI);
         assertTrue(randomAI.getPdL()==6);
-        assertEquals(PdL1.getKind(),"PdL");
+        assertEquals(PdL1.getKind(),Player.PDS);
         assertEquals(PdL1.getReward(),"1PdL");
 
     }
@@ -54,7 +55,7 @@ public class TestFace {
         FaceCombinationAND honour1=new FaceCombinationAND(0,0,0,1);
         honour1.giveReward(randomAI);
         assertTrue(randomAI.getHonour()==1);
-        assertEquals(honour1.getKind(),"H");
+        assertEquals(honour1.getKind(),Player.HONOUR);
         assertEquals(honour1.getReward(),"1H");
 
     }

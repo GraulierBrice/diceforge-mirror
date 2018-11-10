@@ -19,7 +19,7 @@ public class RandomAI extends Player{
             case 0:
                 return null;
             case 1:
-                return "reinforcement";
+                return Referee.REINFORCEMENT;
         }
         return null;
     }
@@ -29,7 +29,7 @@ public class RandomAI extends Player{
             case 0:
                 return null;
             case 1:
-                return "featreinforcement";
+                return Referee.FEAT_REINFORCEMENT;
         }
         return null;
     }
@@ -39,11 +39,11 @@ public class RandomAI extends Player{
         int choice = r.nextInt(3);
         switch(choice){
             case 0:
-                return "passe";
+                return Referee.PASSE;
             case 1:
-                return "forge";
+                return Referee.FORGE;
             case 2:
-                return "exploit";
+                return Referee.EXPLOIT;
         }
         return null;
     }
@@ -63,10 +63,10 @@ public class RandomAI extends Player{
 
     public int chooseFaceBonus(Face face){
         int possibilities=0;
-        if(face.getKind().contains("G"))possibilities++;
-        if(face.getKind().contains("PdL"))possibilities++;
-        if(face.getKind().contains("PdS"))possibilities++;
-        if(face.getKind().contains("H"))possibilities++;
+        if(face.getKind().contains(GOLD))possibilities++;
+        if(face.getKind().contains(PDL))possibilities++;
+        if(face.getKind().contains(PDS))possibilities++;
+        if(face.getKind().contains(HONOUR))possibilities++;
         return r.nextInt(possibilities);
     }
 

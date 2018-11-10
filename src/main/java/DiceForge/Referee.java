@@ -10,6 +10,12 @@ public class Referee {
     private static World world;
     private int turnPlayer, round, maxRound;
 
+    public static final String PASSE="passe";
+    public static final String FORGE="forge";
+    public static final String EXPLOIT="exploit";
+    public static final String REINFORCEMENT="reinforcement";
+    public static final String FEAT_REINFORCEMENT="featreinforcement";
+
     public Referee(Player... players) {
         int gold = 3;
         for (int i = 0; i < players.length; i++) {
@@ -79,9 +85,9 @@ public class Referee {
 
     public void choixReinforcement(String action) {
         Player turnP = this.getPlayer(this.turnPlayer);
-        if (action == "reinforcement") {
+        if (action == REINFORCEMENT) {
             for (int i = 0; i < turnP.getNbFeat(); i++) {
-                if (turnP.getFeat(i).getReinfor() && turnP.chooseFeatReinforcement() == "featreinforcement") {
+                if (turnP.getFeat(i).getReinfor() && turnP.chooseFeatReinforcement() == FEAT_REINFORCEMENT) {
                     turnP.getFeat(i).effect();
                 }
             }
@@ -93,7 +99,7 @@ public class Referee {
         Player turnP = this.getPlayer(this.turnPlayer);
 
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
-            case "forge":
+            case FORGE:
                 Pool pool = forge.getPool(turnP.choosePool());
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                     int poolFace = turnP.choosePoolFace(pool);
@@ -102,7 +108,7 @@ public class Referee {
                     this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
                 }
                 break;
-            case "exploit":
+            case EXPLOIT:
                 turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
@@ -138,7 +144,6 @@ public class Referee {
         }
         return winner;
     }
-
 
     public void reset() {
         for (Player player : players) {

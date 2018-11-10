@@ -1,5 +1,6 @@
 import DiceForge.Face.*;
 import DiceForge.AI.*;
+import DiceForge.Player;
 import DiceForge.Pool;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class TestPool {
         randomAI.addGold(12);
 
         assertTrue(pool.kindOfPool(""));
-        assertTrue(pool.kindOfPool("G"));
+        assertTrue(pool.kindOfPool(Player.GOLD));
 
         assertEquals(pool.buy(randomAI,PdS1),PdS1);
         assertEquals(randomAI.getGold(),0);

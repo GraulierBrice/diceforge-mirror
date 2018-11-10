@@ -43,7 +43,7 @@ public class Announcer {
         }
     }
 
-    public void game(int number) {
+    public void DiceForgeResult(int number) {
         for (int j = 0; j < number; j++) {
             while (referee.getRound() <= referee.getMaxRound()) {
                 if (number == 1) System.out.println("Nous sommes au tour : " + referee.getRound() + "\n");
@@ -61,11 +61,9 @@ public class Announcer {
                     if (referee.getNumberPlayer() == 2) {
                         referee.faveur();
                         System.out.println("Seconde Faveur:");
-                        referee.getPlayer(referee.getTurnPlayer()).getDice(0).toString(1);
-                        referee.getPlayer(referee.getTurnPlayer()).getDice(1).toString(2);
+                        this.printDice(referee.getPlayer(referee.getTurnPlayer()));
                     }
                     referee.faveur();
-
                     referee.nextPlayer();
                 }
             }
@@ -95,8 +93,7 @@ public class Announcer {
                     }
                 }
                 System.out.println("  Faveur :");
-                p.getDice(0).toString(1);
-                p.getDice(1).toString(2);
+                this.printDice(p);
             }
         }
     }
@@ -104,13 +101,13 @@ public class Announcer {
     public void printAction() {
         String action = referee.getPlayer(referee.getTurnPlayer()).chooseAction();
         switch (action) {
-            case "passe":
+            case Referee.PASSE:
                 System.out.println(ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " passe son tour" + ANSI_RESET);
                 break;
-            case "forge":
+            case Referee.FORGE:
                 System.out.println(ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " peut acheter une face" + ANSI_RESET);
                 break;
-            case "exploit":
+            case Referee.EXPLOIT:
                 System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " peut choisir un exploit à réaliser" + ANSI_RESET);
                 Player player = referee.getPlayer(referee.getTurnPlayer());
                 Island island = referee.getWorld().getIsland(player.getCurrentIsland());
@@ -127,11 +124,11 @@ public class Announcer {
     public void printReinforcement() {
         Player player = referee.getPlayer(referee.getTurnPlayer());
         String action = referee.getPlayer(referee.getTurnPlayer()).chooseReinforcement();
-        if (action == "reinforcement") {
+        if (action == Referee.REINFORCEMENT) {
             for (int i = 0; i < player.getNbFeat(); i++) {
                 if (player.getFeat(i).getReinfor()) {
                         System.out.println(ANSI_UNDERLINE+ANSI_BOLD+ANSI_SGREEN+"Joueur " + (referee.getTurnPlayer() + 1) + " peut renforcer " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
-                    if (player.chooseFeatReinforcement() == "featreinforcement") {
+                    if (player.chooseFeatReinforcement() == Referee.FEAT_REINFORCEMENT) {
                             System.out.println(ANSI_GREEN+"Joueur " + (referee.getTurnPlayer() + 1) + " renforce l'exploit " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
                     } else {
                             System.out.println(ANSI_GREEN+"Il n'a pas fait de renforcement"+ANSI_RESET);
@@ -140,4 +137,12 @@ public class Announcer {
             }
         }
     }
+
+    public void printDice(Player player){
+        player.getDice(0).toString();
+        player.getDice(0).toString();
+    }
+
+
+
 }

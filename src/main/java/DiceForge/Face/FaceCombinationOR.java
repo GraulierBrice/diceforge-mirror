@@ -13,27 +13,27 @@ public class FaceCombinationOR extends Face {
     public void giveRewardOR(Player player,int choose) {
         switch(choose){
             case 0:
-                if (kind.contains("G")) {
+                if (kind.contains(Player.GOLD)) {
                     player.addGold(rewardGold);
-                }else if(kind.contains("PdL")){
+                }else if(kind.contains(Player.PDL)){
                     player.addPdL(rewardPdL);
-                }else if(kind.contains("PdS")){
+                }else if(kind.contains(Player.PDS)){
                     player.addPdS(rewardPdS);
                 }else{
                     player.addHonour(rewardHonour);
                 }
                 break;
             case 1:
-                if(kind.contains("PdL")){
+                if(kind.contains(Player.PDL)){
                     player.addPdL(rewardPdL);
-                }else if(kind.contains("PdS")){
+                }else if(kind.contains(Player.PDS)){
                     player.addPdS(rewardPdS);
                 }else{
                     player.addHonour(rewardHonour);
                 }
                 break;
             case 2:
-                if(kind.contains("PdS")){
+                if(kind.contains(Player.PDS)){
                     player.addPdS(rewardPdS);
                 }else{
                     player.addHonour(rewardHonour);

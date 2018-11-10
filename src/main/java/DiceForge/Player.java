@@ -12,6 +12,11 @@ public abstract class Player {
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
 
+    public static final String GOLD="G";
+    public static final String HONOUR="H";
+    public static final String PDL="PdL";
+    public static final String PDS="PdS";
+
     public Player(){
         this.honour=0;
         this.PdL=0;
@@ -160,8 +165,8 @@ public abstract class Player {
 
     public void lastAction(){
         int diceNumber=0;
-        if(this.de1.diceNotFullWith("H")) diceNumber=0;
-        else if(this.de2.diceNotFullWith("H")) diceNumber=1;
+        if(this.de1.diceNotFullWith(HONOUR)) diceNumber=0;//devrait traiter plus tard pour chercher la face ayant le moins d'honneur si jamais il est full honour sur ses deux dés
+        else if(this.de2.diceNotFullWith(HONOUR)) diceNumber=1;
         if(false){
        // if(Referee.getWorld().getIsland(6).isIn(Hydre.class) && this.PdL>=5 && this.PdS>=5){
             this.currentIsland=6;
@@ -205,14 +210,14 @@ public abstract class Player {
         }else if(Referee.getWorld().getIsland(2).isIn(SabotArgent.class) && this.PdL>=2){
             this.currentIsland=2;
             Referee.getWorld().giveFeat(this,SabotArgent.class);
-        }else if(Referee.getForge().getPool(0).kindOfPool("H") && this.gold>=12){
-            this.buy(Referee.getForge().getPool(0),Referee.getForge().getPool(0).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
-        }else if(Referee.getForge().getPool(1).kindOfPool("H") && this.gold>=8){
-            this.buy(Referee.getForge().getPool(1),Referee.getForge().getPool(1).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
-        }else if(Referee.getForge().getPool(4).kindOfPool("H") && this.gold>=5){
-            this.buy(Referee.getForge().getPool(4),Referee.getForge().getPool(4).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
-        }else if(Referee.getForge().getPool(5).kindOfPool("H") && this.gold>=4){
-            this.buy(Referee.getForge().getPool(5),Referee.getForge().getPool(5).faceKind("H"),diceNumber,this.de1.faceNotOfThisKind("H"));
+        }else if(Referee.getForge().getPool(0).kindOfPool(HONOUR) && this.gold>=12){
+            this.buy(Referee.getForge().getPool(0),Referee.getForge().getPool(0).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
+        }else if(Referee.getForge().getPool(1).kindOfPool(HONOUR) && this.gold>=8){
+            this.buy(Referee.getForge().getPool(1),Referee.getForge().getPool(1).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
+        }else if(Referee.getForge().getPool(4).kindOfPool(HONOUR) && this.gold>=5){
+            this.buy(Referee.getForge().getPool(4),Referee.getForge().getPool(4).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
+        }else if(Referee.getForge().getPool(5).kindOfPool(HONOUR) && this.gold>=4){
+            this.buy(Referee.getForge().getPool(5),Referee.getForge().getPool(5).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
         }
     }
 }
