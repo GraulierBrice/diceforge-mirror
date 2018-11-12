@@ -8,6 +8,7 @@ public class Pince extends Feat{
 
     @Override
     public void effect(Object... o) {
-
+    	owner.faveur();
+    	owner.faveur();
     }
 }

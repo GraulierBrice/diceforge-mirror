@@ -8,6 +8,6 @@ public class AilesGardienne extends Feat{
 
     @Override
     public void effect(Object... o) {
-
+    	
     }
 }
