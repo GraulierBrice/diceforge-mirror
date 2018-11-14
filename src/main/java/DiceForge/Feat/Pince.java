@@ -3,7 +3,7 @@ package DiceForge.Feat;
 public class Pince extends Feat{
 
     public Pince(){
-        super(8,6,0,false);
+        super(8,6,0,true);
     }
 
     @Override

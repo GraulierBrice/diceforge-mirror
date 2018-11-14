@@ -107,10 +107,9 @@ public class Referee {
                 }
                 break;
             case EXPLOIT:
-                turnP.chooseIsland();
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
-                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() || turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
+                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
                     this.world.giveFeat(turnP, exploit);
                 }
                 break;

@@ -14,4 +14,9 @@ public class SabotArgent extends Feat{
         reward.giveReward(this.owner);
         if(Main.numberOfGames==1)reward.toString(1);
     }
+
+    @Override
+    public void setPlayer(Player player){
+        super.setPlayer(player);
+    }
 }

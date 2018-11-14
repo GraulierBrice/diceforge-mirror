@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Player {
     protected ArrayList<Feat> feats=new ArrayList<>();
     protected int honour, gold, lunarShard, solarShard, maxLunarShard = 6, maxSolarShard =6, maxGold=12;
-    protected int currentIsland=0;//ile début à modif pour mettre une valeur "ile de départ"
+    protected int currentIsland=-1;//ile début à modif pour mettre une valeur "ile de départ"
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
    // protected Strategy strategy;
@@ -97,6 +97,8 @@ public abstract class Player {
 
     public Class listFeat(int featNumber){
         switch(this.currentIsland){
+            case -1:
+                return null;
             case 0:
                 switch(featNumber){
                     case 0:

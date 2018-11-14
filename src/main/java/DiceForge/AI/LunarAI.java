@@ -4,6 +4,8 @@ import DiceForge.Face.Face;
 import DiceForge.Feat.*;
 import DiceForge.*;
 
+import java.util.Random;
+
 public class LunarAI extends Player {
 
     public LunarAI(){
@@ -24,20 +26,21 @@ public class LunarAI extends Player {
     @Override
     public String chooseAction() {
         Pool pool=Referee.getForge().affordablePoolWith(LunarShard,this.getGold());
-        Island island=Referee.getWorld().lowestIslandNotEmpty(LunarShard);
-        Island islandSolarShard=Referee.getWorld().lowestIslandNotEmpty(SolarShard);
-        if(island!=null && (this.getLunarShard()>=island.lowestPriceOfFeat(LunarShard).getPriceLunarShard() || (islandSolarShard!=null && this.getSolarShard()>=islandSolarShard.lowestPriceOfFeat(SolarShard).getPriceSolarShard() && island.isIn(HerbesFolles.class) ))) {//pour farmer les marteaux pour l'instant
-            return Referee.EXPLOIT;
-        }else if(pool!=null) {
-            if (this.getGold() >= pool.getPrice()) {
-                return Referee.FORGE;
+        chooseIsland();
+        if(this.currentIsland!=-1){
+            Island island=Referee.getWorld().getIsland(this.currentIsland);
+            if(island!=null && this.chooseFeat()!=-1 ) {//pour farmer les marteaux pour l'instant
+                return Referee.EXPLOIT;
             }
+        }
+        if(pool!=null && this.getGold() >= pool.getPrice()) {
+            return Referee.FORGE;
         }
         return Referee.PASSE;
     }
 
     @Override
-    public int chooseDice() {//on remplit le 2ème dé qui a déjà des lunarShard comme ça on est sûr d'en drop à chaque tour
+    public int chooseDice() {//on remplit le 2ème dé qui a déjà des PdL comme ça on est sûr d'en drop à chaque tour
         if(Referee.getForge().affordablePoolWith(LunarShard,this.getGold()).getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
             return 1;
         }
@@ -46,7 +49,7 @@ public class LunarAI extends Player {
 
     @Override
     public Dice chooseBestDice() {
-        if(this.maxLunarShard -this.lunarShard < 2) return de1;
+        if(this.maxLunarShard-this.lunarShard < 2) return de1;
         return de2;
     }
 
@@ -63,7 +66,7 @@ public class LunarAI extends Player {
     }
 
     @Override
-    public int choosePoolFace(Pool pool) {//test pour l'instant pour prendre les pools avec uniquement des lunarShard pour le moment
+    public int choosePoolFace(Pool pool) {//test pour l'instant pour prendre les pools avec uniquement des PdL pour le moment
         if(Referee.getForge().affordablePoolWith(LunarShard,this.getGold()).getPrice()<=this.getGold()){
             return 0;
         }
@@ -72,9 +75,9 @@ public class LunarAI extends Player {
 
     @Override
     public int choosePool() {
-        Pool poolLunarShard =Referee.getForge().affordablePoolWith(LunarShard,this.getGold());
+        Pool poolPdL =Referee.getForge().affordablePoolWith(LunarShard,this.getGold());
         Pool poolG=Referee.getForge().affordablePoolWith(GOLD,this.getGold());
-        if(poolLunarShard!=null && poolLunarShard.getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
+        if(poolPdL!=null && poolPdL.getPrice()<=this.getGold() && !this.doIHaveAnHammer()) {
             return Referee.getForge().isNumber(Referee.getForge().affordablePoolWith(LunarShard,this.getGold()));
         }else if(poolG!=null && poolG.getPrice()<=this.getGold()){
             return Referee.getForge().isNumber((Referee.getForge().affordablePoolWith(GOLD,this.getGold())));
@@ -101,26 +104,51 @@ public class LunarAI extends Player {
 
     @Override
     public void chooseIsland() {
-        if(this.getLunarShard()>=4 && !Referee.getWorld().isEmpty(4)){//virer les && false quand les iles existeronts
+        if((this.lunarShard>=6 && !Referee.getWorld().getIsland(6).isIn(Pince.class))||(this.lunarShard>=5 && this.solarShard>=5 && !Referee.getWorld().getIsland(6).isIn(Hydre.class))){
+            this.currentIsland=6;
+        }else if(this.lunarShard>=4 && !Referee.getWorld().isEmpty(4)){//virer les && false quand les iles existeronts
             this.currentIsland=4;//3,lune
-        }else if(this.getLunarShard()>2 && !Referee.getWorld().isEmpty(2)){
+        }else if(this.lunarShard>2 && !Referee.getWorld().isEmpty(2)){
             this.currentIsland=2;//2,lune
-        }else if(this.getLunarShard()>1 && !Referee.getWorld().isEmpty(0)){
-            this.currentIsland=0;//1,lune
-        }else if(this.getSolarShard()>=1 && !Referee.getWorld().isEmpty(1)){
+        }else if(this.lunarShard>1 && !Referee.getWorld().isEmpty(0)) {
+            this.currentIsland = 0;//1,lune
+        }else if(this.solarShard>=2 && !Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
+            this.currentIsland=3;
+        }else if(this.solarShard>=1 && !Referee.getWorld().getIsland(1).isIn(HerbesFolles.class)){
             this.currentIsland=1;//1,soleil
+        }else{
+            this.currentIsland=-1;
         }
     }
 
+
     @Override
-    public int chooseFeat() {
-        if(this.currentIsland==0){
-                if(!this.doIHaveAnHammer()){
-                    return 0;
-                }else return 1;
-        }else if(this.currentIsland==1){
-            return 1;
-        }if(this.currentIsland==4 || this.currentIsland==2)return 0;
-        return 1;//pour le moment dans tout les cas, 2iles donc on veut qu'il prenne les herbesfolles
+    public int chooseFeat(){
+        Island island=Referee.getWorld().getIsland(this.currentIsland);
+        switch(this.currentIsland){
+            case 0:
+                if(island.isIn(Hammer.class) && !this.doIHaveAnHammer())return 0;
+                else if(island.isIn(Chest.class))return 1;
+                else return -1;
+            case 1:
+                if(island.isIn(HerbesFolles.class)) return 1;
+                else return -1;
+            case 2:
+                if(island.isIn(SabotArgent.class))return 0;
+                else if(island.isIn(Satyres.class))return 1;
+                else return -1;
+            case 3:
+                if(island.isIn(AilesGardienne.class))return 0;
+                else return -1;
+            case 4:
+                if(island.isIn(Passeur.class))return 0;
+                else if(island.isIn(CasqueInvisibilite.class))return 1;
+                else return -1;
+            case 6:
+                if(this.solarShard>=5 &&island.isIn(Hydre.class))return 1;
+                else if(island.isIn(Pince.class))return 0;
+                else return -1;
+        }
+        return -1;
     }
 }

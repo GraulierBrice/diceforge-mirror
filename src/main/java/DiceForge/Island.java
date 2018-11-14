@@ -19,7 +19,8 @@ public class Island{
 
     //checks if Feat type is present in island
     public Boolean isIn(Class c){
-        return feats.stream().anyMatch(c::isInstance);
+        if(c==null) return false;
+        else return feats.stream().anyMatch(c::isInstance);
     }
 
     public int numOfFeats(){

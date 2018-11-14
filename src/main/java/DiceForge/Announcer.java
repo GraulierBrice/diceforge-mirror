@@ -46,18 +46,18 @@ public class Announcer {
     public void DiceForgeResult(int number) {
         for (int j = 0; j < number; j++) {
             while (referee.getRound() <= referee.getMaxRound()) {
-                if (number == 1) System.out.println("Nous sommes au tour : " + referee.getRound() + "\n");
+                if (number == 1) System.out.println("Nous sommes au tour : " + referee.getRound() + "\n\n");
                 for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                    referee.choixReinforcement(referee.getPlayer(referee.getTurnPlayer()).chooseReinforcement());
-                    if (referee.getRound() != referee.getMaxRound())
-                        referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).chooseAction());
-                    else referee.getPlayer(referee.getTurnPlayer()).lastAction();
-
-                    if(number==1) {
+                    if(number==1)
                         this.printReinforcement();
-                        this.printAction();
+                    referee.choixReinforcement(referee.getPlayer(referee.getTurnPlayer()).chooseReinforcement());
+                    if (number == 1) this.printAction();
+                    if (referee.getRound() != referee.getMaxRound()) {
+                        referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).chooseAction());
+                    }else referee.getPlayer(referee.getTurnPlayer()).lastAction();
+
                         this.printLog(number);
-                    }
+
                     if (referee.getNumberPlayer() == 2) {
                         referee.faveur();
                         System.out.println("Seconde Faveur:");
@@ -82,7 +82,7 @@ public class Announcer {
         if (number == 1) {
             for (Player p : referee.getPlayers()) {
                 System.out.println(referee.getPlayers().indexOf(p) == referee.getTurnPlayer() ? ANSI_UNDERLINE + ANSI_SRED + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET : ANSI_UNDERLINE + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET);
-                System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  solarShard: " + p.getSolarShard() + "/" + p.getMaxSolarShard() + "\n  lunarShard: " + p.getLunarShard() + "/" + p.getMaxLunarShard());
+                System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  SolarShard: " + p.getSolarShard() + "/" + p.getMaxSolarShard() + "\n  LunarShard: " + p.getLunarShard() + "/" + p.getMaxLunarShard());
                 for (int i = 0; i < p.getNbFeat(); i++) {
                     if (p.getFeat(i) instanceof Hammer) {
                         Hammer hammer = (Hammer) p.getFeat(i);
@@ -142,7 +142,4 @@ public class Announcer {
         player.getDice(0).toString(1);
         player.getDice(1).toString(2);
     }
-
-
-
 }
