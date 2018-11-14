@@ -14,8 +14,8 @@ public abstract class Player {
    // protected Strategy strategy;
     public static final String GOLD="G";
     public static final String HONOUR="H";
-    public static final String LunarShard="lunarShard";
-    public static final String SolarShard="solarShard";
+    public static final String LunarShard="LunarShard";
+    public static final String SolarShard="SolarShard";
 
     public Player(/*String strategy*/){
         //this.strategy = new Strategy(strategy);
