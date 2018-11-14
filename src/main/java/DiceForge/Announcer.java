@@ -139,8 +139,8 @@ public class Announcer {
     }
 
     public void printDice(Player player){
-        player.getDice(0).toString();
-        player.getDice(0).toString();
+        player.getDice(0).toString(1);
+        player.getDice(1).toString(2);
     }
 
 

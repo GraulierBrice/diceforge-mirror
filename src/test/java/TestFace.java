@@ -45,7 +45,7 @@ public class TestFace {
         FaceCombinationAND LunarShard8=new FaceCombinationAND(0,8,0,0);
         LunarShard8.giveReward(randomAI);
         assertTrue(randomAI.getLunarShard()==6);
-        assertEquals(LunarShard1.getKind(),Player.SolarShard);
+        assertEquals(LunarShard1.getKind(),Player.LunarShard);
         assertEquals(LunarShard1.getReward(),"1LunarShard");
 
     }

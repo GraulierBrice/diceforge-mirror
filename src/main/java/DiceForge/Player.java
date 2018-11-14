@@ -1,6 +1,5 @@
 package DiceForge;
 
-import DiceForge.AI.Strategy;
 import DiceForge.Face.*;
 import DiceForge.Feat.*;
 
