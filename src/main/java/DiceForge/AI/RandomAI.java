@@ -64,8 +64,8 @@ public class RandomAI extends Player{
     public int chooseFaceBonus(Face face){
         int possibilities=0;
         if(face.getKind().contains(GOLD))possibilities++;
-        if(face.getKind().contains(PDL))possibilities++;
-        if(face.getKind().contains(PDS))possibilities++;
+        if(face.getKind().contains(LunarShard))possibilities++;
+        if(face.getKind().contains(SolarShard))possibilities++;
         if(face.getKind().contains(HONOUR))possibilities++;
         return r.nextInt(possibilities);
     }

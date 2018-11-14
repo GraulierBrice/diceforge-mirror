@@ -3,14 +3,14 @@ import DiceForge.*;
 
 public class FaceCombinationAND extends Face{
 
-    public FaceCombinationAND(int rewardGold, int rewardPdL, int rewardPdS, int rewardHonour) {
-        super(rewardGold,rewardPdL,rewardPdS,rewardHonour);
+    public FaceCombinationAND(int rewardGold, int rewardLunarShard, int rewardSolarShard, int rewardHonour) {
+        super(rewardGold,rewardLunarShard,rewardSolarShard,rewardHonour);
     }
 
     public void giveReward(Player player) {
         player.addGold(rewardGold);
-        player.addPdL(rewardPdL);
-        player.addPdS(rewardPdS);
+        player.addLunarShard(rewardLunarShard);
+        player.addSolarShard(rewardSolarShard);
         player.addHonour(rewardHonour);
     }
 

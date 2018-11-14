@@ -4,8 +4,8 @@ import DiceForge.Player;
 
 public class FaceCombinationOR extends Face {
 
-    public FaceCombinationOR(int rewardGold, int rewardPdL, int rewardPdS, int rewardHonour) {
-        super(rewardGold, rewardPdL, rewardPdS, rewardHonour);
+    public FaceCombinationOR(int rewardGold, int rewardLunarShard, int rewardSolarShard, int rewardHonour) {
+        super(rewardGold, rewardLunarShard, rewardSolarShard, rewardHonour);
 
     }
     public void giveReward(Player player){}
@@ -15,26 +15,26 @@ public class FaceCombinationOR extends Face {
             case 0:
                 if (kind.contains(Player.GOLD)) {
                     player.addGold(rewardGold);
-                }else if(kind.contains(Player.PDL)){
-                    player.addPdL(rewardPdL);
-                }else if(kind.contains(Player.PDS)){
-                    player.addPdS(rewardPdS);
+                }else if(kind.contains(Player.LunarShard)){
+                    player.addLunarShard(rewardLunarShard);
+                }else if(kind.contains(Player.SolarShard)){
+                    player.addSolarShard(rewardSolarShard);
                 }else{
                     player.addHonour(rewardHonour);
                 }
                 break;
             case 1:
-                if(kind.contains(Player.PDL)){
-                    player.addPdL(rewardPdL);
-                }else if(kind.contains(Player.PDS)){
-                    player.addPdS(rewardPdS);
+                if(kind.contains(Player.LunarShard)){
+                    player.addLunarShard(rewardLunarShard);
+                }else if(kind.contains(Player.SolarShard)){
+                    player.addSolarShard(rewardSolarShard);
                 }else{
                     player.addHonour(rewardHonour);
                 }
                 break;
             case 2:
-                if(kind.contains(Player.PDS)){
-                    player.addPdS(rewardPdS);
+                if(kind.contains(Player.SolarShard)){
+                    player.addSolarShard(rewardSolarShard);
                 }else{
                     player.addHonour(rewardHonour);
                 }

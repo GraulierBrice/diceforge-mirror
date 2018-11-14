@@ -3,8 +3,8 @@ import DiceForge.*;
 
 public class Chest extends Feat {
 
-    private int maxPdL;
-    private int maxPdS;
+    private int maxLunarShard;
+    private int maxSolarShard;
     private int maxGold;
 
     public Chest() {
@@ -18,8 +18,8 @@ public class Chest extends Feat {
 
     //Increase ressource capacity
     public void effect(Object... o){
-        owner.setMaxPdL(this.owner.getMaxPdL()+3);
-        owner.setMaxPdS(this.owner.getMaxPdS()+3);
+        owner.setMaxLunarShard(this.owner.getMaxLunarShard()+3);
+        owner.setMaxSolarShard(this.owner.getMaxSolarShard()+3);
         owner.setMaxGold(this.owner.getMaxGold()+4);
     }
 }

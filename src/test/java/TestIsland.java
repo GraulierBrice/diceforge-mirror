@@ -24,19 +24,19 @@ public class TestIsland {
     @Test
     public void methodsFeats() {
         assertEquals(2, island.numOfFeats());
-        assertTrue(island.doesItCost(Player.PDL));
-        assertFalse(island.doesItCost(Player.PDS));
+        assertTrue(island.doesItCost(Player.LunarShard));
+        assertFalse(island.doesItCost(Player.SolarShard));
         assertTrue(island.isIn(Hammer.class));
 
         Feat feat=feats1.get(1);
-        assertEquals(island.lowestPriceOfFeat(Player.PDL),feat);
+        assertEquals(island.lowestPriceOfFeat(Player.LunarShard),feat);
 
         island.removeFeat(Hammer.class);
         assertEquals(1, island.numOfFeats());
         assertTrue( !island.isIn(Hammer.class));
 
         Feat feat1=feats1.get(0);
-        assertEquals(island.lowestPriceOfFeat(Player.PDL),feat1);
+        assertEquals(island.lowestPriceOfFeat(Player.LunarShard),feat1);
 
         island.removeFeat(Chest.class);
         assertTrue(island.isEmpty());

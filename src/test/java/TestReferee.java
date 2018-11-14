@@ -48,7 +48,7 @@ public class TestReferee {
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
         assertEquals(forge.getPool(6).howManyFaces(),referee.getNumberPlayer()-2);//pour buy la face
 
-        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1PdS");//on regarde si après achat la face achetée est bien la bonne
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1SolarShard");//on regarde si après achat la face achetée est bien la bonne
 
         referee.reset();
 
@@ -63,7 +63,7 @@ public class TestReferee {
          referee.nextPlayer();
          referee.nextPlayer();
          referee.nextPlayer();
-         referee.getPlayer(referee.getTurnPlayer()).addPdL(2);
+         referee.getPlayer(referee.getTurnPlayer()).addLunarShard(2);
          referee.choixAction(Referee.EXPLOIT);
          assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(0) instanceof Hammer);
 
@@ -111,7 +111,7 @@ public class TestReferee {
         referee.choixAction(Referee.FORGE);
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
-        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(1).getFace(0).getReward(),"2PdL");
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(1).getFace(0).getReward(),"2LunarShard");
 
         referee.choixAction(Referee.EXPLOIT);
         referee.getPlayer(referee.getTurnPlayer()).addGold(5);
@@ -121,18 +121,18 @@ public class TestReferee {
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getGold(),0);
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(0).getReward(),"3G");
 
-        referee.getPlayer(referee.getTurnPlayer()).removePdL(1000);
+        referee.getPlayer(referee.getTurnPlayer()).removeLunarShard(1000);
         referee.getPlayer(referee.getTurnPlayer()).removeGold(1000);
-        referee.getPlayer(referee.getTurnPlayer()).removePdS(1000);
-        referee.getPlayer(referee.getTurnPlayer()).addPdS(1);//on reset toutes ses stats pour voir si il achète bien herbes folles
+        referee.getPlayer(referee.getTurnPlayer()).removeSolarShard(1000);
+        referee.getPlayer(referee.getTurnPlayer()).addSolarShard(1);//on reset toutes ses stats pour voir si il achète bien herbes folles
 
         referee.choixAction(Referee.EXPLOIT);
 
         assertTrue(referee.getPlayer(referee.getTurnPlayer()).getFeat(5) instanceof HerbesFolles);
-        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getPdS(),0);
+        assertEquals(referee.getPlayer(referee.getTurnPlayer()).getSolarShard(),0);
 
-        referee.getPlayer(referee.getTurnPlayer()).addPdL(1);
-        referee.getPlayer(referee.getTurnPlayer()).addPdS(1);
+        referee.getPlayer(referee.getTurnPlayer()).addLunarShard(1);
+        referee.getPlayer(referee.getTurnPlayer()).addSolarShard(1);
 
         referee.choixAction(Referee.EXPLOIT);
 

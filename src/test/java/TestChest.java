@@ -15,13 +15,13 @@ public class TestChest {
     }
 
     @Test
-    public void MaxPdS() {
-        assertEquals(9,chest.getOwner().getMaxPdS());
+    public void MaxSolarShard() {
+        assertEquals(9,chest.getOwner().getMaxSolarShard());
     }
 
     @Test
-    public void MaxPdl() {
-        assertEquals(9,chest.getOwner().getMaxPdL());
+    public void MaxLunarShard() {
+        assertEquals(9,chest.getOwner().getMaxLunarShard());
     }
 
     @Test

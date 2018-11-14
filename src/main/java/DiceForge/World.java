@@ -51,8 +51,8 @@ public class World {
 
     public void giveFeat(Player player, Class feat){
         this.islands.get(player.getCurrentIsland()).getFeat(feat).setPlayer(player);
-        player.removePdL(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPricePdL());
-        player.removePdS(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPricePdS());
+        player.removeLunarShard(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPriceLunarShard());
+        player.removeSolarShard(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPriceSolarShard());
         this.islands.get(player.getCurrentIsland()).removeFeat(feat);
     }
 }

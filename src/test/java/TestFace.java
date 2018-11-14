@@ -26,27 +26,27 @@ public class TestFace {
     }
 
     @Test
-    public void facePdS(){
-        FaceCombinationAND PdS1=new FaceCombinationAND(0,0,1,0);
-        PdS1.giveReward(randomAI);
-        assertTrue(randomAI.getPdS()==1);
-        FaceCombinationAND PdS8=new FaceCombinationAND(0,0,8,0);
-        PdS8.giveReward(randomAI);
-        assertTrue(randomAI.getPdS()==6);
-        assertEquals(PdS1.getKind(),Player.PDS);
-        assertEquals(PdS1.getReward(),"1PdS");
+    public void faceSolarShard(){
+        FaceCombinationAND SolarShard1=new FaceCombinationAND(0,0,1,0);
+        SolarShard1.giveReward(randomAI);
+        assertTrue(randomAI.getSolarShard()==1);
+        FaceCombinationAND SolarShard8=new FaceCombinationAND(0,0,8,0);
+        SolarShard8.giveReward(randomAI);
+        assertTrue(randomAI.getSolarShard()==6);
+        assertEquals(SolarShard1.getKind(),Player.SolarShard);
+        assertEquals(SolarShard1.getReward(),"1SolarShard");
     }
 
     @Test
-    public void facePdL(){
-        FaceCombinationAND PdL1=new FaceCombinationAND(0,1,0,0);
-        PdL1.giveReward(randomAI);
-        assertTrue(randomAI.getPdL()==1);
-        FaceCombinationAND PdL8=new FaceCombinationAND(0,8,0,0);
-        PdL8.giveReward(randomAI);
-        assertTrue(randomAI.getPdL()==6);
-        assertEquals(PdL1.getKind(),Player.PDS);
-        assertEquals(PdL1.getReward(),"1PdL");
+    public void faceLunarShard(){
+        FaceCombinationAND LunarShard1=new FaceCombinationAND(0,1,0,0);
+        LunarShard1.giveReward(randomAI);
+        assertTrue(randomAI.getLunarShard()==1);
+        FaceCombinationAND LunarShard8=new FaceCombinationAND(0,8,0,0);
+        LunarShard8.giveReward(randomAI);
+        assertTrue(randomAI.getLunarShard()==6);
+        assertEquals(LunarShard1.getKind(),Player.SolarShard);
+        assertEquals(LunarShard1.getReward(),"1LunarShard");
 
     }
 

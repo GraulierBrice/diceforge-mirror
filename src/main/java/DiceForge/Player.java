@@ -1,5 +1,6 @@
 package DiceForge;
 
+import DiceForge.AI.Strategy;
 import DiceForge.Face.*;
 import DiceForge.Feat.*;
 
@@ -7,54 +8,57 @@ import java.util.ArrayList;
 
 public abstract class Player {
     protected ArrayList<Feat> feats=new ArrayList<>();
-    protected int honour, gold, PdL, PdS, maxPdL = 6, maxPdS=6, maxGold=12;
+    protected int honour, gold, lunarShard, solarShard, maxLunarShard = 6, maxSolarShard =6, maxGold=12;
     protected int currentIsland=0;//ile début à modif pour mettre une valeur "ile de départ"
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
-
+   // protected Strategy strategy;
     public static final String GOLD="G";
     public static final String HONOUR="H";
-    public static final String PDL="PdL";
-    public static final String PDS="PdS";
+    public static final String LunarShard="lunarShard";
+    public static final String SolarShard="solarShard";
 
-    public Player(){
+    public Player(/*String strategy*/){
+        //this.strategy = new Strategy(strategy);
         this.honour=0;
-        this.PdL=0;
-        this.PdS=0;
+        this.lunarShard =0;
+        this.solarShard =0;
         this.gold=0;
     }
 
     /* Accessor */
     public int getHonour(){return this.honour;}
-    public int getPdL(){return this.PdL;}
-    public int getPdS(){return this.PdS;}
+    public int getLunarShard(){return this.lunarShard;}
+    public int getSolarShard(){return this.solarShard;}
     public int getGold(){return this.gold;}
-    public int getMaxPdL(){return this.maxPdL;}
-    public int getMaxPdS(){return this.maxPdS;}
+    public int getMaxLunarShard(){return this.maxLunarShard;}
+    public int getMaxSolarShard(){return this.maxSolarShard;}
     public int getMaxGold(){return this.maxGold;}
     public int getCurrentIsland(){return this.currentIsland;}
     public Feat getFeat(int n){return this.feats.get(n);}
     public int getNbFeat(){return this.feats.size();}
     public Dice getDice(int n){return (n==0) ? this.de1 : (n==1) ? this.de2 : null;}
 
+
     /* Mutator */
-    public void setMaxPdL(int n){this.maxPdL = n;}
-    public void setMaxPdS(int n){this.maxPdS = n;}
+    public void setMaxLunarShard(int n){this.maxLunarShard = n;}
+    public void setMaxSolarShard(int n){this.maxSolarShard = n;}
     public void setMaxGold(int n){this.maxGold = n;}
     public void addFeat(Feat feat){this.feats.add(feat);}
     public void addHonour(int honour){this.honour+=honour;}
-    public void addPdL(int PdL){this.PdL = (this.PdL+PdL<=maxPdL) ? this.PdL+PdL : maxPdL;}
-    public void addPdS(int PdS){this.PdS = (this.PdS+PdS<=maxPdS) ? this.PdS+PdS : maxPdS;}
+    public void addLunarShard(int LunarShard){this.lunarShard = (this.lunarShard +LunarShard<= maxLunarShard) ? this.lunarShard +LunarShard : maxLunarShard;}
+    public void addSolarShard(int SolarShard){this.solarShard = (this.solarShard +SolarShard<= maxSolarShard) ? this.solarShard +SolarShard : maxSolarShard;}
     public void addGold(int gold){
         for(Feat f : this.feats){
             if(f instanceof Hammer && ((Hammer)f).getLevel() < 2){gold = this.goldChoice(gold, (Hammer)f); break;}
         }
         this.gold = (this.gold+gold<=maxGold) ? this.gold+gold : maxGold;
     }
-    public void removePdL(int PdL){this.PdL = (this.PdL-PdL>=0) ? this.PdL-PdL : 0;}
-    public void removePdS(int PdS){this.PdS = (this.PdS-PdS>=0) ? this.PdS-PdS : 0;}
+    public void removeLunarShard(int LunarShard){this.lunarShard = (this.lunarShard -LunarShard>=0) ? this.lunarShard -LunarShard : 0;}
+    public void removeSolarShard(int SolarShard){this.solarShard = (this.solarShard -SolarShard>=0) ? this.solarShard -SolarShard : 0;}
     public void removeGold(int gold){this.gold = (this.gold-gold>=0) ? this.gold-gold : 0;}
-    
+
+
     //Rolls dice and adds rewards to player's ressources
     public void faveur(){
         this.de1.giveReward(this);
@@ -71,10 +75,10 @@ public abstract class Player {
         this.de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
         this.gold=0;
         this.honour=0;
-        this.PdL=0;
-        this.PdS=0;
-        this.maxPdL=6;
-        this.maxPdS=6;
+        this.lunarShard =0;
+        this.solarShard =0;
+        this.maxLunarShard =6;
+        this.maxSolarShard =6;
         this.maxGold=12;
         this.currentIsland=0;// à modif pour mettre une valeur "ile de départ"
         this.feats=new ArrayList<>();
@@ -168,46 +172,46 @@ public abstract class Player {
         if(this.de1.diceNotFullWith(HONOUR)) diceNumber=0;//devrait traiter plus tard pour chercher la face ayant le moins d'honneur si jamais il est full honour sur ses deux dés
         else if(this.de2.diceNotFullWith(HONOUR)) diceNumber=1;
         if(false){
-       // if(Referee.getWorld().getIsland(6).isIn(Hydre.class) && this.PdL>=5 && this.PdS>=5){
+       // if(Referee.getWorld().getIsland(6).isIn(Hydre.class) && this.lunarShard>=5 && this.solarShard>=5){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,Hydre.class);
 
-        }else if(Referee.getWorld().getIsland(5).isIn(Meduse.class) && this.PdS>=5){
+        }else if(Referee.getWorld().getIsland(5).isIn(Meduse.class) && this.solarShard >=5){
             this.currentIsland=5;
             Referee.getWorld().giveFeat(this,Meduse.class);
 
-        }else if(Referee.getWorld().getIsland(4).isIn(Passeur.class) && this.PdL>=5){
+        }else if(Referee.getWorld().getIsland(4).isIn(Passeur.class) && this.lunarShard >=5){
             this.currentIsland=4;
             Referee.getWorld().giveFeat(this,Passeur.class);
 
-        }else if(Referee.getWorld().getIsland(5).isIn(MiroirAbyssal.class) && this.PdS>=5){
+        }else if(Referee.getWorld().getIsland(5).isIn(MiroirAbyssal.class) && this.solarShard >=5){
             this.currentIsland=5;
             Referee.getWorld().giveFeat(this,MiroirAbyssal.class);
-        }else if(Referee.getWorld().getIsland(6).isIn(Enigme.class) && this.PdS>=6){
+        }else if(Referee.getWorld().getIsland(6).isIn(Enigme.class) && this.solarShard >=6){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,Enigme.class);
-        }else if(Referee.getWorld().getIsland(6).isIn(Pince.class) && this.PdL>=6){
+        }else if(Referee.getWorld().getIsland(6).isIn(Pince.class) && this.lunarShard >=6){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,Pince.class);
-        }else if(Referee.getWorld().getIsland(3).isIn(Minotaure.class) && this.PdS>=3){
+        }else if(Referee.getWorld().getIsland(3).isIn(Minotaure.class) && this.solarShard >=3){
             this.currentIsland=3;
             Referee.getWorld().giveFeat(this,Minotaure.class);
-        }else if(Referee.getWorld().getIsland(2).isIn(Satyres.class) && this.PdL>=3){
+        }else if(Referee.getWorld().getIsland(2).isIn(Satyres.class) && this.lunarShard >=3){
             this.currentIsland=2;
             Referee.getWorld().giveFeat(this,Satyres.class);
-        }else if(Referee.getWorld().getIsland(4).isIn(CasqueInvisibilite.class) && this.PdL>=5){
+        }else if(Referee.getWorld().getIsland(4).isIn(CasqueInvisibilite.class) && this.lunarShard >=5){
             this.currentIsland=4;
             Referee.getWorld().giveFeat(this,CasqueInvisibilite.class);
-        }else if(Referee.getWorld().getIsland(3).isIn(AilesGardienne.class) && this.PdS>=2){
+        }else if(Referee.getWorld().getIsland(3).isIn(AilesGardienne.class) && this.solarShard >=2){
             this.currentIsland=3;
             Referee.getWorld().giveFeat(this,AilesGardienne.class);
-        }else if(Referee.getWorld().getIsland(1).isIn(HerbesFolles.class) && this.PdS>=1){
+        }else if(Referee.getWorld().getIsland(1).isIn(HerbesFolles.class) && this.solarShard >=1){
             this.currentIsland=1;
             Referee.getWorld().giveFeat(this,HerbesFolles.class);
-        }else if(Referee.getWorld().getIsland(0).isIn(Chest.class) && this.PdL>=1){
+        }else if(Referee.getWorld().getIsland(0).isIn(Chest.class) && this.lunarShard >=1){
             this.currentIsland=0;
             Referee.getWorld().giveFeat(this,Chest.class);
-        }else if(Referee.getWorld().getIsland(2).isIn(SabotArgent.class) && this.PdL>=2){
+        }else if(Referee.getWorld().getIsland(2).isIn(SabotArgent.class) && this.lunarShard >=2){
             this.currentIsland=2;
             Referee.getWorld().giveFeat(this,SabotArgent.class);
         }else if(Referee.getForge().getPool(0).kindOfPool(HONOUR) && this.gold>=12){

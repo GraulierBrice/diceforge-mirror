@@ -82,7 +82,7 @@ public class Announcer {
         if (number == 1) {
             for (Player p : referee.getPlayers()) {
                 System.out.println(referee.getPlayers().indexOf(p) == referee.getTurnPlayer() ? ANSI_UNDERLINE + ANSI_SRED + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET : ANSI_UNDERLINE + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET);
-                System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  PdS: " + p.getPdS() + "/" + p.getMaxPdS() + "\n  PdL: " + p.getPdL() + "/" + p.getMaxPdL());
+                System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  solarShard: " + p.getSolarShard() + "/" + p.getMaxSolarShard() + "\n  lunarShard: " + p.getLunarShard() + "/" + p.getMaxLunarShard());
                 for (int i = 0; i < p.getNbFeat(); i++) {
                     if (p.getFeat(i) instanceof Hammer) {
                         Hammer hammer = (Hammer) p.getFeat(i);
@@ -113,7 +113,7 @@ public class Announcer {
                 Island island = referee.getWorld().getIsland(player.getCurrentIsland());
                 Class exploit = player.listFeat(player.chooseFeat());//l'exploit sur l'ile qu'il va choisir
 
-                if (island.isIn(exploit) && (player.getPdL() >= island.getFeat(exploit).getPricePdL() || player.getPdS() >= island.getFeat(exploit).getPricePdS())) {
+                if (island.isIn(exploit) && (player.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() || player.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
                     System.out.println(ANSI_SBLUE + " Joueur " + (referee.getTurnPlayer() + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + ANSI_RESET);
                 } else System.out.println(ANSI_SBLUE + "Il ne réalise pas d'exploit" + ANSI_RESET);
                 break;

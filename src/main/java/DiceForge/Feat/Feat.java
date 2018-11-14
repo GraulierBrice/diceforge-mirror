@@ -5,21 +5,21 @@ import DiceForge.*;
 public abstract class Feat{
 
 	Player owner;
-	int honour, pricePdL, pricePdS;
+	int honour, priceLunarShard, priceSolarShard;
 	boolean reinfor;
 
-	public Feat(int amount, int pricePdL,int pricePdS, boolean reinfor){
+	public Feat(int amount, int priceLunarShard,int priceSolarShard, boolean reinfor){
 		this.honour = amount;
 		this.owner = null; //set in Island with no owner
-		this.pricePdL = pricePdL;
-		this.pricePdS = pricePdS;
+		this.priceLunarShard = priceLunarShard;
+		this.priceSolarShard = priceSolarShard;
 		this.reinfor = reinfor;
 
 	}
 
 	/* Accessor */
-	public int getPricePdL(){return this.pricePdL; }
-	public int getPricePdS(){return this.pricePdS; }
+	public int getPriceLunarShard(){return this.priceLunarShard; }
+	public int getPriceSolarShard(){return this.priceSolarShard; }
 	public boolean getReinfor(){return this.reinfor;}
 
 	public int getHonour(){

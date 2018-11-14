@@ -36,7 +36,7 @@ public class Island{
 
     public boolean doesItCost(String kind) {
         for (Feat f : feats) {
-            if ((kind.equals(Player.PDL) && f.getPricePdL()>0) || (kind.equals(Player.PDS) && f.getPricePdS()>0)) {
+            if ((kind.equals(Player.LunarShard) && f.getPriceLunarShard()>0) || (kind.equals(Player.SolarShard) && f.getPriceSolarShard()>0)) {
                 return true;
             }
         }
@@ -46,14 +46,14 @@ public class Island{
     public Feat lowestPriceOfFeat(String kind){
         int number=0;
         for(int i=0;i<feats.size()-1;i++) {
-            if(kind.equals(Player.PDL)) {
-                if (feats.get(i).getPricePdL()<feats.get(i+1).getPricePdL()){
+            if(kind.equals(Player.LunarShard)) {
+                if (feats.get(i).getPriceLunarShard()<feats.get(i+1).getPriceLunarShard()){
                     number=i;
                 }else {
                     number=i+1;
                 }
-            }else if(kind.equals(Player.PDS)){
-                if(feats.get(i).getPricePdS()<feats.get(i+1).getPricePdS()){
+            }else if(kind.equals(Player.SolarShard)){
+                if(feats.get(i).getPriceSolarShard()<feats.get(i+1).getPriceSolarShard()){
                     number=i;
                 }else {
                     number=i+1;

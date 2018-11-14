@@ -15,6 +15,6 @@ public class HerbesFolles extends Feat {
 
     public void effect(Object... o) {
         owner.addGold(3);
-        owner.addPdL(3);
+        owner.addLunarShard(3);
     }
 }

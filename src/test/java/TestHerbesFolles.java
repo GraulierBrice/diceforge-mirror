@@ -22,9 +22,9 @@ public class TestHerbesFolles {
     }
 
     @Test
-    public void PdL() {
-        assertEquals(3,herbesFolles.getOwner().getPdL());
+    public void LunarShard() {
+        assertEquals(3,herbesFolles.getOwner().getLunarShard());
         herbesFolles.effect();
-        assertEquals(6,herbesFolles.getOwner().getPdL());
+        assertEquals(6,herbesFolles.getOwner().getLunarShard());
     }
 }
