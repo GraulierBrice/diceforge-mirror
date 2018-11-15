@@ -23,7 +23,7 @@ public class TestPool {
         pool.setPrice(12);
         assertEquals(pool.getPrice(),12);
 
-        RandomAI randomAI=new RandomAI();
+        RandomAI randomAI=new RandomAI("random");
         randomAI.addGold(12);
 
         assertTrue(pool.kindOfPool(""));

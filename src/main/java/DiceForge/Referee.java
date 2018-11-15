@@ -131,19 +131,22 @@ public class Referee {
     */
 
 
-    public int[] honour() {
-        int[] winner = {this.players.get(0).getHonour(), 0};//winner[0]=max;winner[1]=playerid;
-        for (Player i : this.players) {
-            if (winner[0] < i.getHonour()) {
-                winner[0] = i.getHonour();
-                winner[1] = this.players.indexOf(i);
+
+    public Player winner(){
+        Player player=this.players.get(0);
+
+        for(Player p : this.players){
+            if(p.getHonour()>player.getHonour()){
+                player=p;
             }
         }
-        return winner;
+        player.addVictory();
+        return player;
     }
 
     public void reset() {
         for (Player player : players) {
+            player.addSumHonour();
             player.reset();
         }
         this.round = 1;

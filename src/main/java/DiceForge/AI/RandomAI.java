@@ -9,8 +9,8 @@ public class RandomAI extends Player{
 
     private Random r = new Random();
 
-    public RandomAI(){
-        super();
+    public RandomAI(String name){
+        super(name);
     }
 
     public String chooseReinforcement() {

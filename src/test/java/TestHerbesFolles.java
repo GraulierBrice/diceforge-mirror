@@ -11,7 +11,7 @@ public class TestHerbesFolles {
     @Before
     public void setUp() {
         herbesFolles = new HerbesFolles();
-        herbesFolles.setPlayer(new RandomAI());
+        herbesFolles.setPlayer(new RandomAI("random"));
     }
 
     @Test

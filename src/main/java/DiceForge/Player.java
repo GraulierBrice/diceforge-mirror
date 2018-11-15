@@ -9,6 +9,8 @@ public abstract class Player {
     protected ArrayList<Feat> feats=new ArrayList<>();
     protected int honour, gold, lunarShard, solarShard, maxLunarShard = 6, maxSolarShard =6, maxGold=12;
     protected int currentIsland=-1;//ile début à modif pour mettre une valeur "ile de départ"
+    protected int nbVictory=0, sumHonour=0;
+    protected String name;
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
    // protected Strategy strategy;
@@ -17,12 +19,13 @@ public abstract class Player {
     public static final String LunarShard="LunarShard";
     public static final String SolarShard="SolarShard";
 
-    public Player(/*String strategy*/){
+    public Player(/*String strategy*/String name){
         //this.strategy = new Strategy(strategy);
         this.honour=0;
         this.lunarShard =0;
         this.solarShard =0;
         this.gold=0;
+        this.name=name;
     }
 
     /* Accessor */
@@ -37,6 +40,9 @@ public abstract class Player {
     public Feat getFeat(int n){return this.feats.get(n);}
     public int getNbFeat(){return this.feats.size();}
     public Dice getDice(int n){return (n==0) ? this.de1 : (n==1) ? this.de2 : null;}
+    public int getNbVictory(){return this.nbVictory;}
+    public int getSumHonour(){return this.sumHonour;}
+    public String getName(){return this.name;}
 
 
     /* Mutator */
@@ -56,6 +62,8 @@ public abstract class Player {
     public void removeLunarShard(int LunarShard){this.lunarShard = (this.lunarShard -LunarShard>=0) ? this.lunarShard -LunarShard : 0;}
     public void removeSolarShard(int SolarShard){this.solarShard = (this.solarShard -SolarShard>=0) ? this.solarShard -SolarShard : 0;}
     public void removeGold(int gold){this.gold = (this.gold-gold>=0) ? this.gold-gold : 0;}
+    public void addVictory(){this.nbVictory++;}
+    public void addSumHonour(){this.sumHonour+=this.honour;}
 
 
     //Rolls dice and adds rewards to player's ressources

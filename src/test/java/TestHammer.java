@@ -12,7 +12,7 @@ public class TestHammer {
     @Before
     public void setUp() {
         hammer = new Hammer();
-        hammer.setPlayer(new RandomAI());
+        hammer.setPlayer(new RandomAI("random"));
     }
 
     @Test

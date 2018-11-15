@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class LunarAI extends Player {
 
-    public LunarAI(){
-        super();
+    public LunarAI(String name){
+        super(name);
     }
 
     @Override

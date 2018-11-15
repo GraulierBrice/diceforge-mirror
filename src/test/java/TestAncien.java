@@ -11,7 +11,7 @@ public class TestAncien {
     @Before
     public void setUp() {
         ancien = new Ancien();
-        ancien.setPlayer(new RandomAI());
+        ancien.setPlayer(new RandomAI("random"));
     }
 
     @Test

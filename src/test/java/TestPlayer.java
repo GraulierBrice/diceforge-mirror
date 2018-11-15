@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 public class TestPlayer {
     @Test public void AIMethods(){
-        RandomAI AI=new RandomAI();
+        RandomAI AI=new RandomAI("random");
         AI.addGold(11);
         assertTrue(AI.getGold()==11);
         AI.addGold(3);
@@ -37,7 +37,7 @@ public class TestPlayer {
         assertTrue(AI.getMaxLunarShard()==6);
         assertTrue(AI.getMaxSolarShard()==6);
         assertTrue(AI.getMaxGold()==12);
-        assertTrue(AI.getCurrentIsland()==0);
+        assertTrue(AI.getCurrentIsland()==-1);
 
 
 

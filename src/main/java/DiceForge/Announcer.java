@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class Announcer {
     Referee referee;
-    public ArrayList<Integer> nbVictoire = new ArrayList<>();
-    public ArrayList<Integer> sumHonour = new ArrayList<>();
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_BLUE = "\u001B[34m";
@@ -24,22 +22,15 @@ public class Announcer {
     public Announcer(Referee referee) {
         this.referee = referee;
         for (Player p : referee.getPlayers()) {
-            this.nbVictoire.add(0);
-            this.sumHonour.add(p.getHonour());
         }
     }
 
     public void printWinner(int number) {
-        int[] winner = referee.honour();
+        //int[] winner = referee.honour();
+        Player winner=referee.winner();
         if (number == 1) {
-            System.out.println(ANSI_SYELLOW + ANSI_BOLD + "Joueur " + (winner[1] + 1) + " gagne avec " + winner[0] + " honneurs" + ANSI_RESET);
+            System.out.println(ANSI_SYELLOW + ANSI_BOLD + "Joueur " + (winner.getName()) + " gagne avec " + winner.getHonour() + " honneurs" + ANSI_RESET);
         } else {
-            for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                if (winner[1] == i) {
-                    this.nbVictoire.set(i, this.nbVictoire.get(i) + 1);
-                }
-                this.sumHonour.set(i, referee.getPlayer(i).getHonour() + this.sumHonour.get(i));
-            }
         }
     }
 
@@ -72,8 +63,8 @@ public class Announcer {
         }
         if (number > 1) {
             for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                System.out.println(ANSI_UNDERLINE + ANSI_SRED + "Le joueur " + (i + 1) + ":" + ANSI_RESET + " " + this.nbVictoire.get(i) + "(" + ((float) this.nbVictoire.get(i) / (float) number) * 100 + "%)");
-                System.out.println("Honneur moyen du joueur " + (i + 1) + ": " + this.sumHonour.get(i) / number);
+                System.out.println(ANSI_UNDERLINE + ANSI_SRED + "Le joueur " + referee.getPlayer(i).getName() + ":" + ANSI_RESET + " " + referee.getPlayer(i).getNbVictory() + "(" + ((float) referee.getPlayer(i).getNbVictory() / (float) number) * 100 + "%)");
+                System.out.println("Honneur moyen du joueur " + referee.getPlayer(i).getName() + ": " + referee.getPlayer(i).getSumHonour() / number);
             }
         }
     }

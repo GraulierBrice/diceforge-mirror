@@ -10,7 +10,7 @@ public class TestFace {
 
     @Before
     public void setUp() {
-        randomAI=new RandomAI();
+        randomAI=new RandomAI("random");
     }
 
     @Test

@@ -10,7 +10,7 @@ public class TestMeduse {
     @Before
     public void setUp() {
         meduse = new Meduse();
-        meduse.setPlayer(new RandomAI());
+        meduse.setPlayer(new RandomAI("random"));
     }
 
     @Test

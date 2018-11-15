@@ -11,7 +11,7 @@ public class TestChest {
     @Before
     public void setUp() {
         chest = new Chest();
-        chest.setPlayer(new RandomAI());
+        chest.setPlayer(new RandomAI("random"));
     }
 
     @Test
