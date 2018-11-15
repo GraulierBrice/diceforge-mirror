@@ -1,5 +1,6 @@
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.Passeur;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ public class TestPasseur {
     @Before
     public void setUp() {
         passeur = new Passeur();
-        passeur.setPlayer(new RandomAI("random"));
+        passeur.setPlayer(new Player());
     }
 
     @Test

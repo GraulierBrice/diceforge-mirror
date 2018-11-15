@@ -1,31 +1,54 @@
 package DiceForge;
 
+import DiceForge.AI.RandomAI;
+import DiceForge.AI.Strategy;
 import DiceForge.Face.*;
 import DiceForge.Feat.*;
 
 import java.util.ArrayList;
 
-public abstract class Player {
+public class Player {
     protected ArrayList<Feat> feats=new ArrayList<>();
     protected int honour, gold, lunarShard, solarShard, maxLunarShard = 6, maxSolarShard =6, maxGold=12;
     protected int currentIsland=-1;//ile début à modif pour mettre une valeur "ile de départ"
-    protected int nbVictory=0, sumHonour=0;
-    protected String name;
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
-   // protected Strategy strategy;
+    protected Strategy strategy;
+    protected int nbVictory=0, sumHonour=0;
+    protected String name;
     public static final String GOLD="G";
     public static final String HONOUR="H";
     public static final String LunarShard="LunarShard";
     public static final String SolarShard="SolarShard";
 
-    public Player(/*String strategy*/String name){
-        //this.strategy = new Strategy(strategy);
+    public Player(Object strategy, String name){
+        this.strategy = (Strategy) strategy;
+        this.strategy.setPlayer(this);
         this.honour=0;
         this.lunarShard =0;
         this.solarShard =0;
         this.gold=0;
         this.name=name;
+    }
+
+    public Player(String name) {
+        this.strategy = new RandomAI();
+        this.strategy.setPlayer(this);
+        this.honour=0;
+        this.lunarShard =0;
+        this.solarShard =0;
+        this.gold=0;
+        this.name=name;
+    }
+
+    public Player() {
+        this.strategy = new RandomAI();
+        this.strategy.setPlayer(this);
+        this.honour=0;
+        this.lunarShard =0;
+        this.solarShard =0;
+        this.gold=0;
+        this.name="1";
     }
 
     /* Accessor */
@@ -40,6 +63,7 @@ public abstract class Player {
     public Feat getFeat(int n){return this.feats.get(n);}
     public int getNbFeat(){return this.feats.size();}
     public Dice getDice(int n){return (n==0) ? this.de1 : (n==1) ? this.de2 : null;}
+    public Strategy getStrategy() { return strategy; }
     public int getNbVictory(){return this.nbVictory;}
     public int getSumHonour(){return this.sumHonour;}
     public String getName(){return this.name;}
@@ -48,6 +72,7 @@ public abstract class Player {
     /* Mutator */
     public void setMaxLunarShard(int n){this.maxLunarShard = n;}
     public void setMaxSolarShard(int n){this.maxSolarShard = n;}
+    public void setCurrentIsland(int currentIsland) { this.currentIsland = currentIsland; }
     public void setMaxGold(int n){this.maxGold = n;}
     public void addFeat(Feat feat){this.feats.add(feat);}
     public void addHonour(int honour){this.honour+=honour;}
@@ -55,16 +80,19 @@ public abstract class Player {
     public void addSolarShard(int SolarShard){this.solarShard = (this.solarShard +SolarShard<= maxSolarShard) ? this.solarShard +SolarShard : maxSolarShard;}
     public void addGold(int gold){
         for(Feat f : this.feats){
-            if(f instanceof Hammer && ((Hammer)f).getLevel() < 2){gold = this.goldChoice(gold, (Hammer)f); break;}
+            if(f instanceof Hammer && ((Hammer)f).getLevel() < 2){gold = this.strategy.goldChoice(gold, (Hammer)f); break;}
         }
         this.gold = (this.gold+gold<=maxGold) ? this.gold+gold : maxGold;
     }
     public void removeLunarShard(int LunarShard){this.lunarShard = (this.lunarShard -LunarShard>=0) ? this.lunarShard -LunarShard : 0;}
     public void removeSolarShard(int SolarShard){this.solarShard = (this.solarShard -SolarShard>=0) ? this.solarShard -SolarShard : 0;}
     public void removeGold(int gold){this.gold = (this.gold-gold>=0) ? this.gold-gold : 0;}
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+        this.strategy.setPlayer(this);
+    }
     public void addVictory(){this.nbVictory++;}
     public void addSumHonour(){this.sumHonour+=this.honour;}
-
 
     //Rolls dice and adds rewards to player's ressources
     public void faveur(){
@@ -162,19 +190,6 @@ public abstract class Player {
                 return null;
         }
     }
-
-    public abstract String chooseReinforcement();
-    public abstract String chooseFeatReinforcement();
-    public abstract String chooseAction();
-    public abstract int chooseDice();
-    public abstract int chooseDiceFace(int dice);
-    public abstract int chooseFaceBonus(Face face);
-    public abstract int choosePoolFace(Pool pool);
-    public abstract int choosePool();
-    public abstract int goldChoice(int g, Hammer h);
-    public abstract void chooseIsland();
-    public abstract int chooseFeat();
-    public abstract Dice chooseBestDice();
 
     public void lastAction(){
         int diceNumber=0;

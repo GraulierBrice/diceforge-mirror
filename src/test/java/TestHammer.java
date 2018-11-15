@@ -1,5 +1,6 @@
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.*;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class TestHammer {
     @Before
     public void setUp() {
         hammer = new Hammer();
-        hammer.setPlayer(new RandomAI("random"));
+        hammer.setPlayer(new Player());
     }
 
     @Test

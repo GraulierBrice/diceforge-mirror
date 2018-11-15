@@ -5,12 +5,13 @@ import DiceForge.Feat.*;
 
 import java.util.Random;
 
-public class RandomAI extends Player{
+public class RandomAI extends Strategy{
+
 
     private Random r = new Random();
 
-    public RandomAI(String name){
-        super(name);
+    public RandomAI(){
+        super();
     }
 
     public String chooseReinforcement() {
@@ -23,6 +24,7 @@ public class RandomAI extends Player{
         }
         return null;
     }
+
     public String chooseFeatReinforcement() {
         int choice = r.nextInt(2);
         switch(choice){
@@ -44,7 +46,7 @@ public class RandomAI extends Player{
                 return Referee.FORGE;
             case 2:
                 this.chooseIsland();
-                if(this.currentIsland!=-1 && this.chooseFeat()!=-1)
+                if(this.player.getCurrentIsland()!=-1 && this.chooseFeat()!=-1)
                 return Referee.EXPLOIT;
         }
         return Referee.PASSE;
@@ -56,7 +58,7 @@ public class RandomAI extends Player{
     }
 
     public Dice chooseBestDice(){
-        return this.getDice(r.nextInt(2));
+        return this.player.getDice(r.nextInt(2));
     }
 
     public int chooseDiceFace(int dice) {
@@ -65,10 +67,10 @@ public class RandomAI extends Player{
 
     public int chooseFaceBonus(Face face){
         int possibilities=0;
-        if(face.getKind().contains(GOLD))possibilities++;
-        if(face.getKind().contains(LunarShard))possibilities++;
-        if(face.getKind().contains(SolarShard))possibilities++;
-        if(face.getKind().contains(HONOUR))possibilities++;
+        if(face.getKind().contains(Player.GOLD))possibilities++;
+        if(face.getKind().contains(Player.LunarShard))possibilities++;
+        if(face.getKind().contains(Player.SolarShard))possibilities++;
+        if(face.getKind().contains(Player.HONOUR))possibilities++;
         return r.nextInt(possibilities);
     }
 
@@ -88,19 +90,18 @@ public class RandomAI extends Player{
 
     public void chooseIsland(){
         int value=r.nextInt(7);
-        if(Referee.getWorld().getIsland(value).isEmpty() || this.lunarShard<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.LunarShard).getPriceLunarShard() || this.solarShard<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.SolarShard).getPriceSolarShard()){
+        if(Referee.getWorld().getIsland(value).isEmpty() || this.player.getLunarShard()<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.LunarShard).getPriceLunarShard() || this.player.getSolarShard()<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.SolarShard).getPriceSolarShard()){
             value=-1;
         }
-        this.currentIsland=value;
-
+        this.player.setCurrentIsland(value);
 
     }
 
     public int chooseFeat(){
         int value;
-        if(this.currentIsland<6) value= r.nextInt(2);//pour l'instant il n'y a pas d'ile avec plus de deux feat, pour la dernière ile, il faudra juste vérif si on est dessus et dans ce cas on fera random bound: 3
+        if(this.player.getCurrentIsland()<6) value= r.nextInt(2);//pour l'instant il n'y a pas d'ile avec plus de deux feat, pour la dernière ile, il faudra juste vérif si on est dessus et dans ce cas on fera random bound: 3
         else  value=r.nextInt(3);
-        if(this.currentIsland==-1 || !Referee.getWorld().getIsland(this.currentIsland).isIn(this.listFeat(value))){
+        if(this.player.getCurrentIsland()==-1 || !Referee.getWorld().getIsland(this.player.getCurrentIsland()).isIn(this.player.listFeat(value))){
             return -1;
         }else{
             return value;

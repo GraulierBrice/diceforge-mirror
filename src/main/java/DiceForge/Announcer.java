@@ -22,15 +22,16 @@ public class Announcer {
     public Announcer(Referee referee) {
         this.referee = referee;
         for (Player p : referee.getPlayers()) {
+
         }
     }
 
     public void printWinner(int number) {
-        //int[] winner = referee.honour();
         Player winner=referee.winner();
         if (number == 1) {
             System.out.println(ANSI_SYELLOW + ANSI_BOLD + "Joueur " + (winner.getName()) + " gagne avec " + winner.getHonour() + " honneurs" + ANSI_RESET);
         } else {
+
         }
     }
 
@@ -39,15 +40,14 @@ public class Announcer {
             while (referee.getRound() <= referee.getMaxRound()) {
                 if (number == 1) System.out.println("Nous sommes au tour : " + referee.getRound() + "\n\n");
                 for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                    if(number==1)
-                        this.printReinforcement();
-                    referee.choixReinforcement(referee.getPlayer(referee.getTurnPlayer()).chooseReinforcement());
+                    if(number==1) this.printReinforcement();
+                    referee.choixReinforcement(referee.getPlayer(referee.getTurnPlayer()).strategy.chooseReinforcement());
                     if (number == 1) this.printAction();
                     if (referee.getRound() != referee.getMaxRound()) {
-                        referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).chooseAction());
-                    }else referee.getPlayer(referee.getTurnPlayer()).lastAction();
+                        referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).strategy.chooseAction());
+                    } else referee.getPlayer(referee.getTurnPlayer()).lastAction();
 
-                        this.printLog(number);
+                    this.printLog(number);
 
                     if (referee.getNumberPlayer() == 2) {
                         referee.faveur();
@@ -90,7 +90,7 @@ public class Announcer {
     }
 
     public void printAction() {
-        String action = referee.getPlayer(referee.getTurnPlayer()).chooseAction();
+        String action = referee.getPlayer(referee.getTurnPlayer()).strategy.chooseAction();
         switch (action) {
             case Referee.PASSE:
                 System.out.println(ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " passe son tour" + ANSI_RESET);
@@ -102,7 +102,7 @@ public class Announcer {
                 System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " peut choisir un exploit à réaliser" + ANSI_RESET);
                 Player player = referee.getPlayer(referee.getTurnPlayer());
                 Island island = referee.getWorld().getIsland(player.getCurrentIsland());
-                Class exploit = player.listFeat(player.chooseFeat());//l'exploit sur l'ile qu'il va choisir
+                Class exploit = player.listFeat(player.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
 
                 if (island.isIn(exploit) && (player.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() || player.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
                     System.out.println(ANSI_SBLUE + " Joueur " + (referee.getTurnPlayer() + 1) + " réalise l'exploit " + exploit.getName().split("\\.")[2] + ANSI_RESET);
@@ -114,12 +114,12 @@ public class Announcer {
 
     public void printReinforcement() {
         Player player = referee.getPlayer(referee.getTurnPlayer());
-        String action = referee.getPlayer(referee.getTurnPlayer()).chooseReinforcement();
+        String action = referee.getPlayer(referee.getTurnPlayer()).strategy.chooseReinforcement();
         if (action == Referee.REINFORCEMENT) {
             for (int i = 0; i < player.getNbFeat(); i++) {
                 if (player.getFeat(i).getReinfor()) {
                         System.out.println(ANSI_UNDERLINE+ANSI_BOLD+ANSI_SGREEN+"Joueur " + (referee.getTurnPlayer() + 1) + " peut renforcer " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
-                    if (player.chooseFeatReinforcement() == Referee.FEAT_REINFORCEMENT) {
+                    if (player.strategy.chooseFeatReinforcement() == Referee.FEAT_REINFORCEMENT) {
                             System.out.println(ANSI_GREEN+"Joueur " + (referee.getTurnPlayer() + 1) + " renforce l'exploit " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
                     } else {
                             System.out.println(ANSI_GREEN+"Il n'a pas fait de renforcement"+ANSI_RESET);
@@ -133,4 +133,5 @@ public class Announcer {
         player.getDice(0).toString(1);
         player.getDice(1).toString(2);
     }
+
 }

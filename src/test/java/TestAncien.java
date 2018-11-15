@@ -1,5 +1,6 @@
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.Ancien;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class TestAncien {
     @Before
     public void setUp() {
         ancien = new Ancien();
-        ancien.setPlayer(new RandomAI("random"));
+        ancien.setPlayer(new Player());
     }
 
     @Test

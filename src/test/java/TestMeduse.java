@@ -1,5 +1,6 @@
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.Meduse;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ public class TestMeduse {
     @Before
     public void setUp() {
         meduse = new Meduse();
-        meduse.setPlayer(new RandomAI("random"));
+        meduse.setPlayer(new Player());
     }
 
     @Test

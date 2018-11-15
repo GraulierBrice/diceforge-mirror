@@ -23,7 +23,7 @@ public class Dice{
 	public void giveReward(Player player){
 		this.rollDice();
 		if(this.faces[this.roll] instanceof FaceCombinationOR){
-			this.faces[this.roll].giveRewardOR(player,player.chooseFaceBonus(this.faces[this.roll]));
+			this.faces[this.roll].giveRewardOR(player,player.strategy.chooseFaceBonus(this.faces[this.roll]));
 		}else {
 			this.faces[roll].giveReward(player);
 		}

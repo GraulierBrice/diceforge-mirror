@@ -1,5 +1,6 @@
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.*;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class TestChest {
     @Before
     public void setUp() {
         chest = new Chest();
-        chest.setPlayer(new RandomAI("random"));
+        chest.setPlayer(new Player());
     }
 
     @Test

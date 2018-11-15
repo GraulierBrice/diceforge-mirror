@@ -41,19 +41,15 @@ public class Referee {
     public int getTurnPlayer() {
         return this.turnPlayer;
     }
-
     public int getNumberPlayer() {
         return this.players.size();
     }
-
     public Player getPlayer(int n) {
         return players.get(n);
     }
-
     public int getRound() {
         return this.round;
     }
-
     public int getMaxRound() {
         return this.maxRound;
     }
@@ -85,7 +81,7 @@ public class Referee {
         Player turnP = this.getPlayer(this.turnPlayer);
         if (action == REINFORCEMENT) {
             for (int i = 0; i < turnP.getNbFeat(); i++) {
-                if (turnP.getFeat(i).getReinfor() && turnP.chooseFeatReinforcement() == FEAT_REINFORCEMENT) {
+                if (turnP.getFeat(i).getReinfor() && turnP.strategy.chooseFeatReinforcement() == FEAT_REINFORCEMENT) {
                     turnP.getFeat(i).effect();
                 }
             }
@@ -98,19 +94,18 @@ public class Referee {
 
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case FORGE:
-                Pool pool = forge.getPool(turnP.choosePool());
+                Pool pool = forge.getPool(turnP.strategy.choosePool());
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
-                    int poolFace = turnP.choosePoolFace(pool);
-                    int dice = turnP.chooseDice();
-                    int diceFace = turnP.chooseDiceFace(turnP.chooseDice());
+                    int poolFace = turnP.strategy.choosePoolFace(pool);
+                    int dice = turnP.strategy.chooseDice();
+                    int diceFace = turnP.strategy.chooseDiceFace(turnP.strategy.chooseDice());
                     this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
                 }
                 break;
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
-                Class exploit = turnP.listFeat(turnP.chooseFeat());//l'exploit sur l'ile qu'il va choisir
-                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
-                    this.world.giveFeat(turnP, exploit);
+                Class exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
+                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {                    this.world.giveFeat(turnP, exploit);
                 }
                 break;
         }
@@ -131,10 +126,8 @@ public class Referee {
     */
 
 
-
     public Player winner(){
         Player player=this.players.get(0);
-
         for(Player p : this.players){
             if(p.getHonour()>player.getHonour()){
                 player=p;

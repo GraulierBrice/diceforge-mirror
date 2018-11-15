@@ -1,5 +1,6 @@
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.HerbesFolles;
+import DiceForge.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class TestHerbesFolles {
     @Before
     public void setUp() {
         herbesFolles = new HerbesFolles();
-        herbesFolles.setPlayer(new RandomAI("random"));
+        herbesFolles.setPlayer(new Player());
     }
 
     @Test

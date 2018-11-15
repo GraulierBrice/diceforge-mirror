@@ -23,18 +23,18 @@ public class TestPool {
         pool.setPrice(12);
         assertEquals(pool.getPrice(),12);
 
-        RandomAI randomAI=new RandomAI("random");
-        randomAI.addGold(12);
+        Player player=new Player();
+        player.addGold(12);
 
         assertTrue(pool.kindOfPool(""));
         assertTrue(pool.kindOfPool(Player.GOLD));
 
-        assertEquals(pool.buy(randomAI,SolarShard1),SolarShard1);
-        assertEquals(randomAI.getGold(),0);
+        assertEquals(pool.buy(player,SolarShard1),SolarShard1);
+        assertEquals(player.getGold(),0);
         pool.setPrice(0);
-        assertEquals(pool.buy(randomAI,g1),g1);
+        assertEquals(pool.buy(player,g1),g1);
         assertEquals(pool.isEmpty(),false);
-        assertEquals(pool.buy(randomAI,g1),g1);
+        assertEquals(pool.buy(player,g1),g1);
         assertEquals(pool.isEmpty(),true);
 
     }

@@ -9,7 +9,7 @@ public class SabotArgent extends Feat{
 
     //rolls dice to play
     public void effect(Object... o) {
-        Dice reward = this.owner.chooseBestDice();
+        Dice reward = this.owner.getStrategy().chooseBestDice();
         reward.rollDice();
         reward.giveReward(this.owner);
         if(Main.numberOfGames==1)reward.toString(1);
