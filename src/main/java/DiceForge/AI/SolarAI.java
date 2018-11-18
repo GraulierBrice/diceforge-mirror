@@ -90,18 +90,20 @@ public class SolarAI extends Strategy {
 
     @Override
     public int goldChoice(int g, Hammer h) {
-        if((h.getGold()+g-(5-this.player.getGold())<=15 && h.getLevel()==1) || (h.getGold()+g-(5-this.player.getGold())<=30 && h.getLevel()==0)){
-            h.effect(g - (6 - this.player.getGold()));
-            return (5 - this.player.getGold());
-        }else if(h.getGold()+g-(5-this.player.getGold())>15 && h.getLevel()==1){
-            int value=h.getGold()+g-(5-this.player.getGold())-15;
-            h.effect(15-h.getGold());
-            return value;
-        }else if(h.getGold()+g-(5-this.player.getGold())>30 && h.getLevel()==0){
-            int value=h.getGold()+g-(5-this.player.getGold())-30;
-            h.effect(15-h.getGold());
-            h.effect(15);
-            return value;
+        if(g+this.player.getGold()>=5) {
+            if ((h.getGold() + g - (5 - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (5 - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
+                h.effect(g - (5 - this.player.getGold()));
+                return (5 - this.player.getGold());
+            } else if (h.getGold() + g - (5 - this.player.getGold()) > 15 && h.getLevel() == 1) {
+                int value = h.getGold() + g - (5 - this.player.getGold()) - 15;
+                h.effect(15 - h.getGold());
+                return value;
+            } else if (h.getGold() + g - (5 - this.player.getGold()) > 30 && h.getLevel() == 0) {
+                int value = h.getGold() + g - (5 - this.player.getGold()) - 30;
+                h.effect(15 - h.getGold());
+                h.effect(15);
+                return value;
+            }
         }
         return g;
     }
@@ -114,9 +116,9 @@ public class SolarAI extends Strategy {
             this.player.setCurrentIsland(5);
         }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
             this.player.setCurrentIsland(3);
-        }else if(this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(Ancien.class) ||(this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(HerbesFolles.class))){
+        }else if(this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(Ancien.class) || (this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(HerbesFolles.class))){
             this.player.setCurrentIsland(1);
-        }else if(this.player.getLunarShard()>=4 && !Referee.getWorld().isEmpty(4)) {
+        }else if(this.player.getLunarShard()>=4 && !Referee.getWorld().getIsland(4).isIn(Passeur.class)) {
             this.player.setCurrentIsland(4);
         }else if(this.player.getLunarShard()>=2 && Referee.getWorld().getIsland(2).isIn(SabotArgent.class)) {
             this.player.setCurrentIsland(2);
@@ -144,6 +146,9 @@ public class SolarAI extends Strategy {
                 else return -1;
             case 3:
                 if(island.isIn(AilesGardienne.class))return 0;
+                else return -1;
+            case 4:
+                if(island.isIn(Passeur.class))return 0;
                 else return -1;
             case 5:
                 if(island.isIn(Meduse.class))return 0;
