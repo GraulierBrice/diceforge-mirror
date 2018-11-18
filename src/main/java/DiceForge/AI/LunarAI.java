@@ -40,7 +40,7 @@ public class LunarAI extends Strategy {
 
     @Override
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des lunarShard comme ça on est sûr d'en drop à chaque tour
-        if(Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold()).getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
+        if(Referee.getForge().bestPoolWith(Player.LunarShard,this.player.getGold()).getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
             return 1;
         }
         return 0;
@@ -66,36 +66,43 @@ public class LunarAI extends Strategy {
 
     @Override
     public int choosePoolFace(Pool pool) {//test pour l'instant pour prendre les pools avec uniquement des lunarShard pour le moment
-        if(Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold()).getPrice()<=this.player.getGold()){
-            return 0;
+        if(interestingKind()!="nothing"){
+            return pool.isNumber(pool.bestFaceOf(interestingKind()));
         }
-        return 0;
+        return -1;
     }
+
+    public String interestingKind(){
+        Pool poolPdL =Referee.getForge().bestPoolWith(Player.LunarShard,this.player.getGold());
+        Pool poolG=Referee.getForge().bestPoolWith(Player.GOLD,this.player.getGold());
+        if(poolPdL!=null && poolPdL.getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
+            return Player.LunarShard;
+        }else if(poolG!=null && poolG.getPrice()<=this.player.getGold()) {
+            return Player.GOLD;
+        }
+        return "nothing";
+        }
 
     @Override
     public int choosePool() {
-        Pool poolPdL =Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold());
-        Pool poolG=Referee.getForge().affordablePoolWith(Player.GOLD,this.player.getGold());
-        if(poolPdL!=null && poolPdL.getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
-            return Referee.getForge().isNumber(Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold()));
-        }else if(poolG!=null && poolG.getPrice()<=this.player.getGold()){
-            return Referee.getForge().isNumber((Referee.getForge().affordablePoolWith(Player.GOLD,this.player.getGold())));
-        }
-        return 0;//devrait être -1 en plein test
+            if(interestingKind()==Player.LunarShard) return Referee.getForge().isNumber(Referee.getForge().bestPoolWith(Player.LunarShard,this.player.getGold()));
+            else if(interestingKind()==Player.GOLD) return Referee.getForge().isNumber((Referee.getForge().bestPoolWith(Player.GOLD,this.player.getGold())));
+            else return -1;//devrait être -1 en plein test
     }
 
     @Override
     public int goldChoice(int g, Hammer h) {
-        if((h.getGold()+g-(2-this.player.getGold())<=15 && h.getLevel()==1) || (h.getGold()+g-(2-this.player.getGold())<=30 && h.getLevel()==0)){
-            h.effect(g - (2 - this.player.getGold()));
-            return (2 - this.player.getGold());
-        }else if(h.getGold()+g-(2-this.player.getGold())>15 && h.getLevel()==1){
-            int value=h.getGold()+g-(2-this.player.getGold())-15;
-            h.effect(g-value);
+        if((h.getGold()+g-(5-this.player.getGold())<=15 && h.getLevel()==1) || (h.getGold()+g-(5-this.player.getGold())<=30 && h.getLevel()==0)){
+        h.effect(g - (6 - this.player.getGold()));
+            return (5 - this.player.getGold());
+        }else if(h.getGold()+g-(5-this.player.getGold())>15 && h.getLevel()==1){
+            int value=h.getGold()+g-(5-this.player.getGold())-15;
+            h.effect(15-h.getGold());
             return value;
-        }else if(h.getGold()+g-(2-this.player.getGold())>30 && h.getLevel()==0){
-            int value=h.getGold()+g-(2-this.player.getGold())-30;
-            h.effect(g-value);
+        }else if(h.getGold()+g-(5-this.player.getGold())>30 && h.getLevel()==0){
+            int value=h.getGold()+g-(5-this.player.getGold())-30;
+            h.effect(15-h.getGold());
+            h.effect(15);
             return value;
         }
         return g;
@@ -103,13 +110,13 @@ public class LunarAI extends Strategy {
 
     @Override
     public void chooseIsland() {
-        if((this.player.getLunarShard()>=6 && !Referee.getWorld().getIsland(6).isIn(Pince.class))||(this.player.getLunarShard()>=5 && this.player.getSolarShard()>=5 && !Referee.getWorld().getIsland(6).isIn(Hydre.class))){
+        if((this.player.getLunarShard()>=6 && Referee.getWorld().getIsland(6).isIn(Pince.class))||(this.player.getLunarShard()>=5 && this.player.getSolarShard()>=5 && Referee.getWorld().getIsland(6).isIn(Hydre.class))){
             this.player.setCurrentIsland(6);
         }else if(this.player.getLunarShard()>=4 && !Referee.getWorld().isEmpty(4)){//virer les && false quand les iles existeronts
             this.player.setCurrentIsland(4);//3,lune
-        }else if(this.player.getLunarShard()>2 && !Referee.getWorld().isEmpty(2)){
+        }else if(this.player.getLunarShard()>=2 && !Referee.getWorld().isEmpty(2)){
             this.player.setCurrentIsland(2);//2,lune
-        }else if(this.player.getLunarShard()>1 && !Referee.getWorld().isEmpty(0)) {
+        }else if(this.player.getLunarShard()>=1 && !Referee.getWorld().isEmpty(0)) {
             this.player.setCurrentIsland(0);//1,lune
         }else if(this.player.getSolarShard()>=2 && !Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
             this.player.setCurrentIsland(3);

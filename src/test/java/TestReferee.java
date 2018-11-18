@@ -14,7 +14,7 @@ public class TestReferee {
 
     @Before
     public void setUp() {
-        referee=new Referee(new Player(),new Player(),new Player(),new Player());
+        referee=new Referee(new Player("1"),new Player("2"),new Player("3"),new Player("4"));
         forge=new Forge(referee);
         world=new World(referee);
         referee.addForge(forge);

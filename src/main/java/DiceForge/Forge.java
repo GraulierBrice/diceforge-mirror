@@ -79,14 +79,6 @@ public class Forge{
         this.forge.add(pool2G_1LunarShard);
         this.forge.add(pool2G_3G);
 
-
-
-
-
-
-
-
-
     }
 
     /* Accessor */
@@ -95,15 +87,6 @@ public class Forge{
     }
 
     public int size(){return this.forge.size();}
-
-    public Pool lowestPoolNotEmptyContaining(String kind){//if kind=="" then return all kind of pool
-        for(Pool p:forge){
-            if(!p.isEmpty() && p.kindOfPool(kind)){
-                return p;
-            }
-        }
-        return null;
-    }
 
     public Pool affordablePoolWith(String kind,int gold){
         for(Pool p:forge){
@@ -114,6 +97,16 @@ public class Forge{
         return null;
     }
 
+    public Pool bestPoolWith(String kind,int gold){
+        Pool bestPool=affordablePoolWith(kind,gold);
+        if(bestPool==null) return null;
+        for(Pool p:forge){
+            if(!p.isEmpty() && p.kindOfPool(kind) && p.getPrice()<=gold && p.bestFaceOf(kind).getRewardKind(kind)>bestPool.bestFaceOf(kind).getRewardKind(kind)){
+                            bestPool=p;
+            }
+        }
+        return bestPool;
+    }
 
     public int isNumber(Pool pool){
         for(int i=0;i<forge.size();i++){
@@ -121,6 +114,6 @@ public class Forge{
                 return i;
             }
         }
-        return 0;//test devrait retourner -1
+        return -1;//test devrait retourner -1
     }
 }

@@ -38,7 +38,7 @@ public class TestPlayer {
         assertTrue(player.getMaxLunarShard()==6);
         assertTrue(player.getMaxSolarShard()==6);
         assertTrue(player.getMaxGold()==12);
-        assertTrue(player.getCurrentIsland()==0);
+        assertTrue(player.getCurrentIsland()==-1);
 
 
 

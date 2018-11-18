@@ -52,6 +52,22 @@ public class Pool {
         }
         return -1;
     }
+
+    public Face bestFaceOf(String kind){
+        if(this.faceKind(kind)==-1) return null;
+        Face face=faces.get(this.faceKind(kind));
+        for(int i=0;i<this.howManyFaces();i++){
+            if(this.faces.get(i).getRewardKind(kind)>face.getRewardKind(kind)) face=this.faces.get(i);
+        }
+        return face;
+    }
+
+    public int isNumber(Face face){
+        for(int i=0;i<this.howManyFaces();i++){
+            if(faces.get(i)==face) return i;
+        }
+        return -1;
+    }
 }
 
 

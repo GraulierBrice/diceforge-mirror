@@ -40,6 +40,14 @@ public abstract class Face{
 		return reward;
 	}
 
+	public int getRewardKind(String kind){
+		if(kind.contains(Player.GOLD)) return this.rewardGold;
+		else if(kind.contains(Player.SolarShard)) return this.rewardSolarShard;
+		else if(kind.contains(Player.LunarShard)) return this.rewardLunarShard;
+		else if(kind.contains(Player.HONOUR)) return this.rewardHonour;
+		return 0;
+	}
+
     public String getKind(){return this.kind;}
 
 	public abstract void giveRewardOR(Player player, int chooseFaceBonus);
