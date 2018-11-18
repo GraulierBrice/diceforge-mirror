@@ -92,18 +92,20 @@ public class LunarAI extends Strategy {
 
     @Override
     public int goldChoice(int g, Hammer h) {
-        if((h.getGold()+g-(5-this.player.getGold())<=15 && h.getLevel()==1) || (h.getGold()+g-(5-this.player.getGold())<=30 && h.getLevel()==0)){
-        h.effect(g - (6 - this.player.getGold()));
-            return (5 - this.player.getGold());
-        }else if(h.getGold()+g-(5-this.player.getGold())>15 && h.getLevel()==1){
-            int value=h.getGold()+g-(5-this.player.getGold())-15;
-            h.effect(15-h.getGold());
-            return value;
-        }else if(h.getGold()+g-(5-this.player.getGold())>30 && h.getLevel()==0){
-            int value=h.getGold()+g-(5-this.player.getGold())-30;
-            h.effect(15-h.getGold());
-            h.effect(15);
-            return value;
+        if(g+this.player.getGold()>=5) {
+            if ((h.getGold() + g - (5 - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (5 - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
+                h.effect(g - (5 - this.player.getGold()));
+                return (5 - this.player.getGold());
+            } else if (h.getGold() + g - (5 - this.player.getGold()) > 15 && h.getLevel() == 1) {
+                int value = h.getGold() + g - (5 - this.player.getGold()) - 15;
+                h.effect(15 - h.getGold());
+                return value;
+            } else if (h.getGold() + g - (5 - this.player.getGold()) > 30 && h.getLevel() == 0) {
+                int value = h.getGold() + g - (5 - this.player.getGold()) - 30;
+                h.effect(15 - h.getGold());
+                h.effect(15);
+                return value;
+            }
         }
         return g;
     }

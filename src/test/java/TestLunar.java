@@ -45,7 +45,7 @@ import DiceForge.AI.*;
             referee.choixAction(lunar.getStrategy().chooseAction());
             assertEquals(lunar.getDice(0).getFace(0).getReward(),"6"+Player.GOLD);
             Hammer hammer=(Hammer) lunar.getFeat(0);
-            assertEquals(hammer.getGold(),5);
+            assertEquals(hammer.getGold(),6);//commence avec 3G en utilise 2 puis en gagne 10 donc total de 11 dont 6 dans le hammer
 
             lunar.addLunarShard(6);
             referee.choixAction(lunar.getStrategy().chooseAction());
