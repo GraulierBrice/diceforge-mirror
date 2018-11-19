@@ -114,18 +114,16 @@ public class LunarAI extends Strategy {
     public void chooseIsland() {
         if((this.player.getLunarShard()>=6 && Referee.getWorld().getIsland(6).isIn(Pince.class))||(this.player.getLunarShard()>=5 && this.player.getSolarShard()>=5 && Referee.getWorld().getIsland(6).isIn(Hydre.class))){
             this.player.setCurrentIsland(6);
-        }else if(this.player.getLunarShard()>=4 && !Referee.getWorld().getIsland(4).isIn(Passeur.class)) {
-            this.player.setCurrentIsland(4);
-        }else if(this.player.getLunarShard()>=2 && Referee.getWorld().getIsland(2).isIn(SabotArgent.class)) {
-            this.player.setCurrentIsland(2);
-        }else if(this.player.getLunarShard()>=1 && Referee.getWorld().getIsland(0).isIn(Hammer.class) || (this.player.getLunarShard()>=1 && Referee.getWorld().getIsland(0).isIn(Chest.class))) {
-            this.player.setCurrentIsland(0);
-        }else if(this.player.getSolarShard()>=4 && Referee.getWorld().getIsland(5).isIn(Meduse.class)){
-            this.player.setCurrentIsland(5);
-        }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
+        }else if(this.player.getLunarShard()>=4 && !Referee.getWorld().isEmpty(4)){//virer les && false quand les iles existeronts
+            this.player.setCurrentIsland(4);//3,lune
+        }else if(this.player.getLunarShard()>=2 && !Referee.getWorld().isEmpty(2)){
+            this.player.setCurrentIsland(2);//2,lune
+        }else if(this.player.getLunarShard()>=1 && !Referee.getWorld().isEmpty(0)) {
+            this.player.setCurrentIsland(0);//1,lune
+        }else if(this.player.getSolarShard()>=2 && !Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
             this.player.setCurrentIsland(3);
-        }else if(this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(0).isIn(Ancien.class) || (this.player.getLunarShard()>=1 && Referee.getWorld().getIsland(0).isIn(HerbesFolles.class))) {
-            this.player.setCurrentIsland(0);
+        }else if(this.player.getSolarShard()>=1 && !Referee.getWorld().getIsland(1).isIn(HerbesFolles.class)){
+            this.player.setCurrentIsland(1);//1,soleil
         }else{
             this.player.setCurrentIsland(-1);
         }
@@ -140,24 +138,22 @@ public class LunarAI extends Strategy {
                 else if(island.isIn(Chest.class))return 1;
                 else return -1;
             case 1:
-                if(island.isIn(Ancien.class))return 0;
-                else if(island.isIn(HerbesFolles.class)) return 1;
+                if(island.isIn(HerbesFolles.class)) return 1;
                 else return -1;
             case 2:
                 if(island.isIn(SabotArgent.class))return 0;
+                else if(island.isIn(Satyres.class))return 1;
                 else return -1;
             case 3:
                 if(island.isIn(AilesGardienne.class))return 0;
                 else return -1;
             case 4:
                 if(island.isIn(Passeur.class))return 0;
-                else return -1;
-            case 5:
-                if(island.isIn(Meduse.class))return 0;
+                else if(island.isIn(CasqueInvisibilite.class))return 1;
                 else return -1;
             case 6:
                 if(this.player.getSolarShard()>=5 &&island.isIn(Hydre.class))return 1;
-                else if(island.isIn(Enigme.class))return 0;
+                else if(island.isIn(Pince.class))return 0;
                 else return -1;
         }
         return -1;
