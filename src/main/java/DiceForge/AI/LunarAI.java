@@ -120,9 +120,9 @@ public class LunarAI extends Strategy {
             this.player.setCurrentIsland(2);//2,lune
         }else if(this.player.getLunarShard()>=1 && !Referee.getWorld().isEmpty(0)) {
             this.player.setCurrentIsland(0);//1,lune
-        }else if(this.player.getSolarShard()>=2 && !Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
+        }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
             this.player.setCurrentIsland(3);
-        }else if(this.player.getSolarShard()>=1 && !Referee.getWorld().getIsland(1).isIn(HerbesFolles.class)){
+        }else if(this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(HerbesFolles.class)){
             this.player.setCurrentIsland(1);//1,soleil
         }else{
             this.player.setCurrentIsland(-1);
