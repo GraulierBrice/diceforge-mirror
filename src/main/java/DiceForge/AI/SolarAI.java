@@ -39,9 +39,9 @@ public class SolarAI extends Strategy {
 
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des solarshard comme ça on est sûr d'en drop à chaque tour
         if(Referee.getForge().bestPoolWith(Player.SolarShard,this.player.getGold()).getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
-            return 1;
+            return 0;
         }
-        return 0;
+        return 1;
     }
 
 
@@ -112,17 +112,15 @@ public class SolarAI extends Strategy {
     public void chooseIsland() {
         if((this.player.getSolarShard()>=6 && Referee.getWorld().getIsland(6).isIn(Enigme.class))||(this.player.getLunarShard()>=5 && this.player.getSolarShard()>=5 && Referee.getWorld().getIsland(6).isIn(Hydre.class))){
             this.player.setCurrentIsland(6);
-        }else if(this.player.getSolarShard()>=4 && Referee.getWorld().getIsland(5).isIn(Meduse.class)){
+        }else if(this.player.getSolarShard()>=4 && !Referee.getWorld().isEmpty(5)){
             this.player.setCurrentIsland(5);
         }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
             this.player.setCurrentIsland(3);
-        }else if(this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(Ancien.class) || (this.player.getSolarShard()>=1 && Referee.getWorld().getIsland(1).isIn(HerbesFolles.class))){
+        }else if(this.player.getSolarShard()>=1 && !Referee.getWorld().isEmpty(1)){
             this.player.setCurrentIsland(1);
-        }else if(this.player.getLunarShard()>=4 && !Referee.getWorld().getIsland(4).isIn(Passeur.class)) {
-            this.player.setCurrentIsland(4);
-        }else if(this.player.getLunarShard()>=2 && Referee.getWorld().getIsland(2).isIn(SabotArgent.class)) {
+        }else if(this.player.getLunarShard()>=2 && !Referee.getWorld().isEmpty(2)){
             this.player.setCurrentIsland(2);
-        }else if(this.player.getLunarShard()>=1 && Referee.getWorld().getIsland(0).isIn(Hammer.class) || (this.player.getLunarShard()>=1 && Referee.getWorld().getIsland(0).isIn(Chest.class))) {
+        }else if(this.player.getLunarShard()>=1 && !Referee.getWorld().isEmpty(0)) {
             this.player.setCurrentIsland(0);
         }else{
             this.player.setCurrentIsland(-1);
@@ -143,12 +141,10 @@ public class SolarAI extends Strategy {
                 else return -1;
             case 2:
                 if(island.isIn(SabotArgent.class))return 0;
+                else if(island.isIn(Satyres.class))return 1;
                 else return -1;
             case 3:
                 if(island.isIn(AilesGardienne.class))return 0;
-                else return -1;
-            case 4:
-                if(island.isIn(Passeur.class))return 0;
                 else return -1;
             case 5:
                 if(island.isIn(Meduse.class))return 0;
