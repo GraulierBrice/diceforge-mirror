@@ -86,7 +86,7 @@ public class RandomAI extends Strategy{
         ArrayList<Face> faces = this.player.getEnnemyFaces();// System.out.println(faces.size());
         Face[] bestFaces=new Face[2];
         bestFaces[0]=faces.get(0);
-        bestFaces[0]=faces.get(1);
+        bestFaces[1]=faces.get(1);
         return bestFaces;
     }
 

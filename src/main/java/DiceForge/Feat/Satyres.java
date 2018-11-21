@@ -23,13 +23,7 @@ public class Satyres extends Feat{
     public void effect(Object... o) {
         ((Face)o[0]).giveReward(owner);
         ((Face)o[1]).giveReward(owner);
-        System.out.println("Le joueur "+owner.getName()+" choisit les faces suivantes :");
-        for(int i=0;i<owner.getEnnemyFaces().size();i++){
-            if(owner.getEnnemyFaces().get(i)==((Face)o[0]) || owner.getEnnemyFaces().get(i)==((Face)o[1])){
-                System.out.print(Announcer.ANSI_YELLOW+owner.getEnnemyFaces().get(i).getReward()+Announcer.ANSI_RESET+" ");
-            }else System.out.print(owner.getEnnemyFaces().get(i).getReward()+" ");
-        }
-        System.out.println("\n");
+        Announcer.printSatyres(owner,(Face)o[0],(Face)o[1]);
         owner.setEnnemyFaces(new ArrayList<>());
 
     }

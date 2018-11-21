@@ -29,7 +29,7 @@ public class LunarAI extends Strategy {
         chooseIsland();
         if(this.player.getCurrentIsland()!=-1){
             Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
-            if(island!=null && this.chooseFeat()!=-1 ) {//pour farmer les marteaux pour l'instant
+            if(island!=null && this.chooseFeat()!=-1) {
                 this.player.setAction(Referee.EXPLOIT);
             }
         }else if(pool!=null && this.player.getGold() >= pool.getPrice()) {
