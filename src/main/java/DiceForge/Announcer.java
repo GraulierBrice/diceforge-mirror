@@ -50,6 +50,7 @@ public class Announcer {
                     } else {
                         referee.getPlayer(referee.getTurnPlayer()).lastAction();
                     }
+                    referee.sameIsland();
 
                     this.printAction();
                     this.printLog();
@@ -134,7 +135,7 @@ public class Announcer {
         }
     }
 
-    public void printDice(Player player){
+    public static void printDice(Player player){
         if(Main.LEVEL==1) {
             player.getDice(0).toString(1);
             player.getDice(1).toString(2);
@@ -151,6 +152,12 @@ public class Announcer {
             }
             System.out.println("\n");
         }
+    }
+
+    public static void printSameIsland(Player currentPlayer,Player otherPlayer){
+        System.out.println(ANSI_RED+"\nLe joueur "+otherPlayer.getName()+" est sur la même île que le joueur "+currentPlayer.getName()+" il est donc déplacé au point de départ et une faveur lui est accordée."+ANSI_RESET);
+        printDice(otherPlayer);
+        System.out.print("\n");
     }
 
 

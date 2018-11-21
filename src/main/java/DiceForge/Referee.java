@@ -94,6 +94,16 @@ public class Referee {
         }
     }
 
+    public void sameIsland(){
+        for(Player p:this.getPlayers()){
+            if(p!=this.getPlayer(this.getTurnPlayer()) && p.getCurrentIsland()==this.getPlayer(this.getTurnPlayer()).getCurrentIsland()){
+                p.setCurrentIsland(-1);
+                p.faveur();
+                Announcer.printSameIsland(this.getPlayer(this.getTurnPlayer()),p);
+            }
+        }
+    }
+
     public void choixReinforcement() {
         turnP = this.getPlayer(this.turnPlayer);
         turnP.strategy.chooseReinforcement();

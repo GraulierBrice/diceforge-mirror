@@ -12,7 +12,7 @@ public class SabotArgent extends Feat{
         Dice reward = this.owner.getStrategy().chooseBestDice();
         reward.rollDice();
         reward.giveReward(this.owner);
-        if(Main.numberOfGames==1)reward.toString(1);
+        if(Main.LEVEL==1)reward.toString(1);
     }
 
     @Override
