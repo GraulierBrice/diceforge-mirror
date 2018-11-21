@@ -98,6 +98,14 @@ public class Player {
     public void faveur(){
         this.de1.giveReward(this);
         this.de2.giveReward(this);
+        Face face1 = this.de1.getFace(de1.getRoll());
+        Face face2 = this.de2.getFace(de2.getRoll());
+        if(face1.getRewardKind("") == 0){
+            face1.giveReward(this);
+            face2.giveReward(this);
+            face1.giveReward(this);
+            face2.giveReward(this);
+        }
     }
 
     //Purchase a dice face and set it on a dice of chosing
