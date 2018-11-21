@@ -100,7 +100,7 @@ public class Player {
         this.de2.giveReward(this);
         Face face1 = this.de1.getFace(de1.getRoll());
         Face face2 = this.de2.getFace(de2.getRoll());
-        if(face1.getRewardKind("") == 0){
+        if(face1.getKind().equals("three") || face2.getKind().equals("three")){
             face1.giveReward(this);
             face2.giveReward(this);
             face1.giveReward(this);

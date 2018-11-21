@@ -11,11 +11,12 @@ public class CasqueInvisibilite extends Feat{
     public CasqueInvisibilite(){
         super(4,5,0,false);
         timeThree = new FaceCombinationAND(0,0,0,0);
-        //timeThree.setKind("three");
+        timeThree.setKind("three");
     }
 
     @Override
     public void effect(Object... o) {
-    	owner.getDice((owner.getStrategy().chooseDice()+1)%2).setFace(timeThree,owner.getStrategy().chooseDiceFace((owner.getStrategy().chooseDice()+1)%2));
+        System.out.print(owner.getStrategy().chooseDice())%2)
+    	owner.getDice( (owner.getStrategy().chooseDice())%2 ).setFace(timeThree,owner.getStrategy().chooseDiceFace((owner.getStrategy().chooseDice())%2));
     }
 }

@@ -50,5 +50,7 @@ public abstract class Face{
 
     public String getKind(){return this.kind;}
 
+    public void setKind(String a){this.kind+=a;}
+
 	public abstract void giveRewardOR(Player player, int chooseFaceBonus);
 }
