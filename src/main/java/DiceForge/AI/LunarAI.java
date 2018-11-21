@@ -3,7 +3,7 @@ package DiceForge.AI;
 import DiceForge.Face.Face;
 import DiceForge.Feat.*;
 import DiceForge.*;
-import java.util.Random;
+import java.util.ArrayList;
 
 public class LunarAI extends Strategy {
 
@@ -63,6 +63,23 @@ public class LunarAI extends Strategy {
     @Override
     public int chooseFaceBonus(Face face) {
         return 0;
+    }
+
+    @Override
+    public Face[] chooseBestEnnemyFace() {//strat pas faite
+        ArrayList<Face> faces = this.player.getEnnemyFaces();
+        Face[] bestFace=new Face[2];
+        bestFace[0]=faces.get(0);
+        bestFace[1]=faces.get(1);
+
+        for(int i=0;i<faces.size();i++){
+            if(faces.get(i).getRewardKind(Player.LunarShard) > bestFace[0].getRewardKind(Player.LunarShard)){
+                bestFace[0]=faces.get(i);
+            }else if(faces.get(i).getRewardKind(Player.LunarShard) > bestFace[1].getRewardKind(Player.LunarShard)){
+                bestFace[1]=faces.get(i);
+            }
+        }
+        return bestFace;
     }
 
     @Override

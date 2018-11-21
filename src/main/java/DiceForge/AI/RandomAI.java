@@ -2,6 +2,7 @@ package DiceForge.AI;
 import DiceForge.*;
 import DiceForge.Face.Face;
 import DiceForge.Feat.*;
+import java.util.ArrayList;
 
 import java.util.Random;
 
@@ -73,6 +74,15 @@ public class RandomAI extends Strategy{
         if(face.getKind().contains(Player.SolarShard))possibilities++;
         if(face.getKind().contains(Player.HONOUR))possibilities++;
         return r.nextInt(possibilities);
+    }
+
+    @Override
+    public Face[] chooseBestEnnemyFace() {
+        ArrayList<Face> faces = this.player.getEnnemyFaces();// System.out.println(faces.size());
+        Face[] bestFaces=new Face[2];
+        bestFaces[0]=faces.get(0);
+        bestFaces[0]=faces.get(1);
+        return bestFaces;
     }
 
     public int choosePoolFace(Pool pool) {

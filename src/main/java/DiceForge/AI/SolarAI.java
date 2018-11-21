@@ -3,6 +3,7 @@ package DiceForge.AI;
 import DiceForge.Face.Face;
 import DiceForge.Feat.*;
 import DiceForge.*;
+import java.util.ArrayList;
 
 
 public class SolarAI extends Strategy {
@@ -61,6 +62,23 @@ public class SolarAI extends Strategy {
 
     public int chooseFaceBonus(Face face) {
         return 0;
+    }
+
+    @Override
+    public Face[] chooseBestEnnemyFace() {//strat à faire
+        ArrayList<Face> faces = this.player.getEnnemyFaces();
+        Face[] bestFace=new Face[2];
+        bestFace[0]=faces.get(0);
+        bestFace[1]=faces.get(1);
+
+        for(int i=1;i<faces.size();i++){
+            if(faces.get(i).getRewardKind(Player.SolarShard) > bestFace[0].getRewardKind(Player.SolarShard)){
+                bestFace[0]=faces.get(i);
+            }else if(faces.get(i).getRewardKind(Player.SolarShard) > bestFace[1].getRewardKind(Player.SolarShard) && faces.get(i)!=bestFace[0]){
+                bestFace[1]=faces.get(i);
+            }
+        }
+        return bestFace;
     }
 
 

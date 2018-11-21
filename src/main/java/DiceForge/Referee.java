@@ -1,5 +1,8 @@
 package DiceForge;
 
+import DiceForge.Face.*;
+import DiceForge.Feat.Satyres;
+
 import java.util.ArrayList;
 
 public class Referee {
@@ -65,6 +68,17 @@ public class Referee {
         return world;
     }
 
+    public void getEnnemyRoll(){
+        ArrayList<Face> ennemyFaces=new ArrayList<>();
+        for(int i=0;i<this.getNumberPlayer();i++){
+            if(players.get(i)!=players.get(turnPlayer)){
+                ennemyFaces.add(players.get(i).getDice(0).getReward());
+                ennemyFaces.add(players.get(i).getDice(1).getReward());
+            }
+        }
+        this.players.get(this.getTurnPlayer()).setEnnemyFaces(ennemyFaces);
+    }
+
     /* Mutator */
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
@@ -106,7 +120,9 @@ public class Referee {
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 Class exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
-                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {                    this.world.giveFeat(turnP, exploit);
+                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
+                    this.getEnnemyRoll();
+                    this.world.giveFeat(turnP, exploit);
                 }
                 break;
         }

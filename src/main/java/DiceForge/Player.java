@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Player {
     protected ArrayList<Feat> feats=new ArrayList<>();
+    protected ArrayList<Face> ennemyFaces=new ArrayList<>();
     protected int honour, gold, lunarShard, solarShard, maxLunarShard = 6, maxSolarShard =6, maxGold=12;
     protected int currentIsland=-1;//ile début à modif pour mettre une valeur "ile de départ"
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
@@ -69,12 +70,13 @@ public class Player {
     public int getNbVictory(){return this.nbVictory;}
     public int getSumHonour(){return this.sumHonour;}
     public String getName(){return this.name;}
-
+    public ArrayList<Face> getEnnemyFaces(){return this.ennemyFaces;}
 
     /* Mutator */
     public void setMaxLunarShard(int n){this.maxLunarShard = n;}
     public void setMaxSolarShard(int n){this.maxSolarShard = n;}
     public void setCurrentIsland(int currentIsland) { this.currentIsland = currentIsland; }
+    public void setEnnemyFaces(ArrayList<Face> faces){ this.ennemyFaces=faces;}
     public void setMaxGold(int n){this.maxGold = n;}
     public void addFeat(Feat feat){this.feats.add(feat);}
     public void addHonour(int honour){this.honour+=honour;}
@@ -110,8 +112,8 @@ public class Player {
     public void faveur(){
         this.de1.giveReward(this);
         this.de2.giveReward(this);
-        Face face1 = this.de1.getFace(de1.getRoll());
-        Face face2 = this.de2.getFace(de2.getRoll());
+        Face face1 = this.de1.getReward();
+        Face face2 = this.de2.getReward();
         if(face1.getKind().equals("three") || face2.getKind().equals("three")){
             face1.giveReward(this);
             face2.giveReward(this);

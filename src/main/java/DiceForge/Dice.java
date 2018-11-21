@@ -16,8 +16,9 @@ public class Dice{
 
 	/* Accessor */
 	public Face getFace(int i){return this.faces[i];}
-	public int getRoll() {return this.roll;}
-
+	public Face getReward(){
+		return this.faces[roll];
+	}
 	/* Mutator */
 	public void setFace(Face face,int i){this.faces[i] = face;}
 
