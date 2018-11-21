@@ -3,7 +3,7 @@ import DiceForge.Face.*;
 
 public class AilesGardienne extends Feat{
 
-	FaceCombinationOR face = new FaceCombinationOR(1,1,1,1);
+	FaceCombinationOR face = new FaceCombinationOR(1,1,1,0);
 
     public AilesGardienne(){
         super(4,0,2,true);
