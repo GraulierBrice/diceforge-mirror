@@ -9,6 +9,7 @@ public class SolarAI extends Strategy {
 
     public SolarAI(){
         super();
+        super.name = "Solar";
     }
 
 

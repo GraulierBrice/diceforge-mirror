@@ -1,6 +1,8 @@
 package DiceForge;
 
+import DiceForge.AI.LunarAI;
 import DiceForge.AI.RandomAI;
+import DiceForge.AI.SolarAI;
 import DiceForge.AI.Strategy;
 import DiceForge.Face.*;
 import DiceForge.Feat.*;
@@ -87,8 +89,18 @@ public class Player {
     public void removeLunarShard(int LunarShard){this.lunarShard = (this.lunarShard -LunarShard>=0) ? this.lunarShard -LunarShard : 0;}
     public void removeSolarShard(int SolarShard){this.solarShard = (this.solarShard -SolarShard>=0) ? this.solarShard -SolarShard : 0;}
     public void removeGold(int gold){this.gold = (this.gold-gold>=0) ? this.gold-gold : 0;}
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public void nextStrategy() {
+        switch (getStrategy().getName()) {
+            case "Lunar":
+                this.strategy = new SolarAI();
+                break;
+            case "Solar":
+                this.strategy = new LunarAI();
+                break;
+           /* case "Random" :
+                this.strategy = new LunarAI();
+                break; */
+        }
         this.strategy.setPlayer(this);
     }
     public void addVictory(){this.nbVictory++;}
@@ -196,6 +208,21 @@ public class Player {
                 }
             default:
                 return null;
+        }
+    }
+
+    public void shouldIChangeStrategy(Referee referee) {
+        if (this.getStrategy().getName().equals("Random")) {
+            return;
+        }
+
+        switch ( referee.getRound()) {
+            case 1 :
+
+                if (referee.getPlayers().stream().filter(p -> this.getStrategy().getName().equals(p.getStrategy().getName()) && p != this).count() > 1) {
+                    this.nextStrategy();
+                    shouldIChangeStrategy(referee);
+                }
         }
     }
 

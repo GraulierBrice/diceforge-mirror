@@ -7,10 +7,11 @@ import DiceForge.Feat.HerbesFolles;
 
 public abstract class Strategy {
     Player player;
+    String name;
 
     public Strategy() {
     }
-
+    public String getName() { return this.name; }
     public void setPlayer(Player player) { this.player = player; }
     public abstract String chooseReinforcement();
     public abstract String chooseFeatReinforcement();

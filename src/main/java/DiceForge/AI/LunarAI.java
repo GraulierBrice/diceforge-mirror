@@ -9,6 +9,7 @@ public class LunarAI extends Strategy {
 
     public LunarAI(){
         super();
+        super.name="Lunar";
     }
 
     @Override

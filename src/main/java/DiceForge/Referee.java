@@ -7,6 +7,7 @@ public class Referee {
     private static Forge forge;
     private static World world;
     private int turnPlayer, round, maxRound;
+    private Player turnP;
 
     public static final String PASSE="passe";
     public static final String FORGE="forge";
@@ -53,7 +54,7 @@ public class Referee {
     public int getMaxRound() {
         return this.maxRound;
     }
-
+    public Player getCurrentPlayer() { return this.turnP; }
     public ArrayList<Player> getPlayers(){ return this.players;}
 
     public static Forge getForge() {
@@ -78,7 +79,7 @@ public class Referee {
     }
 
     public void choixReinforcement(String action) {
-        Player turnP = this.getPlayer(this.turnPlayer);
+        turnP = this.getPlayer(this.turnPlayer);
         if (action == REINFORCEMENT) {
             for (int i = 0; i < turnP.getNbFeat(); i++) {
                 if (turnP.getFeat(i).getReinfor() && turnP.strategy.chooseFeatReinforcement() == FEAT_REINFORCEMENT) {
@@ -90,8 +91,8 @@ public class Referee {
 
     public void choixAction(String action) {//number = nombre de games
 
-        Player turnP = this.getPlayer(this.turnPlayer);
-
+        turnP = this.getPlayer(this.turnPlayer);
+        turnP.shouldIChangeStrategy(this);
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case FORGE:
                 Pool pool = forge.getPool(turnP.strategy.choosePool());

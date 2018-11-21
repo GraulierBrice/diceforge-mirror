@@ -12,6 +12,7 @@ public class RandomAI extends Strategy{
 
     public RandomAI(){
         super();
+        super.name = "Random";
     }
 
     public String chooseReinforcement() {
