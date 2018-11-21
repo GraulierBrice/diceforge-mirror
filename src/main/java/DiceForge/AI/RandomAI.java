@@ -16,42 +16,47 @@ public class RandomAI extends Strategy{
         super.name = "Random";
     }
 
-    public String chooseReinforcement() {
+    public void chooseReinforcement() {
         int choice = r.nextInt(2);
-        switch(choice){
+        switch(choice) {
             case 0:
-                return null;
+                this.player.setAction(null);
+                break;
             case 1:
-                return Referee.REINFORCEMENT;
+                this.player.setAction(Referee.REINFORCEMENT);
+                break;
         }
-        return null;
     }
 
-    public String chooseFeatReinforcement() {
+    public void chooseFeatReinforcement() {
         int choice = r.nextInt(2);
-        switch(choice){
+        switch(choice) {
             case 0:
-                return null;
+                this.player.setAction(null);
+                break;
             case 1:
-                return Referee.FEAT_REINFORCEMENT;
+                this.player.setAction(Referee.FEAT_REINFORCEMENT);
+                break;
         }
-        return null;
     }
 
 
-    public String chooseAction() {
+    public void chooseAction() {
         int choice = r.nextInt(3);
         switch(choice){
             case 0:
-                return Referee.PASSE;
+                this.player.setAction(Referee.PASSE);
+                break;
             case 1:
-                return Referee.FORGE;
+                this.player.setAction(Referee.FORGE);
+                break;
             case 2:
                 this.chooseIsland();
                 if(this.player.getCurrentIsland()!=-1 && this.chooseFeat()!=-1)
-                return Referee.EXPLOIT;
+                    this.player.setAction(Referee.EXPLOIT);
+                break;
         }
-        return Referee.PASSE;
+        this.player.setAction(Referee.PASSE);
     }
 
 

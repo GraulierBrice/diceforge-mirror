@@ -14,28 +14,26 @@ public class SolarAI extends Strategy {
     }
 
 
-    public String chooseReinforcement() {
-        return Referee.REINFORCEMENT;
+    public void chooseReinforcement() {
+        this.player.setAction(Referee.REINFORCEMENT);
     }
-    public String chooseFeatReinforcement() {
-        return Referee.FEAT_REINFORCEMENT;
+    public void chooseFeatReinforcement() {
+        this.player.setAction(Referee.FEAT_REINFORCEMENT);
     }
 
 
 
-    public String chooseAction() {
+    public void chooseAction() {
         Pool pool=Referee.getForge().affordablePoolWith(Player.SolarShard,this.player.getGold());
         chooseIsland();
         if(this.player.getCurrentIsland()!=-1){
             Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
             if(island!=null && this.chooseFeat()!=-1 ) {//pour farmer les marteaux pour l'instant
-                return Referee.EXPLOIT;
+                this.player.setAction(Referee.EXPLOIT);
             }
-        }
-        if(pool!=null && this.player.getGold() >= pool.getPrice()) {
-            return Referee.FORGE;
-        }
-        return Referee.PASSE;
+        }else if(pool!=null && this.player.getGold() >= pool.getPrice()) {
+            this.player.setAction(Referee.FORGE);
+        }else this.player.setAction(Referee.PASSE);
     }
 
 

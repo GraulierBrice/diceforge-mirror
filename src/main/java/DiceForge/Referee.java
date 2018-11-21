@@ -72,6 +72,8 @@ public class Referee {
         ArrayList<Face> ennemyFaces=new ArrayList<>();
         for(int i=0;i<this.getNumberPlayer();i++){
             if(players.get(i)!=players.get(turnPlayer)){
+                players.get(i).getDice(0).rollDice();
+                players.get(i).getDice(1).rollDice();
                 ennemyFaces.add(players.get(i).getDice(0).getReward());
                 ennemyFaces.add(players.get(i).getDice(1).getReward());
             }
@@ -92,11 +94,15 @@ public class Referee {
         }
     }
 
-    public void choixReinforcement(String action) {
+    public void choixReinforcement() {
         turnP = this.getPlayer(this.turnPlayer);
+        turnP.strategy.chooseReinforcement();
+        String action=turnP.getAction();
         if (action == REINFORCEMENT) {
+            turnP.strategy.chooseFeatReinforcement();
+            action=turnP.getAction();
             for (int i = 0; i < turnP.getNbFeat(); i++) {
-                if (turnP.getFeat(i).getReinfor() && turnP.strategy.chooseFeatReinforcement() == FEAT_REINFORCEMENT) {
+                if (turnP.getFeat(i).getReinfor() && action == FEAT_REINFORCEMENT) {
                     turnP.getFeat(i).effect();
                 }
             }
@@ -104,7 +110,6 @@ public class Referee {
     }
 
     public void choixAction(String action) {//number = nombre de games
-
         turnP = this.getPlayer(this.turnPlayer);
         turnP.shouldIChangeStrategy(this);
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer

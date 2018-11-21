@@ -13,9 +13,9 @@ public abstract class Strategy {
     }
     public String getName() { return this.name; }
     public void setPlayer(Player player) { this.player = player; }
-    public abstract String chooseReinforcement();
-    public abstract String chooseFeatReinforcement();
-    public abstract String chooseAction();
+    public abstract void chooseReinforcement();
+    public abstract void chooseFeatReinforcement();
+    public abstract void chooseAction();
     public abstract Face[] chooseBestEnnemyFace();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);

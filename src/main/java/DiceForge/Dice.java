@@ -16,6 +16,7 @@ public class Dice{
 
 	/* Accessor */
 	public Face getFace(int i){return this.faces[i];}
+
 	public Face getReward(){
 		return this.faces[roll];
 	}

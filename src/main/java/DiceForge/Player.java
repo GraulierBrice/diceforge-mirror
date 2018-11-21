@@ -23,6 +23,7 @@ public class Player {
     public static final String HONOUR="H";
     public static final String LunarShard="LunarShard";
     public static final String SolarShard="SolarShard";
+    public String action;
 
     public Player(Object strategy, String name){
         this.strategy = (Strategy) strategy;
@@ -71,8 +72,10 @@ public class Player {
     public int getSumHonour(){return this.sumHonour;}
     public String getName(){return this.name;}
     public ArrayList<Face> getEnnemyFaces(){return this.ennemyFaces;}
+    public String getAction(){return this.action;}
 
     /* Mutator */
+    public void setAction(String action){this.action=action;}
     public void setMaxLunarShard(int n){this.maxLunarShard = n;}
     public void setMaxSolarShard(int n){this.maxSolarShard = n;}
     public void setCurrentIsland(int currentIsland) { this.currentIsland = currentIsland; }
@@ -138,6 +141,7 @@ public class Player {
         this.maxSolarShard =6;
         this.maxGold=12;
         this.currentIsland=0;// à modif pour mettre une valeur "ile de départ"
+        this.ennemyFaces=new ArrayList<>();
         this.feats=new ArrayList<>();
     }
 
@@ -232,8 +236,8 @@ public class Player {
         int diceNumber=0;
         if(this.de1.diceNotFullWith(HONOUR)) diceNumber=0;//devrait traiter plus tard pour chercher la face ayant le moins d'honneur si jamais il est full honour sur ses deux dés
         else if(this.de2.diceNotFullWith(HONOUR)) diceNumber=1;
-        if(false){
-       // if(Referee.getWorld().getIsland(6).isIn(Hydre.class) && this.lunarShard>=5 && this.solarShard>=5){
+        action=Referee.EXPLOIT;
+        if(Referee.getWorld().getIsland(6).isIn(Hydre.class) && this.lunarShard>=5 && this.solarShard>=5){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,Hydre.class);
 
@@ -259,7 +263,7 @@ public class Player {
             Referee.getWorld().giveFeat(this,Minotaure.class);
         }else if(Referee.getWorld().getIsland(2).isIn(Satyres.class) && this.lunarShard >=3){
             this.currentIsland=2;
-            Referee.getWorld().giveFeat(this,Satyres.class);
+           Referee.getWorld().giveFeat(this,Satyres.class);
         }else if(Referee.getWorld().getIsland(4).isIn(CasqueInvisibilite.class) && this.lunarShard >=5){
             this.currentIsland=4;
             Referee.getWorld().giveFeat(this,CasqueInvisibilite.class);
@@ -276,12 +280,16 @@ public class Player {
             this.currentIsland=2;
             Referee.getWorld().giveFeat(this,SabotArgent.class);
         }else if(Referee.getForge().getPool(0).kindOfPool(HONOUR) && this.gold>=12){
+            action=Referee.FORGE;
             this.buy(Referee.getForge().getPool(0),Referee.getForge().getPool(0).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
         }else if(Referee.getForge().getPool(1).kindOfPool(HONOUR) && this.gold>=8){
+            action=Referee.FORGE;
             this.buy(Referee.getForge().getPool(1),Referee.getForge().getPool(1).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
         }else if(Referee.getForge().getPool(4).kindOfPool(HONOUR) && this.gold>=5){
+            action=Referee.FORGE;
             this.buy(Referee.getForge().getPool(4),Referee.getForge().getPool(4).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
         }else if(Referee.getForge().getPool(5).kindOfPool(HONOUR) && this.gold>=4){
+            action=Referee.FORGE;
             this.buy(Referee.getForge().getPool(5),Referee.getForge().getPool(5).faceKind(HONOUR),diceNumber,this.de1.faceNotOfThisKind(HONOUR));
         }
     }

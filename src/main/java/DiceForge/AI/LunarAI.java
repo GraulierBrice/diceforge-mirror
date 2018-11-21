@@ -13,30 +13,28 @@ public class LunarAI extends Strategy {
     }
 
     @Override
-    public String chooseReinforcement() {
-        return Referee.REINFORCEMENT;
+    public void chooseReinforcement() {
+        this.player.setAction(Referee.REINFORCEMENT);
     }
 
     @Override
-    public String chooseFeatReinforcement() {
-        return Referee.FEAT_REINFORCEMENT;
+    public void chooseFeatReinforcement() {
+        this.player.setAction(Referee.FEAT_REINFORCEMENT);
     }
 
 
     @Override
-    public String chooseAction() {
+    public void chooseAction() {
         Pool pool=Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold());
         chooseIsland();
         if(this.player.getCurrentIsland()!=-1){
             Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
             if(island!=null && this.chooseFeat()!=-1 ) {//pour farmer les marteaux pour l'instant
-                return Referee.EXPLOIT;
+                this.player.setAction(Referee.EXPLOIT);
             }
-        }
-        if(pool!=null && this.player.getGold() >= pool.getPrice()) {
-            return Referee.FORGE;
-        }
-        return Referee.PASSE;
+        }else if(pool!=null && this.player.getGold() >= pool.getPrice()) {
+            this.player.setAction(Referee.FORGE);
+        }else  this.player.setAction(Referee.PASSE);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class LunarAI extends Strategy {
         for(int i=0;i<faces.size();i++){
             if(faces.get(i).getRewardKind(Player.LunarShard) > bestFace[0].getRewardKind(Player.LunarShard)){
                 bestFace[0]=faces.get(i);
-            }else if(faces.get(i).getRewardKind(Player.LunarShard) > bestFace[1].getRewardKind(Player.LunarShard)){
+            }else if(faces.get(i).getRewardKind(Player.LunarShard) > bestFace[1].getRewardKind(Player.LunarShard) && faces.get(i)!=bestFace[0]){
                 bestFace[1]=faces.get(i);
             }
         }
