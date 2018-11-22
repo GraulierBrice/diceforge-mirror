@@ -50,6 +50,11 @@ public class SolarAI extends Strategy {
         return this.player.getDice(1);
     }
 
+    @Override
+    public void replay() {
+
+    }
+
 
     public int chooseDiceFace(int dice) {
         if(this.chooseDice()==0) return (this.player.getDice(dice).faceNotOfThisKind(Player.SolarShard));

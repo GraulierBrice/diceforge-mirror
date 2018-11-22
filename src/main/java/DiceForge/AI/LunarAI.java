@@ -52,6 +52,11 @@ public class LunarAI extends Strategy {
     }
 
     @Override
+    public void replay() {
+
+    }
+
+    @Override
     public int chooseDiceFace(int dice) {
         if(this.chooseDice()==1) return (this.player.getDice(dice).faceNotOfThisKind(Player.LunarShard));
         else if(this.chooseDice()==0) return (this.player.getDice(dice).faceNotOfThisKind(Player.GOLD));

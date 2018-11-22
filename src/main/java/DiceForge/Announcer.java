@@ -34,36 +34,21 @@ public class Announcer {
         }
     }
 
+    public static void printTurnNumber(int number){
+        if (Main.LEVEL == 1) System.out.println("Nous sommes au tour : " + number + "\n\n");
+    }
+
+    public static void printTwoPlayersSecondRoll(Player player){
+        if(Main.LEVEL==1) {
+            System.out.println("Seconde Faveur:");
+            printDice(player);
+        }
+    }
+
+
     public void DiceForgeResult() {
         for (int j = 0; j < Main.numberOfGames; j++) {
-            while (referee.getRound() <= referee.getMaxRound()) {
-                if (Main.LEVEL == 1) System.out.println("Nous sommes au tour : " + referee.getRound() + "\n\n");
-                for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                    referee.getPlayer(referee.getTurnPlayer()).strategy.chooseReinforcement();
-                    this.printReinforcement();
-                    referee.choixReinforcement();
-
-                   referee.getPlayer(referee.getTurnPlayer()).strategy.chooseAction();
-                    referee.getEnnemyRoll(); // à voir à mieux placer
-                    if (referee.getRound() != referee.getMaxRound()) {
-                        referee.choixAction(referee.getPlayer(referee.getTurnPlayer()).getAction());
-                    } else {
-                        referee.getPlayer(referee.getTurnPlayer()).lastAction();
-                    }
-                    referee.sameIsland();
-
-                    this.printAction();
-                    this.printLog();
-
-                    if (referee.getNumberPlayer() == 2) {
-                        referee.faveur();
-                        System.out.println("Seconde Faveur:");
-                        this.printDice(referee.getPlayer(referee.getTurnPlayer()));
-                    }
-                    referee.faveur();
-                    referee.nextPlayer();
-                }
-            }
+            referee.game();
             this.printWinner();
             referee.reset();
         }
@@ -75,7 +60,8 @@ public class Announcer {
         }
     }
 
-    public void printLog() {
+
+    public static void printLog(Referee referee) {
         if (Main.LEVEL == 1) {
             for (Player p : referee.getPlayers()) {
                 System.out.println(referee.getPlayers().indexOf(p) == referee.getTurnPlayer() ? ANSI_UNDERLINE + ANSI_SRED + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET : ANSI_UNDERLINE + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET);
@@ -90,42 +76,40 @@ public class Announcer {
                     }
                 }
                 System.out.println("  Faveur :");
-                this.printDice(p);
+                printDice(p);
             }
         }
     }
 
-    public void printAction() {
+    public static void printAction(Player player) {
         if(Main.LEVEL==1){
-            Player player = referee.getPlayer(referee.getTurnPlayer());
             String action = player.getAction();
             switch (action) {
                 case Referee.PASSE:
-                    System.out.println(ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " passe son tour" + ANSI_RESET);
+                    System.out.println(ANSI_SBLUE + "Joueur " + player.getName() + " passe son tour" + ANSI_RESET);
                     break;
                 case Referee.FORGE:
-                    System.out.println(ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " peut acheter une face" + ANSI_RESET);
+                    System.out.println(ANSI_SBLUE + "Joueur " + player.getName()+ " peut acheter une face" + ANSI_RESET);
                     break;
                 case Referee.EXPLOIT:
-                    System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + (referee.getTurnPlayer() + 1) + " peut choisir un exploit à réaliser" + ANSI_RESET);
-                    System.out.println(ANSI_SBLUE + " Joueur " + (referee.getTurnPlayer() + 1) + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1));
+                    System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + player.getName() + " peut choisir un exploit à réaliser" + ANSI_RESET);
+                    System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1));
                     break;
             }
         }
     }
 
-    public void printReinforcement() {
+    public static void printReinforcement(Player player) {
         if(Main.LEVEL==1) {
-            Player player = referee.getPlayer(referee.getTurnPlayer());
             String action = player.getAction();
             player.strategy.chooseFeatReinforcement();
             String actionFeat = player.getAction();
             if (action == Referee.REINFORCEMENT) {
                 for (int i = 0; i < player.getNbFeat(); i++) {
                     if (player.getFeat(i).getReinfor()) {
-                        System.out.println(ANSI_UNDERLINE + ANSI_BOLD + ANSI_SGREEN + "Joueur " + (referee.getTurnPlayer() + 1) + " peut renforcer " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
+                        System.out.println(ANSI_UNDERLINE + ANSI_BOLD + ANSI_SGREEN + "Joueur " + (player.getName()) + " peut renforcer " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
                         if (actionFeat == Referee.FEAT_REINFORCEMENT) {
-                            System.out.println(ANSI_GREEN + "Joueur " + (referee.getTurnPlayer() + 1) + " renforce l'exploit " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
+                            System.out.println(ANSI_GREEN + "Joueur " + (player.getName()) + " renforce l'exploit " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
                         } else {
                             System.out.println(ANSI_GREEN + "Il n'a pas fait de renforcement" + ANSI_RESET);
                         }
@@ -154,10 +138,16 @@ public class Announcer {
         }
     }
 
-    public static void printSameIsland(Player currentPlayer,Player otherPlayer){
-        System.out.println(ANSI_RED+"\nLe joueur "+otherPlayer.getName()+" est sur la même île que le joueur "+currentPlayer.getName()+" il est donc déplacé au point de départ et une faveur lui est accordée."+ANSI_RESET);
-        printDice(otherPlayer);
-        System.out.print("\n");
+    public static void printSameIsland(Player currentPlayer,Player otherPlayer) {
+        if (Main.LEVEL == 1) {
+            System.out.println(ANSI_RED + "\nLe joueur " + otherPlayer.getName() + " est sur la même île que le joueur " + currentPlayer.getName() + " il est donc déplacé au point de départ et une faveur lui est accordée." + ANSI_RESET);
+            printDice(otherPlayer);
+            System.out.print("\n");
+        }
+    }
+
+    public static void printReplay(Player player){
+        if(Main.LEVEL==1) System.out.println(Announcer.ANSI_SYELLOW+"\n\nle joueur "+player.getName()+" rejoue."+Announcer.ANSI_RESET);
     }
 
 

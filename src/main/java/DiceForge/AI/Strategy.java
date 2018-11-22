@@ -26,6 +26,7 @@ public abstract class Strategy {
     public abstract void chooseIsland();
     public abstract int chooseFeat();
     public abstract Dice chooseBestDice();
+    public abstract void replay();
 
 
 }

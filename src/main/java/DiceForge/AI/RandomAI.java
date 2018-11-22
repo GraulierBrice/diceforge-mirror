@@ -42,7 +42,11 @@ public class RandomAI extends Strategy{
 
 
     public void chooseAction() {
-        int choice = r.nextInt(3);
+        this.chooseIsland();
+        int choice;
+        if(this.player.getCurrentIsland()!=-1 && this.chooseFeat()!=-1)
+             choice = r.nextInt(3);
+        else choice= r.nextInt(2);
         switch(choice){
             case 0:
                 this.player.setAction(Referee.PASSE);
@@ -51,12 +55,9 @@ public class RandomAI extends Strategy{
                 this.player.setAction(Referee.FORGE);
                 break;
             case 2:
-                this.chooseIsland();
-                if(this.player.getCurrentIsland()!=-1 && this.chooseFeat()!=-1)
-                    this.player.setAction(Referee.EXPLOIT);
+                this.player.setAction(Referee.EXPLOIT);
                 break;
         }
-        this.player.setAction(Referee.PASSE);
     }
 
 
@@ -106,7 +107,7 @@ public class RandomAI extends Strategy{
 
     public void chooseIsland(){
         int value=r.nextInt(7);
-        if(Referee.getWorld().getIsland(value).isEmpty() || this.player.getLunarShard()<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.LunarShard).getPriceLunarShard() || this.player.getSolarShard()<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.SolarShard).getPriceSolarShard()){
+        if(!Referee.getWorld().getIsland(value).isIn(player.listFeat(this.chooseFeat()))  || this.player.getLunarShard()<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.LunarShard).getPriceLunarShard() || this.player.getSolarShard()<Referee.getWorld().getIsland(value).lowestPriceOfFeat(Player.SolarShard).getPriceSolarShard()){
             value=-1;
         }
         this.player.setCurrentIsland(value);
@@ -121,6 +122,13 @@ public class RandomAI extends Strategy{
             return -1;
         }else{
             return value;
+        }
+    }
+
+    public void replay(){
+        if(player.getHasReplayed()==false && player.getSolarShard()>=2){
+            int value=r.nextInt(2);
+            if(value==1) player.setHasReplayed(true);
         }
     }
 

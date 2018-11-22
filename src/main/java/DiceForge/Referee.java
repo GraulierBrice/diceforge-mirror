@@ -142,6 +142,56 @@ public class Referee {
         }
     }
 
+    public void turn(Player player){
+        player.strategy.chooseReinforcement();
+        Announcer.printReinforcement(player);
+        this.choixReinforcement();
+
+        player.strategy.chooseAction();
+        this.getEnnemyRoll(); // à voir à mieux placer
+        if (this.round != this.maxRound) {
+            this.choixAction(player.getAction());
+        } else {
+            player.lastAction();
+        }
+        this.sameIsland();
+
+       Announcer.printAction(player);
+       Announcer.printLog(this);
+    }
+
+
+    public void replay(Player player){
+        if(!player.getHasReplayed()){
+            player.strategy.replay();
+            if(player.getHasReplayed()){
+                Announcer.printReplay(player);
+                this.turn(player);
+                player.setHasReplayed(false);
+                player.removeSolarShard(2);
+            }
+        }
+    }
+
+    public void game(){
+        while (this.getRound() <= this.getMaxRound()) {
+            Announcer.printTurnNumber(this.getRound());
+            for (int i = 0; i < this.getNumberPlayer(); i++) {
+                Player currentPlayer=this.getPlayer(this.getTurnPlayer());
+
+                this.turn(currentPlayer);
+                this.replay(currentPlayer);
+
+                if (this.getNumberPlayer() == 2) {
+                    this.faveur();
+                    Announcer.printTwoPlayersSecondRoll(currentPlayer);
+                }
+                this.faveur();
+                this.nextPlayer();
+            }
+        }
+    }
+
 
     public void faveur() {
         players.forEach(Player::faveur);

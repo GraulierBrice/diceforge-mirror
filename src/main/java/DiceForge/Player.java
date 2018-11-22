@@ -23,7 +23,8 @@ public class Player {
     public static final String HONOUR="H";
     public static final String LunarShard="LunarShard";
     public static final String SolarShard="SolarShard";
-    public String action;
+    private String action;
+    private boolean hasReplayed=false;
 
     public Player(Object strategy, String name){
         this.strategy = (Strategy) strategy;
@@ -73,8 +74,10 @@ public class Player {
     public String getName(){return this.name;}
     public ArrayList<Face> getEnnemyFaces(){return this.ennemyFaces;}
     public String getAction(){return this.action;}
+    public boolean getHasReplayed(){return this.hasReplayed;}
 
     /* Mutator */
+    public void setHasReplayed(boolean bool){this.hasReplayed=bool;}
     public void setAction(String action){this.action=action;}
     public void setMaxLunarShard(int n){this.maxLunarShard = n;}
     public void setMaxSolarShard(int n){this.maxSolarShard = n;}
@@ -141,6 +144,7 @@ public class Player {
         this.maxSolarShard =6;
         this.maxGold=12;
         this.currentIsland=0;// à modif pour mettre une valeur "ile de départ"
+        hasReplayed=false;
         this.ennemyFaces=new ArrayList<>();
         this.feats=new ArrayList<>();
     }
@@ -231,6 +235,8 @@ public class Player {
                 }
         }
     }
+
+
 
     public void lastAction(){
         int diceNumber=0;
