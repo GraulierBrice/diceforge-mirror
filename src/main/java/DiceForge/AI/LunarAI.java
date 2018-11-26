@@ -24,20 +24,11 @@ public class LunarAI extends Strategy {
 
 
     @Override
-    public void chooseAction() {
-        Pool pool=Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold());
-        chooseIsland();
-        if(this.player.getCurrentIsland()!=-1){
-            Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
-            if(island!=null && this.chooseFeat()!=-1) {
-                this.player.setAction(Referee.EXPLOIT);
-            }
-        }else if(pool!=null && this.player.getGold() >= pool.getPrice()) {
-            this.player.setAction(Referee.FORGE);
-        }else  this.player.setAction(Referee.PASSE);
+    public Pool setPool() {
+        return Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold());
     }
 
-    @Override
+
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des lunarShard comme ça on est sûr d'en drop à chaque tour
         if(Referee.getForge().bestPoolWith(Player.LunarShard,this.player.getGold()).getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
             return 1;
@@ -106,30 +97,16 @@ public class LunarAI extends Strategy {
 
     @Override
     public int choosePool() {
-            if(interestingKind()==Player.LunarShard) return Referee.getForge().isNumber(Referee.getForge().bestPoolWith(Player.LunarShard,this.player.getGold()));
-            else if(interestingKind()==Player.GOLD) return Referee.getForge().isNumber((Referee.getForge().bestPoolWith(Player.GOLD,this.player.getGold())));
-            else return -1;//devrait être -1 en plein test
+        switch (interestingKind()) {
+            case Player.LunarShard:
+                return Referee.getForge().isNumber(Referee.getForge().bestPoolWith(Player.LunarShard, this.player.getGold()));
+            case Player.GOLD:
+                return Referee.getForge().isNumber((Referee.getForge().bestPoolWith(Player.GOLD, this.player.getGold())));
+            default:
+                return -1;//devrait être -1 en plein test
+        }
     }
 
-    @Override
-    public int goldChoice(int g, Hammer h) {
-        if(g+this.player.getGold()>=5) {
-            if ((h.getGold() + g - (5 - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (5 - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
-                h.effect(g - (5 - this.player.getGold()));
-                return (5 - this.player.getGold());
-            } else if (h.getGold() + g - (5 - this.player.getGold()) > 15 && h.getLevel() == 1) {
-                int value = h.getGold() + g - (5 - this.player.getGold()) - 15;
-                h.effect(15 - h.getGold());
-                return value;
-            } else if (h.getGold() + g - (5 - this.player.getGold()) > 30 && h.getLevel() == 0) {
-                int value = h.getGold() + g - (5 - this.player.getGold()) - 30;
-                h.effect(15 - h.getGold());
-                h.effect(15);
-                return value;
-            }
-        }
-        return g;
-    }
 
     @Override
     public void chooseIsland() {

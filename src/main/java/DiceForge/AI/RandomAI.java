@@ -16,6 +16,11 @@ public class RandomAI extends Strategy{
         super.name = "Random";
     }
 
+    @Override
+    public Pool setPool() {
+        return null;
+    }
+
     public void chooseReinforcement() {
         int choice = r.nextInt(2);
         switch(choice) {
@@ -40,7 +45,7 @@ public class RandomAI extends Strategy{
         }
     }
 
-
+    @Override
     public void chooseAction() {
         this.chooseIsland();
         int choice;
