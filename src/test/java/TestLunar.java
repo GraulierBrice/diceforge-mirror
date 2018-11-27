@@ -35,21 +35,21 @@ import DiceForge.AI.*;
         }
 
         public void removeFeat(){
-            referee.getWorld().getIsland(0).removeFeat(Hammer.class);               //world équivalent à 1 joueur
-            referee.getWorld().getIsland(0).removeFeat(Chest.class);                //pour ne pas modif test
-            referee.getWorld().getIsland(1).removeFeat(Ancien.class);               //mais besoin de deux joueurs
-            referee.getWorld().getIsland(1).removeFeat(HerbesFolles.class);         //pour l'effect de satyres
-            referee.getWorld().getIsland(2).removeFeat(SabotArgent.class);          //car il regarde les dés des ennemis
-            referee.getWorld().getIsland(2).removeFeat(Satyres.class);              //et s'il n'a pas d'ennemis ça ne
-            referee.getWorld().getIsland(3).removeFeat(AilesGardienne.class);       //marchera pas
-            referee.getWorld().getIsland(3).removeFeat(Minotaure.class);
-            referee.getWorld().getIsland(4).removeFeat(Passeur.class);
-            referee.getWorld().getIsland(4).removeFeat(CasqueInvisibilite.class);
-            referee.getWorld().getIsland(5).removeFeat(Meduse.class);
-            referee.getWorld().getIsland(5).removeFeat(MiroirAbyssal.class);
-            referee.getWorld().getIsland(6).removeFeat(Pince.class);
-            referee.getWorld().getIsland(6).removeFeat(Hydre.class);
-            referee.getWorld().getIsland(6).removeFeat(Enigme.class);
+            referee.getWorld().getIsland(0).removeFeat(nameFeat.Hammer);               //world équivalent à 1 joueur
+            referee.getWorld().getIsland(0).removeFeat(nameFeat.Chest);                //pour ne pas modif test
+            referee.getWorld().getIsland(1).removeFeat(nameFeat.Ancien);               //mais besoin de deux joueurs
+            referee.getWorld().getIsland(1).removeFeat(nameFeat.HerbesFolles);         //pour l'effect de satyres
+            referee.getWorld().getIsland(2).removeFeat(nameFeat.SabotArgent);          //car il regarde les dés des ennemis
+            referee.getWorld().getIsland(2).removeFeat(nameFeat.Satyres);              //et s'il n'a pas d'ennemis ça ne
+            referee.getWorld().getIsland(3).removeFeat(nameFeat.AilesGardienne);       //marchera pas
+            referee.getWorld().getIsland(3).removeFeat(nameFeat.Minotaure);
+            referee.getWorld().getIsland(4).removeFeat(nameFeat.Passeur);
+            referee.getWorld().getIsland(4).removeFeat(nameFeat.CasqueInvisibilite);
+            referee.getWorld().getIsland(5).removeFeat(nameFeat.Meduse);
+            referee.getWorld().getIsland(5).removeFeat(nameFeat.MiroirAbyssal);
+            referee.getWorld().getIsland(6).removeFeat(nameFeat.Pince);
+            referee.getWorld().getIsland(6).removeFeat(nameFeat.Hydre);
+            referee.getWorld().getIsland(6).removeFeat(nameFeat.Enigme);
         }
 
         @Test public void choiceLunar(){
@@ -61,7 +61,7 @@ import DiceForge.AI.*;
             lunar.addLunarShard(1);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(0) instanceof Hammer);
+            assertTrue(lunar.getFeat(0).getName() == nameFeat.Hammer);
 
             lunar.addGold(10);
             assertEquals(lunar.getGold(),5);
@@ -75,40 +75,40 @@ import DiceForge.AI.*;
             lunar.addLunarShard(6);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(1) instanceof Pince);
+            assertTrue(lunar.getFeat(1).getName()==nameFeat.Pince);
 
             remove();
             lunar.addLunarShard(5); lunar.addSolarShard(5);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(2) instanceof Hydre);
+            assertTrue(lunar.getFeat(2).getName()==nameFeat.Hydre);
 
             remove();
             lunar.addLunarShard(4);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(3) instanceof Passeur);
+            assertTrue(lunar.getFeat(3).getName()==nameFeat.Passeur);
 
             remove();
             lunar.addLunarShard(5);
             lunar.getStrategy().chooseAction();
 
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(4) instanceof CasqueInvisibilite);
+            assertTrue(lunar.getFeat(4).getName()==nameFeat.CasqueInvisibilite);
 
 
             remove();
             lunar.addLunarShard(2);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(5) instanceof SabotArgent);
+            assertTrue(lunar.getFeat(5).getName()==nameFeat.SabotArgent);
 
             remove();
             lunar.addLunarShard(3);
             referee.getEnnemyRoll();
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(6) instanceof Satyres);
+            assertTrue(lunar.getFeat(6).getName()==nameFeat.Satyres);
 
             /* ajouter test de choix de faces quand Satyres
 
@@ -119,7 +119,7 @@ import DiceForge.AI.*;
             lunar.addLunarShard(1);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(7) instanceof Chest);
+            assertTrue(lunar.getFeat(7).getName()==nameFeat.Chest);
 
             world.getIsland(0).setFeats(new Hammer());
             world.getIsland(0).setFeats((new Chest()));
@@ -127,7 +127,7 @@ import DiceForge.AI.*;
             lunar.addLunarShard(1);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
-            assertTrue(lunar.getFeat(8) instanceof Chest);
+            assertTrue(lunar.getFeat(8).getName()==nameFeat.Chest);
 
             world.getIsland(0).setFeats(new Chest());
             lunar.addGold(31);
@@ -135,7 +135,7 @@ import DiceForge.AI.*;
             lunar.addLunarShard(1);
             lunar.getStrategy().chooseAction();
             referee.choixAction((lunar.getAction()));
-            assertTrue(lunar.getFeat(9) instanceof Hammer);
+            assertTrue(lunar.getFeat(9).getName()==nameFeat.Hammer);
 
             lunar.addGold(5);
             lunar.getStrategy().chooseAction();

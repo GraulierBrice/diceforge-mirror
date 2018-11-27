@@ -10,6 +10,7 @@ public class Hammer extends Feat{
 		super(0,1,0,false);
 		this.gold = 0;
 		this.level = 0;
+		this.name=nameFeat.Hammer;
 	}
 
 	/* Accessor */

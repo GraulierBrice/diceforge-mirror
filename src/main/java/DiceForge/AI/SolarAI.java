@@ -53,8 +53,8 @@ public class SolarAI extends Strategy {
         return 0;//test devrait être -1 pour cas erreur
     }
 
-
-    public int chooseFaceBonus(Face face) {
+    @Override
+    public int chooseFaceOr(Face face) {
         return 0;
     }
 
@@ -108,11 +108,11 @@ public class SolarAI extends Strategy {
 
     @Override
     public void chooseIsland() {
-        if((this.player.getSolarShard()>=6 && Referee.getWorld().getIsland(6).isIn(Enigme.class))||(this.player.getLunarShard()>=5 && this.player.getSolarShard()>=5 && Referee.getWorld().getIsland(6).isIn(Hydre.class))){
+        if((this.player.getSolarShard()>=6 && Referee.getWorld().getIsland(6).isIn(nameFeat.Enigme))||(this.player.getLunarShard()>=5 && this.player.getSolarShard()>=5 && Referee.getWorld().getIsland(6).isIn(nameFeat.Hydre))){
             this.player.setCurrentIsland(6);
         }else if(this.player.getSolarShard()>=4 && !Referee.getWorld().isEmpty(5)){
             this.player.setCurrentIsland(5);
-        }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(AilesGardienne.class)){
+        }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(nameFeat.AilesGardienne)){
             this.player.setCurrentIsland(3);
         }else if(this.player.getSolarShard()>=1 && !Referee.getWorld().isEmpty(1)){
             this.player.setCurrentIsland(1);
@@ -130,26 +130,26 @@ public class SolarAI extends Strategy {
         Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
         switch(this.player.getCurrentIsland()){
             case 0:
-                if(island.isIn(Hammer.class) && !this.player.doIHaveAnHammer())return 0;
-                else if(island.isIn(Chest.class))return 1;
+                if(island.isIn(nameFeat.Hammer) && !this.player.doIHaveAnHammer())return 0;
+                else if(island.isIn(nameFeat.Chest))return 1;
                 else return -1;
             case 1:
-                if(island.isIn(Ancien.class))return 0;
-                else if(island.isIn(HerbesFolles.class)) return 1;
+                if(island.isIn(nameFeat.Ancien))return 0;
+                else if(island.isIn(nameFeat.HerbesFolles)) return 1;
                 else return -1;
             case 2:
-                if(island.isIn(SabotArgent.class))return 0;
-                else if(island.isIn(Satyres.class))return 1;
+                if(island.isIn(nameFeat.SabotArgent))return 0;
+                else if(island.isIn(nameFeat.Satyres))return 1;
                 else return -1;
             case 3:
-                if(island.isIn(AilesGardienne.class))return 0;
+                if(island.isIn(nameFeat.AilesGardienne))return 0;
                 else return -1;
             case 5:
-                if(island.isIn(Meduse.class))return 0;
+                if(island.isIn(nameFeat.Meduse))return 0;
                 else return -1;
             case 6:
-                if(this.player.getLunarShard()>=5 &&island.isIn(Hydre.class))return 1;
-                else if(island.isIn(Enigme.class))return 0;
+                if(this.player.getLunarShard()>=5 &&island.isIn(nameFeat.Hydre))return 1;
+                else if(island.isIn(nameFeat.Enigme))return 0;
                 else return -1;
         }
         return -1;

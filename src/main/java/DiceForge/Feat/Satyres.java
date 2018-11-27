@@ -10,6 +10,7 @@ public class Satyres extends Feat{
 
     public Satyres(){
         super(6,3,0,false);
+        this.name=nameFeat.Satyres;
     }
 
     @Override

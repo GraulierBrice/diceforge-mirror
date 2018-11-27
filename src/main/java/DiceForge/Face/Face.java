@@ -24,6 +24,8 @@ public abstract class Face{
 
 	public abstract void giveReward(Player player); //Overridden to adjust for each Face ressource type
 
+	public abstract void removeReward(Player player);
+
 	public String getReward() {
 		String reward = "";
 		if (this instanceof FaceCombinationAND){
@@ -48,9 +50,17 @@ public abstract class Face{
 		return 0;
 	}
 
+	public int getNumberOfKind(){
+		int number=0;
+		if(rewardGold>0)number++;
+		if(rewardHonour>0)number++;
+		if(rewardLunarShard>0)number++;
+		if(rewardSolarShard>0)number++;
+		return number;
+	}
+
     public String getKind(){return this.kind;}
 
     public void setKind(String a){this.kind+=a;}
 
-	public abstract void giveRewardOR(Player player, int chooseFaceBonus);
 }

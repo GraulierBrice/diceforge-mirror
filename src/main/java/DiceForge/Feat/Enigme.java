@@ -8,6 +8,7 @@ public class Enigme extends Feat{
 
     public Enigme(){
         super(10,0,6,true);
+        this.name=nameFeat.Enigme;
     }
 
     public void setPlayer(Player player){

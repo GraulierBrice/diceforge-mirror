@@ -25,11 +25,7 @@ public class Dice{
 
 	public void giveReward(Player player){
 		this.rollDice();
-		if(this.faces[this.roll] instanceof FaceCombinationOR){
-			this.faces[this.roll].giveRewardOR(player,player.strategy.chooseFaceBonus(this.faces[this.roll]));
-		}else {
-			this.faces[roll].giveReward(player);
-		}
+		this.faces[roll].giveReward(player);
 	}
 
 	//Change le numéro de face roulé aléatoirement

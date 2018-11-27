@@ -2,6 +2,7 @@ package DiceForge;
 
 import DiceForge.Face.Face;
 import DiceForge.Feat.Hammer;
+import DiceForge.Feat.nameFeat;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class Announcer {
                 System.out.println(referee.getPlayers().indexOf(p) == referee.getTurnPlayer() ? ANSI_UNDERLINE + ANSI_SRED + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET : ANSI_UNDERLINE + "Information joueur: " + (referee.getPlayers().indexOf(p) + 1) + ANSI_RESET);
                 System.out.println("  Honour: " + p.getHonour() + "\n  Gold: " + p.getGold() + "/" + p.getMaxGold() + "\n  SolarShard: " + p.getSolarShard() + "/" + p.getMaxSolarShard() + "\n  LunarShard: " + p.getLunarShard() + "/" + p.getMaxLunarShard());
                 for (int i = 0; i < p.getNbFeat(); i++) {
-                    if (p.getFeat(i) instanceof Hammer) {
+                    if (p.getFeat(i).getName() == nameFeat.Hammer) {
                         Hammer hammer = (Hammer) p.getFeat(i);
                         if (hammer.getLevel() < 2) {
                             System.out.println("  Hammer level " + (hammer.getLevel() + 1) + ": " + hammer.getGold());
@@ -77,9 +78,15 @@ public class Announcer {
                 }
                 System.out.println("  Faveur :");
                 printDice(p);
+                if (referee.getNumberPlayer() == 2) {
+                    p.faveur();
+                    printTwoPlayersSecondRoll(p);
+                }
             }
         }
     }
+
+
 
     public static void printAction(Player player) {
         if(Main.LEVEL==1){
@@ -93,7 +100,7 @@ public class Announcer {
                     break;
                 case Referee.EXPLOIT:
                     System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + player.getName() + " peut choisir un exploit à réaliser" + ANSI_RESET);
-                    System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1));
+                    System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1).getName());
                     break;
             }
         }

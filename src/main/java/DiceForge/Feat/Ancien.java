@@ -3,7 +3,10 @@ import DiceForge.Player;
 
 public class Ancien extends Feat{
 
-    public Ancien(){super(0,0,1,true);}
+    public Ancien(){
+        super(0,0,1,true);
+        this.name=nameFeat.Ancien;
+    }
 
     //trade gold vs honour
     public void effect(Object... o) {

@@ -16,6 +16,7 @@ public abstract class Strategy {
     public abstract void chooseReinforcement();
     public abstract void chooseFeatReinforcement();
     public abstract Pool setPool();
+
     public void chooseAction() {
         Pool pool=setPool();
         chooseIsland();
@@ -27,14 +28,15 @@ public abstract class Strategy {
         }else if(pool!=null && this.player.getGold() >= pool.getPrice()) {
             this.player.setAction(Referee.FORGE);
         }else this.player.setAction(Referee.PASSE);
-    };
+    }
 
     public abstract Face[] chooseBestEnnemyFace();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
-    public abstract int chooseFaceBonus(Face face);
+    public abstract int chooseFaceOr(Face face);
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
+
     public int goldChoice(int g, Hammer h) {
         if(g+this.player.getGold()>=5) {
             if ((h.getGold() + g - (5 - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (5 - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
@@ -52,7 +54,8 @@ public abstract class Strategy {
             }
         }
         return g;
-    };
+    }
+
     public abstract void chooseIsland();
     public abstract int chooseFeat();
     public abstract Dice chooseBestDice();

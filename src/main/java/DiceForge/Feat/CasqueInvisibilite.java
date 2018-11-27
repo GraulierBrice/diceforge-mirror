@@ -11,6 +11,7 @@ public class CasqueInvisibilite extends Feat{
         super(4,5,0,false);
         timeThree = new FaceCombinationAND(0,0,0,0);
         timeThree.setKind("three");
+        this.name=nameFeat.CasqueInvisibilite;
     }
 
     @Override

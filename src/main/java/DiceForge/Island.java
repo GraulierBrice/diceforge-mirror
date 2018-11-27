@@ -12,23 +12,31 @@ public class Island{
     }
 
     /* Accessor */
-    public Feat getFeat(Class c){
-        return feats.stream().filter(c::isInstance).findFirst().orElse(null);
+    public Feat getFeat(nameFeat featName){
+        for(Feat f:feats){
+            if(f.getName()==featName)return f;
+        }
+        return null;
     }
     public void setFeats(Feat feat){ this.feats.add(feat);}
 
     //checks if Feat type is present in island
-    public Boolean isIn(Class c){
-        if(c==null) return false;
-        else return feats.stream().anyMatch(c::isInstance);
+    public Boolean isIn(nameFeat featName){
+        if(featName==null) return false;
+        else {
+            for(Feat f:feats){
+                if(f.getName()==featName) return true;
+            }
+        }
+        return false;
     }
 
     public int numOfFeats(){
         return this.feats.size();
     }
 
-    public void removeFeat(Class c){
-        feats.remove(getFeat(c)); //Lambda streams are fun
+    public void removeFeat(nameFeat featName){
+        feats.remove(getFeat(featName)); //Lambda streams are fun
     }
 
     public boolean isEmpty(){

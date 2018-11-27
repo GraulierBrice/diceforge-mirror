@@ -1,6 +1,7 @@
 import DiceForge.Feat.Chest;
 import DiceForge.Feat.Feat;
 import DiceForge.Feat.Hammer;
+import DiceForge.Feat.nameFeat;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,19 +27,19 @@ public class TestIsland {
         assertEquals(2, island.numOfFeats());
         assertTrue(island.doesItCost(Player.LunarShard));
         assertFalse(island.doesItCost(Player.SolarShard));
-        assertTrue(island.isIn(Hammer.class));
+        assertTrue(island.isIn(nameFeat.Hammer));
 
         Feat feat=feats1.get(1);
         assertEquals(island.lowestPriceOfFeat(Player.LunarShard),feat);
 
-        island.removeFeat(Hammer.class);
+        island.removeFeat(nameFeat.Hammer);
         assertEquals(1, island.numOfFeats());
-        assertTrue( !island.isIn(Hammer.class));
+        assertTrue( !island.isIn(nameFeat.Hammer));
 
         Feat feat1=feats1.get(0);
         assertEquals(island.lowestPriceOfFeat(Player.LunarShard),feat1);
 
-        island.removeFeat(Chest.class);
+        island.removeFeat(nameFeat.Chest);
         assertTrue(island.isEmpty());
     }
 

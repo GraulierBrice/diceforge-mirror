@@ -9,6 +9,7 @@ public class Chest extends Feat {
 
     public Chest() {
         super(2,1,0,false);
+        this.name=nameFeat.Chest;
     }
 
     public void setPlayer(Player player){

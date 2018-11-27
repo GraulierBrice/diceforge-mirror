@@ -2,11 +2,12 @@ package DiceForge;
 
 import DiceForge.Face.*;
 import DiceForge.Feat.Satyres;
+import DiceForge.Feat.nameFeat;
 
 import java.util.ArrayList;
 
 public class Referee {
-    private ArrayList<Player> players = new ArrayList<>();
+    private static ArrayList<Player> players = new ArrayList<>();
     private static Forge forge;
     private static World world;
     private int turnPlayer, round, maxRound;
@@ -58,7 +59,7 @@ public class Referee {
         return this.maxRound;
     }
     public Player getCurrentPlayer() { return this.turnP; }
-    public ArrayList<Player> getPlayers(){ return this.players;}
+    public static ArrayList<Player> getPlayers(){ return players;}
 
     public static Forge getForge() {
         return forge;
@@ -96,7 +97,7 @@ public class Referee {
 
     public void sameIsland(){
         for(Player p:this.getPlayers()){
-            if(p!=this.getPlayer(this.getTurnPlayer()) && p.getCurrentIsland()==this.getPlayer(this.getTurnPlayer()).getCurrentIsland()){
+            if(p!=this.getPlayer(this.getTurnPlayer()) && p.getCurrentIsland()==this.getPlayer(this.getTurnPlayer()).getCurrentIsland() && p.getCurrentIsland()!=-1){
                 p.setCurrentIsland(-1);
                 p.faveur();
                 Announcer.printSameIsland(this.getPlayer(this.getTurnPlayer()),p);
@@ -134,7 +135,7 @@ public class Referee {
                 break;
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
-                Class exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
+                nameFeat exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
                 if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
                     this.world.giveFeat(turnP, exploit);
                 }
@@ -157,6 +158,10 @@ public class Referee {
         this.sameIsland();
 
        Announcer.printAction(player);
+        if (this.getNumberPlayer() == 2) {
+            this.faveur();
+        }
+        this.faveur();
        Announcer.printLog(this);
     }
 
@@ -182,11 +187,7 @@ public class Referee {
                 this.turn(currentPlayer);
                 this.replay(currentPlayer);
 
-                if (this.getNumberPlayer() == 2) {
-                    this.faveur();
-                    Announcer.printTwoPlayersSecondRoll(currentPlayer);
-                }
-                this.faveur();
+
                 this.nextPlayer();
             }
         }

@@ -5,6 +5,7 @@ import DiceForge.*;
 public abstract class Feat{
 
 	Player owner;
+	nameFeat name;
 	int honour, priceLunarShard, priceSolarShard;
 	boolean reinfor;
 
@@ -14,7 +15,7 @@ public abstract class Feat{
 		this.priceLunarShard = priceLunarShard;
 		this.priceSolarShard = priceSolarShard;
 		this.reinfor = reinfor;
-
+		//this.name=this.getClass().toString().split("\\.")[2];
 	}
 
 	/* Accessor */
@@ -25,6 +26,10 @@ public abstract class Feat{
 	public int getHonour(){
 		return this.honour;
 	}
+
+	public nameFeat getName(){
+	    return this.name;
+    }
 
 	public Player getOwner() {
 		return owner;

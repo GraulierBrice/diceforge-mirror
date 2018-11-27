@@ -5,7 +5,10 @@ import DiceForge.Main;
 
 public class SabotArgent extends Feat{
 
-    public SabotArgent(){super(2,2,0,true);}
+    public SabotArgent(){
+        super(2,2,0,true);
+        this.name=nameFeat.SabotArgent;
+    }
 
     //rolls dice to play
     public void effect(Object... o) {
@@ -13,10 +16,5 @@ public class SabotArgent extends Feat{
         reward.rollDice();
         reward.giveReward(this.owner);
         if(Main.LEVEL==1)reward.toString(1);
-    }
-
-    @Override
-    public void setPlayer(Player player){
-        super.setPlayer(player);
     }
 }

@@ -4,6 +4,7 @@ public class Pince extends Feat{
 
     public Pince(){
         super(8,6,0,false);
+        this.name=nameFeat.Pince;
     }
 
     @Override

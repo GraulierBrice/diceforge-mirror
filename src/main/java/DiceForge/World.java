@@ -49,10 +49,10 @@ public class World {
         return this.islands.get(n).isEmpty();
     }
 
-    public void giveFeat(Player player, Class feat){
-        this.islands.get(player.getCurrentIsland()).getFeat(feat).setPlayer(player);
-        player.removeLunarShard(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPriceLunarShard());
-        player.removeSolarShard(this.islands.get(player.getCurrentIsland()).getFeat(feat).getPriceSolarShard());
-        this.islands.get(player.getCurrentIsland()).removeFeat(feat);
+    public void giveFeat(Player player, nameFeat featName){
+        this.islands.get(player.getCurrentIsland()).getFeat(featName).setPlayer(player);
+        player.removeLunarShard(this.islands.get(player.getCurrentIsland()).getFeat(featName).getPriceLunarShard());
+        player.removeSolarShard(this.islands.get(player.getCurrentIsland()).getFeat(featName).getPriceSolarShard());
+        this.islands.get(player.getCurrentIsland()).removeFeat(featName);
     }
 }

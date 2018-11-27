@@ -8,10 +8,9 @@ public class FaceCombinationOR extends Face {
         super(rewardGold, rewardLunarShard, rewardSolarShard, rewardHonour);
 
     }
-    public void giveReward(Player player){}
-
-    public void giveRewardOR(Player player,int choose) {
-        switch(choose){
+    @Override
+    public void giveReward(Player player){
+        switch(player.getStrategy().chooseFaceOr(this)){
             case 0:
                 if (kind.contains(Player.GOLD)) {
                     player.addGold(rewardGold);
@@ -41,6 +40,42 @@ public class FaceCombinationOR extends Face {
                 break;
             case 3:
                 player.addHonour(rewardHonour);
+                break;
+        }
+    }
+
+    @Override
+    public void removeReward(Player player) {
+        switch(player.getStrategy().chooseFaceOr(this)){
+            case 0:
+                if (kind.contains(Player.GOLD)) {
+                    player.removeGold(rewardGold);
+                }else if(kind.contains(Player.LunarShard)){
+                    player.removeLunarShard(rewardLunarShard);
+                }else if(kind.contains(Player.SolarShard)){
+                    player.removeSolarShard(rewardSolarShard);
+                }else{
+                    player.removeHonour(rewardHonour);
+                }
+                break;
+            case 1:
+                if(kind.contains(Player.LunarShard)){
+                    player.removeLunarShard(rewardLunarShard);
+                }else if(kind.contains(Player.SolarShard)){
+                    player.removeSolarShard(rewardSolarShard);
+                }else{
+                    player.removeHonour(rewardHonour);
+                }
+                break;
+            case 2:
+                if(kind.contains(Player.SolarShard)){
+                    player.removeSolarShard(rewardSolarShard);
+                }else{
+                    player.removeHonour(rewardHonour);
+                }
+                break;
+            case 3:
+                player.removeHonour(rewardHonour);
                 break;
         }
     }

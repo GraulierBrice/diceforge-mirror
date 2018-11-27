@@ -78,13 +78,9 @@ public class RandomAI extends Strategy{
         return r.nextInt(6);
     }
 
-    public int chooseFaceBonus(Face face){
-        int possibilities=0;
-        if(face.getKind().contains(Player.GOLD))possibilities++;
-        if(face.getKind().contains(Player.LunarShard))possibilities++;
-        if(face.getKind().contains(Player.SolarShard))possibilities++;
-        if(face.getKind().contains(Player.HONOUR))possibilities++;
-        return r.nextInt(possibilities);
+    @Override
+    public int chooseFaceOr(Face face) {
+        return r.nextInt(face.getNumberOfKind());
     }
 
     @Override

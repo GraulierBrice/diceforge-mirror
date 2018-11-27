@@ -1,5 +1,9 @@
 package DiceForge.Feat;
 
+import DiceForge.Player;
+import DiceForge.Referee;
+import java.util.ArrayList;
+
 public class Minotaure extends Feat{
 
     public Minotaure(){
@@ -7,7 +11,17 @@ public class Minotaure extends Feat{
     }
 
     @Override
-    public void effect(Object... o) {
+    public void setPlayer(Player player){
+        super.setPlayer(player);
+        this.effect();
+    }
 
+    @Override
+    public void effect(Object... o) {
+        for(Player p:Referee.getPlayers()){
+                if (p.getName() != this.owner.getName()) {
+                    p.defaveur();
+                }
+            }
     }
 }

@@ -7,10 +7,11 @@ public class AilesGardienne extends Feat{
 
     public AilesGardienne(){
         super(4,0,2,true);
+        this.name=nameFeat.AilesGardienne;
     }
 
     @Override
     public void effect(Object... o) {
-    	face.giveRewardOR(this.owner,this.owner.getStrategy().chooseFaceBonus(face));
+    	face.giveReward(this.owner);
     }
 }

@@ -6,6 +6,7 @@ public class HerbesFolles extends Feat {
 
     public HerbesFolles() {
         super(2,0,1,false);
+        this.name=nameFeat.HerbesFolles;
     }
 
     public void setPlayer(Player player) {

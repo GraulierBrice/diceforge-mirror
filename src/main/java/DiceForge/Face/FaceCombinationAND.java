@@ -6,7 +6,7 @@ public class FaceCombinationAND extends Face{
     public FaceCombinationAND(int rewardGold, int rewardLunarShard, int rewardSolarShard, int rewardHonour) {
         super(rewardGold,rewardLunarShard,rewardSolarShard,rewardHonour);
     }
-
+    @Override
     public void giveReward(Player player) {
         player.addGold(rewardGold);
         player.addLunarShard(rewardLunarShard);
@@ -14,9 +14,10 @@ public class FaceCombinationAND extends Face{
         player.addHonour(rewardHonour);
     }
 
-    public void giveRewardOR(Player player, int chooseFaceBonus) {
-
+    public void removeReward(Player player){
+        player.removeGold(rewardGold);
+        player.removeLunarShard(rewardLunarShard);
+        player.removeSolarShard(rewardSolarShard);
+        player.removeHonour(rewardHonour);
     }
-
-
 }
