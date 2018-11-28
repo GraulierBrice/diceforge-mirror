@@ -1,3 +1,5 @@
+package TestFeat;
+
 import DiceForge.AI.RandomAI;
 import DiceForge.Feat.*;
 import DiceForge.Player;

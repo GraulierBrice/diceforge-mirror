@@ -1,3 +1,5 @@
+package TestFeat;
+
 import DiceForge.Face.FaceCombinationAND;
 import DiceForge.Feat.Minotaure;
 import DiceForge.Player;

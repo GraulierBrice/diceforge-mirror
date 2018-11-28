@@ -1,3 +1,5 @@
+package TestFeat;
+
 import DiceForge.AI.*;
 import DiceForge.Feat.Satyres;
 import DiceForge.Player;
