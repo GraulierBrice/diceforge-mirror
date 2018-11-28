@@ -17,7 +17,10 @@ public class CasqueInvisibilite extends Feat{
 
     @Override
     public void effect(Object... o) {
-    	owner.getDice( (owner.getStrategy().chooseDice())%2 ).setFace(timeThree,owner.getStrategy().chooseDiceFace((owner.getStrategy().chooseDice())%2));
+        int dice = owner.getStrategy().chooseDice()%2;
+        int diceFace = owner.getStrategy().chooseDiceFace(dice);
+    	owner.getDice(dice).setFace(timeThree,diceFace);
+        //owner.getDice( (owner.getStrategy().chooseDice())%2 ).setFace(timeThree,owner.getStrategy().chooseDiceFace((owner.getStrategy().chooseDice())%2));
     }
 
     public void setPlayer(Player player) {

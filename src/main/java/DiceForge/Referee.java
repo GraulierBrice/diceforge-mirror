@@ -129,7 +129,7 @@ public class Referee {
                 if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                     int poolFace = turnP.strategy.choosePoolFace(pool);
                     int dice = turnP.strategy.chooseDice();
-                    int diceFace = turnP.strategy.chooseDiceFace(turnP.strategy.chooseDice());
+                    int diceFace = turnP.strategy.chooseDiceFace(dice);
                     this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
                 }
                 break;

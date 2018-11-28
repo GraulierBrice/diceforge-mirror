@@ -15,7 +15,9 @@ public class MiroirAbyssal extends Feat{
 
     @Override
     public void effect(Object... o) {
-        owner.getDice( (owner.getStrategy().chooseDice())%2 ).setFace(mirror,owner.getStrategy().chooseDiceFace((owner.getStrategy().chooseDice())%2));
+        int dice = owner.getStrategy().chooseDice()%2;
+        int diceFace = owner.getStrategy().chooseDiceFace(dice);
+        owner.getDice(dice).setFace(mirror,diceFace);
     }
 
     public void setPlayer(Player player) {
