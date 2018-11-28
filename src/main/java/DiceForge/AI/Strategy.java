@@ -41,7 +41,7 @@ public abstract class Strategy {
     public abstract int chooseFaceOr(Face face);
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
-    public abstract String interestingKind();
+
     public int goldChoice(int g, Hammer h) {
         if(g+this.player.getGold()>=5) {
             if ((h.getGold() + g - (5 - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (5 - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
