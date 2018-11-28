@@ -128,7 +128,7 @@ public class Player {
             face2.giveReward(this);
         }
 
-        if(face1.getKind().equals("miror") ^ face2.getKind().equals("three")){
+        if(face1.getKind().equals("mirror") ^ face2.getKind().equals("three")){
             strategy.chooseBestEnnemyFace()[0].getReward();
         } else if (face1.getKind().equals("three") && face2.getKind().equals("three")){
             Face[] enFaces =  strategy.chooseBestEnnemyFace();
