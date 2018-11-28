@@ -128,14 +128,13 @@ public class Player {
             face2.giveReward(this);
         }
 
-        if(face1.getKind().equals("mirror") ^ face2.getKind().equals("three")){
-            strategy.chooseBestEnnemyFace()[0].getReward();
-        } else if (face1.getKind().equals("three") && face2.getKind().equals("three")){
+         if (face1.getKind().equals("mirror") && face2.getKind().equals("mirror")){
             Face[] enFaces =  strategy.chooseBestEnnemyFace();
-            enFaces[0].getReward();
-            enFaces[1].getReward();
-        }
-
+            enFaces[0].giveReward(this);
+            enFaces[1].giveReward(this);
+        }else if(face1.getKind().equals("mirror") || face2.getKind().equals("mirror")) {
+             strategy.chooseBestEnnemyFace()[0].giveReward(this);
+         }
     }
 
     public void defaveur(){
