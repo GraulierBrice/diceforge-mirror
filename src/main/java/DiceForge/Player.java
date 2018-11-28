@@ -125,6 +125,15 @@ public class Player {
             face1.giveReward(this);
             face2.giveReward(this);
         }
+
+        if(face1.getKind().equals("miror") ^ face2.getKind().equals("three")){
+            strategy.chooseBestEnnemyFace()[0].getReward();
+        } else if (face1.getKind().equals("three") && face2.getKind().equals("three")){
+            Face[] enFaces =  strategy.chooseBestEnnemyFace();
+            enFaces[0].getReward();
+            enFaces[1].getReward();
+        }
+
     }
 
     public void defaveur(){
