@@ -1,10 +1,11 @@
 package DiceForge.Feat;
 import DiceForge.Face.*;
+import DiceForge.Player;
 
 
 public class CasqueInvisibilite extends Feat{
 
-	FaceCombinationAND timeThree;
+	Face timeThree;
 
 
     public CasqueInvisibilite(){
@@ -17,5 +18,10 @@ public class CasqueInvisibilite extends Feat{
     @Override
     public void effect(Object... o) {
     	owner.getDice( (owner.getStrategy().chooseDice())%2 ).setFace(timeThree,owner.getStrategy().chooseDiceFace((owner.getStrategy().chooseDice())%2));
+    }
+
+    public void setPlayer(Player player) {
+        super.setPlayer(player);
+        this.effect();
     }
 }
