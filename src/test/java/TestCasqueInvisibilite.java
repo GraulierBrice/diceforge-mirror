@@ -17,7 +17,7 @@ public class TestCasqueInvisibilite {
         casque.setPlayer(new Player());
         for(int i = 0; i<6; i++){
             casque.getOwner().getDice(0).setFace(new FaceCombinationAND(0,0,0,0),i);
-            casque.getOwner().getDice(1).setFace(new FaceCombinationAND(1,0,0,0),i);
+            casque.getOwner().getDice(1).setFace(new FaceCombinationAND(1,1,1,0),i);
             casque.getOwner().getDice(0).getFace(i).setKind("three");
         }
         casque.getOwner().removeGold(1000);
@@ -28,6 +28,8 @@ public class TestCasqueInvisibilite {
         assertEquals("three",casque.getOwner().getDice(0).getFace(1).getKind());
         casque.getOwner().faveur();
         assertEquals(casque.getOwner().getGold(),3);
+        assertEquals(casque.getOwner().getSolarShard(),3);
+        assertEquals(casque.getOwner().getLunarShard(),3);
     }
 
 
