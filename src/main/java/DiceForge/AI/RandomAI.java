@@ -132,5 +132,4 @@ public class RandomAI extends Strategy{
             if(value==1) player.setHasReplayed(true);
         }
     }
-
 }

@@ -102,7 +102,7 @@ public class SolarAI extends Strategy {
             this.player.setCurrentIsland(6);
         }else if(this.player.getSolarShard()>=4 && !Referee.getWorld().isEmpty(5)){
             this.player.setCurrentIsland(5);
-        }else if(this.player.getSolarShard()>=2 && Referee.getWorld().getIsland(3).isIn(nameFeat.AilesGardienne)){
+        }else if(this.player.getSolarShard()>=2 && !Referee.getWorld().isEmpty(3)){
             this.player.setCurrentIsland(3);
         }else if(this.player.getSolarShard()>=1 && !Referee.getWorld().isEmpty(1)){
             this.player.setCurrentIsland(1);
@@ -133,6 +133,7 @@ public class SolarAI extends Strategy {
                 else return -1;
             case 3:
                 if(island.isIn(nameFeat.AilesGardienne)&& player.getSolarShard()>=2)return 0;
+                else if(island.isIn(nameFeat.Minotaure) && player.getSolarShard()>=3)return 1;
                 else return -1;
             case 5:
                 if(island.isIn(nameFeat.Meduse)&& player.getSolarShard()>=4)return 0;
