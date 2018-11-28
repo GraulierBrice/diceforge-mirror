@@ -11,7 +11,7 @@ public class LunarAI extends Strategy {
         super();
         super.name="Lunar";
     }
-    
+
     @Override
     public Pool setPool() {
         return Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold());
