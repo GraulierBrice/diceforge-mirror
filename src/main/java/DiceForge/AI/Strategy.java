@@ -14,8 +14,12 @@ public abstract class Strategy {
     }
     public String getName() { return this.name; }
     public void setPlayer(Player player) { this.player = player; }
-    public abstract void chooseReinforcement();
-    public abstract void chooseFeatReinforcement();
+    public void chooseReinforcement() {
+        this.player.setAction(Referee.REINFORCEMENT);
+    }
+    public void chooseFeatReinforcement() {
+        this.player.setAction(Referee.FEAT_REINFORCEMENT);
+    }
     public abstract Pool setPool();
 
     public void chooseAction() {

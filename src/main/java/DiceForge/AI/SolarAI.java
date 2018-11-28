@@ -13,16 +13,6 @@ public class SolarAI extends Strategy {
         super.name = "Solar";
     }
 
-
-    public void chooseReinforcement() {
-        this.player.setAction(Referee.REINFORCEMENT);
-    }
-    public void chooseFeatReinforcement() {
-        this.player.setAction(Referee.FEAT_REINFORCEMENT);
-    }
-
-
-
     public Pool setPool() {
         return Referee.getForge().affordablePoolWith(Player.SolarShard,this.player.getGold());
     }

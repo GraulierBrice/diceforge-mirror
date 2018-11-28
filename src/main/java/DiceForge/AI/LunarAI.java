@@ -11,18 +11,7 @@ public class LunarAI extends Strategy {
         super();
         super.name="Lunar";
     }
-
-    @Override
-    public void chooseReinforcement() {
-        this.player.setAction(Referee.REINFORCEMENT);
-    }
-
-    @Override
-    public void chooseFeatReinforcement() {
-        this.player.setAction(Referee.FEAT_REINFORCEMENT);
-    }
-
-
+    
     @Override
     public Pool setPool() {
         return Referee.getForge().affordablePoolWith(Player.LunarShard,this.player.getGold());
