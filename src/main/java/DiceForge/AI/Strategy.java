@@ -30,7 +30,7 @@ public abstract class Strategy {
             if(island!=null && this.chooseFeat()!=-1 ) {//pour farmer les marteaux pour l'instant
                 this.player.setAction(Referee.EXPLOIT);
             }
-        }else if(pool!=null && this.player.getGold() >= pool.getPrice()) {
+        }else if(pool!=null && choosePoolFace(pool)!=-1 && this.player.getGold() >= pool.getPrice()) {
             this.player.setAction(Referee.FORGE);
         }else this.player.setAction(Referee.PASSE);
     }
@@ -42,17 +42,18 @@ public abstract class Strategy {
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
 
-    public int goldChoice(int g, Hammer h) {
-        if(g+this.player.getGold()>=5) {
-            if ((h.getGold() + g - (5 - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (5 - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
-                h.effect(g - (5 - this.player.getGold()));
-                return (5 - this.player.getGold());
-            } else if (h.getGold() + g - (5 - this.player.getGold()) > 15 && h.getLevel() == 1) {
-                int value = h.getGold() + g - (5 - this.player.getGold()) - 15;
+    public int goldChoice(int g, Hammer h,String strategy) {
+        int maxGold = strategy.equals("Hammer") ? 8 : 5;
+        if(g+this.player.getGold()>=maxGold) {
+            if ((h.getGold() + g - (maxGold - this.player.getGold()) <= 15 && h.getLevel() == 1) || (h.getGold() + g - (maxGold - this.player.getGold()) <= 30 && h.getLevel() == 0)) {
+                h.effect(g - (maxGold - this.player.getGold()));
+                return (maxGold - this.player.getGold());
+            } else if (h.getGold() + g - (maxGold - this.player.getGold()) > 15 && h.getLevel() == 1) {
+                int value = h.getGold() + g - (maxGold - this.player.getGold()) - 15;
                 h.effect(15 - h.getGold());
                 return value;
-            } else if (h.getGold() + g - (5 - this.player.getGold()) > 30 && h.getLevel() == 0) {
-                int value = h.getGold() + g - (5 - this.player.getGold()) - 30;
+            } else if (h.getGold() + g - (maxGold - this.player.getGold()) > 30 && h.getLevel() == 0) {
+                int value = h.getGold() + g - (maxGold - this.player.getGold()) - 30;
                 h.effect(15 - h.getGold());
                 h.effect(15);
                 return value;

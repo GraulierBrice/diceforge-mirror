@@ -1,9 +1,6 @@
 package DiceForge;
 
-import DiceForge.AI.LunarAI;
-import DiceForge.AI.RandomAI;
-import DiceForge.AI.SolarAI;
-import DiceForge.AI.Strategy;
+import DiceForge.AI.*;
 import DiceForge.Face.*;
 import DiceForge.Feat.*;
 
@@ -90,7 +87,7 @@ public class Player {
     public void addSolarShard(int SolarShard){this.solarShard = (this.solarShard +SolarShard<= maxSolarShard) ? this.solarShard +SolarShard : maxSolarShard;}
     public void addGold(int gold){
         for(Feat f : this.feats){
-            if(f.getName()==nameFeat.Hammer && ((Hammer)f).getLevel() < 2){gold = this.strategy.goldChoice(gold, (Hammer)f); break;}
+            if(f.getName()==nameFeat.Hammer && ((Hammer)f).getLevel() < 2){gold = this.strategy.goldChoice(gold, (Hammer)f, this.getStrategy().getName()); break;}
         }
         this.gold = (this.gold+gold<=maxGold) ? this.gold+gold : maxGold;
     }
@@ -104,11 +101,11 @@ public class Player {
                 this.strategy = new SolarAI();
                 break;
             case "Solar":
+                this.strategy = new HammerAI();
+                break;
+            case "Hammer" :
                 this.strategy = new LunarAI();
                 break;
-           /* case "Random" :
-                this.strategy = new LunarAI();
-                break; */
         }
         this.strategy.setPlayer(this);
     }
@@ -244,14 +241,14 @@ public class Player {
             return;
         }
 
-        switch ( referee.getRound()) {
-            case 1 :
+        //switch ( referee.getRound()) {
+        //    case 1 :
 
-                if (referee.getPlayers().stream().filter(p -> this.getStrategy().getName().equals(p.getStrategy().getName()) && p != this).count() > 1) {
-                    this.nextStrategy();
-                    shouldIChangeStrategy(referee);
-                }
-        }
+        //        if (referee.getPlayers().stream().filter(p -> this.getStrategy().getName().equals(p.getStrategy().getName()) && p != this).count() > 1) {
+        //            this.nextStrategy();
+          //          shouldIChangeStrategy(referee);
+        //        }
+        //}
     }
 
 
