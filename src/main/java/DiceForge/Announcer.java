@@ -100,6 +100,7 @@ public class Announcer {
                     break;
                 case Referee.EXPLOIT:
                     System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + player.getName() + " peut choisir un exploit à réaliser" + ANSI_RESET);
+                    System.out.println(player.getNbFeat());
                     System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1).getName());
                     break;
             }

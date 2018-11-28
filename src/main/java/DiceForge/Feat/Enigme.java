@@ -11,10 +11,6 @@ public class Enigme extends Feat{
         this.name=nameFeat.Enigme;
     }
 
-    public void setPlayer(Player player){
-        super.setPlayer(player);
-    }
-
     public void effect(Object... o) {
         Dice reward = this.owner.getStrategy().chooseBestDice();
         for(int i=0; i<4;i++) {

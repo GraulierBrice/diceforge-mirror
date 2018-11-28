@@ -4,6 +4,7 @@ import DiceForge.*;
 import DiceForge.Face.Face;
 import DiceForge.Feat.Hammer;
 import DiceForge.Feat.HerbesFolles;
+import DiceForge.Feat.nameFeat;
 
 public abstract class Strategy {
     Player player;

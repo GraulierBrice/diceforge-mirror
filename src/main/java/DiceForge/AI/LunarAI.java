@@ -132,26 +132,26 @@ public class LunarAI extends Strategy {
         Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
         switch(this.player.getCurrentIsland()){
             case 0:
-                if(island.isIn(nameFeat.Hammer) && !this.player.doIHaveAnHammer())return 0;
-                else if(island.isIn(nameFeat.Chest))return 1;
+                if(island.isIn(nameFeat.Hammer) && !this.player.doIHaveAnHammer()&& player.getLunarShard()>=1)return 0;
+                else if(island.isIn(nameFeat.Chest)&& player.getLunarShard()>=1)return 1;
                 else return -1;
             case 1:
-                if(island.isIn(nameFeat.HerbesFolles)) return 1;
+                if(island.isIn(nameFeat.HerbesFolles)&& player.getSolarShard()>=1) return 1;
                 else return -1;
             case 2:
-                if(island.isIn(nameFeat.SabotArgent))return 0;
-                else if(island.isIn(nameFeat.Satyres))return 1;
+                if(island.isIn(nameFeat.SabotArgent)&& player.getLunarShard()>=2)return 0;
+                else if(island.isIn(nameFeat.Satyres)&& player.getLunarShard()>=3)return 1;
                 else return -1;
             case 3:
-                if(island.isIn(nameFeat.AilesGardienne))return 0;
+                if(island.isIn(nameFeat.AilesGardienne)&& player.getSolarShard()>=2)return 0;
                 else return -1;
             case 4:
-                if(island.isIn(nameFeat.Passeur))return 0;
-                else if(island.isIn(nameFeat.CasqueInvisibilite))return 1;
+                if(island.isIn(nameFeat.Passeur)&& player.getLunarShard()>=4)return 0;
+                else if(island.isIn(nameFeat.CasqueInvisibilite)&& player.getLunarShard()>=5)return 1;
                 else return -1;
             case 6:
-                if(this.player.getSolarShard()>=5 &&island.isIn(nameFeat.Hydre))return 1;
-                else if(island.isIn(nameFeat.Pince))return 0;
+                if(this.player.getSolarShard()>=5 &&island.isIn(nameFeat.Hydre)&& player.getLunarShard()>=5)return 1;
+                else if(island.isIn(nameFeat.Pince)&& player.getLunarShard()>=6)return 0;
                 else return -1;
         }
         return -1;
