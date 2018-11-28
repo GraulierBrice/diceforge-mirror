@@ -19,7 +19,8 @@ public class SolarAI extends Strategy {
 
 
     public int chooseDice() {//on remplit le 2ème dé qui a déjà des solarshard comme ça on est sûr d'en drop à chaque tour
-        if(Referee.getForge().bestPoolWith(Player.SolarShard,this.player.getGold()).getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
+        Pool bestPool = Referee.getForge().bestPoolWith(Player.SolarShard,this.player.getGold());
+        if(bestPool != null && bestPool.getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
             return 0;
         }
         return 1;
