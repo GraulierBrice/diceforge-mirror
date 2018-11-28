@@ -222,6 +222,7 @@ public class Referee {
     public void reset() {
         for (Player player : players) {
             player.addSumHonour();
+            player.setMaxHonour();
             player.reset();
         }
         this.round = 1;

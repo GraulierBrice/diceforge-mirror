@@ -14,7 +14,7 @@ public class Player {
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
     protected Strategy strategy;
-    protected int nbVictory=0, sumHonour=0;
+    protected int nbVictory=0, sumHonour=0, maxHonour=0;
     protected String name;
     public static final String GOLD="G";
     public static final String HONOUR="H";
@@ -67,6 +67,7 @@ public class Player {
     public Dice getDice(int n){return (n==0) ? this.de1 : (n==1) ? this.de2 : null;}
     public Strategy getStrategy() { return strategy; }
     public int getNbVictory(){return this.nbVictory;}
+    public int getMaxHonour(){return  this.maxHonour;}
     public int getSumHonour(){return this.sumHonour;}
     public String getName(){return this.name;}
     public ArrayList<Face> getEnnemyFaces(){return this.ennemyFaces;}
@@ -111,6 +112,7 @@ public class Player {
     }
     public void addVictory(){this.nbVictory++;}
     public void addSumHonour(){this.sumHonour+=this.honour;}
+    public void setMaxHonour() {if (this.honour > this.maxHonour) this.maxHonour = this.honour; }
 
     //Rolls dice and adds rewards to player's ressources
     public void faveur(){

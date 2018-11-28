@@ -57,6 +57,7 @@ public class Announcer {
             for (int i = 0; i < referee.getNumberPlayer(); i++) {
                 System.out.println(ANSI_UNDERLINE + ANSI_SRED + "Le joueur " + referee.getPlayer(i).getName() + ":" + ANSI_RESET + " " + referee.getPlayer(i).getNbVictory() + "(" + ((float) referee.getPlayer(i).getNbVictory() / (float) Main.numberOfGames) * 100 + "%)");
                 System.out.println("Honneur moyen du joueur " + referee.getPlayer(i).getName() + ": " + referee.getPlayer(i).getSumHonour() / Main.numberOfGames);
+                System.out.println("Honneur max du joueur " + referee.getPlayer(i).getName() + ": " + referee.getPlayer(i).getMaxHonour());
             }
         }
     }
