@@ -47,7 +47,55 @@ public class SolarAI extends Strategy {
     }
 
     @Override
-    public int chooseFaceOr(Face face) {
+    public int chooseFaceOr(Face face){
+        switch (chooseDiceFaceOr(face)){
+            case 0:
+                if(this.player.getSolarShard()<5){
+                    return 2;
+                }else if(this.player.getSolarShard()>=5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))>=5){
+                    return 1;
+                }else if(this.player.getLunarShard()>=5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))>=5){
+                    return 2;
+                }else if(this.player.getSolarShard()==5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))<5){
+                    return 2;
+                }else if(this.player.getLunarShard()==5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))<5){
+                    return 1;
+                }else if (this.player.getSolarShard()>=6){
+                    return 1;
+                }else if (this.player.getLunarShard()>=6){
+                    return 2;
+                }else if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)) {
+                    return 0;
+                }else{
+                    return 2;
+                }
+            case 1:
+                if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)){
+                    return 0;
+                }else{
+                    return 1;
+                }
+            case 2:
+                if(this.player.getSolarShard()<5){
+                    return 2;
+                }else if(this.player.getSolarShard()>=5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))>=5){
+                    return 1;
+                }else if(this.player.getLunarShard()>=5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))>=5){
+                    return 2;
+                }else if(this.player.getSolarShard()==5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))<5){
+                    return 2;
+                }else if(this.player.getLunarShard()==5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))<5){
+                    return 1;
+                }else if (this.player.getSolarShard()>=6){
+                    return 1;
+                }else if (this.player.getLunarShard()>=6){
+                    return 2;
+                }else if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)) {
+                    return 0;
+                }else{
+                    return 2;
+                }
+        }
         return 0;
     }
 

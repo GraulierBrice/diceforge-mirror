@@ -38,6 +38,16 @@ public abstract class Strategy {
     public abstract Face[] chooseBestEnnemyFace();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
+    public int chooseDiceFaceOr(Face face) {
+        if(face.getKind() == ("1"+Player.GOLD+"/1"+Player.LunarShard+"/1"+Player.SolarShard)){
+            return 1;
+        }else if(face.getKind() == ("3"+Player.GOLD+"/2"+Player.HONOUR)){
+            return 2;
+        }else if(face.getKind() == "2"+Player.GOLD+"/2"+Player.LunarShard+"/2"+Player.SolarShard) {
+            return 3;
+        }
+        return 0;
+    }
     public abstract int chooseFaceOr(Face face);
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();

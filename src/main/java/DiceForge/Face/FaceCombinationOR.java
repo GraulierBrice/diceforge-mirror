@@ -83,8 +83,8 @@ public class FaceCombinationOR extends Face {
     public String getReward(){
         String reward="";
         if (this.rewardGold > 0) reward += (this.rewardGold + Player.GOLD);
-        if (this.rewardLunarShard > 0) reward += (this.rewardLunarShard + Player.LunarShard);
-        if (this.rewardSolarShard > 0) reward += (this.rewardSolarShard + Player.SolarShard);
+        if (this.rewardLunarShard > 0) reward += ("/" +this.rewardLunarShard + Player.LunarShard);
+        if (this.rewardSolarShard > 0) reward += ("/" +this.rewardSolarShard + Player.SolarShard);
         if (this.rewardHonour > 0) reward += ("/" + this.rewardHonour + Player.HONOUR);
         return reward;
     }
