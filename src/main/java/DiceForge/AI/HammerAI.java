@@ -90,7 +90,7 @@ public class HammerAI extends Strategy{
     public void chooseIsland() {
         if (!this.player.doIHaveAnHammer() && this.player.getLunarShard() >= 1 && (Referee.getWorld().getIsland(0).isIn(nameFeat.Hammer))) {
             this.player.setCurrentIsland(0);
-        } else if (this.player.getLunarShard() == 0 && this.player.getSolarShard() >= 1 && (Referee.getWorld().getIsland(1).isIn(nameFeat.HerbesFolles)) || Referee.getWorld().getIsland(1).isIn(nameFeat.Ancien)) {
+        } else if (this.player.getSolarShard() >= 1 &&  ((this.player.getLunarShard() == 0 && !player.doIHaveAnHammer() && Referee.getWorld().getIsland(1).isIn(nameFeat.HerbesFolles)) || (player.doIHaveAnHammer()&& Referee.getWorld().getIsland(1).isIn(nameFeat.Ancien)))) {
             this.player.setCurrentIsland(1);
         } else if ((this.player.getLunarShard() >= 6 && Referee.getWorld().getIsland(6).isIn(nameFeat.Pince)) ||
                 (this.player.getLunarShard() >= 5 && this.player.getSolarShard() >= 5 && Referee.getWorld().getIsland(6).isIn(nameFeat.Hydre)) ||
@@ -112,36 +112,35 @@ public class HammerAI extends Strategy{
 
     @Override
     public int chooseFeat() {
-        Island island = Referee.getWorld().getIsland(this.player.getCurrentIsland());
         switch(this.player.getCurrentIsland()) {
             case 0:
-                if(island.isIn(nameFeat.Hammer) && !this.player.doIHaveAnHammer()) return 0;
-                else if(island.isIn(nameFeat.Chest))return 1;
+                if(Referee.getWorld().affordableFeat(0,player,nameFeat.Hammer)) return 0;
+                else if(Referee.getWorld().affordableFeat(0,player, nameFeat.Chest))return 1;
                 else return -1;
             case 1:
-                if(island.isIn(nameFeat.HerbesFolles) && !this.player.doIHaveAnHammer() && this.player.getLunarShard() == 0) return 1;
-                else if(island.isIn(nameFeat.Ancien)) return 0;
+                if(Referee.getWorld().affordableFeat(1,player,nameFeat.HerbesFolles) && !this.player.doIHaveAnHammer() && this.player.getLunarShard() == 0) return 1;
+                else if(Referee.getWorld().affordableFeat(1,player,nameFeat.Ancien)) return 0;
                 else return -1;
             case 2:
-                if(island.isIn(nameFeat.SabotArgent))return 0;
-                else if(island.isIn(nameFeat.Satyres))return 1;
+                if(Referee.getWorld().affordableFeat(2,player,nameFeat.SabotArgent))return 0;
+                else if(Referee.getWorld().affordableFeat(2,player,nameFeat.Satyres))return 1;
                 else return -1;
             case 3:
-                if(island.isIn(nameFeat.AilesGardienne)) return 0;
-                else if (island.isIn(nameFeat.Minotaure)) return 1;
+                if(Referee.getWorld().affordableFeat(3,player,nameFeat.AilesGardienne)) return 0;
+                else if (Referee.getWorld().affordableFeat(3,player,nameFeat.Minotaure)) return 1;
                 else return -1;
             case 4:
-                if (island.isIn(nameFeat.Passeur)) return 0;
-                else if(island.isIn(nameFeat.CasqueInvisibilite)) return 1;
+                if (Referee.getWorld().affordableFeat(4,player,nameFeat.Passeur)) return 0;
+                else if(Referee.getWorld().affordableFeat(4,player,nameFeat.CasqueInvisibilite)) return 1;
                 else return -1;
             case 5:
-                if (island.isIn(nameFeat.Meduse)) return 0;
-                else if(island.isIn(nameFeat.MiroirAbyssal)) return 1;
+                if (Referee.getWorld().affordableFeat(5,player,nameFeat.Meduse)) return 0;
+                else if(Referee.getWorld().affordableFeat(5,player,nameFeat.MiroirAbyssal)) return 1;
                 else return -1;
             case 6:
-                if (island.isIn(nameFeat.Hydre)) return 1;
-                else if (island.isIn(nameFeat.Pince)) return 0;
-                else if (island.isIn(nameFeat.Enigme)) return 2;
+                if (Referee.getWorld().affordableFeat(6,player,nameFeat.Hydre)) return 1;
+                else if (Referee.getWorld().affordableFeat(6,player,nameFeat.Pince)) return 0;
+                else if (Referee.getWorld().affordableFeat(6,player,nameFeat.Enigme)) return 2;
                 else return -1;
 
         }

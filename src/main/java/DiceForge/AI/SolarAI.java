@@ -168,30 +168,29 @@ public class SolarAI extends Strategy {
 
     @Override
     public int chooseFeat(){
-        Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
         switch(this.player.getCurrentIsland()){
             case 0:
-                if(island.isIn(nameFeat.Hammer) && !this.player.doIHaveAnHammer() && player.getLunarShard()>=1)return 0;
-                else if(island.isIn(nameFeat.Chest)&& player.getLunarShard()>=1)return 1;
+                if(Referee.getWorld().affordableFeat(0,player,nameFeat.Hammer) && !this.player.doIHaveAnHammer())return 0;
+                else if(Referee.getWorld().affordableFeat(0,player,nameFeat.Chest))return 1;
                 else return -1;
             case 1:
-                if(island.isIn(nameFeat.Ancien) && player.getSolarShard()>=1)return 0;
-                else if(island.isIn(nameFeat.HerbesFolles )&& player.getSolarShard()>=1) return 1;
+                if(Referee.getWorld().affordableFeat(1,player,nameFeat.Ancien))return 0;
+                else if(Referee.getWorld().affordableFeat(1,player,nameFeat.HerbesFolles)) return 1;
                 else return -1;
             case 2:
-                if(island.isIn(nameFeat.SabotArgent)&& player.getLunarShard()>=2)return 0;
-                else if(island.isIn(nameFeat.Satyres)&& player.getLunarShard()>=3)return 1;
+                if(Referee.getWorld().affordableFeat(2,player,nameFeat.SabotArgent))return 0;
+                else if(Referee.getWorld().affordableFeat(2,player,nameFeat.Satyres))return 1;
                 else return -1;
             case 3:
-                if(island.isIn(nameFeat.AilesGardienne)&& player.getSolarShard()>=2)return 0;
-                else if(island.isIn(nameFeat.Minotaure) && player.getSolarShard()>=3)return 1;
+                if(Referee.getWorld().affordableFeat(3,player,nameFeat.AilesGardienne))return 0;
+                else if(Referee.getWorld().affordableFeat(3,player,nameFeat.Minotaure))return 1;
                 else return -1;
             case 5:
-                if(island.isIn(nameFeat.Meduse)&& player.getSolarShard()>=4)return 0;
+                if(Referee.getWorld().affordableFeat(5,player,nameFeat.Meduse))return 0;
                 else return -1;
             case 6:
-                if(this.player.getLunarShard()>=5 &&island.isIn(nameFeat.Hydre)&& player.getSolarShard()>=5)return 1;
-                else if(island.isIn(nameFeat.Enigme)&& player.getSolarShard()>=6) return 2;
+                if(Referee.getWorld().affordableFeat(6,player,nameFeat.Hydre))return 1;
+                else if(Referee.getWorld().affordableFeat(6,player,nameFeat.Enigme)) return 2;
                 else return -1;
         }
         return -1;

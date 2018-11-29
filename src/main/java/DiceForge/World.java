@@ -45,6 +45,10 @@ public class World {
         return null;
     }
 
+    public boolean affordableFeat(int island,Player player,nameFeat nameFeat){
+        return this.islands.get(island).affordableFeat(player,nameFeat);
+    }
+
     public boolean isEmpty(int n){
         return this.islands.get(n).isEmpty();
     }

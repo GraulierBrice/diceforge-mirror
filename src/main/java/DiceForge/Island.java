@@ -31,6 +31,11 @@ public class Island{
         return false;
     }
 
+    public boolean affordableFeat(Player player,nameFeat nameFeat){
+        if(!this.isIn(nameFeat) || this.getFeat(nameFeat).getPriceSolarShard()>player.getSolarShard() || this.getFeat(nameFeat).getPriceLunarShard()>player.getLunarShard()) return false;
+        return true;
+    }
+
     public int numOfFeats(){
         return this.feats.size();
     }

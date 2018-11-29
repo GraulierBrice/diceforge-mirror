@@ -136,7 +136,7 @@ public class Referee {
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 nameFeat exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
-                if (island.isIn(exploit) && (turnP.getLunarShard() >= island.getFeat(exploit).getPriceLunarShard() && turnP.getSolarShard() >= island.getFeat(exploit).getPriceSolarShard())) {
+                if (island.affordableFeat(turnP,exploit)) {
                     this.world.giveFeat(turnP, exploit);
                 }
                 break;
