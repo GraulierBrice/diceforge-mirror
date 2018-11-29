@@ -7,7 +7,7 @@ import DiceForge.Player;
 public class Enigme extends Feat{
 
     public Enigme(){
-        super(10,0,6,true);
+        super(10,0,6,false);
         this.name=nameFeat.Enigme;
     }
 
