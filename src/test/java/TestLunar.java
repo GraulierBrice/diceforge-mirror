@@ -150,6 +150,22 @@ import DiceForge.AI.*;
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
             assertEquals(lunar.getDice(1).getFace(1).getReward(),"2"+Player.LunarShard+"2"+Player.HONOUR);
-            lunar.addGold(2);
+
+            remove();
+
+            lunar.addLunarShard(2);
+            lunar.addSolarShard(2);
+            lunar.getStrategy().replay();
+            assertEquals(lunar.getHasReplayed(),true);
+
+            lunar.setHasReplayed(false);
+
+            remove();//0 ressources donc ne peut pas rejouer
+            lunar.getStrategy().replay();
+            assertEquals(lunar.getHasReplayed(),false);
+
+            lunar.addSolarShard(2);
+            lunar.getStrategy().replay();//ne replay pas car ne pourrait rien faire d'interessant après avec la strat actuelle
+            assertEquals(lunar.getHasReplayed(),false);
         }
 }

@@ -57,6 +57,12 @@ public class TestReferee {
         assertEquals(referee.getMaxRound(),9);
         assertNotSame(referee.getForge(),forge);
         assertNotSame(referee.getWorld(),world);
+
+        referee.getPlayer(0).setCurrentIsland(0);
+        referee.getPlayer(1).setCurrentIsland(0);
+        assertEquals(referee.getPlayer(1).getCurrentIsland(),0);
+        referee.sameIsland();
+        assertEquals(referee.getPlayer(1).getCurrentIsland(),-1);
     }
 
 }
