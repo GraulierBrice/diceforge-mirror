@@ -34,7 +34,9 @@ public class LunarAI extends Strategy {
 
     @Override
     public void replay() {
-
+        if(player.getHasReplayed()==false && player.getSolarShard()>=2 && player.getLunarShard()>=2){
+            player.setHasReplayed(true);
+        }
     }
 
     @Override

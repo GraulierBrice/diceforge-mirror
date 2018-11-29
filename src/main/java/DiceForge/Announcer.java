@@ -101,8 +101,7 @@ public class Announcer {
                     break;
                 case Referee.EXPLOIT:
                     System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + player.getName() + " peut choisir un exploit à réaliser" + ANSI_RESET);
-                    System.out.println(player.getNbFeat());
-                    System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1).getName());
+                    System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1).getName()+ ANSI_RESET);
                     break;
             }
         }
@@ -135,16 +134,18 @@ public class Announcer {
         }
     }
 
-    public static void printSatyres(Player player, Face face1,Face face2) {
+    public static void printSatyres(Player player, Face[] faces) {
         if (Main.LEVEL == 1) {
             System.out.println("Le joueur " + player.getName() + " choisit les faces suivantes :");
             for (int i = 0; i < player.getEnnemyFaces().size(); i++) {
-                if (player.getEnnemyFaces().get(i) == face1 || player.getEnnemyFaces().get(i) == face2) {
+                if (player.getEnnemyFaces().get(i) == faces[0] || player.getEnnemyFaces().get(i) == faces[1]) {
                     System.out.print(Announcer.ANSI_YELLOW + player.getEnnemyFaces().get(i).getReward() + Announcer.ANSI_RESET + " ");
                 } else System.out.print(player.getEnnemyFaces().get(i).getReward() + " ");
             }
             System.out.println("\n");
         }
+        player.setEnnemyFaces(new ArrayList<>());
+
     }
 
     public static void printSameIsland(Player currentPlayer,Player otherPlayer) {

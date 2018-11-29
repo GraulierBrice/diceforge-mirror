@@ -24,8 +24,7 @@ public class Satyres extends Feat{
     public void effect(Object... o) {
         ((Face)o[0]).giveReward(owner);
         ((Face)o[1]).giveReward(owner);
-        Announcer.printSatyres(owner,(Face)o[0],(Face)o[1]);
-        owner.setEnnemyFaces(new ArrayList<>());
-
+        Face[] faces={(Face)o[0],(Face)o[1]};
+        owner.setChosenFacesFeat(faces);
     }
 }

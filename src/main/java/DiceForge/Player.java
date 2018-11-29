@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Player {
     protected ArrayList<Feat> feats=new ArrayList<>();
     protected ArrayList<Face> ennemyFaces=new ArrayList<>();
+    protected Face[] chosenFacesFeat=new Face[2];
     protected int honour, gold, lunarShard, solarShard, maxLunarShard = 6, maxSolarShard =6, maxGold=12;
     protected int currentIsland=-1;//ile début à modif pour mettre une valeur "ile de départ"
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
@@ -73,8 +74,13 @@ public class Player {
     public ArrayList<Face> getEnnemyFaces(){return this.ennemyFaces;}
     public String getAction(){return this.action;}
     public boolean getHasReplayed(){return this.hasReplayed;}
-
+    public Face[] getChosenFacesFeat(){return this.chosenFacesFeat;}
     /* Mutator */
+    public void setChosenFacesFeat(Face[] faces){
+        for(int i=0;i<faces.length;i++){
+            this.chosenFacesFeat[i]=faces[i];
+        }
+    }
     public void setHasReplayed(boolean bool){this.hasReplayed=bool;}
     public void setAction(String action){this.action=action;}
     public void setMaxLunarShard(int n){this.maxLunarShard = n;}

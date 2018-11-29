@@ -155,14 +155,14 @@ public class Referee {
         } else {
             player.lastAction();
         }
-        this.sameIsland();
-
-       Announcer.printAction(player);
+        Announcer.printAction(player);
+        if(player.getNbFeat()!=0 && player.getFeat(player.getNbFeat()-1).getName()==nameFeat.Satyres)Announcer.printSatyres(player,player.getChosenFacesFeat());
         if (this.getNumberPlayer() == 2) {
             this.faveur();
         }
         this.faveur();
-       Announcer.printLog(this);
+        this.sameIsland();
+        Announcer.printLog(this);
     }
 
 
