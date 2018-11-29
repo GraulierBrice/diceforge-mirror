@@ -167,6 +167,8 @@ public class HammerAI extends Strategy{
 
     @Override
     public void replay() {
-
+        if(player.getHasReplayed()==false && player.getSolarShard()>=3 ||(player.getSolarShard()>=2 && player.getLunarShard()>=1)){
+            player.setHasReplayed(true);
+        }
     }
 }

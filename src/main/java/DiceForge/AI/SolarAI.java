@@ -34,7 +34,9 @@ public class SolarAI extends Strategy {
 
     @Override
     public void replay() {
-
+        if(player.getHasReplayed()==false && player.getSolarShard()>=4){
+            player.setHasReplayed(true);
+        }
     }
 
 
