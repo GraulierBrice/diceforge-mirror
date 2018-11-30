@@ -15,7 +15,7 @@ public class Player {
     protected Dice de1 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,1,0));
     protected Dice de2 = new Dice(new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(1,0,0,0),new FaceCombinationAND(0,0,0,1),new FaceCombinationAND(0,1,0,0));
     protected Strategy strategy;
-    protected int nbVictory=0, sumHonour=0, maxHonour=0;
+    protected int nbVictory=0, sumHonour=0, maxHonour=0,nbEgality=0;
     protected String name;
     public static final String GOLD="G";
     public static final String HONOUR="H";
@@ -67,6 +67,7 @@ public class Player {
     public int getNbFeat(){return this.feats.size();}
     public Dice getDice(int n){return (n==0) ? this.de1 : (n==1) ? this.de2 : null;}
     public Strategy getStrategy() { return strategy; }
+    public int getNbEgality(){return this.nbEgality;}
     public int getNbVictory(){return this.nbVictory;}
     public int getMaxHonour(){return  this.maxHonour;}
     public int getSumHonour(){return this.sumHonour;}
@@ -116,6 +117,7 @@ public class Player {
         }
         this.strategy.setPlayer(this);
     }
+    public void addEgality(){this.nbEgality++;}
     public void addVictory(){this.nbVictory++;}
     public void addSumHonour(){this.sumHonour+=this.honour;}
     public void setMaxHonour() {if (this.honour > this.maxHonour) this.maxHonour = this.honour; }
@@ -285,45 +287,43 @@ public class Player {
         if(this.de1.diceNotFullWith(HONOUR)) diceNumber=0;//devrait traiter plus tard pour chercher la face ayant le moins d'honneur si jamais il est full honour sur ses deux dés
         else if(this.de2.diceNotFullWith(HONOUR)) diceNumber=1;
         action=Referee.EXPLOIT;
-        if(Referee.getWorld().getIsland(6).isIn(nameFeat.Hydre) && this.lunarShard>=5 && this.solarShard>=5){
+        if(Referee.getWorld().affordableFeat(6,this,nameFeat.Hydre)){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,nameFeat.Hydre);
-
-        }else if(Referee.getWorld().getIsland(5).isIn(nameFeat.Meduse) && this.solarShard >=5){
+        }else if(Referee.getWorld().affordableFeat(5,this,nameFeat.Meduse)){
             this.currentIsland=5;
             Referee.getWorld().giveFeat(this,nameFeat.Meduse);
-
-        }else if(Referee.getWorld().getIsland(4).isIn(nameFeat.Passeur) && this.lunarShard >=5){
+        }else if(Referee.getWorld().affordableFeat(4,this,nameFeat.Passeur)){
             this.currentIsland=4;
             Referee.getWorld().giveFeat(this,nameFeat.Passeur);
-        }else if(Referee.getWorld().getIsland(5).isIn(nameFeat.MiroirAbyssal) && this.solarShard >=5){
+        }else if(Referee.getWorld().affordableFeat(5,this,nameFeat.MiroirAbyssal)){
             this.currentIsland=5;
             Referee.getWorld().giveFeat(this,nameFeat.MiroirAbyssal);
-        }else if(Referee.getWorld().getIsland(6).isIn(nameFeat.Enigme) && this.solarShard >=6){
+        }else if(Referee.getWorld().affordableFeat(6,this,nameFeat.Enigme)){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,nameFeat.Enigme);
-        }else if(Referee.getWorld().getIsland(6).isIn(nameFeat.Pince) && this.lunarShard >=6){
+        }else if(Referee.getWorld().affordableFeat(6,this,nameFeat.Pince)){
             this.currentIsland=6;
             Referee.getWorld().giveFeat(this,nameFeat.Pince);
-        }else if(Referee.getWorld().getIsland(3).isIn(nameFeat.Minotaure) && this.solarShard >=3){
+        }else if(Referee.getWorld().affordableFeat(3,this,nameFeat.Minotaure)){
             this.currentIsland=3;
             Referee.getWorld().giveFeat(this,nameFeat.Minotaure);
-        }else if(Referee.getWorld().getIsland(2).isIn(nameFeat.Satyres) && this.lunarShard >=3){
+        }else if(Referee.getWorld().affordableFeat(2,this,nameFeat.Satyres)){
             this.currentIsland=2;
            Referee.getWorld().giveFeat(this,nameFeat.Satyres);
-        }else if(Referee.getWorld().getIsland(4).isIn(nameFeat.CasqueInvisibilite) && this.lunarShard >=5){
+        }else if(Referee.getWorld().affordableFeat(4,this,nameFeat.CasqueInvisibilite)){
             this.currentIsland=4;
             Referee.getWorld().giveFeat(this,nameFeat.CasqueInvisibilite);
-        }else if(Referee.getWorld().getIsland(3).isIn(nameFeat.AilesGardienne) && this.solarShard >=2){
+        }else if(Referee.getWorld().affordableFeat(3,this,nameFeat.AilesGardienne)){
             this.currentIsland=3;
             Referee.getWorld().giveFeat(this,nameFeat.AilesGardienne);
-        }else if(Referee.getWorld().getIsland(1).isIn(nameFeat.HerbesFolles) && this.solarShard >=1){
+        }else if(Referee.getWorld().affordableFeat(1,this,nameFeat.HerbesFolles)){
             this.currentIsland=1;
             Referee.getWorld().giveFeat(this,nameFeat.HerbesFolles);
-        }else if(Referee.getWorld().getIsland(0).isIn(nameFeat.Chest) && this.lunarShard >=1){
+        }else if(Referee.getWorld().affordableFeat(0,this,nameFeat.Chest)){
             this.currentIsland=0;
             Referee.getWorld().giveFeat(this,nameFeat.Chest);
-        }else if(Referee.getWorld().getIsland(2).isIn(nameFeat.SabotArgent) && this.lunarShard >=2){
+        }else if(Referee.getWorld().affordableFeat(2,this,nameFeat.SabotArgent)){
             this.currentIsland=2;
             Referee.getWorld().giveFeat(this,nameFeat.SabotArgent);
         }else if(Referee.getForge().getPool(0).kindOfPool(HONOUR) && this.gold>=12){

@@ -208,15 +208,22 @@ public class Referee {
     */
 
 
-    public Player winner(){
-        Player player=this.players.get(0);
+    public ArrayList<Player> winner(){
+        ArrayList<Player> winners=new ArrayList<>();
+        winners.add(this.players.get(0));
         for(Player p : this.players){
-            if(p.getHonour()>player.getHonour()){
-                player=p;
+            if(p.getHonour()>winners.get(0).getHonour()){
+                winners.set(0,p);
             }
         }
-        player.addVictory();
-        return player;
+        for(Player p: this.players){
+            if(winners.get(0)!=p && winners.get(0).getHonour()==p.getHonour()){
+                p.addEgality();
+                winners.add(p);
+            }
+        }
+        if(winners.size()==1) winners.get(0).addVictory();
+        return winners;
     }
 
     public void reset() {

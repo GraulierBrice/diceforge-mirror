@@ -33,8 +33,8 @@ public class TestReferee {
             referee.getPlayer(i).addHonour(12*(i+1));
             assertEquals(referee.getPlayer(i).getHonour(),12*(i+1));
        }
-        assertEquals(referee.winner().getHonour(),referee.getPlayer(3).getHonour());
-        assertEquals(referee.winner().getName(), "4");
+        assertEquals(referee.winner().get(0).getHonour(),referee.getPlayer(3).getHonour());
+        assertEquals(referee.winner().get(0).getName(), "4");
         assertEquals(referee.getRound(),2);
 
         assertEquals(referee.getPlayer(referee.getTurnPlayer()).getDice(0).getFace(3).getReward(),"1G");// on regarde la face avant modification par achat

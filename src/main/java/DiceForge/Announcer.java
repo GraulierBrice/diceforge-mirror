@@ -4,6 +4,7 @@ import DiceForge.Face.Face;
 import DiceForge.Feat.Hammer;
 import DiceForge.Feat.nameFeat;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Announcer {
@@ -29,9 +30,16 @@ public class Announcer {
     }
 
     public void printWinner() {
-        Player winner=referee.winner();
+        ArrayList<Player> winners=referee.winner();
         if (Main.LEVEL == 1) {
-            System.out.println(ANSI_SYELLOW + ANSI_BOLD + "Joueur " + (winner.getName()) + " gagne avec " + winner.getHonour() + " honneurs" + ANSI_RESET);
+            if(winners.size()==1)System.out.println(ANSI_SYELLOW + ANSI_BOLD + "Joueur " + (winners.get(0).getName()) + " gagne avec " + winners.get(0).getHonour() + " honneurs" + ANSI_RESET);
+            else{
+                System.out.print(ANSI_SYELLOW + ANSI_BOLD + "Le oueur " + winners.get(0).getName() + "a autant de points d'honneur que ");
+                for(int i=1;i<winners.size()-1;i++){
+                    System.out.print("le joueur "+winners.get(i).getName() + " et ");
+                }
+                System.out.println(winners.get(winners.size()-1).getName() + ANSI_RESET);
+            }
         }
     }
 
@@ -55,7 +63,8 @@ public class Announcer {
         }
         if (Main.LEVEL == 2) {
             for (int i = 0; i < referee.getNumberPlayer(); i++) {
-                System.out.println(ANSI_UNDERLINE + ANSI_SRED + "Le joueur " + referee.getPlayer(i).getName() + ":" + ANSI_RESET + " " + referee.getPlayer(i).getNbVictory() + "(" + ((float) referee.getPlayer(i).getNbVictory() / (float) Main.numberOfGames) * 100 + "%)");
+                System.out.println(ANSI_UNDERLINE + ANSI_SRED + "Le joueur " + referee.getPlayer(i).getName() + ":" + ANSI_RESET + " " + referee.getPlayer(i).getNbVictory() + " victoire(s) (" + ((float) referee.getPlayer(i).getNbVictory() / (float) Main.numberOfGames) * 100 + "%)");
+                System.out.println("Le joueur " + referee.getPlayer(i).getName() + " a réalisé: " + referee.getPlayer(i).getNbEgality() + " égalité(s)");
                 System.out.println("Honneur moyen du joueur " + referee.getPlayer(i).getName() + ": " + referee.getPlayer(i).getSumHonour() / Main.numberOfGames);
                 System.out.println("Honneur max du joueur " + referee.getPlayer(i).getName() + ": " + referee.getPlayer(i).getMaxHonour());
             }
