@@ -51,6 +51,7 @@ public abstract class Strategy {
     public abstract int chooseFaceOr(Face face);
     public abstract int choosePoolFace(Pool pool);
     public abstract int choosePool();
+    public abstract boolean shouldKeepForging();
 
     public int goldChoice(int g, Hammer h,String strategy) {
         int maxGold = strategy.equals("Hammer") ? 8 : 5;

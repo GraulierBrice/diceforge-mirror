@@ -125,13 +125,15 @@ public class Referee {
         turnP.shouldIChangeStrategy(this);
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case FORGE:
-                Pool pool = forge.getPool(turnP.strategy.choosePool());
-                if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
-                    int poolFace = turnP.strategy.choosePoolFace(pool);
-                    int dice = turnP.strategy.chooseDice();
-                    int diceFace = turnP.strategy.chooseDiceFace(turnP.strategy.chooseDice());
-                    this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
-                }
+                do{
+                    Pool pool = forge.getPool(turnP.strategy.choosePool());
+                    if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
+                        int poolFace = turnP.strategy.choosePoolFace(pool);
+                        int dice = turnP.strategy.chooseDice();
+                        int diceFace = turnP.strategy.chooseDiceFace(turnP.strategy.chooseDice());
+                        this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
+                    }
+                }while(turnP.strategy.shouldKeepForging());
                 break;
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());

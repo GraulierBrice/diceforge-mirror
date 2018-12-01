@@ -100,6 +100,10 @@ public class RandomAI extends Strategy{
         return r.nextInt(10);//10 jeu complet mais 3 pools non codées
     }
 
+    public boolean shouldKeepForging(){
+        return false;
+    }
+
     public int goldChoice(int gold, Hammer m) {
         int g = r.nextInt(gold+1);
         m.effect(g);

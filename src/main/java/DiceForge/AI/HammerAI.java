@@ -135,6 +135,11 @@ public class HammerAI extends Strategy{
     }
 
     @Override
+    public boolean shouldKeepForging(){
+        return false;
+    }
+
+    @Override
     public void chooseIsland() {
         if (!this.player.doIHaveAnHammer() && this.player.getLunarShard() >= 1 && (Referee.getWorld().getIsland(0).isIn(nameFeat.Hammer))) {
             this.player.setCurrentIsland(0);

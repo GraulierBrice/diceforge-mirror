@@ -147,6 +147,11 @@ public class LunarAI extends Strategy {
         }
     }
 
+    @Override
+    public boolean shouldKeepForging(){
+        return false;
+    }
+
 
     @Override
     public void chooseIsland() {

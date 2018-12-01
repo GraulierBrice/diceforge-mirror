@@ -143,8 +143,12 @@ public class SolarAI extends Strategy {
             case Player.GOLD:
                 return Referee.getForge().isNumber((Referee.getForge().bestPoolWith(Player.GOLD, this.player.getGold())));
             default:
-                return -1;//devrait être -1 en plein test
+                return -1;//devrait être -1 en plein test      
         }
+    }
+
+    public boolean shouldKeepForging(){
+        return false;
     }
 
     @Override
