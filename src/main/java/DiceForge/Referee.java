@@ -5,6 +5,9 @@ import DiceForge.Feat.Satyres;
 import DiceForge.Feat.nameFeat;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class Referee {
     private static ArrayList<Player> players = new ArrayList<>();
@@ -125,13 +128,20 @@ public class Referee {
         turnP.shouldIChangeStrategy(this);
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case FORGE:
+                List<Face> alreadyBought = new ArrayList<Face>();
                 do{
                     Pool pool = forge.getPool(turnP.strategy.choosePool());
                     if (!pool.isEmpty() && turnP.getGold() >= pool.getPrice()) {
                         int poolFace = turnP.strategy.choosePoolFace(pool);
                         int dice = turnP.strategy.chooseDice();
                         int diceFace = turnP.strategy.chooseDiceFace(turnP.strategy.chooseDice());
-                        this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
+                        if (alreadyBought.stream()
+                                    .filter(x -> pool.getFace(poolFace).compareTo(x))
+                                    .collect(Collectors.toList())
+                                    .isEmpty()) {
+                            alreadyBought.add(pool.getFace(poolFace));
+                            this.getPlayer(this.turnPlayer).buy(pool, poolFace, dice, diceFace);
+                        } else break;
                     }
                 }while(turnP.strategy.shouldKeepForging());
                 break;

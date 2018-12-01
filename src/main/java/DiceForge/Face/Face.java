@@ -49,4 +49,8 @@ public abstract class Face{
 
     public void setKind(String a){this.kind+=a;}
 
+    public boolean compareTo(Face f){
+    	return this.kind.equals(f.getKind()) && this.getReward().equals(f.getReward());
+    }
+
 }
