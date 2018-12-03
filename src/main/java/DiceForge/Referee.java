@@ -148,6 +148,7 @@ public class Referee {
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 nameFeat exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
+                if(exploit==nameFeat.Satyres) this.getEnnemyRoll();
                 if (island.affordableFeat(turnP,exploit)) {
                     this.world.giveFeat(turnP, exploit);
                 }
@@ -159,12 +160,11 @@ public class Referee {
         player.strategy.chooseReinforcement();
         Announcer.printReinforcement(player);
         this.choixReinforcement();
-
         player.strategy.chooseAction();
-        this.getEnnemyRoll(); // à voir à mieux placer
         if (this.round != this.maxRound) {
             this.choixAction(player.getAction());
         } else {
+           // this.getEnnemyRoll();
             player.lastAction();
         }
         Announcer.printAction(player);
@@ -207,6 +207,7 @@ public class Referee {
 
 
     public void faveur() {
+        this.getEnnemyRoll();
         players.forEach(Player::faveur);
     }
 
@@ -230,9 +231,12 @@ public class Referee {
         }
         for(Player p: this.players){
             if(winners.get(0)!=p && winners.get(0).getHonour()==p.getHonour()){
-                p.addEgality();
                 winners.add(p);
             }
+        }
+
+        for(Player p: winners){
+            p.addEgality();
         }
         if(winners.size()==1) winners.get(0).addVictory();
         return winners;
