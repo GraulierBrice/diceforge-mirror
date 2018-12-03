@@ -234,11 +234,11 @@ public class Referee {
                 winners.add(p);
             }
         }
-
+        if(winners.size()>1)
         for(Player p: winners){
             p.addEgality();
         }
-        if(winners.size()==1) winners.get(0).addVictory();
+        else if(winners.size()==1) winners.get(0).addVictory();
         return winners;
     }
 
