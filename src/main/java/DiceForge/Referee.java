@@ -169,6 +169,7 @@ public class Referee {
         }
         Announcer.printAction(player);
         if(player.getNbFeat()!=0 && player.getFeat(player.getNbFeat()-1).getName()==nameFeat.Satyres)Announcer.printSatyres(player,player.getChosenFacesFeat());
+        else if(player.getNbFeat()!=0 && player.getFeat(player.getNbFeat()-1).getName()==nameFeat.Minotaure)Announcer.printMinotaure(this);
         if (this.getNumberPlayer() == 2) {
             this.faveur();
         }

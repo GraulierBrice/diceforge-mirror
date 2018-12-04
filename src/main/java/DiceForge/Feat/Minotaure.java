@@ -8,6 +8,7 @@ public class Minotaure extends Feat{
 
     public Minotaure(){
         super(8,0,3,false);
+        this.name=nameFeat.Minotaure;
     }
 
     @Override

@@ -154,7 +154,16 @@ public class Announcer {
             System.out.println("\n");
         }
         player.setEnnemyFaces(new ArrayList<>());
+    }
 
+    public static void printMinotaure(Referee referee){
+        if(Main.LEVEL==1){
+            System.out.print('\n');
+            for(Player p:referee.getPlayers()){
+                if(p.getName()!=referee.getPlayer(referee.getTurnPlayer()).getName())
+                System.out.println("Le joueur " + p.getName() + " choisit de perdre "+ANSI_YELLOW+p.getDice(0).getReward().getReward()+ANSI_RESET+" et "+ANSI_YELLOW+p.getDice(1).getReward().getReward()+ANSI_RESET+"");
+            }
+        }
     }
 
     public static void printSameIsland(Player currentPlayer,Player otherPlayer) {
