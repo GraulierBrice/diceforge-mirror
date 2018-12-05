@@ -116,7 +116,7 @@ public class HammerAI extends Strategy{
 
     @Override
     public int choosePoolFace(Pool pool) {
-        if(interestingKind().equals("nothing")){
+        if( !interestingKind().equals("nothing")){
             return pool.isNumber(pool.bestFaceOf(interestingKind()));
         }
         return -1;
@@ -201,15 +201,14 @@ public class HammerAI extends Strategy{
     }
 
     public String interestingKind(){
-        Pool poolPdS =Referee.getForge().bestPoolWith(Player.SolarShard,this.player.getGold());
+        Pool poolSolarShard =Referee.getForge().bestPoolWith(Player.SolarShard,this.player.getGold());
         Pool poolG=Referee.getForge().bestPoolWith(Player.GOLD,this.player.getGold());
-        if(poolG!=null && poolG.getPrice()<=this.player.getGold()) {
+        if(poolSolarShard!=null && poolSolarShard.getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
+            return Player.SolarShard;
+        }else if(poolG!=null && poolG.getPrice()<=this.player.getGold()) {
             return Player.GOLD;
         }
-        else if(poolPdS!=null && poolPdS.getPrice()<=this.player.getGold()) {
-            return Player.SolarShard;
-        }
-        return Player.GOLD;
+        return "nothing";
     }
 
     @Override
