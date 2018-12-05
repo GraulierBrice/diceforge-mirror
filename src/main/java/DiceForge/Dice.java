@@ -41,8 +41,12 @@ public class Dice{
 		System.out.print("    Dé "+dice+" :");
 		for(int i=0;i<6;i++){
 			//affiche en couleur la face roulé
-            System.out.print(i == this.roll ? Announcer.ANSI_BOLD+Announcer.ANSI_YELLOW + this.getFace(i).getReward() +" "+ Announcer.ANSI_RESET : this.getFace(i).getReward() + " ");
-		}
+            String reward=this.getFace(i).getReward();
+            if(reward.contains("/") && i==this.roll){
+                System.out.print(reward + " ");
+            }
+            else   System.out.print(i == this.roll ? Announcer.ANSI_BOLD+Announcer.ANSI_YELLOW + this.getFace(i).getReward() +" "+ Announcer.ANSI_RESET : this.getFace(i).getReward() + " ");
+        }
 		System.out.print("\n");
 	}
 	

@@ -94,11 +94,22 @@ public class FaceCombinationOR extends Face {
     }
     @Override
     public String getReward(){
-        String reward="";
-        if (this.rewardGold > 0) reward += (lastReward.equals(Player.GOLD) ? Announcer.ANSI_YELLOW : "") +this.rewardGold + Player.GOLD+"/" +Announcer.ANSI_RESET;
-        if (this.rewardLunarShard > 0) reward += (lastReward.equals(Player.LunarShard) ? Announcer.ANSI_YELLOW : "") + (this.rewardLunarShard + Player.LunarShard+"/" +Announcer.ANSI_RESET);
-        if (this.rewardSolarShard > 0) reward += (lastReward.equals(Player.SolarShard) ? Announcer.ANSI_YELLOW : "") + (this.rewardSolarShard + Player.SolarShard+"/" +Announcer.ANSI_RESET);
-        if (this.rewardHonour > 0) reward += (lastReward.equals(Player.HONOUR) ? Announcer.ANSI_YELLOW : "") + ( this.rewardHonour + Player.HONOUR+Announcer.ANSI_RESET);
+        String reward=Announcer.ANSI_RESET;
+        if (this.rewardGold > 0){
+            reward += (lastReward.equals(Player.GOLD) ? Announcer.ANSI_YELLOW : "") +this.rewardGold + Player.GOLD +Announcer.ANSI_RESET+"/";
+        }
+
+        if (this.rewardLunarShard > 0){
+            reward += (lastReward.equals(Player.LunarShard) ? Announcer.ANSI_YELLOW : "") + (this.rewardLunarShard + Player.LunarShard +Announcer.ANSI_RESET+"/");
+
+        }
+        if (this.rewardSolarShard > 0) {
+            reward += (lastReward.equals(Player.SolarShard) ? Announcer.ANSI_YELLOW : "") + (this.rewardSolarShard + Player.SolarShard + Announcer.ANSI_RESET );
+        }
+        if (this.rewardHonour > 0){
+            reward += (lastReward.equals(Player.HONOUR) ? Announcer.ANSI_YELLOW : "") + ( this.rewardHonour + Player.HONOUR+Announcer.ANSI_RESET);
+        }
+        lastReward="";
         return reward;
     }
 }
