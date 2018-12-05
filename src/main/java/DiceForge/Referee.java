@@ -164,7 +164,6 @@ public class Referee {
         if (this.round != this.maxRound) {
             this.choixAction(player.getAction());
         } else {
-           // this.getEnnemyRoll();
             player.lastAction();
         }
         Announcer.printAction(player);
