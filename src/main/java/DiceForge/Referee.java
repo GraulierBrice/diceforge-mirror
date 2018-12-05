@@ -117,6 +117,7 @@ public class Referee {
             action=turnP.getAction();
             for (int i = 0; i < turnP.getNbFeat(); i++) {
                 if (turnP.getFeat(i).getReinfor() && action == FEAT_REINFORCEMENT) {
+                    if(Main.LEVEL==1)Announcer.printReinforcement(turnP,turnP.getFeat(i).getName()); 
                     turnP.getFeat(i).effect();
                 }
             }
@@ -158,7 +159,6 @@ public class Referee {
 
     public void turn(Player player){
         player.strategy.chooseReinforcement();
-        Announcer.printReinforcement(player);
         this.choixReinforcement();
         player.strategy.chooseAction();
         if (this.round != this.maxRound) {

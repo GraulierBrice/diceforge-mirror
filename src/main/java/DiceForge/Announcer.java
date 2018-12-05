@@ -116,24 +116,8 @@ public class Announcer {
         }
     }
 
-    public static void printReinforcement(Player player) {
-        if(Main.LEVEL==1) {
-            String action = player.getAction();
-            player.strategy.chooseFeatReinforcement();
-            String actionFeat = player.getAction();
-            if (action == Referee.REINFORCEMENT) {
-                for (int i = 0; i < player.getNbFeat(); i++) {
-                    if (player.getFeat(i).getReinfor()) {
-                        System.out.println(ANSI_UNDERLINE + ANSI_BOLD + ANSI_SGREEN + "Joueur " + (player.getName()) + " peut renforcer " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
-                        if (actionFeat == Referee.FEAT_REINFORCEMENT) {
-                            System.out.println(ANSI_GREEN + "Joueur " + (player.getName()) + " renforce l'exploit " + player.getFeat(i).getClass().getName().split("\\.")[2] + ANSI_RESET);
-                        } else {
-                            System.out.println(ANSI_GREEN + "Il n'a pas fait de renforcement" + ANSI_RESET);
-                        }
-                    }
-                }
-            }
-        }
+    public static void printReinforcement(Player player, nameFeat featName) {
+        System.out.println(ANSI_GREEN + "Joueur " + (player.getName()) + " renforce l'exploit " + featName + ANSI_RESET);
     }
 
     public static void printDice(Player player){
