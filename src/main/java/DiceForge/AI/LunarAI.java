@@ -149,9 +149,10 @@ public class LunarAI extends Strategy {
 
     @Override
     public boolean shouldKeepForging(){
+        if (Referee.getForge().bestPoolWith(interestingKind(), this.player.getGold()) != null)
+            return true;
         return false;
     }
-
 
     @Override
     public void chooseIsland() {
