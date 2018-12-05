@@ -34,11 +34,11 @@ public class Announcer {
         if (Main.LEVEL == 1) {
             if(winners.size()==1)System.out.println(ANSI_SYELLOW + ANSI_BOLD + "Joueur " + (winners.get(0).getName()) + " gagne avec " + winners.get(0).getHonour() + " honneurs" + ANSI_RESET);
             else{
-                System.out.print(ANSI_SYELLOW + ANSI_BOLD + "Le oueur " + winners.get(0).getName() + "a autant de points d'honneur que ");
+                System.out.print(ANSI_SYELLOW + ANSI_BOLD + "Le Joueur " + winners.get(0).getName() + " a autant de points d'honneur que ");
                 for(int i=1;i<winners.size()-1;i++){
                     System.out.print("le joueur "+winners.get(i).getName() + " et ");
                 }
-                System.out.println(winners.get(winners.size()-1).getName() + ANSI_RESET);
+                System.out.println("le joueur "+winners.get(winners.size()-1).getName() + ANSI_RESET);
             }
         }
     }
