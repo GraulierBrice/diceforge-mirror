@@ -126,7 +126,7 @@ public class Referee {
 
     public void choixAction(String action) {//number = nombre de games
         turnP = this.getPlayer(this.turnPlayer);
-        turnP.shouldIChangeStrategy(this);
+        //turnP.shouldIChangeStrategy(this);
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case FORGE:
                 List<Face> alreadyBought = new ArrayList<Face>();
