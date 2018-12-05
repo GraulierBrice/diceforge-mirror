@@ -106,13 +106,13 @@ public class Player {
     public void nextStrategy() {
         switch (getStrategy().getName()) {
             case "Lunar":
-                this.strategy = new HammerAI();
+                this.strategy = new SolarAI();
                 break;
             case "Solar":
-                this.strategy = new LunarAI();
+                this.strategy = new HammerAI();
                 break;
             case "Hammer" :
-                this.strategy = new SolarAI();
+                this.strategy = new LunarAI();
                 break;
         }
         this.strategy.setPlayer(this);
@@ -259,25 +259,14 @@ public class Player {
             return;
         }
 
-        switch ( referee.getRound()) {
-            case 1:
-                if (Referee.getPlayers().stream().filter(p -> this.getStrategy().getName().equals(p.getStrategy().getName()) && p != this).count() > 1) {
-                    this.nextStrategy();
-                    shouldIChangeStrategy(referee);
-                }
-            case 2:
+        //switch ( referee.getRound()) {
+        //    case 1 :
 
-            case 3:
-                if(this.getStrategy().getName().equals("Hammer") && !this.doIHaveAnHammer()) {
-                    this.nextStrategy();
-                    shouldIChangeStrategy(referee);
-                }
-               // if( this.getStrategy().getName().equals("Solar") && this.doIHaveAnHammer()) {
-                //    this.strategy = new HammerAI();
-                  //  strategy.setPlayer(this);
-                //    çA SA FAIT CRASH
-  //              }
-        }
+        //        if (referee.getPlayers().stream().filter(p -> this.getStrategy().getName().equals(p.getStrategy().getName()) && p != this).count() > 1) {
+        //            this.nextStrategy();
+          //          shouldIChangeStrategy(referee);
+        //        }
+        //}
     }
 
 
