@@ -1,5 +1,6 @@
 package DiceForge.Feat;
 import DiceForge.Face.*;
+import DiceForge.Main;
 
 public class AilesGardienne extends Feat{
 
@@ -13,5 +14,6 @@ public class AilesGardienne extends Feat{
     @Override
     public void effect(Object... o) {
     	face.giveReward(this.owner);
+    	if(Main.LEVEL==1)System.out.println(face.getReward());
     }
 }
