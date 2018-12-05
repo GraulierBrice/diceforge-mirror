@@ -14,6 +14,6 @@ public class AilesGardienne extends Feat{
     @Override
     public void effect(Object... o) {
     	face.giveReward(this.owner);
-    	if(Main.LEVEL==1)System.out.println(face.getReward());
+    	if(Main.LEVEL==1)System.out.println(owner.getName()+" choisis une ressource:"+"\n"+face.getReward());
     }
 }
