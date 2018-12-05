@@ -136,6 +136,8 @@ public class HammerAI extends Strategy{
 
     @Override
     public boolean shouldKeepForging(){
+        if (Referee.getForge().bestPoolWith(interestingKind(), this.player.getGold()) != null)
+                return true;
         return false;
     }
 
@@ -203,12 +205,13 @@ public class HammerAI extends Strategy{
     public String interestingKind(){
         Pool poolPdS =Referee.getForge().bestPoolWith(Player.SolarShard,this.player.getGold());
         Pool poolG=Referee.getForge().bestPoolWith(Player.GOLD,this.player.getGold());
-        if(poolPdS!=null && poolPdS.getPrice()<=this.player.getGold() && !this.player.doIHaveAnHammer()) {
-            return Player.SolarShard;
-        }else if(poolG!=null && poolG.getPrice()<=this.player.getGold()) {
+        if(poolG!=null && poolG.getPrice()<=this.player.getGold()) {
             return Player.GOLD;
         }
-        return "nothing";
+        else if(poolPdS!=null && poolPdS.getPrice()<=this.player.getGold()) {
+            return Player.SolarShard;
+        }
+        return Player.GOLD;
     }
 
     @Override
