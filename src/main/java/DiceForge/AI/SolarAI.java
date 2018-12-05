@@ -50,24 +50,22 @@ public class SolarAI extends Strategy {
     public int chooseFaceOr(Face face){
         switch (chooseDiceFaceOr(face)){
             case 0:
-                if(this.player.getSolarShard()<5){
+                if(this.player.getLunarShard()>5 && this.player.getSolarShard()==4) {
                     return 2;
-                }else if(this.player.getSolarShard()>=5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))>=5){
+                }else if(this.player.getSolarShard()>5 && this.player.getLunarShard()==4) {
                     return 1;
-                }else if(this.player.getLunarShard()>=5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))>=5){
-                    return 2;
-                }else if(this.player.getSolarShard()==5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))<5){
-                    return 2;
-                }else if(this.player.getLunarShard()==5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))<5){
+                }else if(this.player.getLunarShard()==5 && this.player.getSolarShard()<4){
                     return 1;
-                }else if (this.player.getSolarShard()>=6){
-                    return 1;
-                }else if (this.player.getLunarShard()>=6){
+                }else if(this.player.getSolarShard()==5 && this.player.getLunarShard()<4){
                     return 2;
-                }else if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)) {
-                    return 0;
+                }else if(this.player.getLunarShard()==5 && this.player.getSolarShard()==4){
+                    return 2;
+                }else if(this.player.getSolarShard()==5 && this.player.getLunarShard()==4){
+                    return 1;
+                }else if(this.player.getSolarShard()<5) {
+                    return 2;
                 }else{
-                    return 2;
+                    return 0;
                 }
             case 1:
                 if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)){
@@ -76,29 +74,26 @@ public class SolarAI extends Strategy {
                     return 1;
                 }
             case 2:
-                if(this.player.getSolarShard()<5){
+                if(this.player.getLunarShard()>5 && (this.player.getSolarShard()==3 || this.player.getSolarShard()==4)){
                     return 2;
-                }else if(this.player.getSolarShard()>=5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))>=5){
+                }else if(this.player.getSolarShard()>5 && (this.player.getLunarShard()==3 || this.player.getLunarShard()==4)){
                     return 1;
-                }else if(this.player.getLunarShard()>=5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))>=5){
-                    return 2;
-                }else if(this.player.getSolarShard()==5 && (this.player.getLunarShard()+face.getRewardKind(Player.LunarShard))<5){
-                    return 2;
-                }else if(this.player.getLunarShard()==5 && (this.player.getSolarShard()+face.getRewardKind(Player.SolarShard))<5){
+                }else if(this.player.getLunarShard()==5 && this.player.getSolarShard()<3){
                     return 1;
-                }else if (this.player.getSolarShard()>=6){
-                    return 1;
-                }else if (this.player.getLunarShard()>=6){
+                }else if(this.player.getSolarShard()==5 && this.player.getLunarShard()<3){
                     return 2;
-                }else if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)) {
-                    return 0;
+                }else if(this.player.getLunarShard()==5 && (this.player.getSolarShard()==3 || this.player.getSolarShard()==4)){
+                    return 2;
+                }else if(this.player.getSolarShard()==5 && (this.player.getLunarShard()==3 || this.player.getLunarShard()==4)){
+                    return 1;
+                }else if(this.player.getSolarShard()<5) {
+                    return 2;
                 }else{
-                    return 2;
+                    return 0;
                 }
         }
         return 0;
     }
-
     @Override
     public Face[] chooseBestEnnemyFace() {//strat à faire
         ArrayList<Face> faces = this.player.getEnnemyFaces();
