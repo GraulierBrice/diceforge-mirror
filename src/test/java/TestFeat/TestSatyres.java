@@ -15,7 +15,7 @@ public class TestSatyres {
 
     @Test
     public void gotReward () {
-        Referee referee=new Referee(new Player("1"));
+        Referee referee=new Referee(new Player("1"), new Player("2"));
         Satyres satyres = new Satyres();
         referee.getEnnemyRoll();
         satyres.setPlayer(referee.getPlayer(0));
