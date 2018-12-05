@@ -101,6 +101,8 @@ public class RandomAI extends Strategy{
     }
 
     public boolean shouldKeepForging(){
+        int choice = r.nextInt(2);
+        if(choice == 0)return true;
         return false;
     }
 

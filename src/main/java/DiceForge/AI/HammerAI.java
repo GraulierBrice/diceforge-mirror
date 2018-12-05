@@ -136,9 +136,7 @@ public class HammerAI extends Strategy{
 
     @Override
     public boolean shouldKeepForging(){
-        if (Referee.getForge().bestPoolWith(interestingKind(), this.player.getGold()) != null)
-                return true;
-        return false;
+        return Referee.getForge().bestPoolWith(interestingKind(), this.player.getGold()) != null;
     }
 
     @Override
