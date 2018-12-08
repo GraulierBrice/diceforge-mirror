@@ -3,6 +3,7 @@ package TestAI;
 import DiceForge.Face.Face;
 import DiceForge.Face.FaceCombinationAND;
 import DiceForge.Face.FaceCombinationOR;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,11 +20,10 @@ public class TestSolarAI {
     private World world;
     private Player solar;
 
-
     @Before
     public void setUp() {
         solar=new Player(new SolarAI(),"solar");
-        referee=new Referee(solar,new Player("2"),new Player("3"));
+        referee=new Referee(solar,new Player(new SolarAI(),"2"),new Player(new SolarAI(),"3"));
         forge=new Forge(referee);
         world=new World(referee);
         referee.addForge(forge);
@@ -74,7 +74,7 @@ public class TestSolarAI {
         referee.getWorld().getIsland(6).removeFeat(nameFeat.Enigme);
     }
 
-    public void valueSolarChooseFaceOr(Face face,int solarShard,int lunarShard,int gold,int value){
+    public void valueSolarChooseFaceOr(Face face,int lunarShard,int solarShard,int gold,int value){
         remove();
         solar.addLunarShard(lunarShard);solar.addSolarShard(solarShard);solar.addGold(gold);
         assertTrue(solar.getStrategy().chooseFaceOr(face)==value);
@@ -93,7 +93,6 @@ public class TestSolarAI {
         solar.getStrategy().chooseAction();
         referee.choixAction(solar.getAction());
         assertEquals(solar.getDice(0).getFace(0).getReward(),"1"+Player.SolarShard);
-        remove();
 
         turnExploitSolar(6,6,0,nameFeat.Hydre,0);
         turnExploitSolar(0,6,0,nameFeat.Enigme,1);
@@ -125,10 +124,15 @@ public class TestSolarAI {
         assertEquals(solar.getStrategy().chooseBestDice(),solar.getDice(1));
         solar.addSolarShard(solar.getMaxSolarShard());
         assertEquals(solar.getStrategy().chooseBestDice(),solar.getDice(0));
+
+        replay();
+        chooseFaceOr();
+        chooseWorstEnnemyFace();
+        choosePool();
     }
 
-    @Test
     public void replay(){
+        remove();
         solar.getStrategy().replay();
         assertTrue(!solar.getHasReplayed());
         solar.addSolarShard(2);
@@ -139,8 +143,8 @@ public class TestSolarAI {
         assertTrue(solar.getHasReplayed());
     }
 
-    @Test
     public void chooseFaceOr(){//1G/1PdL/1PdS    3G/2H      2G/2PdL/2PdS
+        remove();
         Face face1=new FaceCombinationOR(1,1,1,0);
         valueSolarChooseFaceOr(face1,6,4,0,2);
         valueSolarChooseFaceOr(face1,4,6,0,1);
@@ -172,8 +176,10 @@ public class TestSolarAI {
         valueSolarChooseFaceOr(new FaceCombinationAND(0,0,0,0),0,0,0,0);
     }
 
-    @Test
+
     public void chooseWorstEnnemyFace(){
+       // referee=new Referee(solar,new Player(),new Player());
+        remove();
         Face gold_1=new FaceCombinationAND(1,0,0,0);
         setEnemiesFaces(gold_1);
         referee.faveur();
@@ -199,8 +205,8 @@ public class TestSolarAI {
         assertEquals(solar.getStrategy().chooseWorstEnnemyFace()[1].getReward(),"4"+Player.SolarShard);
     }
 
-    @Test
     public void choosePool(){
+        referee=new Referee(solar);
         Forge forge2=new Forge(referee);
         referee.addForge(forge2);
         remove();
