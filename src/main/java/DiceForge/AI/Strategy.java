@@ -39,6 +39,7 @@ public abstract class Strategy {
     }
 
     public abstract Face[] chooseBestEnnemyFace();
+    public abstract Face[] chooseWorstEnnemyFace();
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
     public int chooseDiceFaceOr(Face face) {

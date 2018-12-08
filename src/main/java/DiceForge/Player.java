@@ -159,6 +159,14 @@ public class Player {
             face1.removeReward(this);
             face2.removeReward(this);
         }
+
+        if (face1.getKind().equals("mirror") && face2.getKind().equals("mirror")){
+            Face[] enFaces =  strategy.chooseWorstEnnemyFace();
+            enFaces[0].giveReward(this);
+            enFaces[1].giveReward(this);
+        }else if(face1.getKind().equals("mirror") || face2.getKind().equals("mirror")) {
+            strategy.chooseWorstEnnemyFace()[0].giveReward(this);
+        }
     }
 
     //Purchase a dice face and set it on a dice of chosing

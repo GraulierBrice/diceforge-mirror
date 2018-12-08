@@ -111,6 +111,34 @@ public class SolarAI extends Strategy {
         return bestFace;
     }
 
+    @Override
+    public Face[] chooseWorstEnnemyFace() {
+        ArrayList<Face> faces = this.player.getEnnemyFaces();
+        Face[] worstFaces=new Face[2];
+        int numberChosen=0;
+        worstFaces[0]=faces.get(0);
+        worstFaces[1]=faces.get(1);
+        for(int i=0;i<faces.size();i++) {
+            if ((this.player.getGold() == 0 && faces.get(i).getRewardKind(Player.GOLD)>0) || (this.player.getLunarShard() == 0 && faces.get(i).getRewardKind(Player.LunarShard)>0) ||
+                    (this.player.getSolarShard() == 0 && faces.get(i).getRewardKind(Player.SolarShard) >0) || this.player.getHonour() == 0 && faces.get(i).getRewardKind(Player.HONOUR) >0){
+                worstFaces[numberChosen]=faces.get(i);
+                numberChosen++;
+            }
+            if(numberChosen==2) break;
+        }
+        if(numberChosen!=2){
+            for(int i=0;i<faces.size();i++){
+                if((faces.get(i).getRewardKind(Player.GOLD)>0 && faces.get(i).getRewardKind(Player.GOLD)<=3) || (faces.get(i).getRewardKind(Player.HONOUR)>0 && faces.get(i).getRewardKind(Player.HONOUR)<=3) ||
+                        (faces.get(i).getRewardKind(Player.LunarShard)>0 && faces.get(i).getRewardKind(Player.LunarShard)<=2)){
+                    worstFaces[numberChosen]=faces.get(i);
+                    numberChosen++;
+                }
+                if(numberChosen==2) break;
+            }
+        }
+        return worstFaces;
+    }
+
 
     public int choosePoolFace(Pool pool) {//test pour l'instant pour prendre les pools avec uniquement des solarshard pour le moment
         if(interestingKind()!="nothing"){

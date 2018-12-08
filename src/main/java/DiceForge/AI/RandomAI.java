@@ -92,6 +92,17 @@ public class RandomAI extends Strategy{
         return bestFaces;
     }
 
+    @Override
+    public Face[] chooseWorstEnnemyFace() {
+        ArrayList<Face> faces = this.player.getEnnemyFaces();
+        Face[] worstFaces=new Face[2];
+        worstFaces[0]=faces.get(r.nextInt(faces.size()));
+        do {
+            worstFaces[1] = faces.get(r.nextInt(faces.size()));
+        }while(worstFaces[0]==worstFaces[1]);
+        return worstFaces;
+    }
+
     public int choosePoolFace(Pool pool) {
         return r.nextInt(pool.howManyFaces());
     }
