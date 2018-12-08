@@ -88,7 +88,8 @@ import DiceForge.AI.*;
         }
 
         @Test public void choiceLunar(){
-
+            remove();
+            lunar.addGold(2);
             lunar.getStrategy().chooseAction();
             referee.choixAction(lunar.getAction());
             assertEquals(lunar.getDice(1).getFace(0).getReward(),"1"+Player.LunarShard);
@@ -159,10 +160,15 @@ import DiceForge.AI.*;
             assertEquals(lunar.getStrategy().chooseBestDice(),lunar.getDice(1));
             lunar.addLunarShard(lunar.getMaxLunarShard());
             assertEquals(lunar.getStrategy().chooseBestDice(),lunar.getDice(0));
+
+            replay();
+            chooseFaceOr();
+            chooseWorstEnnemyFace();
+            choosePool();
         }
 
-        @Test
         public void replay(){
+            remove();
             lunar.getStrategy().replay();
             assertTrue(!lunar.getHasReplayed());
             lunar.addSolarShard(2);
@@ -173,7 +179,6 @@ import DiceForge.AI.*;
             assertTrue(lunar.getHasReplayed());
         }
 
-        @Test
         public void chooseFaceOr(){//1G/1PdL/1PdS    3G/2H      2G/2PdL/2PdS
             Face face1=new FaceCombinationOR(1,1,1,0);
             valueLunarChooseFaceOr(face1,6,4,0,2);
@@ -206,14 +211,12 @@ import DiceForge.AI.*;
             valueLunarChooseFaceOr(new FaceCombinationAND(0,0,0,0),0,0,0,0);
         }
 
-        @Test
         public void chooseWorstEnnemyFace(){
             Face gold_1=new FaceCombinationAND(1,0,0,0);
             setEnemiesFaces(gold_1);
             referee.faveur();
             //referee.getPlayer(1).getDice(0).setFace(new FaceCombinationAND(0,4,0,0),5);
             //referee.getPlayer(1).getDice(1).setFace(new FaceCombinationAND(0,4,0,0),5);
-
             remove();
             assertEquals(lunar.getStrategy().chooseWorstEnnemyFace()[0].getReward(),"1"+Player.GOLD);
             assertEquals(lunar.getStrategy().chooseWorstEnnemyFace()[1].getReward(),"1"+Player.GOLD);
@@ -233,7 +236,6 @@ import DiceForge.AI.*;
             assertEquals(lunar.getStrategy().chooseWorstEnnemyFace()[1].getReward(),"4"+Player.LunarShard);
         }
 
-        @Test
         public void choosePool(){
             Forge forge2=new Forge(referee);
             referee.addForge(forge2);
