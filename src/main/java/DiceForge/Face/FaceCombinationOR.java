@@ -94,7 +94,7 @@ public class FaceCombinationOR extends Face {
     }
     @Override
     public String getReward(){
-        String reward="";
+        String reward=Announcer.ANSI_RESET;
         if (this.rewardGold > 0){
             reward += (lastReward.equals(Player.GOLD) ? Announcer.ANSI_YELLOW : "") +this.rewardGold + Player.GOLD +Announcer.ANSI_RESET+"/";
         }
