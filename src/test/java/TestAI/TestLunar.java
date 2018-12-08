@@ -248,7 +248,6 @@ import DiceForge.AI.*;
 
             Hammer hammer=new Hammer();
             hammer.setPlayer(lunar);
-            System.out.println(lunar.getGold());
             assertEquals(lunar.getStrategy().choosePool(),5);//face 6g
         }
 

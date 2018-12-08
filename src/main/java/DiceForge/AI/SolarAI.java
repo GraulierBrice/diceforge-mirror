@@ -49,7 +49,7 @@ public class SolarAI extends Strategy {
     @Override
     public int chooseFaceOr(Face face){
         switch (chooseDiceFaceOr(face)){
-            case 0:
+            case 1:
                 if(this.player.getLunarShard()>5 && this.player.getSolarShard()==4) {
                     return 2;
                 }else if(this.player.getSolarShard()>5 && this.player.getLunarShard()==4) {
@@ -67,13 +67,13 @@ public class SolarAI extends Strategy {
                 }else{
                     return 0;
                 }
-            case 1:
+            case 2:
                 if(this.player.getMaxGold() > this.player.getGold()+face.getRewardKind(Player.GOLD)){
                     return 0;
                 }else{
                     return 1;
                 }
-            case 2:
+            case 3:
                 if(this.player.getLunarShard()>5 && (this.player.getSolarShard()==3 || this.player.getSolarShard()==4)){
                     return 2;
                 }else if(this.player.getSolarShard()>5 && (this.player.getLunarShard()==3 || this.player.getLunarShard()==4)){
