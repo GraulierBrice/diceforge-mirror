@@ -43,11 +43,11 @@ public abstract class Strategy {
     public abstract int chooseDice();
     public abstract int chooseDiceFace(int dice);
     public int chooseDiceFaceOr(Face face) {
-        if(face.getKind() == ("1"+Player.GOLD+"/1"+Player.LunarShard+"/1"+Player.SolarShard)){
+        if(face.getReward().equals("1"+Player.GOLD+Announcer.ANSI_RESET+"/1"+Player.LunarShard+Announcer.ANSI_RESET+"/1"+Player.SolarShard+Announcer.ANSI_RESET)){
             return 1;
-        }else if(face.getKind() == ("3"+Player.GOLD+"/2"+Player.HONOUR)){
+        }else if(face.getReward().equals("3"+Player.GOLD+Announcer.ANSI_RESET+"/2"+Player.HONOUR+Announcer.ANSI_RESET)){
             return 2;
-        }else if(face.getKind() == "2"+Player.GOLD+"/2"+Player.LunarShard+"/2"+Player.SolarShard) {
+        }else if(face.getReward().equals("2"+Player.GOLD+Announcer.ANSI_RESET+"/2"+Player.LunarShard+Announcer.ANSI_RESET+"/2"+Player.SolarShard+Announcer.ANSI_RESET)) {
             return 3;
         }
         return 0;
