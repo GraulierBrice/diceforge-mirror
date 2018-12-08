@@ -25,7 +25,6 @@ public abstract class Strategy {
     public void chooseAction() {
         Pool pool=setPool();
         chooseIsland();
-        System.out.println(player.getCurrentIsland());
         if(this.player.getCurrentIsland()!=-1 && this.player.getGold()<9){
             Island island=Referee.getWorld().getIsland(this.player.getCurrentIsland());
             if(island!=null && this.chooseFeat()!=-1 ) {//pour farmer les marteaux pour l'instant
