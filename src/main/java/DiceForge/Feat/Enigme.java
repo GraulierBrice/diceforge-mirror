@@ -22,7 +22,7 @@ public class Enigme extends Feat{
         for(int i=0; i<4;i++) {
             reward.rollDice();
             reward.giveReward(this.owner);
-            if (Main.numberOfGames == 1) reward.toString(1);
+            if (Main.LEVEL == 1) reward.toString(1);
         }
     }
 }
