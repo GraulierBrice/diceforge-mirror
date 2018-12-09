@@ -129,6 +129,7 @@ public class Referee {
         //turnP.shouldIChangeStrategy(this);
         switch (action) {//"passe" virer vu que c'était juste un print, il est passé chez announcer
             case FORGE:
+                Announcer.printForge(turnP);
                 List<Face> alreadyBought = new ArrayList<Face>();
                 do{
                     Pool pool = forge.getPool(turnP.strategy.choosePool());
@@ -149,15 +150,18 @@ public class Referee {
             case EXPLOIT:
                 Island island = this.world.getIsland(turnP.getCurrentIsland());
                 nameFeat exploit = turnP.listFeat(turnP.strategy.chooseFeat());//l'exploit sur l'ile qu'il va choisir
+                Announcer.printExploit(turnP, exploit);
                 if(exploit==nameFeat.Satyres) this.getEnnemyRoll();
                 if (island.affordableFeat(turnP,exploit)) {
                     this.world.giveFeat(turnP, exploit);
                 }
                 break;
+            case PASSE: Announcer.printPasse(turnP); break;
         }
     }
 
     public void turn(Player player){
+
         player.strategy.chooseReinforcement();
         this.choixReinforcement();
         player.strategy.chooseAction();
@@ -166,7 +170,6 @@ public class Referee {
         } else {
             player.lastAction();
         }
-        Announcer.printAction(player);
         if(player.getNbFeat()!=0 && player.getFeat(player.getNbFeat()-1).getName()==nameFeat.Satyres)Announcer.printSatyres(player,player.getChosenFacesFeat());
         else if(player.getNbFeat()!=0 && player.getFeat(player.getNbFeat()-1).getName()==nameFeat.Minotaure)Announcer.printMinotaure(this);
         if (this.getNumberPlayer() == 2) {

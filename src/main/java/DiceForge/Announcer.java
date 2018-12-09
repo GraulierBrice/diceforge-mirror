@@ -96,23 +96,14 @@ public class Announcer {
         }
     }
 
+    public static void printPasse(Player player){if(Main.LEVEL==1) System.out.println(ANSI_SBLUE + "Joueur " + player.getName() + " passe son tour" + ANSI_RESET);}
 
+    public static void printForge(Player player){if(Main.LEVEL==1) System.out.println(ANSI_SBLUE + "Joueur " + player.getName()+ " peut acheter une face" + ANSI_RESET);}
 
-    public static void printAction(Player player) {
-        if(Main.LEVEL==1){
-            String action = player.getAction();
-            switch (action) {
-                case Referee.PASSE:
-                    System.out.println(ANSI_SBLUE + "Joueur " + player.getName() + " passe son tour" + ANSI_RESET);
-                    break;
-                case Referee.FORGE:
-                    System.out.println(ANSI_SBLUE + "Joueur " + player.getName()+ " peut acheter une face" + ANSI_RESET);
-                    break;
-                case Referee.EXPLOIT:
-                    System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + player.getName() + " peut choisir un exploit à réaliser" + ANSI_RESET);
-                    System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'exploit " + player.getFeat(player.getNbFeat() - 1).getName()+ ANSI_RESET);
-                    break;
-            }
+    public static void printExploit(Player player, nameFeat featName){
+        if(Main.LEVEL==1) {
+            System.out.println(ANSI_UNDERLINE + Announcer.ANSI_BOLD + ANSI_SBLUE + "Joueur " + player.getName() + " peut choisir un exploit à réaliser" + ANSI_RESET);
+            System.out.println(ANSI_SBLUE + " Joueur " + player.getName() + " réalise l'éxploit " + featName+ ANSI_RESET);
         }
     }
 
