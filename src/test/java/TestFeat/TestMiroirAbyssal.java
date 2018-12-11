@@ -19,6 +19,7 @@ public class TestMiroirAbyssal {
 
     @Before
     public void setUp() {
+        ref.getPlayers().removeAll(ref.getPlayers());
         mirror = new MiroirAbyssal();
         ref=new Referee(p1,p2);
         mirror.setPlayer(p1);

@@ -22,6 +22,7 @@ public class TestSolarAI {
 
     @Before
     public void setUp() {
+        referee.getPlayers().removeAll(referee.getPlayers());
         solar=new Player(new SolarAI(),"solar");
         referee=new Referee(solar,new Player(new SolarAI(),"2"),new Player(new SolarAI(),"3"));
         forge=new Forge(referee);

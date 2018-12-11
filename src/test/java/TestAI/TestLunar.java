@@ -20,6 +20,7 @@ import DiceForge.AI.*;
 
         @Before
         public void setUp() {
+            referee.getPlayers().removeAll(referee.getPlayers());
             lunar=new Player(new LunarAI(),"lunar");
             referee=new Referee(lunar,new Player("2"),new Player("3"));
             forge=new Forge(referee);

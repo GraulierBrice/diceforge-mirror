@@ -1,4 +1,5 @@
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -7,27 +8,22 @@ import DiceForge.Feat.*;
 import DiceForge.AI.*;
 
 public class TestReferee {
-    private Referee referee;
-    private Forge forge;
-    private World world;
+    Referee referee;
 
-
-    @Before
-    public void setUp() {
-        referee=new Referee(new Player("1"),new Player("2"),new Player("3"),new Player("4"));
-        forge=new Forge(referee);
-        world=new World(referee);
-        referee.addForge(forge);
-        referee.addWorld(world);
-    }
 
     @Test public void refereeMethods() {
-
+        referee.getPlayers().removeAll(referee.getPlayers());
+        referee=new Referee(new Player("1"),new Player("2"),new Player("3"),new Player("4"));
+        Forge forge=new Forge(referee);
+        World world=new World(referee);
+        referee.addForge(forge);
+        referee.addWorld(world);
         assertEquals(referee.getNumberPlayer(),4);
         assertEquals(referee.getMaxRound(),9);
         assertEquals(referee.getRound(),1);
         for(int i=0;i<referee.getNumberPlayer();i++) {
             assertEquals(referee.getTurnPlayer(),i);
+            assertEquals(referee.getPlayer(i).getGold(),3-i);
             referee.nextPlayer();
             assertEquals(referee.getPlayer(i).getHonour(),0);
             referee.getPlayer(i).addHonour(12*(i+1));
@@ -64,5 +60,4 @@ public class TestReferee {
         referee.sameIsland();
         assertEquals(referee.getPlayer(1).getCurrentIsland(),-1);
     }
-
 }
