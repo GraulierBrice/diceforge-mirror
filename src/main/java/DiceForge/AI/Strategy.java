@@ -15,11 +15,13 @@ public abstract class Strategy {
     public String getName() { return this.name; }
     public void setPlayer(Player player) { this.player = player; }
     public void chooseReinforcement() {
-        this.player.setAction(Referee.REINFORCEMENT);
+        if( !player.getHasReplayed()){
+            this.player.setAction(Referee.REINFORCEMENT);
+        }else{
+            this.player.setAction(Referee.NOTREINFORCEMENT);
+        }
     }
-    public void chooseFeatReinforcement() {
-        this.player.setAction(Referee.FEAT_REINFORCEMENT);
-    }
+    public void chooseFeatReinforcement() { this.player.setAction(Referee.FEAT_REINFORCEMENT); }
     public abstract Pool setPool();
 
     public void chooseAction() {

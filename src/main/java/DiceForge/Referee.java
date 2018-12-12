@@ -20,6 +20,7 @@ public class Referee {
     public static final String FORGE="forge";
     public static final String EXPLOIT="exploit";
     public static final String REINFORCEMENT="reinforcement";
+    public static final String NOTREINFORCEMENT="notreinforcement";
     public static final String FEAT_REINFORCEMENT="featreinforcement";
 
     public Referee(Player... players) {
